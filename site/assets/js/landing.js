@@ -9,10 +9,11 @@ import { initWorldsCarousel } from './worlds-carousel.js?v=raw-3';
 import { initScrollReveal } from './scroll-reveal.js?v=raw-3';
 import { initScrappySections } from './scrappy-sections.js?v=raw-3';
 import { initRawMotion } from './raw-motion.js?v=raw-3';
-import { initHowScroll } from './how-scroll.js?v=raw-3';
-import { initPlayFeed } from './play-feed.js?v=raw-3';
-import { initAlbumParty } from './album-party.js?v=raw-3';
-import { renderHeroSitePreviews, renderSitePreviewCards } from './site-previews.js';
+import { initHowScroll } from './how-scroll.js?v=handheld-5';
+import { initPlayFeed } from './play-feed.js?v=scroll-stack-4';
+import { initAlbumParty } from './album-party.js?v=raw-4';
+import { renderHeroSitePreviews } from './site-previews.js';
+import { renderForPreviews } from './for-previews.js';
 
 document.documentElement.classList.add('js');
 injectSprite();
@@ -154,31 +155,62 @@ if (heroPreview) {
 /* ───────── scroll-led reveal + scrappy section details ───────── */
 initScrollReveal($('#vs'));
 initScrappySections();
-renderSitePreviewCards($('[data-site-previews]'));
+renderForPreviews($('[data-site-previews]'));
 
 /* ───────── how it works: four inline, playable steps ───────── */
 {
   const steps = $$('[data-how-step]');
-  const howScroll = initHowScroll($('#how'));
+  const howRoot = $('#how');
+  const howScroll = initHowScroll(howRoot);
   const next = (i) => {
     const behavior = reduced ? 'auto' : 'smooth';
-    if (i < steps.length - 1) {
-      howScroll.goToStep(i + 1, behavior);
-    } else {
-      $('#spaces').scrollIntoView({ behavior, block: 'start' });
-    }
+    howScroll.goToStep(i < steps.length - 1 ? i + 1 : 0, behavior);
   };
-  $$('.step .mini').forEach((mini) => {
-    const step = mini.closest('.step');
+  $$('[data-how-panel]').forEach((mini) => {
+    const step = mini.closest('[data-how-step]');
     mini.innerHTML = renderHow(mini.dataset.screen);
-    const ctl = mountHow(mini.dataset.screen, $('.sp', mini), () => next(+step.dataset.step));
-    // Let each example play once when the visitor reaches it.
-    if (mini.dataset.screen === 'ask' || mini.dataset.screen === 'faves') {
-      new IntersectionObserver(([entry], observer) => {
-        if (entry.isIntersecting) { observer.disconnect(); ctl.demo(); }
-      }, { threshold: 0.6 }).observe(mini);
-    }
+    mountHow(mini.dataset.screen, $('.sp', mini), () => next(+step.dataset.step));
   });
+  const nameInput = $('[data-how-panel][data-screen="hi"] [data-name]');
+  const sharePanel = $('[data-how-panel][data-screen="share"]');
+  const syncShareIdentity = () => {
+    const name = nameInput?.value.trim() || 'mia';
+    const aura = auraFor(name);
+    const handle = aura?.handle || 'mia';
+    $('.bub--card .og b', sharePanel).textContent = name.toLowerCase();
+    $('.bub--card .bub__meta b', sharePanel).textContent = `${name.toLowerCase()}'s space`;
+    $('.bub--card .bub__meta span', sharePanel).textContent = `aura.my/${handle} · tap to open`;
+  };
+  nameInput?.addEventListener('input', syncShareIdentity);
+  syncShareIdentity();
+  // All four screens stay mounted, and this small snapshot also lets a reload
+  // keep the name, picks, and in-progress answers from the same browser tab.
+  const howStateKey = 'auramy-how-session-v1';
+  const snapshot = () => Object.fromEntries($$('[data-how-panel]').map((panel) => [panel.dataset.screen, {
+    fields: $$('input', panel).map((field) => field.value),
+    pressed: $$('[aria-pressed]', panel).map((button) => button.getAttribute('aria-pressed') === 'true'),
+    selected: $$('button', panel).map((button) => button.classList.contains('on')),
+  }]));
+  const persist = () => { try { sessionStorage.setItem(howStateKey, JSON.stringify(snapshot())); } catch { /* private browsing */ } };
+  try {
+    const saved = JSON.parse(sessionStorage.getItem(howStateKey) || '{}');
+    $$('[data-how-panel]').forEach((panel) => {
+      const state = saved[panel.dataset.screen];
+      if (!state) return;
+      $$('input', panel).forEach((field, index) => {
+        if (typeof state.fields?.[index] !== 'string') return;
+        field.value = state.fields[index];
+        field.dispatchEvent(new Event('input', { bubbles: true }));
+      });
+      $$('button', panel).forEach((button, index) => {
+        if (state.selected?.[index] && !button.classList.contains('on')) button.click();
+        const pressed = state.pressed?.[$$('[aria-pressed]', panel).indexOf(button)];
+        if (pressed && button.getAttribute('aria-pressed') !== 'true' && !button.classList.contains('on')) button.click();
+      });
+    });
+  } catch { /* malformed or unavailable session data */ }
+  howRoot.addEventListener('input', persist);
+  howRoot.addEventListener('click', () => queueMicrotask(persist));
 }
 
 /* ───────── worlds: horizontal, swipeable carousel ───────── */
@@ -190,10 +222,6 @@ initAlbumParty($('#albumParty'));
 {
   const row = $('[data-made]');
   renderMade(row);
-  const by = (dir) => row.scrollBy({ left: dir * (row.firstElementChild.offsetWidth + 20), behavior: reduced ? 'auto' : 'smooth' });
-  $('[data-made-prev]').addEventListener('click', () => by(-1));
-  $('[data-made-next]').addEventListener('click', () => by(1));
-
 }
 
 /* ───────── social proof faces ───────── */
@@ -334,6 +362,9 @@ $$('[data-faces]').forEach((el) => (el.innerHTML = Object.keys(PEOPLE).map((k) =
   drawBoard(); setZone();
 
   const loop = (t) => {
+    const panel = root.closest('[data-play-panel]');
+    const playRoot = root.closest('[data-play-feed-root]');
+    if (!playRoot?.classList.contains('is-play-static') && !panel?.classList.contains('is-active')) { raf = 0; return; }
     const dt = Math.min(0.05, (t - last) / 1000 || 0);
     last = t;
     if (running || !motionPaused()) phase += dt * speed * (running ? 1 : 0.55);
@@ -342,6 +373,10 @@ $$('[data-faces]').forEach((el) => (el.innerHTML = Object.keys(PEOPLE).map((k) =
     raf = requestAnimationFrame(loop);
   };
   whileVisible(root, () => { last = performance.now(); raf = requestAnimationFrame(loop); }, () => cancelAnimationFrame(raf), 0.25, false);
+  root.closest('[data-play-feed-root]')?.addEventListener('auramy:play-panelchange', () => {
+    const panel = root.closest('[data-play-panel]');
+    if (panel?.classList.contains('is-active') && !raf) { last = performance.now(); raf = requestAnimationFrame(loop); }
+  });
 
   const flash = (cls) => { root.classList.remove('is-hit', 'is-miss'); void root.offsetWidth; root.classList.add(cls); };
   function press() {

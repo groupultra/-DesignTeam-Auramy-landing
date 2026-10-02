@@ -26,11 +26,12 @@
   <link rel="stylesheet" href="/assets/css/raw.css?v=raw-3">
   <link rel="stylesheet" href="/assets/css/scroll-reveal.css?v=raw-3">
   <link rel="stylesheet" href="/assets/css/scrappy-sections.css?v=raw-3">
-  <link rel="stylesheet" href="/assets/css/how-scroll.css?v=raw-3">
-  <link rel="stylesheet" href="/assets/css/play-feed.css?v=raw-3">
+  <link rel="stylesheet" href="/assets/css/how-scroll.css?v=handheld-7">
+  <link rel="stylesheet" href="/assets/css/play-feed.css?v=scroll-stack-3">
   <link rel="stylesheet" href="/assets/css/album-party.css?v=raw-3">
   <link rel="stylesheet" href="/assets/css/site-previews.css?v=site-previews-1">
   <link rel="stylesheet" href="/assets/css/social-profiles.css?v=social-profiles-1">
+  <link rel="stylesheet" href="/assets/css/for-previews.css?v=for-previews-2">
 </head>
 <body class="editorial-page raw-page">
   <a class="skip" href="#main">Skip to content</a>
@@ -129,30 +130,46 @@
 
     <!-- HOW -->
     <section class="sec how" id="how" aria-labelledby="how-title" data-how-scroll>
-      <div class="how-scroll__stage" data-how-scroll-stage>
-        <div class="how-scroll__head">
+      <div class="wrap how-handheld" data-how-scroll-stage>
+        <div class="how-handheld__head">
           <p class="stamp">an extremely unofficial tutorial</p>
           <h2 id="how-title" class="h2">oops.<br>you made <em>a website.</em></h2>
         </div>
-        <ol class="how-scroll__rail" data-how-scroll-rail>
-          <li class="step how-scroll__step" data-how-step data-step="0" style="--how-paper:#ceff00;--how-turn:-2deg">
-            <div class="how-scroll__copy"><span class="how-scroll__number">01</span><h3>say hi.</h3><p>name. face. questionable selfie.</p></div>
-            <div class="how-scroll__screen"><div class="mini" data-screen="hi"></div></div>
-          </li>
-          <li class="step how-scroll__step" data-how-step data-step="1" style="--how-paper:#d3c1ff;--how-turn:2deg">
-            <div class="how-scroll__copy"><span class="how-scroll__number">02</span><h3>dump your obsessions.</h3><p>the stuff living rent-free in your head.</p></div>
-            <div class="how-scroll__screen"><div class="mini" data-screen="faves"></div></div>
-          </li>
-          <li class="step how-scroll__step" data-how-step data-step="2" style="--how-paper:#ffc8e5;--how-turn:-1deg">
-            <div class="how-scroll__copy"><span class="how-scroll__number">03</span><h3>overshare a little.</h3><p>weird answers encouraged.</p></div>
-            <div class="how-scroll__screen"><div class="mini" data-screen="ask"></div></div>
-          </li>
-          <li class="step how-scroll__step" data-how-step data-step="3" style="--how-paper:#9ddcfa;--how-turn:1.5deg">
-            <div class="how-scroll__copy"><span class="how-scroll__number">04</span><h3>drop the link.</h3><p>send it. let the group chat do its thing.</p></div>
-            <div class="how-scroll__screen"><div class="mini" data-screen="share"></div></div>
-          </li>
-        </ol>
-        <div class="how-scroll__progress" data-how-scroll-progress role="progressbar" aria-label="Tutorial progress" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1">scroll to build</div>
+        <div class="how-handheld__scene">
+          <div class="how-handheld__bursts" aria-hidden="true"><i>✦</i><i>POKE<br>HERE</i><i>!!!</i><i>↗</i></div>
+          <div class="how-handheld__copy" data-how-copy>
+            <span class="how-scroll__number" data-how-number>01</span>
+            <h3 data-how-step-title>say hi.</h3>
+            <p data-how-step-copy>name. face. questionable selfie.</p>
+          </div>
+          <div class="how-handheld__device">
+            <svg class="how-handheld__hand" viewBox="0 0 760 780" aria-hidden="true" focusable="false">
+              <path d="M762 780H432c-34-63-32-130 7-201l70-126c22-40 64-48 91-25 22 19 22 53 2 80l-57 79 45 4 37-119c13-42 54-61 84-42 27 17 34 52 18 82l-43 82 45 4 29-90c13-38 49-57 80-40 25 14 34 44 23 71l-42 102 58 7v199Z" fill="#ff79bd" stroke="#171717" stroke-width="18" stroke-linejoin="round"/>
+              <path d="M470 610c44-16 77-5 101 25 21 27 24 69 8 112l-25 33h-99c-21-42-16-109 15-170Z" fill="#8d65f8" stroke="#171717" stroke-width="18" stroke-linejoin="round"/>
+              <path d="M611 420l18-48 43 20-18 48Z M686 454l15-47 43 16-15 47Z M735 526l13-41 38 15-12 42Z" fill="#d5ff00" stroke="#171717" stroke-width="10" stroke-linejoin="round"/>
+              <path d="M498 679c33 14 62 12 86-6" fill="none" stroke="#171717" stroke-width="11" stroke-linecap="round"/>
+            </svg>
+            <div class="how-handheld__phone" aria-label="A four-step Auramy setup demo">
+              <div class="how-handheld__screen" data-how-scroll-rail>
+                <div class="mini how-handheld__panel" data-how-step data-how-panel data-step="0" data-screen="hi"></div>
+                <div class="mini how-handheld__panel" data-how-step data-how-panel data-step="1" data-screen="faves"></div>
+                <div class="mini how-handheld__panel" data-how-step data-how-panel data-step="2" data-screen="ask"></div>
+                <div class="mini how-handheld__panel" data-how-step data-how-panel data-step="3" data-screen="share"></div>
+              </div>
+              <div class="how-handheld__nav" aria-label="Tutorial controls">
+                <button type="button" data-how-back>← back</button>
+                <button type="button" data-how-next>next →</button>
+              </div>
+            </div>
+            <svg class="how-handheld__hand how-handheld__hand--thumb" viewBox="0 0 760 780" aria-hidden="true" focusable="false">
+              <g class="how-handheld__thumb-joint">
+                <path d="M760 780H560c-19-46-12-98 24-136l-162-28c-41-7-62-33-53-67 8-34 43-50 76-36l120 52 41-60c21-31 57-36 82-16 24 20 27 54 7 80l-45 57c35 30 67 73 85 134Z" fill="#ff79bd" stroke="#171717" stroke-width="18" stroke-linejoin="round"/>
+                <path d="M390 550c9-18 31-25 49-17l21 10-18 35-22-10c-19-8-29-20-30-18Z" fill="#d5ff00" stroke="#171717" stroke-width="8" stroke-linejoin="round"/>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <div class="how-scroll__progress" data-how-scroll-progress role="progressbar" aria-label="Tutorial progress" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1">step 1 of 4</div>
         <p class="how-scroll__sr" role="status" aria-live="polite" data-how-scroll-status></p>
       </div>
     </section>
@@ -181,12 +198,11 @@
     <section class="sec made" id="made" aria-labelledby="made-title">
       <div class="wrap made__head reveal">
         <div>
-          <p class="stamp">found on the internet (kind of)</p>
-          <h2 id="made-title" class="h2">zero polish.<br><em>all personality.</em></h2>
+          <p class="stamp">more than a bio</p>
+          <h2 id="made-title" class="h2">one link.<br><em>your whole you.</em></h2>
         </div>
         <div class="made__side">
-          <p class="made__disclaimer">Demo worlds. Imaginary internet people.</p>
-          <div class="made__nav"><button class="made__btn" data-made-prev aria-label="Previous spaces">←</button><button class="made__btn" data-made-next aria-label="More spaces">→</button></div>
+          <p class="made__disclaimer">Put it in your bio. Let them meet all of you.</p>
         </div>
       </div>
       <div class="made__row" data-made></div>
@@ -201,18 +217,8 @@
           <p class="lede">let them poke around. literally.</p>
         </div>
         <div class="play-feed-shell" data-play-feed-root>
-          <div class="play-feed__controls" aria-label="Browse interactive demos">
-            <button class="play-feed__arrow" type="button" data-play-prev aria-label="Previous demo">↑</button>
-            <div class="play-feed__tabs" role="tablist" aria-label="Interactive demos">
-              <button class="play-feed__tab" type="button" role="tab" data-play-tab aria-controls="play-squish">squish</button>
-              <button class="play-feed__tab" type="button" role="tab" data-play-tab aria-controls="play-game">game</button>
-              <button class="play-feed__tab" type="button" role="tab" data-play-tab aria-controls="play-wall">wall</button>
-              <button class="play-feed__tab" type="button" role="tab" data-play-tab aria-controls="play-love">party</button>
-            </div>
-            <button class="play-feed__arrow" type="button" data-play-next aria-label="Next demo">↓</button>
-          </div>
-          <div class="play-feed" data-play-feed tabindex="0" aria-label="Four interactive demos. Scroll vertically or use arrow keys.">
-          <article class="tile tile--squish" id="play-squish" data-play-panel role="tabpanel" tabindex="-1">
+          <div class="play-feed" data-play-feed aria-label="Four interactive demos. Continue down the page to see each one.">
+          <article class="tile tile--squish" id="play-squish" data-play-panel tabindex="-1">
             <header><h3>squish lu's face</h3><p>she gets a notification. sorry, lu.</p></header>
             <div class="squish" id="squish" aria-label="Squishable face — press and drag, or press Enter or Space to squish" role="button" tabindex="0">
               <svg viewBox="0 0 300 300" aria-hidden="true">
@@ -227,7 +233,7 @@
             <p class="play-feed__live" role="status" aria-live="polite" data-squish-status></p>
           </article>
 
-          <article class="tile tile--game" id="play-game" data-play-panel role="tabpanel" tabindex="-1">
+          <article class="tile tile--game" id="play-game" data-play-panel tabindex="-1">
             <header><h3>beat their high score</h3><p>every space has a mini game + leaderboard.</p></header>
             <div class="tgame" id="tgame" tabindex="0" role="button" aria-label="Timing game. Press to stop the marker in the pink zone.">
               <div class="tgame__score"><span>score</span><b data-score>0</b></div>
@@ -237,7 +243,7 @@
             </div>
           </article>
 
-          <article class="tile tile--wall" id="play-wall" data-play-panel role="tabpanel" tabindex="-1">
+          <article class="tile tile--wall" id="play-wall" data-play-panel tabindex="-1">
             <header><h3>sign the wall</h3><p>17 kinds of guestbook. this is the sticky-note one.</p></header>
             <div class="wall" id="wall" aria-live="polite"></div>
             <form class="wall__form" data-wall-form>
@@ -246,7 +252,7 @@
             </form>
           </article>
 
-          <article class="tile tile--love" id="play-love" data-play-panel role="tabpanel" tabindex="-1">
+          <article class="tile tile--love" id="play-love" data-play-panel tabindex="-1">
             <header><h3>love it too</h3><p>tap their song. again. we won't judge.</p></header>
             <div class="album-party" id="albumParty" data-album-party></div>
           </article>
@@ -394,6 +400,6 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script type="module" src="/assets/js/landing.js?v=raw-3"></script>
+  <script type="module" src="/assets/js/landing.js?v=raw-6"></script>
 </body>
 </html>

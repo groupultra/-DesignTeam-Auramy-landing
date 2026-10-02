@@ -1,44 +1,51 @@
-// Fictional profiles displayed as a local social feed. Opening the highlighted
-// bio link reveals the person's Auramy space inside that same card.
 import { PEOPLE, avatar, photoSrc } from './people.js';
-import { previewMarkup } from './site-previews.js';
+import { personalSiteMarkup } from './for-previews.js';
 
+// Each profile only uses that person's portrait and their own scene photograph.
 const PROFILES = [
-  { who: 'noah', kind: 'sheet', handle: 'noah.rolls', posts: '18', followers: '284', following: '91', bio: 'skate clips, snack rankings & my deeply serious weekend fund.', link: 'open my weekend spreadsheet', color: '#d5ff00' },
-  { who: 'lu', kind: 'pet', handle: 'lu.afterfive', posts: '27', followers: '419', following: '203', bio: 'scraps, tiny joys, and official fan account for Miso.', link: 'meet Miso on his own website', color: '#ffb7dc' },
-  { who: 'jay', kind: 'oc', handle: 'jay.draws.late', posts: '42', followers: '1,092', following: '366', bio: 'I make playlists and characters who have more lore than me.', link: 'read Sora’s courier file', color: '#a5d8ff' },
-  { who: 'ava', kind: 'selfie', handle: 'ava.in.stereo', posts: '31', followers: '672', following: '188', bio: 'photos I almost deleted, now with somewhere to live.', link: 'peek at my midnight page', color: '#ffd674' },
-  { who: 'zara', kind: 'oc', handle: 'zara.reads.outside', posts: '14', followers: '351', following: '107', bio: 'books, walks, annotated margins, accidental sunsets.', link: 'my current character obsession', color: '#d6c4ff' },
-  { who: 'eli', kind: 'pet', handle: 'eli.uses.film', posts: '23', followers: '538', following: '154', bio: 'film grain, friends, and Miso’s unauthorized close-ups.', link: 'Miso’s park diary', color: '#c7f5d5' },
+  { who: 'lu', app: 'gram', handle: 'lu.afterfive', color: '#ff8dbd', site: 'catdiary', scene: '/assets/img/social/lu-cat.jpg', bio: 'tiny drawings, evening walks, and a cat who has opinions.', link: 'open cat diary' },
+  { who: 'noah', app: 'snap', handle: 'noah.rolls', color: '#ffe534', site: 'skatemap', scene: '/assets/img/social/noah-skate.jpg', bio: 'finding a curb, a line, and the right way home.', link: 'open skate spots' },
+  { who: 'jay', app: 'gram', handle: 'jay.draws.late', color: '#b59cff', site: 'artistdesk', scene: '/assets/img/social/jay-studio.jpg', bio: 'paint on my hands. half-finished ideas everywhere.', link: 'open artist desk' },
+  { who: 'ava', app: 'snap', handle: 'ava.in.stereo', color: '#58d6c3', site: 'fieldjournal', scene: '/assets/img/social/ava-camp.jpg', bio: 'campfire smoke, field notes, and one good flashlight.', link: 'open field journal' },
+  { who: 'zara', app: 'links', handle: 'zara.reads.outside', color: '#ff9f5b', site: 'readinglog', scene: '/assets/img/social/zara-books.jpg', bio: 'reading slowly, underlining too much, keeping the good lines.', link: 'open reading log' },
+  { who: 'eli', app: 'gram', handle: 'eli.uses.film', color: '#8ed6ff', site: 'contactsheet', scene: '/assets/img/social/eli-film.jpg', bio: 'film rolls, quiet streets, and frames worth keeping.', link: 'open contact sheet' },
 ];
 
-const thumbnailSources = {
-  noah: [photoSrc('noah'), '/assets/img/editorial/raw-friends.jpg', '/assets/img/editorial/oc-courier.jpg'],
-  lu: [photoSrc('lu'), '/assets/img/editorial/miso.jpg', '/assets/img/editorial/raw-friends.jpg'],
-  jay: [photoSrc('jay'), '/assets/img/editorial/oc-courier.jpg', '/assets/img/editorial/raw-friends.jpg'],
-  ava: [photoSrc('ava'), '/assets/img/editorial/raw-selfie.jpg', '/assets/img/editorial/miso.jpg'],
-  zara: [photoSrc('zara'), '/assets/img/editorial/oc-courier.jpg', '/assets/img/editorial/raw-friends.jpg'],
-  eli: [photoSrc('eli'), '/assets/img/editorial/miso.jpg', '/assets/img/editorial/raw-friends.jpg'],
+const profilePhotos = (p) => {
+  const portrait = photoSrc(p.who);
+  return [p.scene, portrait, p.scene].map((src) => `<img src="${src}" alt="" loading="lazy" decoding="async">`).join('');
 };
-const thumbnails = (who) => (thumbnailSources[who] || [photoSrc(who)]).map((src) => `<img src="${src}" alt="" loading="lazy" decoding="async">`).join('');
+
+const gramMarkup = (p, person) => `<div class="social-profile__chrome social-profile__chrome--gram"><span aria-hidden="true">‹</span><b>${p.handle}</b><span aria-hidden="true">•••</span></div>
+  <section class="social-profile__front social-profile__front--gram" aria-label="${person.name}'s profile">
+    <div class="social-profile__identity">${avatar(p.who, 'social-profile__avatar')}<div class="social-profile__counts"><span><b>6</b> posts</span><span><b>184</b> followers</span><span><b>91</b> following</span></div></div>
+    <div class="social-profile__bio"><b>${person.name}</b><p>${p.bio}</p><button type="button" class="social-profile__link" data-open-site aria-expanded="false">aura.my/${p.handle}<small>${p.link} ↗</small></button></div>
+    <button class="social-profile__follow" type="button" data-follow aria-pressed="false">follow</button>
+    <div class="social-profile__tabs" aria-hidden="true"><span>▦</span><span>⌑</span></div><div class="social-profile__photos">${profilePhotos(p)}</div>
+  </section>`;
+
+const snapMarkup = (p, person) => `<div class="social-profile__chrome social-profile__chrome--snap"><b>${p.handle}</b><span aria-hidden="true">☰</span></div>
+  <section class="social-profile__front social-profile__front--snap" aria-label="${person.name}'s story">
+    <div class="social-profile__story"><img src="${p.scene}" alt="${person.name}'s latest moment" loading="lazy" decoding="async"><div class="social-profile__story-top">${avatar(p.who, 'social-profile__avatar')}<span>today</span></div><p>${p.bio}</p><button class="social-profile__sticker" type="button" data-open-site aria-expanded="false" aria-label="${p.link}">↗ <span>${p.link}</span></button></div>
+    <div class="social-profile__snap-strip"><img src="${photoSrc(p.who)}" alt="" loading="lazy" decoding="async"><span>tap the link sticker</span></div>
+  </section>`;
+
+const linksMarkup = (p, person) => `<div class="social-profile__chrome social-profile__chrome--links"><span>my links</span><span aria-hidden="true">⌁</span></div>
+  <section class="social-profile__front social-profile__front--links" aria-label="${person.name}'s links">
+    ${avatar(p.who, 'social-profile__avatar')}<h3>${person.name}'s reading corner</h3><p>${p.bio}</p>
+    <button class="social-profile__link-card" type="button" data-open-site aria-expanded="false"><span>✦</span><b>${p.link}</b><i>→</i></button>
+    <div class="social-profile__link-photo"><img src="${p.scene}" alt="A book moment from ${person.name}" loading="lazy" decoding="async"></div>
+  </section>`;
 
 const profileMarkup = (p) => {
   const person = PEOPLE[p.who];
-  return `<article class="made-card social-profile" style="--profile-color:${p.color}" data-profile="${p.who}">
-    <div class="social-profile__appbar"><span aria-hidden="true">‹</span><b>${p.handle}</b><span class="social-profile__dots" aria-hidden="true">•••</span></div>
-    <section class="social-profile__front" aria-label="${person.name}'s fictional social profile">
-      <div class="social-profile__identity">${avatar(p.who, 'social-profile__avatar')}<div class="social-profile__stats"><span><b>${p.posts}</b> posts</span><span><b>${p.followers}</b> followers</span><span><b>${p.following}</b> following</span></div></div>
-      <div class="social-profile__bio"><b>${person.name} ${person.age}</b><p>${p.bio}</p><button class="social-profile__bio-link" type="button" data-open-site aria-expanded="false">aura.my/${person.name} ↗<small>${p.link}</small></button></div>
-      <div class="social-profile__actions"><button type="button" data-follow aria-pressed="false">follow</button><span class="social-profile__demo-inbox">demo inbox ♡</span></div>
-      <p class="social-profile__demo-status">a preview of your social profile</p>
-      <div class="social-profile__tabs" aria-hidden="true"><span>▦</span><span>♙</span></div>
-      <div class="social-profile__thumbs">${thumbnails(p.who)}</div>
+  const front = p.app === 'gram' ? gramMarkup(p, person) : p.app === 'snap' ? snapMarkup(p, person) : linksMarkup(p, person);
+  return `<article class="made-card social-profile social-profile--${p.app}" style="--profile-color:${p.color}" data-profile="${p.who}">
+    ${front}
+    <section class="social-profile__site" aria-label="${person.name}'s personal website" hidden>
+      <button class="social-profile__back" type="button" data-close-site>← back</button>
+      ${personalSiteMarkup(p.site, p)}
     </section>
-    <section class="social-profile__site" aria-label="${person.name}'s local website preview" hidden>
-      <button class="social-profile__back" type="button" data-close-site>← back to profile</button>
-      <p class="social-profile__local">LOCAL DEMO · AURAMY SPACE</p>${previewMarkup(p.kind, true)}
-    </section>
-    <footer class="social-profile__caption">fictional person · local demo</footer>
   </article>`;
 };
 
@@ -50,32 +57,31 @@ export function renderMade(row) {
   row.addEventListener('click', (event) => {
     const card = event.target.closest('.social-profile');
     if (!card) return;
-    const open = event.target.closest('[data-open-site]');
-    const close = event.target.closest('[data-close-site]');
     const follow = event.target.closest('[data-follow]');
     if (follow) {
-      const isFollowing = follow.getAttribute('aria-pressed') === 'true';
-      follow.setAttribute('aria-pressed', String(!isFollowing));
-      follow.textContent = isFollowing ? 'follow' : 'following ✓';
+      const following = follow.getAttribute('aria-pressed') === 'true';
+      follow.setAttribute('aria-pressed', String(!following));
+      follow.textContent = following ? 'follow' : 'following';
       return;
     }
-    if (!open && !close) return;
+    const opening = Boolean(event.target.closest('[data-open-site]'));
+    const closing = event.target.closest('[data-close-site]');
+    if (!opening && !closing) return;
     const front = card.querySelector('.social-profile__front');
     const site = card.querySelector('.social-profile__site');
-    const isOpening = Boolean(open);
-    front.hidden = isOpening;
-    site.hidden = !isOpening;
-    card.classList.toggle('is-site-open', isOpening);
-    card.querySelector('[data-open-site]').setAttribute('aria-expanded', String(isOpening));
-    (isOpening ? card.querySelector('[data-close-site]') : card.querySelector('[data-open-site]')).focus();
+    front.hidden = opening;
+    site.hidden = !opening;
+    card.classList.toggle('is-site-open', opening);
+    card.querySelector('[data-open-site]').setAttribute('aria-expanded', String(opening));
+    (opening ? card.querySelector('[data-close-site]') : card.querySelector('[data-open-site]')).focus();
   });
 }
 
 export const LIVE = [
-  ['noah', 'noah just topped up the noodle budget', '1m'],
-  ['zara', 'zara added a chapter to her reading list', '2m'],
-  ['ava', 'ava posted another impossible-to-delete photo', '4m'],
-  ['lu', 'lu updated Miso’s park diary', 'now'],
-  ['jay', 'jay finished Sora’s character file', '6m'],
-  ['eli', 'eli scanned a roll of film', '9m'],
+  ['noah', 'noah added a pin to skate spots', '1m'],
+  ['zara', 'zara saved a line from a book', '2m'],
+  ['ava', 'ava added a field note', '4m'],
+  ['lu', 'lu added a cat drawing', 'now'],
+  ['jay', 'jay pinned a new sketch', '6m'],
+  ['eli', 'eli developed a roll of film', '9m'],
 ];

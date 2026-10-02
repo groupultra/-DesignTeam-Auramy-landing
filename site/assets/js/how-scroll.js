@@ -1,106 +1,106 @@
-// A scroll-led, horizontal story. It observes normal page scroll; it never captures it.
+// A single handheld phone that swaps setup screens in place. The page stays a
+// normal document: progression always comes from an explicit button or CTA.
 const activeSections = new WeakMap();
+const SESSION_KEY = 'auramy-how-step';
+const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+
+function readStep(total) {
+  try { return clamp(Number(sessionStorage.getItem(SESSION_KEY)) || 0, 0, total - 1); }
+  catch { return 0; }
+}
 
 export function initHowScroll(root) {
-  if (!root) return () => {};
-  const previous = activeSections.get(root);
-  previous?.destroy?.();
-
-  const stage = root.querySelector('[data-how-scroll-stage]');
-  const rail = root.querySelector('[data-how-scroll-rail]');
-  const steps = [...root.querySelectorAll('[data-how-step]')];
+  if (!root) return { goToStep() {}, destroy() {} };
+  activeSections.get(root)?.destroy?.();
+  const panels = [...root.querySelectorAll('[data-how-panel]')];
+  const previous = root.querySelector('[data-how-back]');
+  const next = root.querySelector('[data-how-next]');
+  const number = root.querySelector('[data-how-number]');
+  const title = root.querySelector('[data-how-step-title]');
+  const copy = root.querySelector('[data-how-step-copy]');
+  const progress = root.querySelector('[data-how-scroll-progress]');
   const status = root.querySelector('[data-how-scroll-status]');
-  if (!stage || !rail || steps.length < 2) return () => {};
+  if (!panels.length) return { goToStep() {}, destroy() {} };
 
   const abort = new AbortController();
   const { signal } = abort;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const shortLandscape = matchMedia('(max-height: 640px) and (orientation: landscape)');
-  let frame = 0;
+  const shortViewport = matchMedia('(max-height: 640px)');
   let active = -1;
-  let closed = false;
-
-  root.style.setProperty('--how-step-count', steps.length);
-  root.style.setProperty('--how-scroll-length', `${(steps.length - 1) * 82}svh`);
-
-  function setActive(index) {
-    const next = Math.max(0, Math.min(steps.length - 1, index));
-    if (next === active) return;
-    active = next;
-    steps.forEach((step, stepIndex) => {
-      const selected = stepIndex === active;
-      step.classList.toggle('is-active', selected);
-      step.setAttribute('aria-current', selected ? 'step' : 'false');
-      step.inert = !staticMode() && !selected;
+  let pressTimer = 0;
+  let transitionTimer = 0;
+  const isStill = () => reduced.matches || document.body.classList.contains('is-motion-paused');
+  const copyFor = (panel) => ({
+    number: String(Number(panel.dataset.step) + 1).padStart(2, '0'),
+    title: panel.dataset.screen === 'hi' ? 'say hi.' : panel.dataset.screen === 'faves' ? 'dump your obsessions.' : panel.dataset.screen === 'ask' ? 'overshare a little.' : 'drop the link.',
+    text: panel.dataset.screen === 'hi' ? 'name. face. questionable selfie.' : panel.dataset.screen === 'faves' ? 'the stuff living rent-free in your head.' : panel.dataset.screen === 'ask' ? 'weird answers encouraged.' : 'send it. let the group chat do its thing.',
+  });
+  function tapHand() {
+    if (isStill()) return;
+    root.classList.remove('is-how-press');
+    void root.offsetWidth;
+    root.classList.add('is-how-press');
+  }
+  function popBursts() {
+    if (isStill()) return;
+    root.classList.remove('is-how-pop');
+    void root.offsetWidth;
+    root.classList.add('is-how-pop');
+  }
+  function setActive(index, announce = false) {
+    const selected = clamp(index, 0, panels.length - 1);
+    if (selected === active) return;
+    active = selected;
+    const details = copyFor(panels[active]);
+    root.dataset.howStep = String(active + 1);
+    root.classList.toggle('is-how-short', shortViewport.matches);
+    panels.forEach((panel, panelIndex) => {
+      const visible = panelIndex === active;
+      panel.classList.toggle('is-active', visible);
+      panel.setAttribute('aria-hidden', String(!visible));
+      panel.inert = !visible;
     });
-    const indicator = root.querySelector('[data-how-scroll-progress]');
-    if (indicator) indicator.setAttribute('aria-valuenow', String(active + 1));
-    // Keep the live message terse so assistive tech only reports an actual step change.
-    if (status) status.textContent = `Step ${active + 1} of ${steps.length}: ${steps[active].querySelector('h3')?.textContent?.trim() || ''}`;
+    if (number) number.textContent = details.number;
+    if (title) title.textContent = details.title;
+    if (copy) copy.textContent = details.text;
+    if (progress) { progress.setAttribute('aria-valuenow', String(active + 1)); progress.textContent = `step ${active + 1} of ${panels.length}`; }
+    if (previous) previous.disabled = active === 0;
+    if (next) next.textContent = active === panels.length - 1 ? 'restart ↺' : 'next →';
+    if (announce && status) status.textContent = `Step ${active + 1} of ${panels.length}: ${details.title}`;
+    try { sessionStorage.setItem(SESSION_KEY, String(active)); } catch { /* private browsing */ }
   }
-
-  function staticMode() {
-    return reduced.matches || shortLandscape.matches || document.body.classList.contains('is-motion-paused');
+  function focusNewScreen(trigger) {
+    if (!trigger?.closest?.('[data-how-panel]')) return;
+    panels[active].querySelector('input:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])')?.focus({ preventScroll: true });
   }
-
-  function update() {
-    frame = 0;
-    if (closed) return;
-    const staticLayout = staticMode();
-    root.classList.toggle('is-how-static', staticLayout);
-    if (staticLayout) {
-      root.style.setProperty('--how-progress', '0');
-      root.style.setProperty('--how-translate', '0%');
-      active = -1;
-      setActive(0);
+  function goToStep(index, behavior = 'auto') {
+    const selected = clamp(index, 0, panels.length - 1);
+    if (selected === active) return;
+    const trigger = document.activeElement;
+    window.clearTimeout(transitionTimer);
+    window.clearTimeout(pressTimer);
+    if (behavior !== 'auto' && !isStill()) {
+      tapHand();
+      transitionTimer = window.setTimeout(() => {
+        setActive(selected, true);
+        focusNewScreen(trigger);
+        root.classList.remove('is-how-press');
+        popBursts();
+      }, 150);
       return;
     }
-    const bounds = root.getBoundingClientRect();
-    const range = Math.max(1, root.offsetHeight - stage.offsetHeight);
-    const progress = Math.max(0, Math.min(1, -bounds.top / range));
-    root.style.setProperty('--how-progress', progress.toFixed(4));
-    root.style.setProperty('--how-translate', `${progress * -((steps.length - 1) / steps.length) * 100}%`);
-    setActive(Math.min(steps.length - 1, Math.round(progress * (steps.length - 1))));
+    setActive(selected, true);
+    focusNewScreen(trigger);
+    popBursts();
   }
-
-  function requestUpdate() {
-    if (!frame) frame = requestAnimationFrame(update);
-  }
-
-  function goToStep(index, behavior = staticMode() ? 'auto' : 'smooth') {
-    const target = Math.max(0, Math.min(steps.length - 1, index));
-    if (staticMode()) {
-      steps[target].scrollIntoView({ behavior, block: 'start' });
-      return;
-    }
-    const range = Math.max(1, root.offsetHeight - stage.offsetHeight);
-    const top = scrollY + root.getBoundingClientRect().top + (range * target) / (steps.length - 1);
-    scrollTo({ top, behavior });
-  }
-
-  addEventListener('scroll', requestUpdate, { passive: true, signal });
-  addEventListener('resize', requestUpdate, { passive: true, signal });
-  const refreshStaticLayout = () => { active = -1; requestUpdate(); };
-  reduced.addEventListener?.('change', refreshStaticLayout, { signal });
-  shortLandscape.addEventListener?.('change', refreshStaticLayout, { signal });
-  document.addEventListener('auramy:motion-change', refreshStaticLayout, { signal });
-  setActive(0);
-  requestUpdate();
-
-  const destroy = () => {
-    if (closed) return;
-    closed = true;
-    abort.abort();
-    cancelAnimationFrame(frame);
-    root.style.removeProperty('--how-step-count');
-    root.style.removeProperty('--how-scroll-length');
-    root.style.removeProperty('--how-progress');
-    root.style.removeProperty('--how-translate');
-    root.classList.remove('is-how-static');
-    steps.forEach((step) => { step.inert = false; step.classList.remove('is-active'); step.removeAttribute('aria-current'); });
-    if (activeSections.get(root) === controller) activeSections.delete(root);
-  };
-  const controller = { goToStep, destroy };
+  previous?.addEventListener('click', () => goToStep(active - 1, 'smooth'), { signal });
+  next?.addEventListener('click', () => goToStep(active === panels.length - 1 ? 0 : active + 1, 'smooth'), { signal });
+  const refresh = () => root.classList.toggle('is-how-short', shortViewport.matches);
+  reduced.addEventListener?.('change', refresh, { signal });
+  shortViewport.addEventListener?.('change', refresh, { signal });
+  document.addEventListener('auramy:motion-change', refresh, { signal });
+  setActive(readStep(panels.length));
+  const controller = { goToStep, destroy() { abort.abort(); window.clearTimeout(pressTimer); window.clearTimeout(transitionTimer); panels.forEach((panel) => { panel.inert = false; panel.removeAttribute('aria-hidden'); panel.classList.remove('is-active'); }); root.classList.remove('is-how-press', 'is-how-pop', 'is-how-short'); activeSections.delete(root); } };
   activeSections.set(root, controller);
   return controller;
 }
