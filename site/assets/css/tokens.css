@@ -1,0 +1,80 @@
+/* Auramy design tokens — v1.0 (see /brand) */
+:root {
+  color-scheme: light;
+
+  /* Core neutrals */
+  --ink: #141013;
+  --graphite: #3a3236;
+  --stone: #9b9189;
+  --sand: #f3e9da;
+  --paper: #fff8ee;
+  --white: #ffffff;
+
+  /* Aura spectrum */
+  --bubblegum: #ff5fa2;
+  --tangerine: #ff8a3c;
+  --lemon: #e8ff5a;
+  --aqua: #5ce1e6;
+  --violet: #8b6cff;
+  --cherry: #ff3d5a;
+
+  /* Signature gradients */
+  --aura-candy: linear-gradient(135deg, #ff5fa2 0%, #ff8a3c 52%, #e8ff5a 100%);
+  --aura-night: linear-gradient(135deg, #2b1b5e 0%, #8b6cff 55%, #5ce1e6 100%);
+  --aura-holo: linear-gradient(115deg, #ff5fa2, #ffb86b, #e8ff5a, #5ce1e6, #8b6cff, #ff5fa2);
+
+  /* Type */
+  --f-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --f-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --f-mono: "Space Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --f-hand: "Caveat", "Comic Sans MS", cursive;
+  --f-brand: "Unbounded", var(--f-display);
+
+  --t-mega: clamp(3.2rem, 11vw, 9.5rem);
+  --t-h1: clamp(2.6rem, 7.4vw, 6.2rem);
+  --t-h2: clamp(2.2rem, 5.6vw, 4.6rem);
+  --t-h3: clamp(1.4rem, 2.6vw, 2rem);
+  --t-body: clamp(1.02rem, 1.2vw, 1.18rem);
+  --t-small: 0.9rem;
+  --t-label: 0.74rem;
+
+  /* Shape */
+  --r-xs: 8px;
+  --r-s: 12px;
+  --r-m: 20px;
+  --r-l: 28px;
+  --r-xl: 44px;
+  --r-pill: 999px;
+
+  /* Depth: "sticker" elevation */
+  --sh-1: 0 1px 0 rgba(20, 16, 19, 0.06), 0 6px 16px -8px rgba(20, 16, 19, 0.28);
+  --sh-2: 0 1px 0 rgba(20, 16, 19, 0.06), 0 16px 36px -14px rgba(20, 16, 19, 0.38);
+  --sh-3: 0 2px 0 rgba(20, 16, 19, 0.05), 0 30px 70px -24px rgba(20, 16, 19, 0.5);
+  --die-cut: 0 0 0 5px var(--white);
+
+  /* Motion: springs, not timelines */
+  --spring: linear(0, 0.006, 0.025 2.8%, 0.101 6.1%, 0.539 18.9%, 0.721 25.3%, 0.849 31.5%,
+      0.937 38.1%, 0.968 41.8%, 0.991 45.7%, 1.006 50.1%, 1.015 55%, 1.017 63.9%, 1.001 85.9%, 1);
+  --spring-bouncy: linear(0, 0.004, 0.016, 0.035, 0.063, 0.098, 0.141 13.6%, 0.25, 0.391, 0.563, 0.765,
+      1, 0.891 40.9%, 0.848, 0.813, 0.785, 0.766, 0.754, 0.75, 0.754, 0.766, 0.785, 0.813, 0.848,
+      0.891 68.2%, 1 72.7%, 0.973, 0.953, 0.941, 0.938, 0.941, 0.953, 0.973, 1, 0.988, 0.984, 0.988, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-1: 160ms;
+  --dur-2: 320ms;
+  --dur-3: 640ms;
+
+  --gutter: clamp(16px, 4vw, 48px);
+  --maxw: 1240px;
+}
+
+@supports not (transition-timing-function: linear(0, 1)) {
+  :root {
+    --spring: cubic-bezier(0.34, 1.4, 0.64, 1);
+    --spring-bouncy: cubic-bezier(0.34, 1.8, 0.64, 1);
+  }
+}
+
+/* Auri blinks now and then (shared by every page that renders blob avatars) */
+.blob-avatar .eyes__b { animation: auri-blink 5.6s infinite; transform-box: fill-box; transform-origin: center; }
+@keyframes auri-blink { 0%, 94%, 100% { transform: scaleY(1); } 96% { transform: scaleY(.12); } }
+@media (prefers-reduced-motion: reduce) { .blob-avatar .eyes__b { animation: none; } }

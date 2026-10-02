@@ -1,0 +1,146 @@
+/* A paper peel controlled by native page scroll, not a comparison slider. */
+#vs.scroll-reveal {
+  --reveal-progress: 0;
+  position: relative;
+  height: 205svh;
+  min-height: 970px;
+  padding: 0;
+  background: #b8aae0;
+  color: #21251a;
+  overflow: visible;
+}
+#vs.scroll-reveal::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .28;
+  background-image: repeating-linear-gradient(92deg, transparent 0 78px, #b0ab9620 79px 80px), repeating-linear-gradient(0deg, transparent 0 39px, #857f6614 40px 41px);
+}
+#vs.scroll-reveal .scroll-reveal__stage {
+  position: sticky;
+  top: 62px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: calc(100svh - 62px);
+  min-height: 390px;
+  isolation: isolate;
+  padding: 18px 22px 15px;
+  overflow: clip;
+}
+#vs .scroll-reveal__heading {
+  position: relative;
+  z-index: 3;
+  flex: none;
+  margin: 0 0 10px;
+  text-align: center;
+  font: 800 clamp(38px, 4.6vw, 68px)/.87 var(--f-display);
+  letter-spacing: -.07em;
+  transform: rotate(-2deg);
+}
+#vs .scroll-reveal__heading span { position: relative; display: inline-block; font-family: var(--f-hand); font-size: 1.24em; font-weight: 700; font-style: normal; letter-spacing: -.04em; }
+#vs .scroll-reveal__heading span::after { content: ""; position: absolute; left: -2%; right: -2%; height: 4px; bottom: 1px; background: #f955ad; clip-path: polygon(0 20%,100% 0,97% 65%,6% 100%); transform: rotate(-2deg); }
+#vs .scroll-reveal__canvas { position: relative; display: grid; place-items: center; width: min(780px, 100%); min-height: 0; }
+#vs .scroll-reveal__device {
+  --pw: min(258px, calc((100svh - 210px) * .445), 65vw);
+  position: relative;
+  z-index: 2;
+  flex: none;
+  padding: 10px 8px 8px;
+  border: 1px solid #55584d;
+  border-radius: 7px 7px 18px 18px;
+  background: linear-gradient(100deg, #8f9289, #ecefe8 8%, #bcc0b8 42%, #f4f5ee 65%, #a9ada1);
+  box-shadow: 8px 12px 0 #24281d21, inset 0 0 0 1px #fbfcf4;
+  transform: rotate(1.5deg);
+}
+#vs .scroll-reveal__device::before { display: none; }
+#vs .scroll-reveal__device .screen { aspect-ratio: 360 / 780; border: 1px solid #686c62; border-radius: 3px 3px 11px 11px; isolation: isolate; }
+#vs .scroll-reveal__chrome { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 0 1px 8px; color: #282d22; font: 400 8px/1 var(--f-mono); text-transform: uppercase; }
+#vs .scroll-reveal__chrome span:last-child { font-family: monospace; letter-spacing: 3px; }
+#vs .scroll-reveal__after { position: absolute; inset: 0; z-index: 0; isolation: isolate; }
+#vs .scroll-reveal__after .sp-scrap { background-color: #f7efdc; }
+#vs .scroll-reveal__curtain {
+  position: absolute;
+  z-index: 4;
+  inset: -1px -1px 0;
+  padding: 11cqw 7cqw 13cqw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #e8e7e0;
+  color: #74776f;
+  transform-origin: 0 0;
+  box-shadow: 0 12px 14px #24281d38;
+  clip-path: polygon(0 0,100% 0,100% 99%,96% 100%,89% 98.4%,84% 100%,77% 98.9%,68% 100%,61% 98.5%,55% 100%,48% 98.7%,42% 100%,34% 98.5%,25% 100%,18% 99%,10% 100%,4% 98.7%,0 100%);
+  will-change: transform;
+  pointer-events: none;
+}
+#vs .scroll-reveal__boring-stamp { align-self: flex-start; margin: 0 0 9cqw; border: .45cqw solid #8a8d82; padding: 1.3cqw 2cqw; color: #7b7e73; font: 700 2.7cqw/1.1 var(--f-mono); text-transform: uppercase; transform: rotate(-5deg); }
+#vs .scroll-reveal__blank-avatar { display: grid; place-items: center; width: 20cqw; height: 20cqw; border: .3cqw solid #c2c4b8; border-radius: 50%; background: #d1d3ca; color: #909489; font: 400 9cqw/1 var(--f-mono); }
+#vs .scroll-reveal__handle { margin: 5cqw 0 1.5cqw; color: #62665a; font: 700 5cqw/1 var(--f-display); }
+#vs .scroll-reveal__bio { margin: 0 0 8cqw; font: 400 3cqw/1.4 var(--f-mono); text-align: center; }
+#vs .scroll-reveal__links { display: grid; gap: 4cqw; width: 100%; }
+#vs .scroll-reveal__links span { border: .35cqw solid #c3c5bb; border-radius: 2cqw; padding: 4cqw 2cqw; text-align: center; background: #f4f4ee; color: #797c73; font: 500 3.7cqw/1 var(--f-display); }
+#vs .scroll-reveal__error { margin: auto 0 0; padding-top: 10cqw; color: #878b7e; text-align: center; font: 400 2.7cqw/1.7 var(--f-mono); letter-spacing: .03em; }
+#vs .scroll-reveal__error b { font-weight: 400; text-decoration: line-through; }
+#vs .scroll-reveal__torn-edge { position: absolute; bottom: 0; left: 0; right: 0; height: 2.5cqw; background: linear-gradient(#a7ac9c65, #f9faf155); }
+#vs .scroll-reveal__annotation { position: absolute; z-index: 3; width: 150px; margin: 0; font: 700 28px/.9 var(--f-hand); color: #3d4630; pointer-events: none; }
+#vs .scroll-reveal__annotation--before { left: max(0px, calc(50% - 290px)); top: 20%; transform: rotate(-13deg); }
+#vs .scroll-reveal__annotation--before::after { content: "↘"; display: block; text-align: right; margin-top: 9px; font: 400 48px/.7 var(--f-hand); }
+#vs .scroll-reveal__annotation--after { right: max(0px, calc(50% - 294px)); bottom: 23%; transform: rotate(9deg); color: #c6277b; opacity: var(--reveal-progress); }
+#vs .scroll-reveal__annotation--after::before { content: "↖"; display: block; margin-bottom: 5px; font-size: 47px; line-height: .8; }
+#vs .scroll-reveal__sticker { position: absolute; z-index: 1; right: calc(50% - 243px); top: 14%; padding: 10px 12px 8px; border: 1px solid #181c11; background: #cbdc4d; color: #222718; box-shadow: 3px 4px 0 #323c2240; font: 700 11px/1.2 var(--f-mono); transform: rotate(11deg); }
+#vs .scroll-reveal__sticker b { display: block; font-size: 28px; line-height: .95; letter-spacing: -.1em; }
+#vs .scroll-reveal__note { z-index: 3; margin: 16px 0 0; color: #2e3822; font: 700 24px/1 var(--f-hand); text-align: center; transform: rotate(-2deg); }
+#vs .scroll-reveal__reduced-copy { display: none; max-width: 30ch; margin: 9px 0 0; text-align: center; color: #606853; font: 400 10px/1.4 var(--f-mono); }
+#vs .scroll-reveal__sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+#vs .scroll-reveal__after[data-off="1"] *, #vs .scroll-reveal__after[data-off="1"] *::before, #vs .scroll-reveal__after[data-off="1"] *::after { animation-play-state: paused !important; }
+#vs .scroll-reveal__device.is-glitch { animation: scroll-reveal-nudge .18s steps(2, end); }
+#vs .scroll-reveal__device.is-glitch .scroll-reveal__chrome { text-shadow: 1px 0 #e42d87, -1px 0 #56884b; }
+@keyframes scroll-reveal-nudge { 0%,100% { translate: 0 0; } 25% { translate: -2px 0; } 65% { translate: 1px 1px; } }
+
+@media (max-width: 700px) {
+  #vs.scroll-reveal { height: 180svh; min-height: 840px; }
+  #vs.scroll-reveal .scroll-reveal__stage { top: 56px; height: calc(100svh - 56px); min-height: 385px; padding: 17px 16px 13px; }
+  #vs .scroll-reveal__heading { max-width: 330px; margin-bottom: 15px; font-size: clamp(35px, 8.8vw, 50px); }
+  #vs .scroll-reveal__device { --pw: min(244px, calc((100svh - 207px) * .445), 65vw); padding: 8px 6px 6px; box-shadow: 5px 7px 0 #24281d21, inset 0 0 0 1px #fbfcf4; }
+  #vs .scroll-reveal__chrome { padding-bottom: 6px; font-size: 6px; }
+  #vs .scroll-reveal__annotation { width: 88px; font-size: 20px; }
+  #vs .scroll-reveal__annotation--before { left: 0; top: 13%; transform: rotate(-15deg) translateX(-4px); }
+  #vs .scroll-reveal__annotation--before::after { margin-top: 4px; font-size: 36px; }
+  #vs .scroll-reveal__annotation--after { right: -1px; bottom: 12%; transform: rotate(12deg) translateX(3px); }
+  #vs .scroll-reveal__annotation--after::before { font-size: 35px; }
+  #vs .scroll-reveal__sticker { right: 0; top: 1%; padding: 7px 6px 5px; font-size: 7px; transform: rotate(10deg); }
+  #vs .scroll-reveal__sticker b { font-size: 21px; }
+  #vs .scroll-reveal__note { margin-top: 17px; font-size: 21px; }
+}
+@media (max-height: 600px) {
+  #vs .scroll-reveal__heading { font-size: 32px; margin-bottom: 9px; }
+  #vs.scroll-reveal .scroll-reveal__stage { min-height: 350px; padding-top: 10px; padding-bottom: 9px; }
+  #vs .scroll-reveal__device { --pw: min(210px, calc((100svh - 175px) * .44), 65vw); }
+  #vs .scroll-reveal__note { font-size: 18px; margin-top: 9px; }
+}
+#vs.scroll-reveal.is-reduced { height: auto; min-height: 0; }
+#vs.scroll-reveal.is-reduced .scroll-reveal__stage { position: relative; top: auto; height: auto; min-height: 0; padding-block: 50px 35px; }
+#vs.scroll-reveal.is-reduced .scroll-reveal__device { --pw: min(258px, 65vw); }
+#vs.scroll-reveal.is-reduced .scroll-reveal__curtain, #vs.scroll-reveal.is-reduced .scroll-reveal__annotation--before { display: none; }
+#vs.scroll-reveal.is-reduced .scroll-reveal__annotation--after { opacity: 1; }
+#vs.scroll-reveal.is-reduced .scroll-reveal__reduced-copy { display: block; }
+@media (prefers-reduced-motion: reduce) {
+  #vs.scroll-reveal { height: auto; min-height: 0; }
+  #vs.scroll-reveal .scroll-reveal__stage { position: relative; top: auto; height: auto; min-height: 0; padding-block: 50px 35px; }
+  #vs .scroll-reveal__device { --pw: min(258px, 65vw); }
+  #vs .scroll-reveal__curtain { display: none; }
+  #vs .scroll-reveal__annotation--before { display: none; }
+  #vs .scroll-reveal__annotation--after { opacity: 1; }
+  #vs .scroll-reveal__reduced-copy { display: block; }
+  #vs.scroll-reveal *, #vs.scroll-reveal *::before, #vs.scroll-reveal *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+}
+
+#vs .scroll-reveal__stage::before { content:""; position:absolute; z-index:-2; inset:0; background:linear-gradient(#b8aae029,#b8aae04d),url('/assets/img/editorial/raw-friends.jpg') center 45%/cover; opacity:calc(var(--reveal-progress) * .72); pointer-events:none; }
+#vs .scroll-reveal__heading { background:#f4f0dc; padding:10px 14px 16px; box-shadow:5px 5px #111; }
+#vs .scroll-reveal__annotation { background:#f4f0dc; padding:10px; border:1px solid #111; box-shadow:3px 3px #111; }
+#vs .scroll-reveal__annotation--before { opacity:calc(1 - var(--reveal-progress)); }
+#vs .scroll-reveal__note { background:#d5ff00; padding:5px 10px; border:1px solid #111; }
