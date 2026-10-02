@@ -1,8 +1,7 @@
 import { auraFor, prefersReducedMotion } from './aura.js';
 import { injectSprite, pic, blobAvatar } from './sprite.js';
-import { renderHow, NOTIFS, MIA } from './spaces.js';
+import { renderHow, MIA } from './spaces.js';
 import { mountHow } from './interact.js?v=raw-3';
-import { songArt, vinyl } from './covers.js';
 import { PEOPLE, avatar } from './people.js';
 import { renderMade } from './made.js';
 import { initWorldsCarousel } from './worlds-carousel.js?v=raw-3';
@@ -14,6 +13,8 @@ import { initPlayFeed } from './play-feed.js?v=scroll-stack-4';
 import { initAlbumParty } from './album-party.js?v=raw-4';
 import { renderHeroSitePreviews } from './site-previews.js';
 import { renderForPreviews } from './for-previews.js';
+import { initEndingScenes } from './ending-scenes.js?v=ending-3';
+import { initClaimWorlds } from './claim-worlds.js?v=claim-worlds-3';
 
 document.documentElement.classList.add('js');
 injectSprite();
@@ -23,6 +24,7 @@ const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 const reduced = prefersReducedMotion();
+initClaimWorlds($('#claim'));
 const candy = ['#FF5FA2', '#FF8A3C', '#E8FF5A'];
 const motionPaused = () => document.body.classList.contains('is-motion-paused');
 
@@ -217,6 +219,7 @@ renderForPreviews($('[data-site-previews]'));
 initWorldsCarousel($('#spaces'));
 initPlayFeed($('[data-play-feed-root]'));
 initAlbumParty($('#albumParty'));
+initEndingScenes($('#notify'));
 
 /* ───────── made by actual humans ───────── */
 {
@@ -483,38 +486,6 @@ $$('[data-faces]').forEach((el) => (el.innerHTML = Object.keys(PEOPLE).map((k) =
     mine = [...mine, note].slice(-4);
     try { localStorage.setItem('auramy-wall', JSON.stringify(mine)); } catch { /* storage unavailable */ }
     inp.value = '';
-  });
-}
-
-/* ───────── notifications ───────── */
-{
-  const stack = $('#lockStack');
-  const icon = '<span class="ntf__icon" aria-hidden="true">a</span>';
-  let i = 0, timer;
-  const push = () => {
-    const n = NOTIFS[i % NOTIFS.length];
-    i++;
-    const el = document.createElement('div');
-    el.className = 'ntf';
-    // from a friend: their face, with the app as a little corner badge; from Auramy: just the app icon
-    const lead = n.who ? `<span class="ntf__av">${avatar(n.who)}<i class="ntf__badge">${icon}</i></span>` : `<span class="ntf__ico">${icon}</span>`;
-    el.className = n.who ? 'ntf ntf--person' : 'ntf';
-    el.innerHTML = `${lead}<b>${n.t}</b><small></small><p>${n.b}</p>`;
-    stack.prepend(el);
-    $$('.ntf', stack).forEach((x, j) => {
-      x.classList.toggle('is-old', j > 0);
-      $('small', x).textContent = j === 0 ? 'now' : `${j * 3}m ago`;
-      if (j > 3) x.remove();
-    });
-  };
-  push(); push();
-  whileVisible(stack, () => { push(); timer = setInterval(push, 2600); }, () => clearInterval(timer), 0.3);
-  // tap a notification to swipe it away
-  stack.addEventListener('click', (e) => {
-    const n = e.target.closest('.ntf');
-    if (!n || n.classList.contains('is-gone')) return;
-    n.classList.add('is-gone');
-    setTimeout(() => n.remove(), 420);
   });
 }
 
