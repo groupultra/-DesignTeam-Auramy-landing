@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Auramy — a website with your aura</title>
+  <meta name="description" content="Drop in your name, a selfie and the stuff you're into. Auramy turns it into a little world your friends can open, poke, play and sign — right in their browser.">
+  <meta name="theme-color" content="#FFF8EE">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/assets/img/app-icon-180.png">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Auramy — a website with your aura">
+  <meta property="og:description" content="Your corner of the internet. Friends open it, poke it, play it, sign it. No app needed.">
+  <meta property="og:image" content="https://auramy-flax.vercel.app/assets/img/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Caveat:wght@500;700&family=Instrument+Serif:ital@0;1&family=Silkscreen&family=Space+Mono:wght@400;700&family=Unbounded:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/spaces.css">
+  <link rel="stylesheet" href="/assets/css/landing.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="nav" id="nav">
+    <a class="nav__logo" href="/" aria-label="Auramy home">
+      <img src="/assets/logo/auramy-lockup.svg" alt="Auramy" width="150" height="28">
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#how">how it works</a>
+      <a href="#spaces">worlds</a>
+      <a href="#play">for friends</a>
+      <a href="#aura">aura</a>
+      <a href="/brand">brand kit</a>
+    </nav>
+    <a class="btn btn--ink btn--sm" href="#claim">get the app</a>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero__aura" aria-hidden="true"><i></i><i></i><i></i></div>
+
+      <div class="hero__toys" id="toys" aria-hidden="true">
+        <div class="toy toy--vinyl" data-x="0.06" data-y="0.18" data-mx="0.02" data-my="0.08"><div class="toy__in"><div class="vinyl"><div class="vinyl__label"></div></div></div></div>
+        <div class="toy toy--polaroid" data-x="0.535" data-y="0.6" data-r="-8"><div class="toy__in"><figure class="polaroid"><div class="polaroid__pic" data-pic="ph-cat"></div><figcaption>mochi ♡</figcaption><div class="polaroid__b">she bites.<br>love her tho<span>— mia, jun '26</span></div></figure></div></div>
+        <div class="toy toy--note" data-x="0.03" data-y="0.66" data-mx="0.70" data-my="0.47" data-r="6"><div class="toy__in"><div class="note-toy">u have<br>aura fr</div></div></div>
+        <div class="toy toy--likes" data-x="0.52" data-y="0.10" data-mx="0.62" data-my="0.36" data-r="-4"><div class="toy__in"><div class="pill-toy"><svg viewBox="0 0 100 100"><use href="#heart"/></svg><b>1,204</b></div></div></div>
+        <div class="toy toy--game" data-x="0.88" data-y="0.74" data-mx="0.04" data-my="0.44" data-r="7"><div class="toy__in"><div class="cart"><span>hi-score</span><b>345</b><em>noah</em></div></div></div>
+        <div class="toy toy--star" data-x="0.90" data-y="0.12" data-mx="0.82" data-my="0.02" data-r="12"><div class="toy__in"><svg class="star-toy" viewBox="0 0 100 100"><use href="#star"/></svg></div></div>
+      </div>
+
+      <div class="hero__inner">
+        <div class="hero__copy">
+          <p class="stamp"><span class="dot"></span> now in beta · iOS + web</p>
+          <h1 id="hero-title" class="hero__title">a website with your <em class="aura-text">aura</em>.</h1>
+          <p class="hero__sub">Drop in your name, a selfie and the stuff you're into. Auramy turns it into a little world your friends can open, poke, play and sign — right in their browser.</p>
+          <form class="claim" data-claim>
+            <label class="claim__field">
+              <span class="claim__prefix">aura.my/</span>
+              <input name="handle" autocomplete="off" spellcheck="false" maxlength="20" placeholder="yourname" aria-label="Your name">
+            </label>
+            <button class="btn btn--aura" type="submit">claim it <span aria-hidden="true">→</span></button>
+          </form>
+          <p class="hero__micro">free · no code · friends don't need the app</p>
+          <div class="proof"><span class="proof__faces" data-faces></span><p><b>12,480</b> spaces made this week</p></div>
+        </div>
+
+        <div class="hero__card">
+          <div class="holo" id="holo" tabindex="0" aria-label="Your preview card">
+            <div class="holo__inner">
+              <div class="holo__art">
+                <div class="holo__avatar" data-avatar data-look></div>
+                <span class="holo__tag">✦ preview</span>
+              </div>
+              <div class="holo__body">
+                <p class="holo__name" data-name>you</p>
+                <p class="holo__url">aura.my/<b data-handle>you</b></p>
+                <div class="holo__row">
+                  <span>aura</span><b data-aura>candy</b>
+                </div>
+                <ul class="holo__words" data-words><li>loud</li><li>sweet</li><li>main character</li></ul>
+                <div class="holo__stats"><span>♥ 0</span><span>visitors 0</span><span>✦ 0</span></div>
+              </div>
+            </div>
+            <div class="holo__shine" aria-hidden="true"></div>
+            <div class="holo__glare" aria-hidden="true"></div>
+            <div class="holo__back" aria-hidden="true">
+              <div class="holo__backav" data-look data-back-avatar></div>
+              <div class="holo__qr" data-qr></div>
+              <p>scan to visit<b>aura.my/<span data-back-handle>you</span></b></p>
+            </div>
+          </div>
+          <p class="hero__cardhint" aria-hidden="true">↑ type your name. tap to flip.</p>
+        </div>
+      </div>
+      <p class="hero__drag" aria-hidden="true">psst — drag stuff around</p>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__track">
+        <span>my cat's entire personality</span><i>✦</i><span>a guestbook that's a scratch card</span><i>✦</i><span>flappy bird but it's my face</span><i>✦</i><span>top 4 albums on an iPod mini</span><i>✦</i><span>212 people squished my face</span><i>✦</i><span>a pixel town of my summer</span><i>✦</i><span>bottle mail from strangers (friends)</span><i>✦</i>
+        <span>my cat's entire personality</span><i>✦</i><span>a guestbook that's a scratch card</span><i>✦</i><span>flappy bird but it's my face</span><i>✦</i><span>top 4 albums on an iPod mini</span><i>✦</i><span>212 people squished my face</span><i>✦</i><span>a pixel town of my summer</span><i>✦</i><span>bottle mail from strangers (friends)</span><i>✦</i>
+      </div>
+    </div>
+
+    <!-- VS: link in bio -->
+    <section class="sec vs" id="vs" aria-labelledby="vs-title">
+      <div class="wrap vs__grid">
+        <div class="vs__copy reveal">
+          <p class="stamp">01 — the problem with link in bio</p>
+          <h2 id="vs-title" class="h2">link in bio? <em>cute.</em><br>this is a place.</h2>
+          <p class="lede">A list of buttons says where to find you. An Auramy says who you are — the songs on repeat, the cat, the inside jokes — in a space your friends actually want to hang out in.</p>
+          <p class="hint">← drag the handle to glow it up →</p>
+        </div>
+        <div class="vs__stage reveal">
+          <div class="phone phone--vs" id="compare">
+            <div class="screen">
+              <div class="compare__after" data-space="scrap"></div>
+              <div class="compare__before">
+                <div class="lt">
+                  <div class="lt__avatar"></div>
+                  <p class="lt__name">@mia</p>
+                  <p class="lt__bio">indie music & my cat</p>
+                  <a class="lt__btn" tabindex="-1">instagram</a>
+                  <a class="lt__btn" tabindex="-1">tiktok</a>
+                  <a class="lt__btn" tabindex="-1">spotify playlist</a>
+                  <a class="lt__btn" tabindex="-1">pinterest</a>
+                  <a class="lt__btn" tabindex="-1">other links</a>
+                  <p class="lt__foot">link·in·bio</p>
+                </div>
+              </div>
+              <div class="compare__handle" role="slider" tabindex="0" aria-label="Compare link in bio with Auramy" aria-valuemin="0" aria-valuemax="100" aria-valuenow="62">
+                <span class="compare__knob"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6 3 12l6 6M15 6l6 6-6 6"/></svg></span>
+              </div>
+              <span class="compare__lab compare__lab--l">before</span>
+              <span class="compare__lab compare__lab--r">after ✦</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW -->
+    <section class="sec how" id="how" aria-labelledby="how-title">
+      <div class="wrap">
+        <div class="how__head reveal">
+          <p class="stamp">02 — how it works</p>
+          <h2 id="how-title" class="h2">sixty seconds.<br><em>zero</em> code.</h2>
+        </div>
+        <div class="how__grid">
+          <ol class="how__steps">
+            <li class="step" data-step="0">
+              <span class="step__n">01</span>
+              <h3 class="h3">say hi.</h3>
+              <p>Your name and a selfie — or your cat, or your OC. Your holo card shows up instantly. That's you already.</p>
+              <div class="step__screen"><div class="mini" data-screen="hi"></div></div>
+            </li>
+            <li class="step" data-step="1">
+              <span class="step__n">02</span>
+              <h3 class="h3">throw in your favorites.</h3>
+              <p>Search any song, movie or book. Songs become records you can spin, movies go on your film reel, books line up on your shelf. Skip anything — it still looks good.</p>
+              <div class="step__screen"><div class="mini" data-screen="faves"></div></div>
+            </li>
+            <li class="step" data-step="2">
+              <span class="step__n">03</span>
+              <h3 class="h3">answer weird little questions.</h3>
+              <p>While your space builds, we ask the fun stuff. Every answer makes it more you — no staring at a loading bar.</p>
+              <div class="step__screen"><div class="mini" data-screen="ask"></div></div>
+            </li>
+            <li class="step" data-step="3">
+              <span class="step__n">04</span>
+              <h3 class="h3">drop the link.</h3>
+              <p>aura.my/you, with a share card that looks like you. Bio, group chat, story — wherever your people are.</p>
+              <div class="step__screen"><div class="mini" data-screen="share"></div></div>
+            </li>
+          </ol>
+          <div class="how__phone" aria-hidden="true">
+            <div class="phone"><div class="screen" id="howScreen"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPACES -->
+    <!-- pinned: scrolling through this section flips the phone through all five worlds -->
+    <section class="spaces" id="spaces" aria-labelledby="spaces-title">
+      <div class="spaces__pin">
+      <div class="wrap spaces__grid">
+        <div class="spaces__copy reveal">
+          <p class="stamp">03 — worlds</p>
+          <h2 id="spaces-title" class="h2">same you.<br>endless <em>looks.</em></h2>
+          <p class="lede">Pick a world. Switch whenever — your songs, photos, notes and high scores come with you.</p>
+          <div class="styles" role="tablist" aria-label="Worlds">
+            <button role="tab" data-style="desk" aria-selected="true"><b>little desktop</b><span>an OS you can open</span></button>
+            <button role="tab" data-style="vinyl" aria-selected="false"><b>vinyl room</b><span>warm, dark, spinning</span></button>
+            <button role="tab" data-style="pixel" aria-selected="false"><b>pixel world</b><span>walk around your life</span></button>
+            <button role="tab" data-style="scrap" aria-selected="false"><b>scrapbook</b><span>tape, stickers, chaos</span></button>
+            <button role="tab" data-style="story" aria-selected="false"><b>story mode</b><span>tap tap tap</span></button>
+          </div>
+          <p class="more">+ 40 more worlds · new drops every week</p>
+        </div>
+        <div class="spaces__stage">
+          <div class="phone phone--big"><div class="screen" id="spaceScreen" role="tabpanel" data-off="1"></div></div>
+          <p class="stage-hint"><b>✦ everything in here works</b><span data-world-hint></span></p>
+        </div>
+      </div>
+      <p class="spaces__cue" aria-hidden="true"><b data-cue-n>1 / 5</b><span data-cue-t>keep scrolling to flip worlds ↓</span></p>
+      </div>
+    </section>
+
+    <!-- MADE: real people's spaces -->
+    <section class="sec made" id="made" aria-labelledby="made-title">
+      <div class="wrap made__head reveal">
+        <div>
+          <p class="stamp"><span class="dot"></span> live · made this week</p>
+          <h2 id="made-title" class="h2">made by actual<br><em>humans.</em></h2>
+        </div>
+        <div class="made__side">
+          <p class="made__live" data-live aria-live="off"></p>
+          <div class="made__nav"><button class="made__btn" data-made-prev aria-label="Previous spaces">←</button><button class="made__btn" data-made-next aria-label="More spaces">→</button></div>
+        </div>
+      </div>
+      <div class="made__row" data-made></div>
+    </section>
+
+    <!-- PLAY -->
+    <section class="sec play" id="play" aria-labelledby="play-title">
+      <div class="wrap">
+        <div class="play__head reveal">
+          <p class="stamp">04 — for your friends</p>
+          <h2 id="play-title" class="h2">they don't just look.<br>they <em>play.</em></h2>
+          <p class="lede">No app, no account. Your friends open the link and start messing with your stuff. Go on, try it.</p>
+        </div>
+        <div class="play__grid">
+          <article class="tile tile--squish">
+            <header><h3>squish lu's face</h3><p>she gets a notification. sorry, lu.</p></header>
+            <div class="squish" id="squish" aria-label="Squishable face — press and drag" role="img">
+              <svg viewBox="0 0 300 300" aria-hidden="true">
+                <ellipse class="squish__shadow" cx="150" cy="268" rx="90" ry="10"/>
+                <!-- the photo is mapped to the blob's bounding box, so it stretches and squashes with the jelly -->
+                <pattern id="sqface" patternUnits="objectBoundingBox" patternContentUnits="objectBoundingBox" width="1" height="1"><image href="/assets/img/people/lu-face.jpg" width="1" height="1" preserveAspectRatio="none"/></pattern>
+                <path class="squish__body" fill="url(#sqface)" stroke="#fff" stroke-width="7" stroke-linejoin="round"/>
+                <g class="squish__face"></g>
+              </svg>
+            </div>
+            <footer>lu's been squished <b data-squish-count>14</b> times today</footer>
+          </article>
+
+          <article class="tile tile--game">
+            <header><h3>beat their high score</h3><p>every space has a mini game + leaderboard.</p></header>
+            <div class="tgame" id="tgame" tabindex="0" role="button" aria-label="Timing game. Press to stop the marker in the pink zone.">
+              <div class="tgame__score"><span>score</span><b data-score>0</b></div>
+              <div class="tgame__track"><div class="tgame__zone"></div><div class="tgame__zone tgame__zone--perfect"></div><div class="tgame__marker"></div></div>
+              <p class="tgame__msg" data-msg>tap when the dot's in the pink</p>
+              <ol class="board" data-board></ol>
+            </div>
+          </article>
+
+          <article class="tile tile--wall">
+            <header><h3>sign the wall</h3><p>17 kinds of guestbook. this is the sticky-note one.</p></header>
+            <div class="wall" id="wall" aria-live="polite"></div>
+            <form class="wall__form" data-wall-form>
+              <input name="note" maxlength="48" placeholder="leave mia a note…" aria-label="Your note" autocomplete="off">
+              <button class="btn btn--ink btn--sm" type="submit">stick it</button>
+            </form>
+          </article>
+
+          <article class="tile tile--love">
+            <header><h3>love it too</h3><p>tap their song. again. we won't judge.</p></header>
+            <button class="album" id="album" aria-label="Love this song">
+              <span class="album__stack" aria-hidden="true"><span class="album__disc"></span><span class="album__art"></span></span>
+              <span class="album__meta"><b>Birds of a Feather</b><span>Billie Eilish</span></span>
+            </button>
+            <footer><b data-love>38</b> people love this too</footer>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOTIFY -->
+    <section class="sec notify" id="notify" aria-labelledby="notify-title">
+      <div class="wrap notify__grid">
+        <div class="notify__copy reveal">
+          <p class="stamp stamp--dark">05 — the fun part</p>
+          <h2 id="notify-title" class="h2">someone<br>was <em>here.</em></h2>
+          <p class="lede">Every visit, note and new high score lands in your pocket. Reply, rematch, repeat. Even the quiet ones count — "someone stayed for 6 minutes" hits different.</p>
+        </div>
+        <div class="notify__stage">
+          <div class="phone phone--lock">
+            <div class="screen lock">
+              <p class="lock__time">9:41</p>
+              <p class="lock__date">Tuesday, September 29</p>
+              <div class="lock__stack" id="lockStack" aria-live="off"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AURA POINTS -->
+    <section class="sec aura" id="aura" aria-labelledby="aura-title">
+      <div class="wrap aura__grid">
+        <div class="aura__copy reveal">
+          <p class="stamp">06 — aura points</p>
+          <h2 id="aura-title" class="h2">farm <em>aura.</em><br>(legally.)</h2>
+          <p class="lede">Visits, likes, notes and rematches earn you aura. Spend it on rare players, holo stickers and whole new worlds. Then flex it.</p>
+          <div class="badges" aria-label="Visitor badges">
+            <span class="badge"><b>10</b>visitors</span>
+            <span class="badge"><b>100</b>visitors</span>
+            <span class="badge badge--holo"><b>1k</b>visitors</span>
+          </div>
+        </div>
+        <div class="aura__stage">
+          <button class="orb" id="orb" aria-label="Tap for aura">
+            <span class="orb__glow" aria-hidden="true"></span>
+            <span class="orb__core" aria-hidden="true"></span>
+            <span class="orb__num"><small>✦</small><b data-aura-count>12,480</b></span>
+            <span class="orb__tap">tap me</span>
+          </button>
+          <div class="ledger">
+            <div class="ledger__col">
+              <p class="ledger__h">earn</p>
+              <ul>
+                <li><span>someone visited</span><b>+5</b></li>
+                <li><span>new note on your wall</span><b>+20</b></li>
+                <li><span>someone beat your score</span><b>+50</b></li>
+                <li><span>100 visitors</span><b>+500</b></li>
+              </ul>
+            </div>
+            <div class="ledger__col ledger__col--shop">
+              <p class="ledger__h">spend · tap to buy</p>
+              <ul>
+                <li><button class="buy" data-buy="800" data-name="iPod-style player"><span class="shop-ico shop-ico--ipod" aria-hidden="true"></span><span>iPod-style player</span><b>800</b></button></li>
+                <li><button class="buy" data-buy="1200" data-name="cassette walkman"><span class="shop-ico shop-ico--walkman" aria-hidden="true"></span><span>cassette walkman</span><b>1,200</b></button></li>
+                <li><button class="buy" data-buy="300" data-name="holo sticker pack"><span class="shop-ico shop-ico--holo" aria-hidden="true"></span><span>holo sticker pack</span><b>300</b></button></li>
+                <li><button class="buy" data-buy="2000" data-name="3D room world"><span class="shop-ico shop-ico--room" aria-hidden="true"></span><span>3D room world</span><b>2,000</b></button></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOR -->
+    <section class="sec for" id="for" aria-labelledby="for-title">
+      <div class="wrap">
+        <div class="for__head reveal">
+          <p class="stamp">07 — not just for you</p>
+          <h2 id="for-title" class="h2">make one for<br>your <em class="rotator" data-rotator="cat.|OC.|band.|fandom.|best friend.|group chat.">cat.</em></h2>
+        </div>
+        <ul class="for__row">
+          <li class="sticker-card" style="--rot:-4deg;--bg:#FFD7B5"><span class="sticker-card__pic" data-pic="ph-cat"></span><b>your cat's whole personality</b></li>
+          <li class="sticker-card" style="--rot:3deg;--bg:#E6DEFF"><span class="sticker-card__pic" data-blob="violet"></span><b>your OC's lore</b></li>
+          <li class="sticker-card" style="--rot:-2deg;--bg:#FFE0EE"><span class="sticker-card__pic" data-pic="ph-gig"></span><b>your band's first gig</b></li>
+          <li class="sticker-card" style="--rot:4deg;--bg:#E4F7C7"><span class="sticker-card__pic" data-pic="ph-flowers"></span><b>a birthday surprise</b></li>
+          <li class="sticker-card" style="--rot:-3deg;--bg:#D9F5F6"><span class="sticker-card__pic" data-pic="ph-bff"></span><b>your friend group's lore</b></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SAFE -->
+    <section class="sec safe" id="safe" aria-labelledby="safe-title">
+      <div class="wrap">
+        <div class="safe__head reveal">
+          <p class="stamp">08 — your rules</p>
+          <h2 id="safe-title" class="h2">your space.<br>your <em>rules.</em></h2>
+        </div>
+        <ul class="safe__grid">
+          <li><span class="safe__ico">◐</span><b>friends-only mode</b><p>Public, link-only, or just your people. Per photo, if you want.</p></li>
+          <li><span class="safe__ico">◉</span><b>see what they see</b><p>Preview your space as a visitor before you share it.</p></li>
+          <li><span class="safe__ico">✓</span><b>you approve first</b><p>Photos friends send land in your inbox, not on your wall.</p></li>
+          <li><span class="safe__ico">✕</span><b>no mean notes</b><p>Smart filters, one-tap delete, block anyone.</p></li>
+          <li><span class="safe__ico">☂</span><b>teen-safe by default</b><p>Under 18? No stranger discovery, no DMs from people you don't know.</p></li>
+          <li><span class="safe__ico">文</span><b>every language</b><p>Friends read your space in theirs. Auto-translate is built in.</p></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- CLAIM -->
+    <section class="sec claimsec" id="claim" aria-labelledby="claim-title">
+      <div class="claimsec__aura" aria-hidden="true"></div>
+      <div class="wrap claimsec__inner">
+        <button class="auri" id="auri" aria-label="Squish Auri">
+          <span class="auri__body" data-auri data-look></span>
+        </button>
+        <h2 id="claim-title" class="claimsec__title">claim your corner<br>of the <em>internet.</em></h2>
+        <form class="claim claim--big" data-claim>
+          <label class="claim__field">
+            <span class="claim__prefix">aura.my/</span>
+            <input name="handle" autocomplete="off" spellcheck="false" maxlength="20" placeholder="yourname" aria-label="Your name">
+          </label>
+          <button class="btn btn--aura" type="submit">claim it <span aria-hidden="true">→</span></button>
+        </form>
+        <div class="proof proof--dark"><span class="proof__faces" data-faces></span><p>join lu, noah, ava &amp; <b>12k</b> others</p></div>
+        <div class="stores">
+          <a class="store" href="#claim" aria-label="Download for iPhone (coming soon)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.4 12.6c0-2.4 2-3.5 2-3.6-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.1-2.8.9-3.5.9s-1.8-.9-3-.8C7 7.3 5.6 8.2 4.8 9.6c-1.7 2.9-.4 7.2 1.2 9.5.8 1.1 1.7 2.4 2.9 2.4 1.2 0 1.6-.8 3-.8s1.8.8 3 .7c1.3 0 2.1-1.1 2.8-2.3.9-1.3 1.3-2.6 1.3-2.7-.1 0-2.6-1-2.6-3.8ZM14.2 5.6c.6-.8 1.1-1.8 1-2.9-.9 0-2.1.6-2.7 1.4-.6.7-1.1 1.8-1 2.8 1 .1 2.1-.5 2.7-1.3Z"/></svg><span><small>coming to the</small>App Store</span></a>
+          <a class="store" href="#claim" aria-label="Download for Android (coming soon)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3.5v17c0 .4.4.6.8.4l14.7-8.5c.3-.2.3-.6 0-.8L4.8 3.1c-.4-.2-.8 0-.8.4Z"/></svg><span><small>coming to</small>Google Play</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot__grid">
+      <img src="/assets/logo/auramy-lockup-reverse.svg" alt="Auramy" width="170" height="32">
+      <nav aria-label="Footer">
+        <a href="/brand">brand kit</a>
+        <a href="#safe">safety</a>
+        <a href="#claim">get the app</a>
+        <a href="mailto:hello@aura.my">say hi</a>
+      </nav>
+      <p class="foot__small">© 2026 Auramy · made with aura · aura.my</p>
+    </div>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="/assets/js/landing.js"></script>
+</body>
+</html>
