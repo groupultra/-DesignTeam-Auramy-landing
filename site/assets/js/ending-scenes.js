@@ -59,7 +59,7 @@ export function initEndingScenes(root = document.querySelector('[data-ending-sli
     const [name, copy] = messages[messageIndex++ % messages.length];
     const node = document.createElement('div');
     node.className = 'ntf is-new';
-    node.innerHTML = `<span class="ntf__ico"><span class="ntf__icon" aria-hidden="true">a</span></span><b>${name}</b><small>now</small><p>${copy}</p>`;
+    node.innerHTML = `<span class="ntf__ico"><img src="/assets/img/app-icon-180.png" alt=""></span><b>Auramy</b><small>now</small><p>${name[0].toUpperCase()}${name.slice(1)} ${copy}</p>`;
     stack.prepend(node);
     [...stack.children].slice(3).forEach((item) => item.remove());
     messageTimer = setTimeout(popMessage, 1300 + Math.round(Math.random() * 500));

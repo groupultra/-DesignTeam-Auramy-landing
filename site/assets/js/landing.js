@@ -1,31 +1,64 @@
 import { auraFor, prefersReducedMotion } from './aura.js';
 import { injectSprite, pic, blobAvatar } from './sprite.js';
 import { renderHow, MIA } from './spaces.js';
-import { mountHow } from './interact.js?v=motion-6';
+import { mountHow } from './interact.js?v=calm-7';
 import { PEOPLE, avatar } from './people.js';
 import { renderMade } from './made.js';
-import { initWorldsCarousel } from './worlds-carousel.js?v=motion-6';
-import { initScrollReveal } from './scroll-reveal.js?v=motion-6';
-import { initScrappySections } from './scrappy-sections.js?v=raw-3';
-import { initRawMotion } from './raw-motion.js?v=motion-6';
-import { initHowScroll } from './how-scroll.js?v=handheld-5';
-import { initPlayFeed } from './play-feed.js?v=scroll-stack-4';
-import { initAlbumParty } from './album-party.js?v=raw-4';
+import { initWorldsScroll } from './worlds-scroll.js?v=calm-7';
+import { initScrollReveal } from './scroll-reveal.js?v=calm-7';
+import { initHowScroll } from './how-scroll.js?v=calm-7';
+import { initAlbumParty } from './album-party.js?v=calm-7';
 import { renderHeroSitePreviews } from './site-previews.js';
 import { renderForPreviews } from './for-previews.js';
-import { initEndingScenes } from './ending-scenes.js?v=motion-6';
-import { initClaimWorlds } from './claim-worlds.js?v=motion-6';
+import { initEndingScenes } from './ending-scenes.js?v=calm-7';
 
 document.documentElement.classList.add('js');
 injectSprite();
-initRawMotion();
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 const reduced = prefersReducedMotion();
-initClaimWorlds($('#claim'));
 const candy = ['#FF5FA2', '#FF8A3C', '#E8FF5A'];
+
+/* Shared pause control for every decorative animation on the page. It is
+   deliberately independent from the former raw hero effects, so pausing does
+   not restore pointer tracking, glitching, or other ambient decoration. */
+{
+  const preferenceKey = 'auramy-motion-paused';
+  const systemMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const toggles = $$('[data-motion-toggle]');
+  let userChoice = null;
+  try {
+    const saved = localStorage.getItem(preferenceKey);
+    if (saved === 'true' || saved === 'false') userChoice = saved === 'true';
+  } catch { /* storage can be unavailable */ }
+  let paused = userChoice ?? systemMotion.matches;
+
+  const syncMotion = () => {
+    document.body.classList.toggle('is-motion-paused', paused);
+    toggles.forEach((toggle) => {
+      toggle.setAttribute('aria-pressed', String(paused));
+      toggle.textContent = paused ? 'play motion' : 'pause motion';
+      toggle.setAttribute('aria-label', paused ? 'Play decorative motion' : 'Pause decorative motion');
+    });
+    document.dispatchEvent(new CustomEvent('auramy:motion-change', { detail: { paused } }));
+  };
+
+  toggles.forEach((toggle) => toggle.addEventListener('click', () => {
+    paused = !paused;
+    userChoice = paused;
+    try { localStorage.setItem(preferenceKey, String(paused)); } catch { /* storage can be unavailable */ }
+    syncMotion();
+  }));
+  systemMotion.addEventListener?.('change', () => {
+    if (userChoice !== null) return;
+    paused = systemMotion.matches;
+    syncMotion();
+  });
+  syncMotion();
+}
+
 const motionPaused = () => document.body.classList.contains('is-motion-paused');
 
 // Ambient work runs only in a visible, active tab with motion enabled.
@@ -154,9 +187,22 @@ if (heroPreview) {
   });
 }
 
+/* A deliberately bounded, explicit remix control. It never starts ambient
+   glitching or movement; it only swaps the hero's quiet color wash. */
+{
+  const remix = $('[data-chaos]');
+  const hero = $('.raw-hero');
+  const mood = $('[data-mood-stamp]');
+  remix?.addEventListener('click', () => {
+    const remixed = hero?.dataset.remixed !== 'true';
+    if (hero) hero.dataset.remixed = String(remixed);
+    if (mood) mood.textContent = remixed ? 'soft remix, still you.' : 'posting this anyway.';
+    remix.setAttribute('aria-pressed', String(remixed));
+  });
+}
+
 /* ───────── scroll-led reveal + scrappy section details ───────── */
 initScrollReveal($('#vs'));
-initScrappySections();
 renderForPreviews($('[data-site-previews]'));
 
 /* ───────── how it works: four inline, playable steps ───────── */
@@ -215,9 +261,8 @@ renderForPreviews($('[data-site-previews]'));
   howRoot.addEventListener('click', () => queueMicrotask(persist));
 }
 
-/* ───────── worlds: horizontal, swipeable carousel ───────── */
-initWorldsCarousel($('#spaces'));
-initPlayFeed($('[data-play-feed-root]'));
+/* ───────── worlds: a normal, vertically scrolling collection ───────── */
+initWorldsScroll($('#spaces'));
 initAlbumParty($('#albumParty'));
 initEndingScenes($('#notify'));
 
@@ -389,9 +434,6 @@ $$('[data-faces]').forEach((el) => (el.innerHTML = Object.keys(PEOPLE).map((k) =
   drawBoard(); setZone();
 
   const loop = (t) => {
-    const panel = root.closest('[data-play-panel]');
-    const playRoot = root.closest('[data-play-feed-root]');
-    if (!playRoot?.classList.contains('is-play-static') && !panel?.classList.contains('is-active')) { raf = 0; return; }
     const dt = Math.min(0.05, (t - last) / 1000 || 0);
     last = t;
     if (running || !motionPaused()) phase += dt * speed * (running ? 1 : 0.55);
@@ -400,10 +442,6 @@ $$('[data-faces]').forEach((el) => (el.innerHTML = Object.keys(PEOPLE).map((k) =
     raf = requestAnimationFrame(loop);
   };
   whileVisible(root, () => { last = performance.now(); raf = requestAnimationFrame(loop); }, () => cancelAnimationFrame(raf), 0.25, false);
-  root.closest('[data-play-feed-root]')?.addEventListener('auramy:play-panelchange', () => {
-    const panel = root.closest('[data-play-panel]');
-    if (panel?.classList.contains('is-active') && !raf) { last = performance.now(); raf = requestAnimationFrame(loop); }
-  });
 
   const flash = (cls) => { root.classList.remove('is-hit', 'is-miss'); void root.offsetWidth; root.classList.add(cls); };
   function press() {
@@ -453,8 +491,6 @@ $$('[data-faces]').forEach((el) => (el.innerHTML = Object.keys(PEOPLE).map((k) =
   let wallVisible = false;
   let pageActive = true;
   const wallReducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-  const wallPanel = wall.closest('[data-play-panel]');
-  const playRoot = wall.closest('[data-play-feed-root]');
   const friendNotes = [
     { t: 'your newest song is stuck in my head', by: 'ava' },
     { t: 'the guestbook is getting dangerously good', by: 'zara' },
@@ -509,8 +545,7 @@ $$('[data-faces]').forEach((el) => (el.innerHTML = Object.keys(PEOPLE).map((k) =
   }
   requestAnimationFrame(() => [...seed, ...mine].forEach((x) => add(x)));
   const canAddAmbient = () => pageActive && wallVisible && !document.hidden && !motionPaused()
-    && !wallReducedMotion.matches && !dragging && !form.contains(document.activeElement)
-    && (playRoot?.classList.contains('is-play-static') || wallPanel?.classList.contains('is-active'));
+    && !wallReducedMotion.matches && !dragging && !form.contains(document.activeElement);
   function syncAmbientNote() {
     clearTimeout(ambientTimer);
     ambientTimer = 0;
@@ -542,7 +577,6 @@ $$('[data-faces]').forEach((el) => (el.innerHTML = Object.keys(PEOPLE).map((k) =
   });
   form.addEventListener('focusin', syncAmbientNote);
   form.addEventListener('focusout', () => setTimeout(syncAmbientNote, 0));
-  playRoot?.addEventListener('auramy:play-panelchange', syncAmbientNote);
   // keep notes on the wall if the layout changes (rotation, resize)
   addEventListener('resize', () => $$('.wnote', wall).forEach((el) => {
     el.style.left = `${clamp(el.offsetLeft, 4, Math.max(4, wall.clientWidth - el.offsetWidth - 4))}px`;

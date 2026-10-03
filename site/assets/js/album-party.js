@@ -36,11 +36,6 @@ export function initAlbumParty(root) {
   function quiet() {
     return closed || reduced.matches || document.hidden || document.body.classList.contains('is-motion-paused');
   }
-  function panelIsActive() {
-    const panel = root.closest('[data-play-panel]');
-    const playRoot = root.closest('[data-play-feed-root]');
-    return playRoot?.classList.contains('is-play-static') || panel?.classList.contains('is-active');
-  }
   function clearAmbient() {
     window.clearInterval(timer);
     timer = 0;
@@ -60,7 +55,7 @@ export function initAlbumParty(root) {
   }
   function syncAmbient() {
     clearAmbient();
-    const awake = visible && !quiet() && panelIsActive();
+    const awake = visible && !quiet();
     root.classList.toggle('is-awake', awake);
     root.dataset.awake = String(awake);
     if (!awake) return;
@@ -112,7 +107,6 @@ export function initAlbumParty(root) {
   document.addEventListener('visibilitychange', syncAmbient, { signal });
   document.addEventListener('auramy:motion-change', syncAmbient, { signal });
   reduced.addEventListener?.('change', syncAmbient, { signal });
-  root.closest('[data-play-feed-root]')?.addEventListener('auramy:play-panelchange', syncAmbient, { signal });
   const observer = new IntersectionObserver(([entry]) => {
     visible = entry.isIntersecting && entry.intersectionRatio >= .25;
     syncAmbient();

@@ -27,26 +27,11 @@ export function initHowScroll(root) {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const shortViewport = matchMedia('(max-height: 640px)');
   let active = -1;
-  let pressTimer = 0;
-  let transitionTimer = 0;
-  const isStill = () => reduced.matches || document.body.classList.contains('is-motion-paused');
   const copyFor = (panel) => ({
     number: String(Number(panel.dataset.step) + 1).padStart(2, '0'),
     title: panel.dataset.screen === 'hi' ? 'say hi.' : panel.dataset.screen === 'faves' ? 'dump your obsessions.' : panel.dataset.screen === 'ask' ? 'overshare a little.' : 'drop the link.',
-    text: panel.dataset.screen === 'hi' ? 'name. face. questionable selfie.' : panel.dataset.screen === 'faves' ? 'the stuff living rent-free in your head.' : panel.dataset.screen === 'ask' ? 'weird answers encouraged.' : 'send it. let the group chat do its thing.',
+    text: panel.dataset.screen === 'hi' ? 'Start with a name and a photo.' : panel.dataset.screen === 'faves' ? 'Add the things you are into right now.' : panel.dataset.screen === 'ask' ? 'Answer a few questions in your own way.' : 'Share the link when it feels right.',
   });
-  function tapHand() {
-    if (isStill()) return;
-    root.classList.remove('is-how-press');
-    void root.offsetWidth;
-    root.classList.add('is-how-press');
-  }
-  function popBursts() {
-    if (isStill()) return;
-    root.classList.remove('is-how-pop');
-    void root.offsetWidth;
-    root.classList.add('is-how-pop');
-  }
   function setActive(index, announce = false) {
     const selected = clamp(index, 0, panels.length - 1);
     if (selected === active) return;
@@ -77,21 +62,8 @@ export function initHowScroll(root) {
     const selected = clamp(index, 0, panels.length - 1);
     if (selected === active) return;
     const trigger = document.activeElement;
-    window.clearTimeout(transitionTimer);
-    window.clearTimeout(pressTimer);
-    if (behavior !== 'auto' && !isStill()) {
-      tapHand();
-      transitionTimer = window.setTimeout(() => {
-        setActive(selected, true);
-        focusNewScreen(trigger);
-        root.classList.remove('is-how-press');
-        popBursts();
-      }, 150);
-      return;
-    }
     setActive(selected, true);
     focusNewScreen(trigger);
-    popBursts();
   }
   previous?.addEventListener('click', () => goToStep(active - 1, 'smooth'), { signal });
   next?.addEventListener('click', () => goToStep(active === panels.length - 1 ? 0 : active + 1, 'smooth'), { signal });
@@ -100,7 +72,7 @@ export function initHowScroll(root) {
   shortViewport.addEventListener?.('change', refresh, { signal });
   document.addEventListener('auramy:motion-change', refresh, { signal });
   setActive(readStep(panels.length));
-  const controller = { goToStep, destroy() { abort.abort(); window.clearTimeout(pressTimer); window.clearTimeout(transitionTimer); panels.forEach((panel) => { panel.inert = false; panel.removeAttribute('aria-hidden'); panel.classList.remove('is-active'); }); root.classList.remove('is-how-press', 'is-how-pop', 'is-how-short'); activeSections.delete(root); } };
+  const controller = { goToStep, destroy() { abort.abort(); panels.forEach((panel) => { panel.inert = false; panel.removeAttribute('aria-hidden'); panel.classList.remove('is-active'); }); root.classList.remove('is-how-short'); activeSections.delete(root); } };
   activeSections.set(root, controller);
   return controller;
 }
