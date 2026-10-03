@@ -28,11 +28,9 @@
 .how-handheld__nav button:disabled { opacity:.42; cursor:default; }
 .how-handheld__nav button:focus-visible { outline:3px solid #ff52b4; outline-offset:3px; }
 
-/* Both hand layers share the phone's coordinate system, keeping every finger on screen. */
-.how-handheld__hand { position:absolute; z-index:1; right:-5%; bottom:-3%; width:81%; height:auto; overflow:visible; pointer-events:none; user-select:none; }
-.how-handheld__hand--thumb { z-index:5; right:-5%; bottom:-9%; }
-.how-handheld__thumb-joint { transform-box:fill-box; transform-origin:100% 100%; }
-.how.is-how-press .how-handheld__thumb-joint { animation:how-thumb-press .15s ease-out both; }
+/* One connected hand comes in front of the phone, but never takes the controls. */
+.how-handheld__hand { position:absolute; z-index:5; right:-4%; bottom:-13%; width:38%; height:auto; overflow:visible; pointer-events:none; user-select:none; rotate:-27deg; transform-origin:58% 76%; }
+.how.is-how-press .how-handheld__hand { animation:how-hand-tap .22s cubic-bezier(.2,1.15,.35,1) both; }
 
 .how-handheld__bursts { position:absolute; z-index:0; inset:0; pointer-events:none; font-family:var(--f-hand,cursive); color:#171717; }
 .how-handheld__bursts i { position:absolute; display:grid; place-items:center; width:92px; aspect-ratio:1; font-style:normal; font-weight:700; font-size:28px; line-height:.7; text-align:center; background:#ff52b4; clip-path:polygon(50% 0,61% 27%,84% 7%,77% 34%,100% 40%,77% 51%,94% 73%,68% 67%,61% 100%,49% 73%,26% 92%,31% 65%,0 62%,25% 47%,5% 24%,34% 30%); transform:rotate(-13deg); }
@@ -47,18 +45,18 @@
 .how-scroll__progress::before { content:''; width:min(23vw,200px); height:2px; background:linear-gradient(90deg,#171717 calc((var(--how-step,1) / 4) * 100%),#17171733 0); }
 .how-scroll__sr { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
 .how[data-how-step="1"] { --how-step:1; }.how[data-how-step="2"] { --how-step:2; }.how[data-how-step="3"] { --how-step:3; }.how[data-how-step="4"] { --how-step:4; }
-@keyframes how-thumb-press { 0% { transform:translate(0,0) rotate(0); } 100% { transform:translate(-4px,6px) rotate(-4deg); } }
+@keyframes how-hand-tap { 0%,100% { transform:translate(0,0) rotate(0); } 42% { transform:translate(-5px,5px) rotate(-2.5deg); } 68% { transform:translate(2px,-2px) rotate(1deg); } }
 @keyframes how-burst { 0% { opacity:0; transform:scale(.35) rotate(-34deg); } 100% { opacity:1; } }
 
 @media (max-width:700px) {
   .how[data-how-scroll] { padding:66px 0 58px; }
-  .how-handheld__scene { grid-template-columns:1fr; min-height:0; margin-top:18px; padding-bottom:12px; }
+  .how-handheld__scene { grid-template-columns:1fr; min-height:0; margin-top:18px; padding-bottom:92px; }
   .how-handheld__copy { padding:0; max-width:19rem; }.how-scroll__number { margin-bottom:4px; font-size:59px; }.how-handheld__copy h3 { font-size:42px; }.how-handheld__copy p { margin-top:7px; font-size:14px; }
   .how-handheld__device { width:min(390px,100%); min-height:590px; margin:8px auto 0; }
   .how-handheld__phone { left:4%; width:min(294px,77%); padding:7px; border-radius:29px; box-shadow:7px 9px 0 #171717; transform:rotate(-3deg); }
   .how-handheld__phone::before { top:6px; height:13px; }.how-handheld__screen { border-radius:22px; }
   .how-handheld__nav { right:7px; bottom:7px; left:7px; padding:6px; border-radius:13px; }.how-handheld__nav button { min-height:28px; padding:5px 8px; font-size:8px; }
-  .how-handheld__hand { right:-2%; bottom:1%; width:92%; }.how-handheld__hand--thumb { right:-2%; bottom:-18%; }
+  .how-handheld__hand { right:-3%; bottom:-16%; width:34%; }
   .how-handheld__bursts i:nth-child(1) { top:21%; left:1%; }.how-handheld__bursts i:nth-child(2) { bottom:10%; left:-6%; width:88px; font-size:21px; }.how-handheld__bursts i:nth-child(3) { top:43%; right:-2%; width:65px; font-size:29px; }.how-handheld__bursts i:nth-child(4) { display:none; }
   .how-scroll__progress { margin-top:5px; }.how-scroll__progress::before { width:86px; }
 }

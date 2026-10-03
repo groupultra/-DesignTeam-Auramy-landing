@@ -1,20 +1,20 @@
 import { auraFor, prefersReducedMotion } from './aura.js';
 import { injectSprite, pic, blobAvatar } from './sprite.js';
 import { renderHow, MIA } from './spaces.js';
-import { mountHow } from './interact.js?v=raw-3';
+import { mountHow } from './interact.js?v=motion-6';
 import { PEOPLE, avatar } from './people.js';
 import { renderMade } from './made.js';
-import { initWorldsCarousel } from './worlds-carousel.js?v=raw-3';
-import { initScrollReveal } from './scroll-reveal.js?v=raw-3';
+import { initWorldsCarousel } from './worlds-carousel.js?v=motion-6';
+import { initScrollReveal } from './scroll-reveal.js?v=motion-6';
 import { initScrappySections } from './scrappy-sections.js?v=raw-3';
-import { initRawMotion } from './raw-motion.js?v=raw-3';
+import { initRawMotion } from './raw-motion.js?v=motion-6';
 import { initHowScroll } from './how-scroll.js?v=handheld-5';
 import { initPlayFeed } from './play-feed.js?v=scroll-stack-4';
 import { initAlbumParty } from './album-party.js?v=raw-4';
 import { renderHeroSitePreviews } from './site-previews.js';
 import { renderForPreviews } from './for-previews.js';
-import { initEndingScenes } from './ending-scenes.js?v=ending-3';
-import { initClaimWorlds } from './claim-worlds.js?v=claim-worlds-3';
+import { initEndingScenes } from './ending-scenes.js?v=motion-6';
+import { initClaimWorlds } from './claim-worlds.js?v=motion-6';
 
 document.documentElement.classList.add('js');
 injectSprite();
@@ -227,6 +227,30 @@ initEndingScenes($('#notify'));
   renderMade(row);
 }
 
+/* One-time entrance beats only for fresh content, never as background motion. */
+{
+  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const targets = $$(' .reveal .stamp, .reveal .h2, .reveal .h2 em, .how-handheld__head .stamp, .how-handheld__head .h2, .worlds-section__head .worlds-section__eyebrow, .worlds-section__head .worlds-section__title, #made .made-card, #for .for-preview, .homecoming__shelf > a');
+  const pending = new Set(targets);
+  const run = (element) => {
+    if (!pending.has(element) || reducedMotion.matches || motionPaused() || document.hidden) return false;
+    pending.delete(element);
+    element.classList.add('motion-candy--in');
+    return true;
+  };
+  const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
+    if (entry.isIntersecting && run(entry.target)) observer.unobserve(entry.target);
+  }), { threshold: .2 });
+  targets.forEach((target) => observer.observe(target));
+  const retry = () => pending.forEach((target) => {
+    const rect = target.getBoundingClientRect();
+    if (rect.bottom > 0 && rect.top < innerHeight) run(target);
+  });
+  document.addEventListener('visibilitychange', retry);
+  document.addEventListener('auramy:motion-change', retry);
+  reducedMotion.addEventListener?.('change', retry);
+}
+
 /* ───────── social proof faces ───────── */
 $$('[data-faces]').forEach((el) => (el.innerHTML = Object.keys(PEOPLE).map((k) => avatar(k)).join('')));
 
@@ -423,6 +447,19 @@ $$('[data-faces]').forEach((el) => (el.innerHTML = Object.keys(PEOPLE).map((k) =
   let mine = [];
   try { mine = JSON.parse(localStorage.getItem('auramy-wall') || '[]').slice(-4); } catch { mine = []; }
   let n = 0;
+  let dragging = false;
+  let ambientTimer = 0;
+  let ambientArrivals = 0;
+  let wallVisible = false;
+  let pageActive = true;
+  const wallReducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+  const wallPanel = wall.closest('[data-play-panel]');
+  const playRoot = wall.closest('[data-play-feed-root]');
+  const friendNotes = [
+    { t: 'your newest song is stuck in my head', by: 'ava' },
+    { t: 'the guestbook is getting dangerously good', by: 'zara' },
+    { t: 'ok but where did you get that photo?', by: 'eli' },
+  ];
   const slot = (i) => {
     const W = wall.clientWidth, H = wall.clientHeight;
     const cols = Math.max(2, Math.floor(W / 140));
@@ -454,7 +491,7 @@ $$('[data-faces]').forEach((el) => (el.innerHTML = Object.keys(PEOPLE).map((k) =
   function dragInWall(el) {
     let id = null, sx, sy, ox, oy, moved;
     el.addEventListener('pointerdown', (e) => {
-      id = e.pointerId; el.setPointerCapture(id); moved = false;
+      id = e.pointerId; dragging = true; syncAmbientNote(); el.setPointerCapture(id); moved = false;
       sx = e.clientX; sy = e.clientY; ox = el.offsetLeft; oy = el.offsetTop;
       el.style.zIndex = ++z;
     });
@@ -466,11 +503,46 @@ $$('[data-faces]').forEach((el) => (el.innerHTML = Object.keys(PEOPLE).map((k) =
       el.style.left = `${clamp(ox + dx, -20, wall.clientWidth - el.offsetWidth + 20)}px`;
       el.style.top = `${clamp(oy + dy, -10, wall.clientHeight - el.offsetHeight + 10)}px`;
     });
-    const up = (e) => { if (e.pointerId !== id) return; id = null; el.classList.remove('is-grab'); if (!moved) retrigger(el, 'is-wiggle'); };
+    const up = (e) => { if (e.pointerId !== id) return; id = null; dragging = false; syncAmbientNote(); el.classList.remove('is-grab'); if (!moved) retrigger(el, 'is-wiggle'); };
     el.addEventListener('pointerup', up);
     el.addEventListener('pointercancel', up);
   }
   requestAnimationFrame(() => [...seed, ...mine].forEach((x) => add(x)));
+  const canAddAmbient = () => pageActive && wallVisible && !document.hidden && !motionPaused()
+    && !wallReducedMotion.matches && !dragging && !form.contains(document.activeElement)
+    && (playRoot?.classList.contains('is-play-static') || wallPanel?.classList.contains('is-active'));
+  function syncAmbientNote() {
+    clearTimeout(ambientTimer);
+    ambientTimer = 0;
+    if (!canAddAmbient() || ambientArrivals >= friendNotes.length) return;
+    ambientTimer = setTimeout(() => {
+      ambientTimer = 0;
+      if (!canAddAmbient()) return;
+      add(friendNotes[ambientArrivals++], true);
+      syncAmbientNote();
+    }, 1300 + Math.round(Math.random() * 400));
+  }
+  const wallObserver = new IntersectionObserver(([entry]) => {
+    wallVisible = entry.isIntersecting;
+    syncAmbientNote();
+  }, { threshold: .35 });
+  wallObserver.observe(wall);
+  document.addEventListener('visibilitychange', syncAmbientNote);
+  document.addEventListener('auramy:motion-change', syncAmbientNote);
+  wallReducedMotion.addEventListener?.('change', syncAmbientNote);
+  window.addEventListener('pagehide', () => {
+    pageActive = false;
+    syncAmbientNote();
+  });
+  window.addEventListener('pageshow', () => {
+    pageActive = true;
+    const rect = wall.getBoundingClientRect();
+    wallVisible = rect.bottom > 0 && rect.top < innerHeight;
+    syncAmbientNote();
+  });
+  form.addEventListener('focusin', syncAmbientNote);
+  form.addEventListener('focusout', () => setTimeout(syncAmbientNote, 0));
+  playRoot?.addEventListener('auramy:play-panelchange', syncAmbientNote);
   // keep notes on the wall if the layout changes (rotation, resize)
   addEventListener('resize', () => $$('.wnote', wall).forEach((el) => {
     el.style.left = `${clamp(el.offsetLeft, 4, Math.max(4, wall.clientWidth - el.offsetWidth - 4))}px`;
@@ -486,6 +558,7 @@ $$('[data-faces]').forEach((el) => (el.innerHTML = Object.keys(PEOPLE).map((k) =
     mine = [...mine, note].slice(-4);
     try { localStorage.setItem('auramy-wall', JSON.stringify(mine)); } catch { /* storage unavailable */ }
     inp.value = '';
+    syncAmbientNote();
   });
 }
 

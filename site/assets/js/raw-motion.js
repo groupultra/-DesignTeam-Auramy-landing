@@ -6,7 +6,7 @@ export function initRawMotion() {
   const finePointer = matchMedia('(hover: hover) and (pointer: fine)');
   const abort = new AbortController();
   const { signal } = abort;
-  const stamps = ['main character loading…', 'too much? good.', 'posting this anyway.'];
+  const stamps = ['too much? good.', 'posting this anyway.', 'the camera roll won.'];
   const stamp = hero?.querySelector('[data-mood-stamp]');
   let paused = motion.matches;
   let visible = false;
@@ -18,6 +18,7 @@ export function initRawMotion() {
   let mood = -1;
 
   const awake = () => Boolean(hero && visible && !paused && !document.hidden && !destroyed);
+  const canRespondToClick = () => Boolean(hero && !paused && !motion.matches && !document.hidden && !destroyed);
   function resetPointer() {
     cancelAnimationFrame(pointerFrame);
     pointerFrame = 0;
@@ -49,7 +50,9 @@ export function initRawMotion() {
     if (!hero || document.hidden) return;
     mood = (mood + 1) % stamps.length;
     if (stamp) stamp.textContent = stamps[mood];
-    if (!awake()) return;
+    // A direct press must always answer while motion is available. The
+    // intersection observer only controls ambient pointer work, never clicks.
+    if (!canRespondToClick()) return;
     clearChaos();
     // The effect stays local to decorative hero elements; its duration is bounded.
     void hero.offsetWidth;
@@ -72,9 +75,9 @@ export function initRawMotion() {
 
   let observer;
   if (hero) {
-    hero.querySelectorAll('[data-chaos], [data-preview-theme]').forEach((button) => {
-      button.addEventListener('click', chaos, { signal });
-    });
+    hero.addEventListener('click', (event) => {
+      if (event.target.closest?.('[data-chaos], [data-preview-theme]')) chaos();
+    }, { signal });
     hero.addEventListener('pointermove', (event) => {
       if (!awake() || !finePointer.matches || event.pointerType !== 'mouse') return;
       const bounds = hero.getBoundingClientRect();

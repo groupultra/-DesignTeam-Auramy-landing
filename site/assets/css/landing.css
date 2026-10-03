@@ -379,8 +379,14 @@ a { color: inherit; }
 .toast b { color: var(--lemon); }
 
 /* reveal */
-.js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .8s var(--ease-out), transform 1s var(--spring); }
+.js .reveal { opacity: 0; transform: translateY(26px); transition: opacity .45s var(--ease-out), transform .5s var(--spring); }
 .js .reveal.is-in { opacity: 1; transform: none; }
+.motion-candy--in { animation:motion-candy-pop .48s cubic-bezier(.2,1.28,.35,1) both; }
+#made .made-card.motion-candy--in, #for .for-preview.motion-candy--in { animation-delay:var(--candy-delay,0ms); }
+#made .made-card:nth-child(2), #for .for-preview:nth-child(2) { --candy-delay:55ms; }
+#made .made-card:nth-child(3), #for .for-preview:nth-child(3) { --candy-delay:110ms; }
+#made .made-card:nth-child(4), #for .for-preview:nth-child(4) { --candy-delay:165ms; }
+@keyframes motion-candy-pop { 0% { opacity:.15; scale:.92; filter:saturate(.65); } 68% { opacity:1; scale:1.035; filter:saturate(1.25); } 100% { opacity:1; scale:1; filter:none; } }
 
 /* ───── RESPONSIVE ───── */
 @media (max-width: 960px) {
@@ -431,6 +437,7 @@ a { color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .001s !important; animation-iteration-count: 1 !important; transition-duration: .001s !important; scroll-behavior: auto !important; }
   .js .reveal { opacity: 1; transform: none; }
+  .motion-candy--in { animation:none; }
 }
 
 /* ═════════ interaction layer (v2) ═════════ */

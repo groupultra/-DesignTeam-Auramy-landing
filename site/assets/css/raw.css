@@ -71,10 +71,12 @@
 .motion-toggle::before { content:"Ⅱ "; }
 .motion-toggle[aria-pressed="true"]::before { content:"▷ "; }
 .raw-page .hero-scroll { position:relative; z-index:4; font:700 19px/1 var(--f-hand); gap:12px; }
-.raw-hero.is-chaos .hero-memory { animation:raw-slam-left .7s cubic-bezier(.2,.8,.2,1); }
-.raw-hero.is-chaos .hero-mirror { animation:raw-slam-right .7s cubic-bezier(.2,.8,.2,1); }
+.raw-hero.is-chaos .site-preview-collage__main { animation:raw-card-main .68s cubic-bezier(.18,.9,.24,1); }
+.raw-hero.is-chaos .site-preview-collage__pet { animation:raw-card-pet .68s cubic-bezier(.18,.9,.24,1); }
+.raw-hero.is-chaos .site-preview-collage__oc { animation:raw-card-oc .68s cubic-bezier(.18,.9,.24,1); }
+.raw-hero.is-chaos .site-preview-collage__sheet { animation:raw-card-sheet .68s cubic-bezier(.18,.9,.24,1); }
 .raw-hero.is-chaos .hero-heading h1 > span::after { animation:raw-click-glitch .7s steps(1,end); }
-.raw-hero.is-chaos .raw-burst { animation:raw-stamp .7s cubic-bezier(.2,.8,.2,1); }
+.raw-hero.is-chaos .raw-mood { animation:raw-stamp .68s cubic-bezier(.2,.8,.2,1); }
 .raw-hero[data-awake="false"] *, .raw-hero[data-awake="false"] *::before, .raw-hero[data-awake="false"] *::after, .raw-page.is-motion-paused *, .raw-page.is-motion-paused *::before, .raw-page.is-motion-paused *::after { animation-play-state:paused!important; }
 .raw-page.is-motion-paused *, .raw-page.is-motion-paused *::before, .raw-page.is-motion-paused *::after { transition-duration:0s!important; scroll-behavior:auto!important; }
 .raw-page .worlds-section { padding-top:92px; background:#20152a; background-image:radial-gradient(#ff52b425 .8px,transparent .8px); background-size:6px 6px; }
@@ -156,6 +158,10 @@
 @keyframes raw-slam-left { 30% { transform:rotate(-21deg) scale(1.1); } 65% { transform:rotate(-8deg); } }
 @keyframes raw-slam-right { 30% { transform:rotate(23deg) scale(1.08); } 65% { transform:rotate(9deg); } }
 @keyframes raw-stamp { 30% { transform:rotate(-14deg) scale(1.12); } 65% { transform:rotate(22deg); } }
+@keyframes raw-card-main { 0%,100% { transform:translateX(-50%); } 26% { transform:translateX(-50%) translate(-8px,8px) rotate(-5deg) scale(.96); } 58% { transform:translateX(-50%) translate(5px,-4px) rotate(3deg) scale(1.035); } }
+@keyframes raw-card-pet { 0%,100% { transform:rotate(-9deg); } 26% { transform:translate(-9px,8px) rotate(-18deg) scale(.96); } 58% { transform:translate(6px,-4px) rotate(-4deg) scale(1.04); } }
+@keyframes raw-card-oc { 0%,100% { transform:rotate(7deg); } 26% { transform:translate(9px,7px) rotate(16deg) scale(.96); } 58% { transform:translate(-5px,-4px) rotate(2deg) scale(1.035); } }
+@keyframes raw-card-sheet { 0%,100% { transform:rotate(4deg); } 26% { transform:translate(-8px,7px) rotate(-5deg) scale(.96); } 58% { transform:translate(4px,-4px) rotate(9deg) scale(1.04); } }
 @keyframes raw-click-glitch { 0%,100% { transform:translateX(3px); } 20% { transform:translateX(-5px); clip-path:inset(20% 0 60%); } 45% { transform:translateX(7px); clip-path:inset(55% 0 20%); } 70% { transform:translateX(-2px); clip-path:inset(40% 0 30%); } }
 @media (max-width:1000px) {
  .raw-page .hero-memory { left:-3%; width:220px; top:55px; }

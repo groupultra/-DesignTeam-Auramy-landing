@@ -752,7 +752,7 @@ export function mountHow(key, sp, onNext) {
         r.innerHTML = `${avatar(who, 'bub__av')}<p class="bub"><small>${who}</small>${pick(replies)}</p>`;
         chat.append(r);
         trim();
-      }, 900);
+      }, 450);
       trim();
     });
     const trim = () => { const rows = [...chat.children].filter((c) => !c.matches('.bub--card')); if (rows.length > 6) rows[1]?.remove(); };

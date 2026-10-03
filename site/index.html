@@ -20,19 +20,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Caveat:wght@500;700&family=Instrument+Serif:ital@0;1&family=Silkscreen&family=Space+Mono:wght@400;700&family=Unbounded:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/assets/css/tokens.css">
   <link rel="stylesheet" href="/assets/css/spaces.css">
-  <link rel="stylesheet" href="/assets/css/landing.css">
+  <link rel="stylesheet" href="/assets/css/landing.css?v=motion-6">
   <link rel="stylesheet" href="/assets/css/worlds-carousel.css">
   <link rel="stylesheet" href="/assets/css/editorial.css">
-  <link rel="stylesheet" href="/assets/css/raw.css?v=raw-3">
-  <link rel="stylesheet" href="/assets/css/scroll-reveal.css?v=raw-3">
+  <link rel="stylesheet" href="/assets/css/raw.css?v=motion-6">
+  <link rel="stylesheet" href="/assets/css/scroll-reveal.css?v=motion-6">
   <link rel="stylesheet" href="/assets/css/scrappy-sections.css?v=raw-3">
-  <link rel="stylesheet" href="/assets/css/how-scroll.css?v=handheld-7">
-  <link rel="stylesheet" href="/assets/css/play-feed.css?v=scroll-stack-3">
+  <link rel="stylesheet" href="/assets/css/how-scroll.css?v=motion-6">
+  <link rel="stylesheet" href="/assets/css/play-feed.css?v=motion-6">
   <link rel="stylesheet" href="/assets/css/album-party.css?v=raw-3">
   <link rel="stylesheet" href="/assets/css/site-previews.css?v=site-previews-1">
   <link rel="stylesheet" href="/assets/css/social-profiles.css?v=social-profiles-1">
   <link rel="stylesheet" href="/assets/css/for-previews.css?v=for-previews-2">
-  <link rel="stylesheet" href="/assets/css/ending-scenes.css?v=ending-3">
+  <link rel="stylesheet" href="/assets/css/ending-scenes.css?v=motion-6">
   <link rel="stylesheet" href="/assets/css/claim-worlds.css?v=claim-worlds-5">
 </head>
 <body class="editorial-page raw-page">
@@ -145,12 +145,6 @@
             <p data-how-step-copy>name. face. questionable selfie.</p>
           </div>
           <div class="how-handheld__device">
-            <svg class="how-handheld__hand" viewBox="0 0 760 780" aria-hidden="true" focusable="false">
-              <path d="M762 780H432c-34-63-32-130 7-201l70-126c22-40 64-48 91-25 22 19 22 53 2 80l-57 79 45 4 37-119c13-42 54-61 84-42 27 17 34 52 18 82l-43 82 45 4 29-90c13-38 49-57 80-40 25 14 34 44 23 71l-42 102 58 7v199Z" fill="#ff79bd" stroke="#171717" stroke-width="18" stroke-linejoin="round"/>
-              <path d="M470 610c44-16 77-5 101 25 21 27 24 69 8 112l-25 33h-99c-21-42-16-109 15-170Z" fill="#8d65f8" stroke="#171717" stroke-width="18" stroke-linejoin="round"/>
-              <path d="M611 420l18-48 43 20-18 48Z M686 454l15-47 43 16-15 47Z M735 526l13-41 38 15-12 42Z" fill="#d5ff00" stroke="#171717" stroke-width="10" stroke-linejoin="round"/>
-              <path d="M498 679c33 14 62 12 86-6" fill="none" stroke="#171717" stroke-width="11" stroke-linecap="round"/>
-            </svg>
             <div class="how-handheld__phone" aria-label="A four-step Auramy setup demo">
               <div class="how-handheld__screen" data-how-scroll-rail>
                 <div class="mini how-handheld__panel" data-how-step data-how-panel data-step="0" data-screen="hi"></div>
@@ -163,11 +157,8 @@
                 <button type="button" data-how-next>next →</button>
               </div>
             </div>
-            <svg class="how-handheld__hand how-handheld__hand--thumb" viewBox="0 0 760 780" aria-hidden="true" focusable="false">
-              <g class="how-handheld__thumb-joint">
-                <path d="M760 780H560c-19-46-12-98 24-136l-162-28c-41-7-62-33-53-67 8-34 43-50 76-36l120 52 41-60c21-31 57-36 82-16 24 20 27 54 7 80l-45 57c35 30 67 73 85 134Z" fill="#ff79bd" stroke="#171717" stroke-width="18" stroke-linejoin="round"/>
-                <path d="M390 550c9-18 31-25 49-17l21 10-18 35-22-10c-19-8-29-20-30-18Z" fill="#d5ff00" stroke="#171717" stroke-width="8" stroke-linejoin="round"/>
-              </g>
+            <svg class="how-handheld__hand" viewBox="0 0 490 550" aria-hidden="true" focusable="false">
+              <path d="M112 540c1-66 10-119-17-174l-27-55c-13-27-2-59 24-71 27-12 58-1 70 25l19 39V58c0-29 23-52 51-52s51 23 51 52v165c5-25 27-41 52-37 25 4 42 27 38 52l-3 22c9-22 34-33 56-23 23 10 33 36 23 59l-8 18c12-17 36-22 54-10 19 13 24 38 12 57l-47 77c-26 43-66 76-117 101H112Z" fill="#ff79bd" stroke="#171717" stroke-width="18" stroke-linejoin="round"/>
             </svg>
           </div>
         </div>
@@ -290,7 +281,7 @@
         </div>
         <div class="notify__messages">
           <p>your people, dropping by ↓</p>
-          <div class="lock__stack" id="lockStack" aria-live="off">
+          <div class="lock__stack" id="lockStack" data-notify-stack aria-live="off">
             <div class="ntf"><span class="ntf__ico"><span class="ntf__icon" aria-hidden="true">a</span></span><b>eli</b><small>now</small><p>is looking around your world 👀</p></div>
             <div class="ntf is-old"><span class="ntf__ico"><span class="ntf__icon" aria-hidden="true">a</span></span><b>ava</b><small>3m ago</small><p>saved your song for later</p></div>
             <div class="ntf is-old"><span class="ntf__ico"><span class="ntf__icon" aria-hidden="true">a</span></span><b>jay</b><small>7m ago</small><p>found the tiny camera roll</p></div>
@@ -416,6 +407,6 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script type="module" src="/assets/js/landing.js?v=ending-3"></script>
+  <script type="module" src="/assets/js/landing.js?v=motion-6"></script>
 </body>
 </html>

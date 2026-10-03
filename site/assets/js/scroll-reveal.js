@@ -1,5 +1,5 @@
 import { renderSpace } from './spaces.js';
-import { mountSpace } from './interact.js?v=raw-3';
+import { mountSpace } from './interact.js?v=motion-6';
 
 const clamp = (value) => Math.min(1, Math.max(0, value));
 const ease = (value) => value * value * (3 - 2 * value);

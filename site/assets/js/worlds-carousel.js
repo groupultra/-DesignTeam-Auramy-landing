@@ -1,5 +1,5 @@
 import { renderSpace } from './spaces.js';
-import { mountSpace } from './interact.js?v=raw-3';
+import { mountSpace } from './interact.js?v=motion-6';
 
 const WORLDS = [
   { style: 'desk', title: 'little desktop', tag: 'organized chaos', detail: 'Open a folder. Move a window. Make yourself at home.', color: '#c6b4fc', tilt: -3 },

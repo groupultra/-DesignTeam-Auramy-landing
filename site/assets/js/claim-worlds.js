@@ -158,10 +158,10 @@ export function initClaimWorlds(root) {
             worldIndex = (worldIndex + 1) % WORLDS.length;
             host.dataset.world = WORLDS[worldIndex].id;
             runCycle();
-          }, 360);
-        }, 3000);
-      }, 460);
-    }, 900);
+          }, 250);
+        }, 1900);
+      }, 350);
+    }, 550);
   };
   const sync = () => {
     if (canAnimate()) {
