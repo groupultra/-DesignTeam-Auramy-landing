@@ -1,0 +1,36 @@
+{
+  "mode": "built-in image_gen",
+  "created": "2026-10-02",
+  "assets": [
+    {
+      "key": "lu-cat",
+      "prompt": "Use case: photorealistic-natural. Asset type: unique visual for lu's social profile and personal website. Primary request: a ridiculously close spontaneous phone photograph of a fluffy orange tabby cat with one paw stretched toward the lens, lying on a sunlit apartment windowsill, soft pale blue curtain behind, messy houseplant, natural unretouched fur, humorous real camera-roll energy, square composition, no humans. No watermarks, no graphics or UI, no polished stock-photo staging.",
+      "savedPath": "site/assets/img/social/lu-cat.jpg"
+    },
+    {
+      "key": "noah-skate",
+      "prompt": "Use case: photorealistic-natural. Asset type: unique visual for noah's social profile and personal website. Primary request: an amateur ultra-wide 0.5x phone photograph from ground level of a battered skateboard and scuffed black skate shoes at a concrete skatepark at golden hour, chipped cobalt blue deck, sticker scraps with no lettering, small ramps in the background, no human faces or bodies, authentic teen hobby camera roll, motion blur at the distant edge, square composition. No watermarks, no graphics or UI, no polished stock-photo staging.",
+      "savedPath": "site/assets/img/social/noah-skate.jpg"
+    },
+    {
+      "key": "jay-studio",
+      "prompt": "Use case: photorealistic-natural. Asset type: unique visual for jay's social profile and personal website. Primary request: a candid overhead phone photo of an independent young illustrator's chaotic drawing desk: an open cream sketchbook with an ORIGINAL hand-drawn anime-style girl in an orange bomber jacket and short teal hair, her character-study doodles drawn in marker around her, chunky felt-tip pens, tangled headphone cable, washi tape and a cold drink, warm desk lamp, real paper and ink texture, no existing anime character, no readable text, square composition. No watermarks, no graphics or UI, no polished stock-photo staging.",
+      "savedPath": "site/assets/img/social/jay-studio.jpg"
+    },
+    {
+      "key": "ava-camp",
+      "prompt": "Use case: photorealistic-natural. Asset type: unique visual for ava's social profile and personal website. Primary request: a personal camera-roll photo looking out of a half-open cherry-red camping tent toward a deep blue mountain lake at dusk, a pair of orange trail shoes and enamel mug at the tent doorway, unpolished direct phone flash on tent fabric with dusky natural landscape in distance, no people, no brand logos or text, square composition. No watermarks, no graphics or UI, no polished stock-photo staging.",
+      "savedPath": "site/assets/img/social/ava-camp.jpg"
+    },
+    {
+      "key": "zara-books",
+      "prompt": "Use case: photorealistic-natural. Asset type: unique visual for zara's social profile and personal website. Primary request: a spontaneous overhead phone photo from a bookish friend's camera roll: a stack of worn paperbacks with blank cloth and paper covers, one open book face-down so no printed words show, colorful sticky tabs, purple wired headphones, iced matcha and a small pressed flower on a wooden library table, sunlight across the image, no readable text, no people, square composition, believable casual composition. No watermarks, no graphics or UI, no polished stock-photo staging.",
+      "savedPath": "site/assets/img/social/zara-books.jpg"
+    },
+    {
+      "key": "eli-film",
+      "prompt": "Use case: photorealistic-natural. Asset type: unique visual for eli's social profile and personal website. Primary request: a moody amateur 35mm film photo of a tiny empty neighborhood laundromat through its rain-speckled front window at night, mint-green washing machines with round chrome doors, warm orange fluorescent light, a red plastic chair, accidental reflection of city lights, heavy grain, slightly crooked horizon, no legible signs or text, no people, square composition, personal photo diary rather than professional architecture photo. No watermarks, no graphics or UI, no polished stock-photo staging.",
+      "savedPath": "site/assets/img/social/eli-film.jpg"
+    }
+  ]
+}
