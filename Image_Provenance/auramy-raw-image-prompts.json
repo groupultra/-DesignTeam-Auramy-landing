@@ -1,0 +1,22 @@
+{
+  "mode": "built-in OpenAI image generation",
+  "date": "2026-10-02",
+  "subjects": "Fictional adults; intentionally unretouched-looking synthetic demo photographs.",
+  "images": [
+    {
+      "file": "raw-selfie.jpg",
+      "savedPath": "site/assets/img/editorial/raw-selfie.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset: one single vertical 2:3 photograph for an irreverent early-internet personal website, not a designed poster. A fictional East Asian woman aged 24 with short messy black shag hair holding her phone extremely close above her head for a 0.5x front camera selfie, looking up straight at the lens with a huge crooked grin, one eye squinting, silver braces, visible freckles and small acne marks, no makeup, cheap wired white earbuds, worn acid green T-shirt. Her extended forearm rushes up from bottom edge, exaggerated wide-angle perspective, big face in upper center and tiny torso and oversized sneaker lower down. A messy real bedroom: unmade purple duvet and cables, clothes on floor, small lime bedside lamp. Deliberately awkward candid composition, slightly tilted frame, point-and-shoot frontal flash, real pores, uneven shadows, a little high-ISO grain and background motion softness, spontaneous funny photo someone would send to a group chat. Face sharp enough to read. Unretouched smartphone realism, not fashion editorial, not airbrushed, not studio, not a commercial stockphoto. No added text, logos, graphics, filters, watermarks or UI. Clothing normal and fully clothed."
+    },
+    {
+      "file": "raw-friends.jpg",
+      "savedPath": "site/assets/img/editorial/raw-friends.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset: a single landscape 3:2 real-looking raw digital-camera snapshot. Three fictional adult friends aged 23-26 squeezed into an ultra-wide 0.5x selfie at night outside a corner shop with acid-green wall and purple vending machine, very close to lens from a low awkward angle. Woman with short black shag hair at left laughing hard open mouth, Black woman curly messy hair at center leans a lot toward the lens smiling with her nose comically large from optical perspective, man dark curly hair at right partially cropped waving palm much closer to camera than his face. Vintage track jackets and plain bright pink, white and lime casual tees. Rude direct compact-camera flash, real shiny skin, freckles, acne scars, hair flyaways, warm pavement, a little blur at frame edges. Looks like the best random photo buried in friends group chat from 2007: goofy, alive, imperfect framing, absurd perspective, funny joyful energy. NO polished fashion campaign, NO beautification, NO studio, NO professional posing, NO illustrations, NO collages, NO added text, logos or watermarks."
+    },
+    {
+      "file": "raw-mirror.jpg",
+      "savedPath": "site/assets/img/editorial/raw-mirror.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset: one single vertical 2:3 unretouched mirror selfie with phone clearly visible. Fictional androgynous adult aged 25 with short dark hair and silver ear piercings, battered oversized cobalt track jacket and simple black trousers, in an ordinary cramped elevator with scratched stainless-steel walls and smudgy mirror. Standing with an awkward wide stance, one large scuffed sneaker very near bottom mirror creating exaggerated foreshortening, holding a plain silver smartphone high beside their face, flash bursting a little in mirror, half amused tired expression, a grocery plastic bag dangling from free hand. Camera at a slanted 10-degree angle, strong ultra-wide perspective, mundane honest messy vibe, harsh fluorescent greenish lighting mixed with flash, visible skin texture, very slight sensor noise. Looks casually posted in a private photo dump, no retouching, no expensive styling, no professional editorial lighting. Fully clothed. No text, typography, brand logo, watermark or UI."
+    }
+  ]
+}

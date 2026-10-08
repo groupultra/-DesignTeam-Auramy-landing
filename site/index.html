@@ -1,0 +1,353 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Auramy — a website with your aura</title>
+  <meta name="description" content="Drop in your name, a selfie and the stuff you're into. Auramy turns it into a little world your friends can open, poke, play and sign — right in their browser.">
+  <meta name="theme-color" content="#064BFF">
+  <link rel="icon" href="/assets/img/brand/auramy-monitor.jpg?v=materials-8" type="image/jpeg">
+  <link rel="apple-touch-icon" href="/assets/img/brand/auramy-monitor.jpg?v=materials-8">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Auramy — a website with your aura">
+  <meta property="og:description" content="Your corner of the internet. Friends open it, poke it, play it, sign it. No app needed.">
+  <meta property="og:image" content="https://auramy-flax.vercel.app/assets/img/brand/auramy-monitor.jpg?v=materials-8">
+  <meta property="og:image:width" content="1254">
+  <meta property="og:image:height" content="1254">
+  <meta property="og:image:alt" content="Auramy's smiling yellow computer monitor logo">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Caveat:wght@500;700&family=Instrument+Serif:ital@0;1&family=Silkscreen&family=Space+Mono:wght@400;700&family=Unbounded:wght@700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/tokens.css">
+  <link rel="stylesheet" href="/assets/css/spaces.css">
+  <link rel="stylesheet" href="/assets/css/landing.css?v=calm-7">
+  <link rel="stylesheet" href="/assets/css/worlds-scroll.css?v=calm-7">
+  <link rel="stylesheet" href="/assets/css/editorial.css">
+  <link rel="stylesheet" href="/assets/css/raw.css?v=calm-7">
+  <link rel="stylesheet" href="/assets/css/scroll-reveal.css?v=calm-7">
+  <link rel="stylesheet" href="/assets/css/scrappy-sections.css?v=calm-7">
+  <link rel="stylesheet" href="/assets/css/how-scroll.css?v=calm-7">
+  <link rel="stylesheet" href="/assets/css/play-feed.css?v=calm-7">
+  <link rel="stylesheet" href="/assets/css/album-party.css?v=calm-7">
+  <link rel="stylesheet" href="/assets/css/site-previews.css?v=site-previews-1">
+  <link rel="stylesheet" href="/assets/css/social-profiles.css?v=social-profiles-1">
+  <link rel="stylesheet" href="/assets/css/for-previews.css?v=for-previews-2">
+  <link rel="stylesheet" href="/assets/css/ending-scenes.css?v=calm-7">
+  <link rel="stylesheet" href="/assets/css/last-calm.css?v=calm-7">
+  <link rel="stylesheet" href="/assets/css/material-v8.css?v=materials-8">
+</head>
+<body class="editorial-page raw-page calm-page material-v8">
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="nav" id="nav">
+    <a class="nav__logo" href="/" aria-label="Auramy home">
+      <img src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt="Auramy monitor" width="54" height="54">
+      <span>Auramy</span>
+    </a>
+    <nav class="nav__links" aria-label="Primary">
+      <a href="#how">make a mess</a>
+      <a href="#spaces">worlds</a>
+      <a href="#play">poke around</a>
+      <a href="#aura">aura</a>
+    </nav>
+    <a class="btn btn--ink btn--sm" href="#claim">claim your name ↗</a>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero hero--editorial raw-hero" id="top" aria-labelledby="hero-title" data-awake="false">
+      <div class="hero-heading">
+        <p class="editorial-kicker">PERSONAL INTERNET / ONLINE</p>
+        <h1 id="hero-title">A little internet.<br><em>A lot of you.</em></h1>
+        <p class="hero-deck">A place for photos, obsessions, notes, and the tiny details your friends actually want to find.</p>
+        <form class="claim" data-claim>
+          <label class="claim__field"><span class="claim__prefix">aura.my/</span><input name="handle" autocomplete="off" spellcheck="false" maxlength="20" placeholder="yourname" aria-label="Your name"></label>
+          <button class="btn btn--ink" type="submit">claim your name <span aria-hidden="true">↗</span></button>
+        </form>
+      </div>
+      <figure class="hero-monitor">
+        <img src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt="Auramy's smiling yellow computer monitor logo" width="1254" height="1254" fetchpriority="high">
+        <figcaption><span>●</span> YOUR CORNER IS ON</figcaption>
+      </figure>
+      <div class="hero-collage" aria-label="A personal internet, straight from the camera roll">
+        <figure class="hero-memory raw-post">
+          <img src="/assets/img/editorial/raw-friends.jpg" alt="Three friends pulling goofy expressions in a close-up wide-angle snapshot" width="1536" height="1024">
+          <figcaption>this one is staying up.</figcaption>
+        </figure>
+        <article class="profile-preview" id="heroPreview" data-theme="lime" aria-label="Personal space preview">
+          <div class="profile-preview__bar"><span>✳ main_character.jpg</span><span aria-hidden="true">— □ ×</span></div>
+          <div class="profile-preview__photo">
+            <img src="/assets/img/editorial/raw-selfie.jpg" alt="A close-up wide-angle selfie with messy hair, a huge grin and no retouching" width="1024" height="1536" fetchpriority="high">
+          <span class="profile-preview__tag">your corner</span>
+            <h2>oh hey, <span data-preview-name>mia</span><em>!!!</em></h2>
+          </div>
+          <div class="profile-preview__bottom"><span>aura.my/<b data-preview-handle>mia</b></span><button type="button" data-preview-theme aria-label="Remix preview colors">remix me ↯</button></div>
+        </article>
+        <figure class="hero-mirror raw-post">
+          <img src="/assets/img/editorial/raw-mirror.jpg" alt="An unposed mirror selfie in a scratched elevator, with a phone and flash visible" width="1024" height="1536">
+          <figcaption>no context needed</figcaption>
+        </figure>
+      </div>
+      <div class="raw-hero__controls">
+        <button class="chaos-button" type="button" data-chaos aria-pressed="false">make it weird ↯</button>
+        <span class="raw-mood" data-mood-stamp>posting this anyway.</span>
+      </div>
+      <a class="hero-scroll" href="#vs">See what a world can hold <span>↓</span></a>
+    </section>
+
+<section class="scroll-reveal" id="vs" aria-labelledby="vs-title">
+  <div class="scroll-reveal__stage" data-reveal-stage>
+    <h2 class="scroll-reveal__heading" id="vs-title">you are not<br><span>a list of links.</span></h2>
+    <div class="scroll-reveal__canvas">
+      <p class="scroll-reveal__annotation scroll-reveal__annotation--before" aria-hidden="true">is this really<br>all of you?</p>
+      <p class="scroll-reveal__sticker" aria-hidden="true">DELETE THE<b>BORING.</b></p>
+      <div class="phone scroll-reveal__device" id="compare" data-reveal-device>
+        <div class="scroll-reveal__chrome" aria-hidden="true"><span>mia's corner of the internet</span><span>− □ ×</span></div>
+        <div class="screen">
+          <div class="compare__after scroll-reveal__after" data-off="1" inert aria-label="Mia's interactive scrapbook"></div>
+          <div class="scroll-reveal__curtain" data-reveal-curtain aria-hidden="true">
+            <p class="scroll-reveal__boring-stamp">personality not found :/</p>
+            <div class="scroll-reveal__blank-avatar">?</div>
+            <p class="scroll-reveal__handle">@mia</p>
+            <p class="scroll-reveal__bio">a human, probably.</p>
+            <div class="scroll-reveal__links"><span>instagram</span><span>tiktok</span><span>spotify playlist</span><span>pinterest</span><span>more links, i guess</span></div>
+            <p class="scroll-reveal__error">ERROR 404<br><b>a little personality</b></p>
+            <i class="scroll-reveal__torn-edge"></i>
+          </div>
+        </div>
+      </div>
+      <p class="scroll-reveal__annotation scroll-reveal__annotation--after" aria-hidden="true">much better.<br>go touch it!</p>
+    </div>
+    <p class="scroll-reveal__note" data-reveal-note>keep scrolling. this gets better. ↓</p>
+    <p class="scroll-reveal__reduced-copy">The plain link list gives way to your own little world. This is the finished version.</p>
+    <p class="scroll-reveal__sr" role="status" aria-live="polite" data-reveal-status></p>
+  </div>
+</section>
+
+
+    <!-- HOW -->
+    <section class="sec how" id="how" aria-labelledby="how-title" data-how-scroll>
+      <div class="wrap how-handheld" data-how-scroll-stage>
+        <div class="how-handheld__head">
+          <p class="stamp">Make it yours</p>
+          <h2 id="how-title" class="h2">A little world<br><em>in four moves.</em></h2>
+        </div>
+        <div class="how-handheld__scene">
+          <div class="how-handheld__copy" data-how-copy>
+            <span class="how-scroll__number" data-how-number>01</span>
+            <h3 data-how-step-title>say hi.</h3>
+            <p data-how-step-copy>Start with a name and a photo.</p>
+          </div>
+          <div class="how-handheld__device">
+            <div class="how-handheld__phone" aria-label="A four-step Auramy setup demo">
+              <div class="how-handheld__screen" data-how-scroll-rail>
+                <div class="mini how-handheld__panel" data-how-step data-how-panel data-step="0" data-screen="hi"></div>
+                <div class="mini how-handheld__panel" data-how-step data-how-panel data-step="1" data-screen="faves"></div>
+                <div class="mini how-handheld__panel" data-how-step data-how-panel data-step="2" data-screen="ask"></div>
+                <div class="mini how-handheld__panel" data-how-step data-how-panel data-step="3" data-screen="share"></div>
+              </div>
+              <div class="how-handheld__nav" aria-label="Tutorial controls">
+                <button type="button" data-how-back>← back</button>
+                <button type="button" data-how-next>next →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="how-scroll__progress" data-how-scroll-progress role="progressbar" aria-label="Tutorial progress" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1">step 1 of 4</div>
+        <p class="how-scroll__sr" role="status" aria-live="polite" data-how-scroll-status></p>
+      </div>
+    </section>
+
+    <!-- SPACES -->
+<section class="worlds-scroll" id="spaces" aria-label="Choose your world"></section>
+
+    <!-- MADE: real people's spaces -->
+    <section class="sec made" id="made" aria-labelledby="made-title">
+      <div class="wrap made__head reveal">
+        <div>
+          <p class="stamp">Made for your full self</p>
+          <h2 id="made-title" class="h2">More than<br><em>a profile.</em></h2>
+        </div>
+        <div class="made__side">
+          <p class="made__disclaimer">Share a place people can actually explore.</p>
+        </div>
+      </div>
+      <div class="made__row" data-made></div>
+    </section>
+
+    <!-- PLAY -->
+    <section class="sec play" id="play" aria-labelledby="play-title">
+      <div class="wrap">
+        <div class="play__head reveal">
+          <p class="stamp">Built to be explored</p>
+          <h2 id="play-title" class="h2">Your people<br><em>can play too.</em></h2>
+          <p class="lede">Scroll through a few things friends can open, tap, and leave behind.</p>
+        </div>
+        <div class="play-feed-shell" data-play-feed-root>
+          <div class="play-feed" data-play-feed aria-label="Four interactive demos. Continue down the page to see each one.">
+          <article class="tile tile--squish" id="play-squish" data-play-panel tabindex="-1">
+            <header><h3>squish lu's face</h3><p>she gets a notification. sorry, lu.</p></header>
+            <div class="squish" id="squish" aria-label="Squishable face — press and drag, or press Enter or Space to squish" role="button" tabindex="0">
+              <svg viewBox="0 0 300 300" aria-hidden="true">
+                <ellipse class="squish__shadow" cx="150" cy="268" rx="90" ry="10"/>
+                <!-- the photo is mapped to the blob's bounding box, so it stretches and squashes with the jelly -->
+                <pattern id="sqface" patternUnits="objectBoundingBox" patternContentUnits="objectBoundingBox" width="1" height="1"><image href="/assets/img/people/lu-face.jpg" width="1" height="1" preserveAspectRatio="none"/></pattern>
+                <path class="squish__body" fill="url(#sqface)" stroke="#fff" stroke-width="7" stroke-linejoin="round"/>
+                <g class="squish__face"></g>
+              </svg>
+            </div>
+            <footer>lu's been squished <b data-squish-count>14</b> times today</footer>
+            <p class="play-feed__live" role="status" aria-live="polite" data-squish-status></p>
+          </article>
+
+          <article class="tile tile--game" id="play-game" data-play-panel tabindex="-1">
+            <header><h3>beat their high score</h3><p>every space has a mini game + leaderboard.</p></header>
+            <div class="tgame" id="tgame" tabindex="0" role="button" aria-label="Timing game. Press to stop the marker in the pink zone.">
+              <div class="tgame__score"><span>score</span><b data-score>0</b></div>
+              <div class="tgame__track"><div class="tgame__zone"></div><div class="tgame__zone tgame__zone--perfect"></div><div class="tgame__marker"></div></div>
+              <p class="tgame__msg" data-msg>tap when the dot's in the pink</p>
+              <ol class="board" data-board></ol>
+            </div>
+          </article>
+
+          <article class="tile tile--wall" id="play-wall" data-play-panel tabindex="-1">
+            <header><h3>sign the wall</h3><p>17 kinds of guestbook. this is the sticky-note one.</p></header>
+            <div class="wall" id="wall" aria-live="polite"></div>
+            <form class="wall__form" data-wall-form>
+              <input name="note" maxlength="48" placeholder="leave mia a note…" aria-label="Your note" autocomplete="off">
+              <button class="btn btn--ink btn--sm" type="submit">stick it</button>
+            </form>
+          </article>
+
+          <article class="tile tile--love" id="play-love" data-play-panel tabindex="-1">
+            <header><h3>love it too</h3><p>tap their song. again. we won't judge.</p></header>
+            <div class="album-party" id="albumParty" data-album-party></div>
+          </article>
+          </div>
+          <p class="play-feed__caption" data-play-caption></p>
+          <p class="play-feed__live" role="status" aria-live="polite" data-play-live></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- NOTIFY: the little moments when your people find your world -->
+    <section class="sec notify notify--slideshow" id="notify" aria-labelledby="notify-title" data-ending-slideshow>
+      <div class="wrap notify__layout">
+        <div class="notify__copy reveal">
+          <p class="stamp stamp--dark">your link is doing laps</p>
+          <h2 id="notify-title" class="h2">found you<br><em>again.</em></h2>
+          <p class="lede">Your little internet, open in very regular little moments.</p>
+        </div>
+        <div class="notify__deck" aria-label="Three people visiting a personal website on their phones">
+          <figure class="notify-slide is-active" data-notify-slide data-caption="on the train / in your world">
+            <img src="/assets/img/visitors/train-reader.jpg" alt="A person browsing a personal website on their phone while riding a train" width="1536" height="1024" loading="lazy">
+            <figcaption>on the train <i>/</i> in your world</figcaption>
+          </figure>
+          <figure class="notify-slide" data-notify-slide data-caption="before sleep / one more click">
+            <img src="/assets/img/visitors/bedroom-reader.jpg" alt="A person browsing a personal website on their phone in a bedroom" width="1536" height="1024" loading="lazy">
+            <figcaption>before sleep <i>/</i> one more click</figcaption>
+          </figure>
+          <figure class="notify-slide" data-notify-slide data-caption="at the café / deep in the lore">
+            <img src="/assets/img/visitors/cafe-reader.jpg" alt="A person browsing a personal website on their phone at a cafe" width="1536" height="1024" loading="lazy">
+            <figcaption>at the café <i>/</i> deep in the lore</figcaption>
+          </figure>
+          <p class="notify__slide-count" aria-hidden="true"><b data-notify-count>01</b> / 03</p>
+        </div>
+        <div class="lock-phone" aria-label="A phone lock screen with Auramy notifications">
+          <div class="lock-phone__screen">
+            <div class="lock-phone__notch" aria-hidden="true"></div>
+            <p class="lock-phone__date">Friday, October 2</p>
+            <p class="lock-phone__time">9:41</p>
+            <div class="lock__stack" id="lockStack" data-notify-stack aria-live="off">
+              <div class="ntf"><span class="ntf__ico"><img src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt=""></span><b>Auramy</b><small>now</small><p>Eli is looking around your world 👀</p></div>
+              <div class="ntf is-old"><span class="ntf__ico"><img src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt=""></span><b>Auramy</b><small>3m ago</small><p>Ava saved your song for later</p></div>
+              <div class="ntf is-old"><span class="ntf__ico"><img src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt=""></span><b>Auramy</b><small>7m ago</small><p>Jay found the tiny camera roll</p></div>
+            </div>
+            <i class="lock-phone__home" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- AURA POINTS -->
+    <section class="sec aura" id="aura" aria-labelledby="aura-title">
+      <div class="wrap aura__grid">
+        <div class="aura__copy reveal">
+          <p class="stamp">internet points. real dopamine.</p>
+          <h2 id="aura-title" class="h2">farm <em>aura.</em><br>(legally.)</h2>
+          <p class="lede">get visited. earn aura. buy weird stuff.</p>
+          <div class="badges" aria-label="Visitor badges">
+            <span class="badge"><b>10</b>visitors</span>
+            <span class="badge"><b>100</b>visitors</span>
+            <span class="badge badge--holo"><b>1k</b>visitors</span>
+          </div>
+        </div>
+        <div class="aura__stage">
+          <button class="orb" id="orb" aria-label="Tap for aura">
+            <span class="orb__glow" aria-hidden="true"></span>
+            <span class="orb__core" aria-hidden="true"></span>
+            <span class="orb__num"><small>✦</small><b data-aura-count>12,480</b></span>
+            <span class="orb__tap">tap me</span>
+          </button>
+          <div class="ledger">
+            <div class="ledger__col">
+              <p class="ledger__h">earn</p>
+              <ul>
+                <li><span>someone visited</span><b>+5</b></li>
+                <li><span>new note on your wall</span><b>+20</b></li>
+                <li><span>someone beat your score</span><b>+50</b></li>
+                <li><span>100 visitors</span><b>+500</b></li>
+              </ul>
+            </div>
+            <div class="ledger__col ledger__col--shop">
+              <p class="ledger__h">spend · tap to buy</p>
+              <ul>
+                <li><button class="buy" data-buy="800" data-name="iPod-style player"><span class="shop-ico shop-ico--ipod" aria-hidden="true"></span><span>iPod-style player</span><b>800</b></button></li>
+                <li><button class="buy" data-buy="1200" data-name="cassette walkman"><span class="shop-ico shop-ico--walkman" aria-hidden="true"></span><span>cassette walkman</span><b>1,200</b></button></li>
+                <li><button class="buy" data-buy="300" data-name="holo sticker pack"><span class="shop-ico shop-ico--holo" aria-hidden="true"></span><span>holo sticker pack</span><b>300</b></button></li>
+                <li><button class="buy" data-buy="2000" data-name="3D room world"><span class="shop-ico shop-ico--room" aria-hidden="true"></span><span>3D room world</span><b>2,000</b></button></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CLAIM -->
+    <section class="sec claimsec" id="claim" aria-labelledby="claim-title">
+      <div class="claimsec__aura" aria-hidden="true"></div>
+      <div class="wrap claimsec__inner">
+        <h2 id="claim-title" class="claimsec__title">be a little<br><em>too much.</em></h2>
+        <form class="claim claim--big" data-claim>
+          <label class="claim__field">
+            <span class="claim__prefix">aura.my/</span>
+            <input name="handle" autocomplete="off" spellcheck="false" maxlength="20" placeholder="yourname" aria-label="Your name">
+          </label>
+          <button class="btn btn--aura" type="submit">claim your name <span aria-hidden="true">→</span></button>
+        </form>
+        <p class="claimsec__note">your corner. your beautiful nonsense.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap foot__grid">
+      <a class="foot__logo" href="/"><img src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt="" width="58" height="58"><span>Auramy</span></a>
+      <nav aria-label="Footer">
+        <a href="/brand">brand kit</a>
+        <a href="#notify">found you again</a>
+        <a href="#claim">claim your name ↗</a>
+        <a href="mailto:hello@aura.my">say hi</a>
+      </nav>
+      <p class="foot__small">© 2026 Auramy · made with aura · aura.my</p>
+    </div>
+  </footer>
+
+      <button class="motion-toggle" type="button" data-motion-toggle aria-pressed="false">pause motion</button>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script type="module" src="/assets/js/landing.js?v=materials-8"></script>
+</body>
+</html>

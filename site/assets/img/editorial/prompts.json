@@ -1,0 +1,15 @@
+{
+  "generator": "OpenAI built-in image generation (GPT Image)",
+  "generatedAt": "2026-10-02",
+  "note": "Fictional AI-generated adult subjects used as illustrative landing page imagery. Source PNGs preserved in Codex generated_images; optimized JPEGs used by the site.",
+  "images": [
+    {
+      "file": "mia.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: full-bleed portrait photo for a creative personal-homepage demo. Generate one single vertical 2:3 photograph, no layout, no text, no UI. An adult woman aged 24, East Asian, short dark shag haircut, small silver earrings and silver over-ear headphones around her neck, wearing a vivid acid-chartreuse oversized T-shirt, candid relaxed smile with direct eye contact, sitting on an outdoor concrete skatepark ledge. Background blue sky and out-of-focus city basketball fence. Shot by a friend on a compact digital camera, close medium portrait from waist up, slightly low camera angle, bright direct afternoon sun, real skin texture and a few freckles, imperfect spontaneous energy, editorial street-style photography, understated film grain. The face is centered in the upper-middle with generous headroom, arms anatomically natural. Bold lime and blue color accents, no excessive polish, no illustration, no CGI, no mascot, no geometry-generated animals, no watermark, no brand logos. This is a fictional adult model for a website design, not a real testimonial."
+    },
+    {
+      "file": "friends.jpg",
+      "prompt": "Use case: photorealistic-natural. Asset type: candid friendship photography for an expressive personal website. Generate one single horizontal 3:2 photograph, no collage border, no text, no UI. Three stylish adult friends aged 23–27, one Black woman with natural curls, one East Asian woman with a dark bob, and a brown-haired man, casually laughing shoulder-to-shoulder on a rooftop at blue hour. Close flash photography with authentic candid movement, background very blurred city and cobalt evening sky. Clothing: a pink knitted top, a white T-shirt with no print, an acid-green light jacket. Everyone fully clothed, casual streetwear; faces clearly recognizable as three distinct fictional adults, natural human anatomy and textured skin. Analog point-and-shoot feeling, direct camera flash, rich dark blue/pink/lime colors, warm joyful intimate moment, not advertising-stock-photo poses. Composition people fill central 75% of frame so it also crops beautifully into a portrait card. No phones obscuring faces, no text, no lettering, no watermarks, no logos, no cartoons, no plastic skin."
+    }
+  ]
+}
