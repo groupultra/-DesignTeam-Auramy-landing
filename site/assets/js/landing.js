@@ -9,8 +9,7 @@ import { initScrollReveal } from './scroll-reveal.js?v=calm-7';
 import { initHowScroll } from './how-scroll.js?v=calm-7';
 import { initAlbumParty } from './album-party.js?v=calm-7';
 import { renderHeroSitePreviews } from './site-previews.js';
-import { renderForPreviews } from './for-previews.js';
-import { initEndingScenes } from './ending-scenes.js?v=calm-7';
+import { initEndingScenes } from './ending-scenes.js?v=materials-8';
 
 document.documentElement.classList.add('js');
 injectSprite();
@@ -203,7 +202,6 @@ if (heroPreview) {
 
 /* ───────── scroll-led reveal + scrappy section details ───────── */
 initScrollReveal($('#vs'));
-renderForPreviews($('[data-site-previews]'));
 
 /* ───────── how it works: four inline, playable steps ───────── */
 {
@@ -275,7 +273,7 @@ initEndingScenes($('#notify'));
 /* One-time entrance beats only for fresh content, never as background motion. */
 {
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-  const targets = $$(' .reveal .stamp, .reveal .h2, .reveal .h2 em, .how-handheld__head .stamp, .how-handheld__head .h2, .worlds-section__head .worlds-section__eyebrow, .worlds-section__head .worlds-section__title, #made .made-card, #for .for-preview, .homecoming__shelf > a');
+  const targets = $$(' .reveal .stamp, .reveal .h2, .reveal .h2 em, .how-handheld__head .stamp, .how-handheld__head .h2, .worlds-section__head .worlds-section__eyebrow, .worlds-section__head .worlds-section__title, #made .made-card');
   const pending = new Set(targets);
   const run = (element) => {
     if (!pending.has(element) || reducedMotion.matches || motionPaused() || document.hidden) return false;
@@ -670,27 +668,6 @@ $$('.sticker-card, .badge').forEach((el) => el.addEventListener('click', () => {
     });
   };
   addEventListener('pointermove', (e) => { px = e.clientX; py = e.clientY; if (!raf) raf = requestAnimationFrame(look); }, { passive: true });
-}
-
-/* ───────── rotating word ───────── */
-{
-  const el = $('.rotator');
-  const words = el.dataset.rotator.split('|');
-  let i = 0, timer = 0, swapTimer = 0;
-  whileVisible(el, () => {
-    timer = setInterval(() => {
-      el.classList.remove('is-in'); el.classList.add('is-out');
-      swapTimer = setTimeout(() => {
-        i = (i + 1) % words.length;
-        el.textContent = words[i];
-        el.classList.remove('is-out'); el.classList.add('is-in');
-      }, 330);
-    }, 1900);
-  }, () => {
-    clearInterval(timer);
-    clearTimeout(swapTimer);
-    el.classList.remove('is-out'); el.classList.add('is-in');
-  });
 }
 
 console.info('%c✦ auramy', 'font: 800 20px sans-serif; color: #ff5fa2', '— a website with your aura. hi, curious one.', MIA.url);

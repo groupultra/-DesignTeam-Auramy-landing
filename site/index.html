@@ -5,9 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Auramy — a website with your aura</title>
   <meta name="description" content="Drop in your name, a selfie and the stuff you're into. Auramy turns it into a little world your friends can open, poke, play and sign — right in their browser.">
-  <meta name="theme-color" content="#d5ff00">
-  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="/assets/img/app-icon-180.png">
+  <meta name="theme-color" content="#064BFF">
+  <link rel="icon" href="/assets/img/brand/auramy-monitor.jpg?v=materials-8" type="image/jpeg">
+  <link rel="apple-touch-icon" href="/assets/img/brand/auramy-monitor.jpg?v=materials-8">
   <meta property="og:type" content="website">
   <meta property="og:title" content="Auramy — a website with your aura">
   <meta property="og:description" content="Your corner of the internet. Friends open it, poke it, play it, sign it. No app needed.">
@@ -34,13 +34,15 @@
   <link rel="stylesheet" href="/assets/css/for-previews.css?v=for-previews-2">
   <link rel="stylesheet" href="/assets/css/ending-scenes.css?v=calm-7">
   <link rel="stylesheet" href="/assets/css/last-calm.css?v=calm-7">
+  <link rel="stylesheet" href="/assets/css/material-v8.css?v=materials-8">
 </head>
-<body class="editorial-page raw-page calm-page">
+<body class="editorial-page raw-page calm-page material-v8">
   <a class="skip" href="#main">Skip to content</a>
 
   <header class="nav" id="nav">
     <a class="nav__logo" href="/" aria-label="Auramy home">
-      <img src="/assets/logo/auramy-wordmark-ink.svg" alt="Auramy" width="150" height="28">
+      <img src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt="Auramy monitor" width="54" height="54">
+      <span>Auramy</span>
     </a>
     <nav class="nav__links" aria-label="Primary">
       <a href="#how">make a mess</a>
@@ -55,14 +57,18 @@
     <!-- HERO -->
     <section class="hero hero--editorial raw-hero" id="top" aria-labelledby="hero-title" data-awake="false">
       <div class="hero-heading">
-        <p class="editorial-kicker">A personal corner of the internet</p>
-        <h1 id="hero-title">your world,<br><em>wide open.</em></h1>
-        <p class="hero-deck">Add the photos, obsessions, and tiny details that make it feel like you.</p>
+        <p class="editorial-kicker">PERSONAL INTERNET / ONLINE</p>
+        <h1 id="hero-title">A little internet.<br><em>A lot of you.</em></h1>
+        <p class="hero-deck">A place for photos, obsessions, notes, and the tiny details your friends actually want to find.</p>
         <form class="claim" data-claim>
           <label class="claim__field"><span class="claim__prefix">aura.my/</span><input name="handle" autocomplete="off" spellcheck="false" maxlength="20" placeholder="yourname" aria-label="Your name"></label>
           <button class="btn btn--ink" type="submit">claim your name <span aria-hidden="true">↗</span></button>
         </form>
       </div>
+      <figure class="hero-monitor">
+        <img src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt="Auramy's smiling yellow computer monitor logo" width="1254" height="1254" fetchpriority="high">
+        <figcaption><span>●</span> YOUR CORNER IS ON</figcaption>
+      </figure>
       <div class="hero-collage" aria-label="A personal internet, straight from the camera roll">
         <figure class="hero-memory raw-post">
           <img src="/assets/img/editorial/raw-friends.jpg" alt="Three friends pulling goofy expressions in a close-up wide-angle snapshot" width="1536" height="1024">
@@ -253,9 +259,9 @@
             <p class="lock-phone__date">Friday, October 2</p>
             <p class="lock-phone__time">9:41</p>
             <div class="lock__stack" id="lockStack" data-notify-stack aria-live="off">
-              <div class="ntf"><span class="ntf__ico"><img src="/assets/img/app-icon-180.png" alt=""></span><b>Auramy</b><small>now</small><p>Eli is looking around your world 👀</p></div>
-              <div class="ntf is-old"><span class="ntf__ico"><img src="/assets/img/app-icon-180.png" alt=""></span><b>Auramy</b><small>3m ago</small><p>Ava saved your song for later</p></div>
-              <div class="ntf is-old"><span class="ntf__ico"><img src="/assets/img/app-icon-180.png" alt=""></span><b>Auramy</b><small>7m ago</small><p>Jay found the tiny camera roll</p></div>
+              <div class="ntf"><span class="ntf__ico"><img src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt=""></span><b>Auramy</b><small>now</small><p>Eli is looking around your world 👀</p></div>
+              <div class="ntf is-old"><span class="ntf__ico"><img src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt=""></span><b>Auramy</b><small>3m ago</small><p>Ava saved your song for later</p></div>
+              <div class="ntf is-old"><span class="ntf__ico"><img src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt=""></span><b>Auramy</b><small>7m ago</small><p>Jay found the tiny camera roll</p></div>
             </div>
             <i class="lock-phone__home" aria-hidden="true"></i>
           </div>
@@ -307,45 +313,6 @@
       </div>
     </section>
 
-    <!-- FOR -->
-    <section class="sec for" id="for" aria-labelledby="for-title">
-      <div class="wrap">
-        <div class="for__head reveal">
-          <p class="stamp">make one for the lore</p>
-          <h2 id="for-title" class="h2">one for you.<br>one for your <em class="rotator" data-rotator="best friend.|band.|group chat.|summer.">best friend.</em></h2>
-        </div>
-        <div class="site-preview-grid" data-site-previews aria-label="Four different kinds of personal websites"></div>
-      </div>
-    </section>
-
-    <!-- HOME: a personal website as a place your link can open -->
-    <section class="sec safe homecoming" id="safe" aria-labelledby="safe-title">
-      <div class="wrap homecoming__layout">
-        <header class="homecoming__copy reveal">
-          <p class="stamp">no appointment needed</p>
-          <h2 id="safe-title" class="h2">come on<br><em>in.</em></h2>
-          <p class="lede">A public little home for your collections, current obsessions, and all the stuff that makes a link feel alive.</p>
-          <p class="homecoming__note">leave the door weirdly decorated.</p>
-        </header>
-        <div class="homecoming__browser" aria-label="A browser view of Mia's personal home">
-          <div class="homecoming__bar"><span class="homecoming__dots" aria-hidden="true"><i></i><i></i><i></i></span><b>mia’s internet home</b><span>⌁</span></div>
-          <div class="homecoming__room">
-            <div class="homecoming__window"><span>mia’s<br>corner</span><i aria-hidden="true">✦</i></div>
-            <div class="homecoming__plant" aria-hidden="true"><i></i><i></i><i></i><b></b></div>
-            <p class="homecoming__hello">hello!!<br><small>have a look around</small></p>
-            <div class="homecoming__shelf" aria-label="Mia's collections">
-              <a href="#play" class="homecoming__album"><img src="/assets/img/albums/pretty-sad.jpg" alt="An album from Mia's shelf"><span>on repeat</span></a>
-              <a href="#made" class="homecoming__photo"><img src="/assets/img/editorial/raw-mirror.jpg" alt="A snapshot from Mia's collection"><span>tiny camera roll</span></a>
-              <a href="#spaces" class="homecoming__book"><i>3:45</i><span>beat this score</span></a>
-            </div>
-            <p class="homecoming__guestbook">guestbook<br><i>signed by jay ✎</i></p>
-            <span class="homecoming__cursor" aria-hidden="true">↖</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
     <!-- CLAIM -->
     <section class="sec claimsec" id="claim" aria-labelledby="claim-title">
       <div class="claimsec__aura" aria-hidden="true"></div>
@@ -365,10 +332,10 @@
 
   <footer class="foot">
     <div class="wrap foot__grid">
-      <img src="/assets/logo/auramy-wordmark-paper.svg" alt="Auramy" width="170" height="32">
+      <a class="foot__logo" href="/"><img src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt="" width="58" height="58"><span>Auramy</span></a>
       <nav aria-label="Footer">
         <a href="/brand">brand kit</a>
-        <a href="#safe">make yourself at home</a>
+        <a href="#notify">found you again</a>
         <a href="#claim">claim your name ↗</a>
         <a href="mailto:hello@aura.my">say hi</a>
       </nav>
@@ -380,6 +347,6 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script type="module" src="/assets/js/landing.js?v=calm-7"></script>
+  <script type="module" src="/assets/js/landing.js?v=materials-8"></script>
 </body>
 </html>
