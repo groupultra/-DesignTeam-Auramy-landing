@@ -1,122 +1,137 @@
 import { PERSONAS, ORDER, personaAvatar } from './personas.js';
-import { signatureMarkup, bindSignatures } from './persona-sites.js?v=personas-1';
+import { signatureMarkup, bindSignatures } from './persona-sites.js?v=early-web-1';
 
-// Each persona already lives on a different app. The link in their bio opens the
-// signature part of their Auramy world (a simplified section of their template).
-const PROFILES = {
-  camila: { app: 'gram', from: 'instagram', handle: 'cami.ortg', counts: ['214', '612', '588'], bio: 'san diego → boston 🌵 birthday edits on request 🎂', link: 'the cast + birthday reel', grid: ['fries', 'pool', 'beach'] },
-  maddie: { app: 'cf', from: 'instagram close friends', handle: 'mads.cf', scene: 'earbuds', caption: 'drive home playlist is up. you know who you are', link: 'aura.my/maddie' },
-  marcus: { app: 'snap', from: 'snapchat team chat', handle: 'EAGLES 🦅 · 40', scene: 'table', caption: 'whole team on one page. seniors top row.', link: 'aura.my/eagles-wr-room' },
-  jayden: { app: 'discord', from: 'discord', handle: 'jxyden', display: 'j4y', status: 'playing roblox (after 9 only)', about: 'beat my 88. i dare you.', roles: ['squad vc', 'jv hoops', '2k26'], link: 'open the lobby' },
-  river: { app: 'carrd', from: 'carrd · tumblr bio', handle: 'river ☾', sub: 'they/them · 15 · minors dni', tags: ['oc artist', 'lowlight (my story)', 'moth enjoyer'], link: 'read this before you follow' },
-  theo: { app: 'lbxd', from: 'letterboxd', handle: 'theo', films: '212 films this year', favs: ['paris, texas', 'in the mood for love', 'aftersun', 'dazed and confused'], bio: 'they rotate. these are load-bearing.', link: 'the four, explained' },
-  aaliyah: { app: 'depop', from: 'depop shop', handle: 'aaliyahsnack', reviews: '★★★★★ (212)', bio: 'flips + press-ons from newark. book nails on my site ↓', link: 'aura.my/aaliyah.nails', items: [['jacket', '$38', 'navy track jacket'], ['cobalt', '$25', 'cobalt french set'], ['client', '$30', 'floral overlay']] },
-};
-
+// Each persona's link lives on the app they already use. Every screen should be
+// recognisable from its interface alone; the link opens the signature part of their world.
+const P = PERSONAS;
+const ph = (name, fill = false) => `<i class="${fill ? 'ph-fill' : 'ph'} ph-${name}" aria-hidden="true"></i>`;
 const img = (src, alt = '') => `<img src="${src}" alt="${alt}" loading="lazy" decoding="async">`;
-const av = (id, cls = '') => `<img class="av ${cls}" src="${personaAvatar(id)}" alt="" width="80" height="80" decoding="async">`;
-const openBtn = (cls, inner, label) => `<button type="button" class="${cls}" data-open-site aria-expanded="false"${label ? ` aria-label="${label}"` : ''}>${inner}</button>`;
+const status = (dark = false) => `<div class="app__status${dark ? ' app__status--dark' : ''}" aria-hidden="true"><b>9:41</b><span>${ph('cell-signal-full', true)}${ph('wifi-high', true)}${ph('battery-full', true)}</span></div>`;
+const link = (cls, inner, label) => `<button type="button" class="${cls}" data-open-site aria-expanded="false"${label ? ` aria-label="${label}"` : ''}>${inner}</button>`;
 
-const fronts = {
-  gram: (id, p, f) => `<div class="social-profile__chrome social-profile__chrome--gram"><span aria-hidden="true">‹</span><b>${f.handle}</b><span aria-hidden="true">•••</span></div>
-    <section class="social-profile__front social-profile__front--gram" aria-label="${p.name}'s Instagram profile">
-      <div class="social-profile__identity">${av(id, 'social-profile__avatar')}<div class="social-profile__counts"><span><b>${f.counts[0]}</b> posts</span><span><b>${f.counts[1]}</b> followers</span><span><b>${f.counts[2]}</b> following</span></div></div>
-      <div class="social-profile__bio"><b>${p.name.toLowerCase()}</b><p>${f.bio}</p>${openBtn('social-profile__link', `${p.url}<small>${f.link} ↗</small>`)}</div>
-      <button class="social-profile__follow" type="button" data-follow aria-pressed="false">follow</button>
-      <div class="social-profile__tabs" aria-hidden="true"><span>▦</span><span>⌑</span></div><div class="social-profile__photos">${f.grid.map((k) => img(p.photos[k])).join('')}</div>
-    </section>`,
+const screens = {
+  // TikTok profile
+  camila: () => `<div class="app__front tt" aria-label="Camila's TikTok profile">
+    ${status()}
+    <div class="tt__top">${ph('user-plus')}<b>Cami ${ph('caret-down', true)}</b>${ph('list')}</div>
+    <img class="tt__avatar" src="${personaAvatar('camila')}" alt="" width="96" height="96">
+    <p class="tt__handle">@camicuts</p>
+    <ul class="tt__stats"><li><b>88</b>Following</li><li><b>12.4K</b>Followers</li><li><b>301.2K</b>Likes</li></ul>
+    <div class="tt__btns"><button type="button" class="tt__follow" data-follow aria-pressed="false">Follow</button><span class="tt__ghost">${ph('paper-plane-tilt')}</span><span class="tt__ghost">${ph('caret-down', true)}</span></div>
+    <p class="tt__bio">birthday edits on request 🎂 sd → boston</p>
+    ${link('tt__link', `${ph('link-simple')}aura.my/cami`)}
+    <div class="tt__tabs" aria-hidden="true">${ph('squares-four', true)}${ph('lock-simple')}${ph('heart')}</div>
+    <ul class="tt__grid">${[['car', '48.1K', 1], ['grad', '12.4K', 1], ['pool', '9,812'], ['beach', '22.7K'], ['camp', '7,409'], ['bigsur', '5,233']].map(([k, n, pin]) => `<li>${img(P.camila.photos[k])}${pin ? '<em>Pinned</em>' : ''}<span>${ph('play')} ${n}</span></li>`).join('')}</ul>
+  </div>`,
 
-  cf: (id, p, f) => `<section class="social-profile__front pf-story pf-story--cf" aria-label="${p.name}'s close friends story">
-      ${img(p.photos[f.scene], `${p.name}'s close friends story photo`)}
-      <div class="pf-story__top">${av(id)}<b>${f.handle}</b><span>2h</span><em>★ close friends</em></div>
-      <p class="pf-story__caption">${f.caption}</p>
-      ${openBtn('pf-story__sticker', `🔗 <span>${f.link}</span>`, `Open ${f.link}`)}
-    </section>`,
+  // Instagram close friends story
+  maddie: () => `<div class="app__front ig" aria-label="Maddie's close friends story">
+    ${img(P.maddie.photos.earbuds, 'Two pairs of knees sharing wired earbuds')}
+    ${status(true)}
+    <div class="ig__bars" aria-hidden="true"><i class="is-done"></i><i class="is-on"></i><i></i></div>
+    <div class="ig__head"><img src="${personaAvatar('maddie')}" alt="" width="32" height="32"><b>mads.cf</b><span>2h</span><em>${ph('star', true)} Close Friends</em><span class="ig__icons">${ph('dots-three')}${ph('x')}</span></div>
+    <p class="ig__text"><span>drive home playlist is up</span></p>
+    ${link('ig__sticker', `${ph('link-simple')}AURA.MY/MADDIE`, 'Open aura.my/maddie')}
+    <div class="ig__reply" aria-hidden="true"><span>Send message</span>${ph('heart')}${ph('paper-plane-tilt')}</div>
+  </div>`,
 
-  snap: (id, p, f) => `<div class="social-profile__chrome social-profile__chrome--snap"><b>${f.handle}</b><span aria-hidden="true">☰</span></div>
-    <section class="social-profile__front social-profile__front--snap" aria-label="${p.name}'s Snapchat story">
-      <div class="social-profile__story">${img(p.photos[f.scene], 'A photo from the team chat: teammates at a long table after the game')}<div class="social-profile__story-top">${av(id, 'social-profile__avatar')}<span>marcus · 12m</span></div><p>${f.caption}</p>${openBtn('social-profile__sticker', `↗ <span>${f.link}</span>`, `Open ${f.link}`)}</div>
-      <div class="social-profile__snap-strip">${img(p.photos.tyler)}<span>tyler: "good page" (he's lying, he loves it)</span></div>
-    </section>`,
+  // Snapchat story
+  marcus: () => `<div class="app__front sc" aria-label="Marcus's Snapchat story">
+    ${img(P.marcus.photos.table, 'Teammates at a long table after the game')}
+    ${status(true)}
+    <div class="sc__bars" aria-hidden="true"><i></i></div>
+    <div class="sc__head"><img src="${personaAvatar('marcus')}" alt="" width="36" height="36"><span><b>Marcus</b>12m</span>${ph('dots-three-vertical')}</div>
+    <p class="sc__caption">whole team on one page 🦅</p>
+    ${link('sc__attach', `<span class="sc__thumb">${img(P.marcus.photos.team)}</span><span><b>EAGLES · WR ROOM</b>aura.my/eagles-wr-room</span>${ph('caret-up')}`, 'Open aura.my/eagles-wr-room')}
+    <div class="sc__reply" aria-hidden="true">${ph('camera')}<span>Send a chat</span></div>
+  </div>`,
 
-  discord: (id, p, f) => `<section class="social-profile__front pf-discord" aria-label="${p.name}'s Discord profile">
-      <div class="pf-discord__banner"></div>
-      <div class="pf-discord__id">${av(id)}<i aria-hidden="true"></i></div>
-      <div class="pf-discord__card">
-        <b class="pf-discord__name">${f.display}</b><span class="pf-discord__user">${f.handle}</span>
-        <p class="pf-discord__status">🎮 ${f.status}</p>
-        <p class="pf-discord__h">about me</p><p>${f.about}</p>
-        <p class="pf-discord__h">roles</p><ul class="pf-discord__roles">${f.roles.map((r) => `<li>${r}</li>`).join('')}</ul>
-        ${openBtn('pf-discord__link', `${p.url}<small>${f.link} ↗</small>`)}
-      </div>
-    </section>`,
+  // Discord profile
+  jayden: () => `<div class="app__front dc" aria-label="Jayden's Discord profile">
+    <div class="dc__banner"></div>
+    <div class="dc__avatar"><img src="${P.jayden.photos.avatar}" alt="" width="84" height="84"><i></i></div>
+    <div class="dc__card">
+      <b class="dc__name">j4y</b><span class="dc__user">jxyden</span>
+      <p class="dc__activity">${ph('game-controller', true)} Playing Roblox</p>
+      <h5>About me</h5>
+      <p>beat my 88. i dare you.<br>${link('dc__link', 'aura.my/jayden')}</p>
+      <h5>Member since</h5><p>Jun 4, 2024</p>
+      <h5>Roles</h5>
+      <ul class="dc__roles"><li style="--c:#c8ff3d">squad</li><li style="--c:#f47fff">jv hoops</li><li style="--c:#5865f2">2k26</li></ul>
+      <p class="dc__msg">Message @jxyden</p>
+    </div>
+  </div>`,
 
-  carrd: (id, p, f) => `<div class="social-profile__chrome pf-carrd__chrome"><span>${p.short}.carrd</span><span aria-hidden="true">☾</span></div>
-    <section class="social-profile__front pf-carrd" aria-label="${p.name}'s carrd">
-      ${av(id, 'pf-carrd__av')}<h3>${f.handle}</h3><p>${f.sub}</p>
-      <ul class="pf-carrd__tags">${f.tags.map((t) => `<li>${t}</li>`).join('')}</ul>
-      ${openBtn('pf-carrd__link', `<span>✦</span><b>${f.link}</b><i>→</i>`)}
-      <div class="pf-carrd__art">${img(p.photos.pixel, 'A friend’s pixel art of River’s OC, Kite')}</div>
-    </section>`,
+  // Tumblr post on the dashboard
+  river: () => `<div class="app__front tb" aria-label="River's Tumblr post">
+    ${status(true)}
+    <div class="tb__tabs" aria-hidden="true"><span class="is-on">Following</span><span>For you</span><span>Your tags</span></div>
+    <article class="tb__post">
+      <header><img src="${personaAvatar('river')}" alt="" width="32" height="32"><b>riverdraws</b><span class="tb__follow">Follow</span>${ph('dots-three')}</header>
+      ${img(P.river.photos.pixel, 'Pixel art of River’s OC, Kite, running with a map')}
+      <p>kite, courier of lowlight. read my carrd before you follow ☾ ${link('tb__link', 'aura.my/river')}</p>
+      <p class="tb__tags">#oc #original character #lowlight #pixel art #art fight</p>
+      <footer><span>1,204 notes</span><span class="tb__actions">${ph('chat-circle')}${ph('repeat')}${ph('heart')}</span></footer>
+    </article>
+  </div>`,
 
-  lbxd: (id, p, f) => `<div class="social-profile__chrome pf-lbxd__chrome"><span>film diary</span><span aria-hidden="true">≡</span></div>
-    <section class="social-profile__front pf-lbxd" aria-label="${p.name}'s film diary profile">
-      <div class="pf-lbxd__id">${av(id)}<div><b>${f.handle}</b><span>${f.films}</span></div></div>
-      <p class="pf-lbxd__h">favorite films</p>
-      <ol class="pf-lbxd__favs">${f.favs.map((t, i) => `<li style="--h:${[24, 350, 205, 40][i]}"><span>${t}</span></li>`).join('')}</ol>
-      <p class="pf-lbxd__bio">${f.bio}</p>
-      ${openBtn('pf-lbxd__link', `${p.url}<small>${f.link} ↗</small>`)}
-    </section>`,
+  // Letterboxd profile
+  theo: () => `<div class="app__front lb" aria-label="Theo's Letterboxd profile">
+    ${status(true)}
+    <div class="lb__top">${ph('caret-left')}<b>theo</b>${ph('dots-three')}</div>
+    <div class="lb__id"><img src="${personaAvatar('theo')}" alt="" width="56" height="56"><div><b>theo</b>${link('lb__link', `${ph('link-simple')}aura.my/theo`)}</div></div>
+    <ul class="lb__stats"><li><b>212</b>Films</li><li><b>34</b>This year</li><li><b>5</b>Lists</li><li><b>98</b>Followers</li></ul>
+    <p class="lb__bio">taste is just paying attention.</p>
+    <h5>Favorite films</h5>
+    <ol class="lb__favs">${[['paris, texas', 24], ['in the mood for love', 352], ['aftersun', 200], ['dazed and confused', 40]].map(([t, h]) => `<li style="--h:${h}"><span>${t}</span></li>`).join('')}</ol>
+    <h5>Recent activity</h5>
+    <ul class="lb__recent">${[['marty supreme', '★★★★', 1], ['aftersun', '★★★★★', 0], ['dazed and confused', '★★★★½', 1]].map(([t, r, liked]) => `<li><b>${t}</b><span>${r}</span>${liked ? ph('heart', true) : ''}</li>`).join('')}</ul>
+  </div>`,
 
-  depop: (id, p, f) => `<div class="social-profile__chrome pf-depop__chrome"><span aria-hidden="true">‹</span><b>@${f.handle}</b><span aria-hidden="true">♡</span></div>
-    <section class="social-profile__front pf-depop" aria-label="${p.name}'s Depop shop">
-      <div class="pf-depop__id">${av(id)}<div><b>${p.name.toLowerCase()}</b><span>${f.reviews}</span></div></div>
-      <p class="pf-depop__bio">${f.bio}</p>
-      ${openBtn('pf-depop__link', `${f.link}<small>the menu + request a set ↗</small>`)}
-      <ul class="pf-depop__grid">${f.items.map(([k, price, label]) => `<li>${img(p.photos[k], label)}<b>${price}</b></li>`).join('')}</ul>
-    </section>`,
+  // Depop shop
+  aaliyah: () => `<div class="app__front dp" aria-label="Aaliyah's Depop shop">
+    ${status()}
+    <div class="dp__top">${ph('caret-left')}<b>aaliyahsnack</b>${ph('share-network')}</div>
+    <div class="dp__id"><img src="${personaAvatar('aaliyah')}" alt="" width="64" height="64"><div><b>Aaliyah</b><span class="dp__stars">★★★★★ <em>(212)</em></span><span class="dp__meta">Active today · Newark, NJ</span></div></div>
+    <p class="dp__bio">flips + press-ons. book nails on my site ↓</p>
+    ${link('dp__link', `${ph('link-simple')}aura.my/aaliyah.nails`)}
+    <div class="dp__btns"><button type="button" class="dp__follow" data-follow aria-pressed="false">Follow</button><span class="dp__msg">Message</span></div>
+    <div class="dp__tabs" aria-hidden="true"><span class="is-on">Shop</span><span>Likes</span></div>
+    <ul class="dp__grid">${[['vintage', '$38'], ['track', '$34', 1], ['cherry', '$25'], ['charms', '$12'], ['cobalt', '$25', 1], ['client', '$30']].map(([k, price, sold]) => `<li>${img(P.aaliyah.photos[k])}${sold ? '<em>Sold</em>' : `<b>${price}</b>`}</li>`).join('')}</ul>
+  </div>`,
 };
 
-const profileMarkup = (id) => {
-  const p = PERSONAS[id];
-  const f = PROFILES[id];
-  return `<article class="made-card social-profile pf pf--${f.app}" style="--profile-color:${p.color}" data-profile="${id}">
-    <p class="pf__from"><b>${p.name}</b> · from ${f.from}</p>
-    ${fronts[f.app](id, p, f)}
-    <section class="social-profile__site" aria-label="${p.name}'s Auramy world" hidden>
-      <button class="social-profile__back" type="button" data-close-site>← back to ${f.from}</button>
-      ${signatureMarkup(id)}
-    </section>
-  </article>`;
-};
+const card = (id, i) => `<article class="app app--${id}" data-profile="${id}" style="--i:${i}">
+  ${screens[id]()}
+  <section class="app__site" aria-label="${P[id].name}'s Auramy world" hidden>
+    <button class="app__back" type="button" data-close-site>${ph('caret-left')} back</button>
+    ${signatureMarkup(id)}
+  </section>
+</article>`;
 
 export function renderMade(row) {
   if (!row) return;
-  row.innerHTML = ORDER.map(profileMarkup).join('');
+  row.innerHTML = ORDER.map(card).join('');
   bindSignatures(row);
   if (row.dataset.socialProfileBound) return;
   row.dataset.socialProfileBound = 'true';
   row.addEventListener('click', (event) => {
-    const card = event.target.closest('.social-profile');
-    if (!card) return;
+    const app = event.target.closest('.app');
+    if (!app) return;
     const follow = event.target.closest('[data-follow]');
     if (follow) {
       const following = follow.getAttribute('aria-pressed') === 'true';
       follow.setAttribute('aria-pressed', String(!following));
-      follow.textContent = following ? 'follow' : 'following';
+      follow.textContent = following ? 'Follow' : 'Following';
       return;
     }
     const opening = Boolean(event.target.closest('[data-open-site]'));
     const closing = event.target.closest('[data-close-site]');
     if (!opening && !closing) return;
-    const front = card.querySelector('.social-profile__front');
-    const site = card.querySelector('.social-profile__site');
-    const chrome = card.querySelector('.social-profile__chrome');
-    front.hidden = opening;
-    if (chrome) chrome.hidden = opening;
-    site.hidden = !opening;
-    card.classList.toggle('is-site-open', opening);
-    card.querySelector('[data-open-site]').setAttribute('aria-expanded', String(opening));
-    (opening ? card.querySelector('[data-close-site]') : card.querySelector('[data-open-site]')).focus();
+    app.querySelector('.app__front').hidden = opening;
+    app.querySelector('.app__site').hidden = !opening;
+    app.classList.toggle('is-open', opening);
+    app.querySelector('[data-open-site]').setAttribute('aria-expanded', String(opening));
+    (opening ? app.querySelector('[data-close-site]') : app.querySelector('[data-open-site]')).focus();
   });
 }

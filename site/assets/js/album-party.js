@@ -17,14 +17,14 @@ export function initAlbumParty(root) {
   let closed = false;
 
   root.innerHTML = `
-    <p class="album-party__eyebrow">the group chat is listening</p>
+    <p class="album-party__eyebrow">▶ now playing in pearl (maddie's car)</p>
     <div class="album-party__covers" aria-label="Choose an album">${ALBUMS.map((album, index) => `
       <button class="album-party__cover" type="button" data-album-index="${index}" aria-label="${album.title} by ${album.artist}. ${index === 0 ? 'Selected; tap again to like it.' : 'Select this album.'}">
         <img src="${album.cover}" alt="" width="600" height="600">
       </button>`).join('')}</div>
-    <div class="album-party__now"><p>now in the room</p><h4 data-album-title></h4><span data-album-artist></span></div>
-    <p class="album-party__likes"><b data-album-likes>38</b> hearts are in this room <span aria-hidden="true">♥</span></p>
-    <p class="album-party__hint">tap a cover to choose it. tap it again to send love.</p>
+    <div class="album-party__now"><h4 data-album-title></h4><span data-album-artist></span></div>
+    <p class="album-party__likes"><span aria-hidden="true">♥</span> <b data-album-likes>38</b></p>
+    <p class="album-party__hint">tap a cover. tap again to send love.</p>
     <p class="album-party__live" role="status" aria-live="polite" data-album-live></p>`;
 
   const covers = [...root.querySelectorAll('[data-album-index]')];

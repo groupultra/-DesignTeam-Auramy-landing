@@ -1,4 +1,4 @@
-import { homeMarkup, mountHome } from './persona-sites.js?v=personas-1';
+import { homeMarkup, mountHome } from './persona-sites.js?v=early-web-1';
 
 const clamp = (value) => Math.min(1, Math.max(0, value));
 const ease = (value) => value * value * (3 - 2 * value);
@@ -85,13 +85,13 @@ export function initScrollReveal(root) {
       (previousProgress < point && progress >= point) || (previousProgress > point && progress <= point))) glitch();
     previousProgress = progress;
 
-    const nextNote = staticView ? 'less motion. still very you.' : progress >= 0.995 ? 'oh. there you are. ↗' : progress > 0.14 ? 'personality.exe is starting…' : 'keep scrolling. this gets better. ↓';
+    const nextNote = staticView ? '' : progress >= 0.995 ? 'loaded. hi maddie ☺' : `loading the real stuff… ${Math.round(progress * 100)}%`;
     if (note && nextNote !== currentNote) { note.textContent = nextNote; currentNote = nextNote; }
 
     const nextComplete = progress >= 0.995;
     if (nextComplete !== complete) {
       complete = nextComplete;
-      if (status) status.textContent = complete ? 'The link list has been removed. Your interactive scrapbook is ready to explore.' : 'Keep scrolling to reveal the personal scrapbook.';
+      if (status) status.textContent = complete ? 'The link list is gone. Maddie’s close-friends page is ready to explore.' : 'Keep scrolling to reveal Maddie’s close-friends page.';
     }
     syncWorld();
   }

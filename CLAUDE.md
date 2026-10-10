@@ -23,19 +23,17 @@
 - `site/assets/css/last-calm.css`：此前的可读性与手机调整。
 - `site/assets/js/landing.js`：初始化和主交互。
 - `worlds-scroll.js`、`how-scroll.js`、`ending-scenes.js`：世界滚动切换、步骤演示、访客轮播和通知。
-- `made.js`、`for-previews.js`：社交资料卡和资料卡打开的示例网站。虽已删除 `#for` 区块，`for-previews.js` 仍被复用。
+- `made.js`：7 个平台截图（TikTok、Close Friends、Snapchat、Discord、Tumblr、Letterboxd、Depop）及其打开的模板区块。
 
-## 必须保留的设计决定
+## 必须保留的设计决定（early-web 版本，分支 `claude/auramy-early-web`）
 
-- Logo 是奶油色拟物电脑外壳、蓝色 LED 屏、手绘黄色笑脸和像素鼠标手；运行文件为 `site/assets/img/brand/auramy-monitor.jpg`，必须保持正方形比例。
-- 页面融合奶油塑料、纸张、金属与唱片等材质，正文和大标题仍须易读；保留真人、宠物、OC、表格和不同人设网站的多样性。
-- 已删除 “Come on in” (`#safe`) 和 “One for you / your best friend” (`#for`)；不要恢复。
-- Play 是四张连续普通卡片；不要改回 TikTok 式嵌套滚动。
-- Worlds 是一部手机随页面滚动切换五种内容，底部菜单同步；不要改回横向手机 carousel。
-- 步骤区是一部手机，通过 Next/Back 切换；不要加回大手或手指。
-- 通知区保持生活照片轮播，右下为 iOS 锁屏手机和持续通知。
-- 避免闪烁碎片、强 glitch 和过多小号手写字；保留暂停与 `prefers-reduced-motion` 支持。
-- 改 CSS 时检查 `.calm-page.raw-page` 等旧高优先级规则。旧层叠曾造成图片拉伸、伪元素失效和文字对比度问题。
+- 视觉从 Logo 出发：LED 蓝屏点阵、蜡笔黄笑脸、奶油塑料、像素光标；界面借用 Windows XP Luna（蓝色标题栏、米色对话框、黄色气泡提示），涂鸦是蓝色圆珠笔线。
+- 不要孟菲斯式粗黑描边；边框用 1px，阴影偏蓝且柔和。首页不放大 Logo，Logo 只在导航和页脚小尺寸出现，并保持正方形。
+- 早期互联网的高饱和色（粉、荧光绿、青）只做小点缀，不能比内容抢眼；“make it weird” 是唯一的大开关，必须可点、可还原。
+- 文案要短：每个区块一个标题、最多一行副标题。人设靠他们网站里的内容区分，不靠解释段落。社媒截图靠界面本身让人认出平台，不写“来自某平台”。
+- 结构：Hero 桌面（三个主角窗口 + 其余四人桌面图标）、`#vs`（Maddie）、`#spaces`（单手机随滚动切换 7 个模板，XP 任务栏同步）、`#made`（7 个平台截图）、`#how`（XP 安装向导，Back/Next）、`#play`（四个窗口，正常文档流）、`#notify`、`#aura`、`#claim`。
+- 保留暂停与 `prefers-reduced-motion`；glitch 只在 weird 模式里轻微出现，不做闪烁。
+- 页面只加载 `early-web.css` 和 `persona-sites.css`；旧 CSS 文件仍在仓库里但首页不再引用。
 
 ## 验证与协作
 

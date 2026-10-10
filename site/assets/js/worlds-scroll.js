@@ -1,21 +1,7 @@
-import { PERSONAS, ORDER } from './personas.js';
-import { homeMarkup, mountHome } from './persona-sites.js?v=personas-1';
+import { PERSONAS, ORDER, personaAvatar } from './personas.js';
+import { homeMarkup, mountHome } from './persona-sites.js?v=early-web-1';
 
-const HINTS = {
-  camila: 'Tap a clip on the timeline. Her friends drop the rest.',
-  maddie: 'Close friends only. Hit drive → and the windshield clears.',
-  marcus: 'Scoreboard up top, the team chat underneath. Lock in.',
-  jayden: 'No about-me. Just the board. Try to beat his 88.',
-  river: 'A porch at night. Flip the light and see who shows up.',
-  theo: 'Tap the screen for the next subtitle. It’s a slow burn.',
-  aaliyah: 'Try a nail shape, then request a set.',
-};
-const WORLDS = ORDER.map((id) => ({
-  id,
-  label: PERSONAS[id].name,
-  title: PERSONAS[id].template,
-  hint: `<b>${PERSONAS[id].template}</b> · ${PERSONAS[id].url} — ${HINTS[id]}`,
-}));
+const WORLDS = ORDER.map((id) => ({ id, label: PERSONAS[id].name, ...PERSONAS[id] }));
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 
@@ -31,30 +17,37 @@ export function initWorldsScroll(root) {
     <div class="worlds-scroll__pin" data-worlds-pin>
       <div class="worlds-scroll__layout">
         <header class="worlds-scroll__head">
-          <p class="worlds-scroll__kicker">seven people · seven templates</p>
-          <h2 id="${prefix}-title">Same app.<br>Not the same world.</h2>
-          <p data-worlds-instruction>Scroll to explore. Tap a name to jump.</p>
+          <h2 class="sec-title" id="${prefix}-title">Whoever you are,<br><em>there’s a world for it.</em></h2>
+          <div class="worlds-scroll__who" data-worlds-who aria-live="polite">
+            <p class="worlds-scroll__name"><img data-who-avatar src="" alt="" width="44" height="44"><span><b data-who-name></b><small data-who-meta></small></span></p>
+            <p class="worlds-scroll__for">made for <em data-who-for></em></p>
+            <p class="worlds-scroll__line" data-who-line></p>
+          </div>
         </header>
         <div class="worlds-scroll__stage">
           <div class="phone worlds-scroll__phone">
             <div class="screen worlds-scroll__screen" id="${prefix}-panel" role="tabpanel" aria-live="off" data-off="1" inert></div>
           </div>
-          <div class="worlds-scroll__tabs" role="tablist" aria-label="Choose a world">
-            ${WORLDS.map((world, index) => `<button type="button" role="tab" id="${prefix}-tab-${world.id}" aria-controls="${prefix}-panel" aria-selected="${index === 0 ? 'true' : 'false'}" tabindex="${index === 0 ? '0' : '-1'}" data-world-index="${index}">${world.label}</button>`).join('')}
-          </div>
-          <p class="worlds-scroll__hint" data-worlds-hint></p>
+          <p class="worlds-scroll__url" data-who-url aria-hidden="true"></p>
         </div>
       </div>
-      <p class="worlds-scroll__progress" aria-hidden="true"><b data-worlds-count>1 / ${WORLDS.length}</b><span>keep scrolling to change worlds ↓</span></p>
+      <div class="worlds-scroll__tabs" role="tablist" aria-label="Choose a world">
+        ${WORLDS.map((world, index) => `<button type="button" role="tab" id="${prefix}-tab-${world.id}" aria-controls="${prefix}-panel" aria-selected="${index === 0 ? 'true' : 'false'}" tabindex="${index === 0 ? '0' : '-1'}" data-world-index="${index}"><img src="${personaAvatar(world.id)}" alt="" width="20" height="20"><span>${world.label}</span></button>`).join('')}
+      </div>
     </div>`;
 
   const abort = new AbortController();
   const { signal } = abort;
   const screen = root.querySelector('[data-off]');
   const tabs = [...root.querySelectorAll('[role="tab"]')];
-  const hint = root.querySelector('[data-worlds-hint]');
-  const count = root.querySelector('[data-worlds-count]');
-  const instruction = root.querySelector('[data-worlds-instruction]');
+  const who = {
+    avatar: root.querySelector('[data-who-avatar]'),
+    name: root.querySelector('[data-who-name]'),
+    meta: root.querySelector('[data-who-meta]'),
+    madeFor: root.querySelector('[data-who-for]'),
+    line: root.querySelector('[data-who-line]'),
+    url: root.querySelector('[data-who-url]'),
+  };
   const motionFallback = matchMedia('(prefers-reduced-motion: reduce), (max-height: 640px)');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   let active = -1;
@@ -69,10 +62,6 @@ export function initWorldsScroll(root) {
   const isManual = () => motionFallback.matches;
   const shouldAvoidSmoothScroll = () => reducedMotion.matches || document.body.classList.contains('is-motion-paused');
   const range = () => Math.max(1, root.offsetHeight - window.innerHeight);
-
-  function syncInstruction() {
-    instruction.textContent = isManual() ? 'Tap a name to explore.' : 'Scroll to explore. Tap a name to jump.';
-  }
 
   function unmount() {
     if (mounted < 0) return;
@@ -108,8 +97,12 @@ export function initWorldsScroll(root) {
       tab.tabIndex = selected ? 0 : -1;
     });
     screen.setAttribute('aria-labelledby', tabs[active].id);
-    hint.innerHTML = world.hint;
-    count.textContent = `${active + 1} / ${WORLDS.length}`;
+    who.avatar.src = personaAvatar(world.id);
+    who.name.textContent = world.name;
+    who.meta.textContent = world.meta;
+    who.madeFor.textContent = world.madeFor;
+    who.line.textContent = world.line;
+    who.url.textContent = `${world.url} · ${world.template}`;
     syncWorld();
   }
 
@@ -177,7 +170,6 @@ export function initWorldsScroll(root) {
   document.addEventListener('visibilitychange', syncWorld, { signal });
   motionFallback.addEventListener('change', () => {
     lockTo = null;
-    syncInstruction();
     if (!isManual()) scheduleScroll();
   }, { signal });
 
@@ -190,7 +182,6 @@ export function initWorldsScroll(root) {
   observer.observe(screen);
 
   select(0);
-  syncInstruction();
   if (!isManual()) scheduleScroll();
 
   return () => {

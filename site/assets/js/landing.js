@@ -1,19 +1,18 @@
 import { auraFor, prefersReducedMotion } from './aura.js';
-import { injectSprite, pic, blobAvatar } from './sprite.js';
-import { renderHow, MIA } from './spaces.js';
-import { mountHow } from './interact.js?v=calm-7';
+import { injectSprite, blobAvatar } from './sprite.js';
 import { PEOPLE, avatar } from './people.js';
-import { renderMade } from './made.js';
-import { renderPeople } from './people-stories.js?v=personas-1';
-import { initWorldsScroll } from './worlds-scroll.js?v=calm-7';
-import { initScrollReveal } from './scroll-reveal.js?v=calm-7';
-import { initHowScroll } from './how-scroll.js?v=calm-7';
-import { initAlbumParty } from './album-party.js?v=calm-7';
-import { renderHeroSitePreviews } from './site-previews.js';
-import { initEndingScenes } from './ending-scenes.js?v=materials-8';
+import { renderMade } from './made.js?v=early-web-1';
+import { initWorldsScroll } from './worlds-scroll.js?v=early-web-1';
+import { initScrollReveal } from './scroll-reveal.js?v=early-web-1';
+import { initAlbumParty } from './album-party.js?v=early-web-1';
+import { initEndingScenes } from './ending-scenes.js?v=early-web-1';
+import { injectDoodles } from './doodles.js';
+import { initHeroDesktop, initWeird } from './hero-desktop.js?v=early-web-1';
+import { initSetupWizard } from './setup-wizard.js?v=early-web-1';
 
 document.documentElement.classList.add('js');
 injectSprite();
+injectDoodles();
 
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -85,10 +84,6 @@ function whileVisible(el, start, stop, threshold = 0.25, ambient = true) {
   };
 }
 
-/* ───────── static fills ───────── */
-$$('[data-pic]').forEach((el) => (el.innerHTML = pic(el.dataset.pic)));
-$$('[data-blob]').forEach((el) => (el.innerHTML = blobAvatar(['#8B6CFF', '#FF8FC0', '#5CE1E6'], { mood: 'wink' })));
-
 /* ───────── reveal + nav ───────── */
 const io = new IntersectionObserver((entries) => entries.forEach((e) => e.isIntersecting && (e.target.classList.add('is-in'), io.unobserve(e.target))), { threshold: 0.15 });
 $$('.reveal').forEach((el) => io.observe(el));
@@ -134,21 +129,28 @@ function toast(html, ms = 3200) {
   toastT = setTimeout(() => toastEl.classList.remove('is-on'), ms);
 }
 
+/* ───────── hero desktop + make it weird ───────── */
+initHeroDesktop($('[data-desktop]'));
+initWeird($('[data-weird-toggle]'), $('#top'));
+
+/* ───────── setup wizard ───────── */
+const wizard = initSetupWizard($('[data-wizard]'), {
+  toast,
+  onName: (value) => { claimInputs().forEach((input) => { input.value = value; }); updatePreview(value); },
+});
+
 /* ───────── name preview + claim ───────── */
-renderHeroSitePreviews($('.hero-collage'));
-const heroPreview = $('#heroPreview');
 const claimInputs = () => $$('[data-claim] input[name="handle"]');
 function updatePreview(raw) {
-  const name = raw.trim().slice(0, 16).toLowerCase() || 'you';
   const { handle } = auraFor(raw.trim() || 'you');
-  $$('[data-preview-name]').forEach((el) => { el.textContent = name; });
-  $$('[data-preview-handle], [data-live-handle]').forEach((el) => { el.textContent = handle; });
+  $$('[data-preview-handle]').forEach((el) => { el.textContent = handle; });
 }
 updatePreview(claimInputs()[0]?.value || '');
 document.addEventListener('input', (event) => {
   const input = event.target.closest?.('[data-claim] input[name="handle"]');
   if (!input) return;
   claimInputs().forEach((other) => { if (other !== input) other.value = input.value; });
+  wizard.setName?.(input.value);
   updatePreview(input.value);
 });
 document.addEventListener('submit', (e) => {
@@ -164,102 +166,11 @@ document.addEventListener('submit', (e) => {
   }
   updatePreview(value);
   const { handle } = auraFor(value);
-  toast(`Preview ready for <b>${handle}</b> — name claiming is coming soon.`, 4800);
+  toast(`<b>${handle}</b> is saved as a preview. Claiming names opens soon.`, 4800);
 });
 
-if (heroPreview) {
-  const themes = ['lime', 'pink', 'blue'];
-  const remix = $('[data-preview-theme]');
-  let theme = Math.max(0, themes.indexOf(heroPreview.dataset.theme));
-  heroPreview.dataset.theme = themes[theme];
-  const labelRemix = () => remix?.setAttribute('aria-label', `Remix preview. Current color: ${themes[theme]}.`);
-  labelRemix();
-  remix?.addEventListener('click', () => {
-    theme = (theme + 1) % themes.length;
-    heroPreview.dataset.theme = themes[theme];
-    labelRemix();
-    if (!reduced && !document.body.classList.contains('is-motion-paused') && !document.hidden) {
-      heroPreview.animate(
-        [{ scale: 1 }, { scale: 1.025 }, { scale: 1 }],
-        { duration: 360, easing: 'cubic-bezier(.34,1.56,.64,1)' },
-      );
-    }
-  });
-}
-
-/* A deliberately bounded, explicit remix control. It never starts ambient
-   glitching or movement; it only swaps the hero's quiet color wash. */
-{
-  const remix = $('[data-chaos]');
-  const hero = $('.raw-hero');
-  const mood = $('[data-mood-stamp]');
-  remix?.addEventListener('click', () => {
-    const remixed = hero?.dataset.remixed !== 'true';
-    if (hero) hero.dataset.remixed = String(remixed);
-    if (mood) mood.textContent = remixed ? 'soft remix, still you.' : 'posting this anyway.';
-    remix.setAttribute('aria-pressed', String(remixed));
-  });
-}
-
-/* ───────── scroll-led reveal + scrappy section details ───────── */
+/* ───────── links → Maddie's world ───────── */
 initScrollReveal($('#vs'));
-renderPeople($('[data-people]'));
-
-/* ───────── how it works: four inline, playable steps ───────── */
-{
-  const steps = $$('[data-how-step]');
-  const howRoot = $('#how');
-  const howScroll = initHowScroll(howRoot);
-  const next = (i) => {
-    const behavior = reduced ? 'auto' : 'smooth';
-    howScroll.goToStep(i < steps.length - 1 ? i + 1 : 0, behavior);
-  };
-  $$('[data-how-panel]').forEach((mini) => {
-    const step = mini.closest('[data-how-step]');
-    mini.innerHTML = renderHow(mini.dataset.screen);
-    mountHow(mini.dataset.screen, $('.sp', mini), () => next(+step.dataset.step));
-  });
-  const nameInput = $('[data-how-panel][data-screen="hi"] [data-name]');
-  const sharePanel = $('[data-how-panel][data-screen="share"]');
-  const syncShareIdentity = () => {
-    const name = nameInput?.value.trim() || 'mia';
-    const aura = auraFor(name);
-    const handle = aura?.handle || 'mia';
-    $('.bub--card .og b', sharePanel).textContent = name.toLowerCase();
-    $('.bub--card .bub__meta b', sharePanel).textContent = `${name.toLowerCase()}'s space`;
-    $('.bub--card .bub__meta span', sharePanel).textContent = `aura.my/${handle} · tap to open`;
-  };
-  nameInput?.addEventListener('input', syncShareIdentity);
-  syncShareIdentity();
-  // All four screens stay mounted, and this small snapshot also lets a reload
-  // keep the name, picks, and in-progress answers from the same browser tab.
-  const howStateKey = 'auramy-how-session-v1';
-  const snapshot = () => Object.fromEntries($$('[data-how-panel]').map((panel) => [panel.dataset.screen, {
-    fields: $$('input', panel).map((field) => field.value),
-    pressed: $$('[aria-pressed]', panel).map((button) => button.getAttribute('aria-pressed') === 'true'),
-    selected: $$('button', panel).map((button) => button.classList.contains('on')),
-  }]));
-  const persist = () => { try { sessionStorage.setItem(howStateKey, JSON.stringify(snapshot())); } catch { /* private browsing */ } };
-  try {
-    const saved = JSON.parse(sessionStorage.getItem(howStateKey) || '{}');
-    $$('[data-how-panel]').forEach((panel) => {
-      const state = saved[panel.dataset.screen];
-      if (!state) return;
-      $$('input', panel).forEach((field, index) => {
-        if (typeof state.fields?.[index] !== 'string') return;
-        field.value = state.fields[index];
-        field.dispatchEvent(new Event('input', { bubbles: true }));
-      });
-      $$('button', panel).forEach((button, index) => {
-        if (state.selected?.[index] && !button.classList.contains('on')) button.click();
-        const pressed = state.pressed?.[$$('[aria-pressed]', panel).indexOf(button)];
-        if (pressed && button.getAttribute('aria-pressed') !== 'true' && !button.classList.contains('on')) button.click();
-      });
-    });
-  } catch { /* malformed or unavailable session data */ }
-  howRoot.addEventListener('input', persist);
-  howRoot.addEventListener('click', () => queueMicrotask(persist));
-}
 
 /* ───────── worlds: a normal, vertically scrolling collection ───────── */
 initWorldsScroll($('#spaces'));
@@ -271,33 +182,6 @@ initEndingScenes($('#notify'));
   const row = $('[data-made]');
   renderMade(row);
 }
-
-/* One-time entrance beats only for fresh content, never as background motion. */
-{
-  const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
-  const targets = $$(' .reveal .stamp, .reveal .h2, .reveal .h2 em, .how-handheld__head .stamp, .how-handheld__head .h2, .worlds-section__head .worlds-section__eyebrow, .worlds-section__head .worlds-section__title, #made .made-card');
-  const pending = new Set(targets);
-  const run = (element) => {
-    if (!pending.has(element) || reducedMotion.matches || motionPaused() || document.hidden) return false;
-    pending.delete(element);
-    element.classList.add('motion-candy--in');
-    return true;
-  };
-  const observer = new IntersectionObserver((entries) => entries.forEach((entry) => {
-    if (entry.isIntersecting && run(entry.target)) observer.unobserve(entry.target);
-  }), { threshold: .2 });
-  targets.forEach((target) => observer.observe(target));
-  const retry = () => pending.forEach((target) => {
-    const rect = target.getBoundingClientRect();
-    if (rect.bottom > 0 && rect.top < innerHeight) run(target);
-  });
-  document.addEventListener('visibilitychange', retry);
-  document.addEventListener('auramy:motion-change', retry);
-  reducedMotion.addEventListener?.('change', retry);
-}
-
-/* ───────── social proof faces ───────── */
-$$('[data-faces]').forEach((el) => (el.innerHTML = Object.keys(PEOPLE).map((k) => avatar(k)).join('')));
 
 /* ───────── squish (jelly blob physics) ───────── */
 {
@@ -465,7 +349,7 @@ $$('[data-faces]').forEach((el) => (el.innerHTML = Object.keys(PEOPLE).map((k) =
       flash('is-miss');
       you = Math.max(you, score);
       drawBoard();
-      msg.textContent = score > 345 ? `${score}! new high score. jayden is typing…` : score > 320 ? `${score} — you passed marcus. jayden's next.` : score > 0 ? `${score}. so close. tap to go again` : 'oops. tap to try again';
+      msg.textContent = score > 345 ? `${score}! new high score. jayden is typing…` : score > 320 ? `${score}. you passed marcus. jayden's next.` : score > 0 ? `${score}. so close. tap to go again` : 'oops. tap to try again';
     }
   }
   root.addEventListener('pointerdown', (e) => { e.preventDefault(); press(); });
@@ -514,7 +398,7 @@ $$('[data-faces]').forEach((el) => (el.innerHTML = Object.keys(PEOPLE).map((k) =
     const by = document.createElement('span');
     by.className = 'wnote__by';
     by.innerHTML = avatar(note.by, 'wnote__av');
-    by.append(`— ${note.by}`);
+    by.append(note.by);
     el.append(by);
     wall.append(el);
     n++;
@@ -636,7 +520,7 @@ $$('[data-faces]').forEach((el) => (el.innerHTML = Object.keys(PEOPLE).map((k) =
   $$('[data-buy]').forEach((b) => b.addEventListener('click', () => {
     const price = +b.dataset.buy;
     if (b.classList.contains('is-owned')) { toast(`already yours ✦ <b>${b.dataset.name}</b>`); return; }
-    if (target < price) { retrigger(b, 'is-shake'); toast('need more aura — tap the orb ✦'); return; }
+    if (target < price) { retrigger(b, 'is-shake'); toast('need more aura. tap the smiley ✦'); return; }
     const from = target;
     target -= price; val = target;
     const t0 = performance.now();
@@ -657,19 +541,4 @@ $$('[data-faces]').forEach((el) => (el.innerHTML = Object.keys(PEOPLE).map((k) =
 /* ───────── stickers & badges ───────── */
 $$('.sticker-card, .badge').forEach((el) => el.addEventListener('click', () => { retrigger(el, 'is-wiggle'); pop(el, ['✦', '♡']); }));
 
-/* ───────── eyes follow the pointer ───────── */
-{
-  let px = -1, py = -1, raf = 0;
-  const look = () => {
-    raf = 0;
-    $$('[data-look] .eyes').forEach((g) => {
-      const r = g.ownerSVGElement.getBoundingClientRect();
-      if (r.bottom < 0 || r.top > innerHeight || !r.width) return;
-      const dx = clamp((px - (r.left + r.width / 2)) / 260, -1, 1), dy = clamp((py - (r.top + r.height / 2)) / 260, -1, 1);
-      g.setAttribute('transform', `translate(${(dx * 6).toFixed(2)} ${(dy * 4).toFixed(2)})`);
-    });
-  };
-  addEventListener('pointermove', (e) => { px = e.clientX; py = e.clientY; if (!raf) raf = requestAnimationFrame(look); }, { passive: true });
-}
-
-console.info('%c✦ auramy', 'font: 800 20px sans-serif; color: #ff5fa2', '— a website with your aura. hi, curious one.', MIA.url);
+console.info('%c☺ auramy', 'font: 800 20px sans-serif; color: #2f5ef6', 'a little internet for your people. hi, curious one.');
