@@ -52,6 +52,21 @@ Logo 原图副本在 `Assets/Brand/auramy-logo-supplied-original.jpg`，运行�
 - `#notify` 保留照片背景、右下拟真锁屏手机和 iOS 风格通知。
 - 保留减少动态效果和暂停控制；不要重建闪烁碎片、满屏弹跳或小字注释墙。
 
+## 七人设版本（`claude/auramy-seven-personas`）
+
+2026-10-10 在 v8 结构上换成 7 个目标用户人设（Camila、Maddie、Marcus 优先，其后 Jayden、River、Theo、Aaliyah）。人设定位来自 Lark《Auramy 目标用户分类》，示例网站是各自模板（`auramy-<name>.vercel.app`）的简化版。
+
+| 文件 | 用途 |
+| --- | --- |
+| `site/assets/js/personas.js` | 7 个人设的数据：定位、矛盾、价值主张、常用社媒、引语、照片路径 |
+| `site/assets/js/persona-sites.js` + `css/persona-sites.css` | 7 个模板的简化首页（cqw 尺寸，可放进手机、Hero 卡片）和资料卡打开的“招牌区块” |
+| `site/assets/js/people-stories.js` | 新增 `#people`：Camila / Maddie / Marcus 三段故事与小互动 |
+| `site/assets/css/personas.css` | Hero 三张卡、`#people`、7 种社媒资料卡、7 个世界的手机布局；在 material-v8 之后加载 |
+
+- Hero 是三人的模板卡片；`#vs` 揭开的是 Maddie 的 close friends 页；`#spaces` 一部手机切换 7 个模板；`#made` 是 7 种平台（IG、Close Friends、Snapchat、Discord、carrd、Letterboxd 风格、Depop）。
+- 照片来自 `Persona Photos` 文件夹，压缩为 960px JPEG 放在 `site/assets/img/personas/<name>/`；头像裁成 200px 放在 `site/assets/img/av/<name>.jpg`。各文件夹里 `artifact-*`（专辑、电影海报等）标明不得对外发布，未使用。
+- 模板与人设档案有出入时（例如朋友名字），文案跟随模板，照片跟随人设档案；Maddie 的 UC Irvine 卫衣照（C02）因与模板 16 岁设定冲突未使用。
+
 ## 素材和来源
 
 `site/assets/img/` 是网页实际引用的运行时素材。`Assets/` 是按人设整理的交接副本，便于浏览和替换；它不是运行时路径。`Assets/MANIFEST.md` 列出每份副本、对应的仓库相对来源、大小和 SHA-256。

@@ -4,6 +4,7 @@ import { renderHow, MIA } from './spaces.js';
 import { mountHow } from './interact.js?v=calm-7';
 import { PEOPLE, avatar } from './people.js';
 import { renderMade } from './made.js';
+import { renderPeople } from './people-stories.js?v=personas-1';
 import { initWorldsScroll } from './worlds-scroll.js?v=calm-7';
 import { initScrollReveal } from './scroll-reveal.js?v=calm-7';
 import { initHowScroll } from './how-scroll.js?v=calm-7';
@@ -138,8 +139,8 @@ renderHeroSitePreviews($('.hero-collage'));
 const heroPreview = $('#heroPreview');
 const claimInputs = () => $$('[data-claim] input[name="handle"]');
 function updatePreview(raw) {
-  const name = raw.trim().slice(0, 16).toLowerCase() || 'mia';
-  const { handle } = auraFor(raw.trim() || 'mia');
+  const name = raw.trim().slice(0, 16).toLowerCase() || 'you';
+  const { handle } = auraFor(raw.trim() || 'you');
   $$('[data-preview-name]').forEach((el) => { el.textContent = name; });
   $$('[data-preview-handle], [data-live-handle]').forEach((el) => { el.textContent = handle; });
 }
@@ -202,6 +203,7 @@ if (heroPreview) {
 
 /* ───────── scroll-led reveal + scrappy section details ───────── */
 initScrollReveal($('#vs'));
+renderPeople($('[data-people]'));
 
 /* ───────── how it works: four inline, playable steps ───────── */
 {
@@ -313,10 +315,10 @@ $$('[data-faces]').forEach((el) => (el.innerHTML = Object.keys(PEOPLE).map((k) =
     const rx = C.x + Math.cos(a) * R * sx, ry = C.y + 10 + Math.sin(a) * R * sy;
     return { rx, ry, x: rx, y: ry, vx: 0, vy: 0, tx: rx, ty: ry };
   });
-  // the face is lu's photo (a pattern on the body); only the jelly gloss sits on top
+  // the face is jayden's group-chat cat (a pattern on the body); only the jelly gloss sits on top
   const gloss = '<ellipse cx="-38" cy="-52" rx="13" ry="7" transform="rotate(-35 -38 -52)" fill="#fff" fill-opacity=".45"/>';
   const faces = { idle: gloss, squish: gloss };
-  const lines = ['oof', 'hey!', 'ok rude', '😳', 'again??', 'my face!!', 'i felt that', '🫠'];
+  const lines = ['mrrp', 'buffering…', 'ok rude', '😳', 'again??', 'one more game', 'he felt that', '🫠'];
   let squishes = 0, down = null, raf = 0, last = 0;
   let face = 'idle';
   faceG.innerHTML = faces.idle;
@@ -382,7 +384,7 @@ $$('[data-faces]').forEach((el) => (el.innerHTML = Object.keys(PEOPLE).map((k) =
     down = point;
     setTargets(down); setFace('squish'); kick();
     squishes++; countEl.textContent = 14 + squishes;
-    statusEl.textContent = `Lu has been squished ${14 + squishes} times today.`;
+    statusEl.textContent = `The group chat cat has been squished ${14 + squishes} times today.`;
     say(event);
   }
   root.addEventListener('pointerdown', (e) => {
@@ -414,7 +416,7 @@ $$('[data-faces]').forEach((el) => (el.innerHTML = Object.keys(PEOPLE).map((k) =
   const scoreEl = $('[data-score]', root);
   const msg = $('[data-msg]', root);
   const board = $('[data-board]', root);
-  const base = [{ n: 'noah', s: 345 }, { n: 'mia', s: 320 }, { n: 'jay', s: 290 }, { n: 'lu', s: 150 }];
+  const base = [{ n: 'jayden', s: 345 }, { n: 'marcus', s: 320 }, { n: 'river', s: 290 }, { n: 'theo', s: 150 }];
   let you = 0, running = false, score = 0, speed = 1.6, zw = 24, pw = 6, zc = 50, phase = 0, raf = 0, last = 0, pos = 0;
   const cheers = ['clean.', 'ok pro', 'again!', 'locked in', 'too easy?', '🔥🔥'];
 
@@ -463,7 +465,7 @@ $$('[data-faces]').forEach((el) => (el.innerHTML = Object.keys(PEOPLE).map((k) =
       flash('is-miss');
       you = Math.max(you, score);
       drawBoard();
-      msg.textContent = score > 345 ? `${score}! new high score. noah is shaking.` : score > 320 ? `${score} — you passed mia. noah's next.` : score > 0 ? `${score}. so close. tap to go again` : 'oops. tap to try again';
+      msg.textContent = score > 345 ? `${score}! new high score. jayden is typing…` : score > 320 ? `${score} — you passed marcus. jayden's next.` : score > 0 ? `${score}. so close. tap to go again` : 'oops. tap to try again';
     }
   }
   root.addEventListener('pointerdown', (e) => { e.preventDefault(); press(); });
@@ -476,9 +478,9 @@ $$('[data-faces]').forEach((el) => (el.innerHTML = Object.keys(PEOPLE).map((k) =
   const form = $('[data-wall-form]');
   const colors = ['#FFE45C', '#FFB3D1', '#B5E8FF', '#C8F59A', '#E3D4FF'];
   const seed = [
-    { t: 'ur playlist saved my week', by: 'jay' },
-    { t: 'rematch. tonight.', by: 'noah' },
-    { t: 'this photo is the main character', by: 'lu' },
+    { t: 'ok everyone sign before we all leave', by: 'camila' },
+    { t: 'the pool was so cold. worth it', by: 'maddie' },
+    { t: 'seniors top row. no debate', by: 'marcus' },
   ];
   let mine = [];
   try { mine = JSON.parse(localStorage.getItem('auramy-wall') || '[]').slice(-4); } catch { mine = []; }
@@ -490,9 +492,9 @@ $$('[data-faces]').forEach((el) => (el.innerHTML = Object.keys(PEOPLE).map((k) =
   let pageActive = true;
   const wallReducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   const friendNotes = [
-    { t: 'your newest song is stuck in my head', by: 'ava' },
-    { t: 'the guestbook is getting dangerously good', by: 'zara' },
-    { t: 'ok but where did you get that photo?', by: 'eli' },
+    { t: 'drew you a tiny moth. it’s in the corner', by: 'river' },
+    { t: 'the grad photo is load-bearing', by: 'theo' },
+    { t: 'i’ll do everyone’s nails for the reunion', by: 'aaliyah' },
   ];
   const slot = (i) => {
     const W = wall.clientWidth, H = wall.clientHeight;

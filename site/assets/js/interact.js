@@ -746,7 +746,7 @@ export function mountHow(key, sp, onNext) {
       chat.append(me);
       inp.value = '';
       setTimeout(() => {
-        const who = pick(['jay', 'lu', 'noah', 'ava']);
+        const who = pick(['maddie', 'marcus', 'jayden', 'river']);
         const r = document.createElement('div');
         r.className = 'bubrow';
         r.innerHTML = `${avatar(who, 'bub__av')}<p class="bub"><small>${who}</small>${pick(replies)}</p>`;

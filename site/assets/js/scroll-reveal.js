@@ -1,10 +1,9 @@
-import { renderSpace } from './spaces.js';
-import { mountSpace } from './interact.js?v=motion-6';
+import { homeMarkup, mountHome } from './persona-sites.js?v=personas-1';
 
 const clamp = (value) => Math.min(1, Math.max(0, value));
 const ease = (value) => value * value * (3 - 2 * value);
 
-/** Reveal a personal world through ordinary page scrolling. No wheel/touch interception. */
+/** Reveal Maddie's close-friends world through ordinary page scrolling. No wheel/touch interception. */
 export function initScrollReveal(root) {
   if (!root) return () => {};
   const stage = root.querySelector('[data-reveal-stage]');
@@ -28,7 +27,7 @@ export function initScrollReveal(root) {
   let currentNote = '';
   let stopWorld = () => {};
 
-  after.innerHTML = renderSpace('scrap');
+  after.innerHTML = homeMarkup('maddie');
   after.inert = true;
   after.dataset.off = '1';
 
@@ -44,8 +43,8 @@ export function initScrollReveal(root) {
     after.inert = !available;
     if (available && !mounted) {
       // Mounts dispose animation loops. Fresh elements discard their old listeners.
-      after.innerHTML = renderSpace('scrap');
-      stopWorld = mountSpace('scrap', after);
+      after.innerHTML = homeMarkup('maddie');
+      stopWorld = mountHome('maddie', after);
       after.dataset.off = '0';
       mounted = true;
     } else if (!available && mounted) {

@@ -1,6 +1,14 @@
-// The recurring cast of friends who show up across the page (notifications, leaderboard, wall, chat,
-// showcase). Mia is the demo owner and keeps her Auri avatar; everyone else is a real-looking person.
+// The recurring cast who show up across the page (notifications, leaderboard, wall, chat):
+// the seven Auramy personas, with avatars cropped from their persona photos.
 export const PEOPLE = {
+  camila: { name: 'camila', age: 18, city: 'boston' },
+  maddie: { name: 'maddie', age: 16, city: 'columbus' },
+  marcus: { name: 'marcus', age: 17, city: 'georgia' },
+  jayden: { name: 'jayden', age: 15, city: 'atlanta' },
+  river: { name: 'river', age: 15, city: 'kansas' },
+  theo: { name: 'theo', age: 18, city: 'austin' },
+  aaliyah: { name: 'aaliyah', age: 17, city: 'newark' },
+  // Earlier demo cast, still used inside the older interactive spaces.
   noah: { name: 'noah', age: 17, city: 'brooklyn' },
   lu: { name: 'lu', age: 16, city: 'vancouver' },
   jay: { name: 'jay', age: 18, city: 'chicago' },
