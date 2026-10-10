@@ -176,9 +176,9 @@ const how = {
       ${statusBar()}
       <p class="fl-step">1 / 3</p>
       <h4 class="fl-title">hi! what should we call you?</h4>
-      <label class="fl-input"><input data-name value="mia" maxlength="14" spellcheck="false" autocomplete="off" aria-label="Your name"></label>
+      <label class="fl-input"><input data-name value="cami" maxlength="14" spellcheck="false" autocomplete="off" aria-label="Your name"></label>
       <button class="fl-selfie" data-selfie>${blobAvatar(candy, { id: 'flh', mood: 'happy' })}<span>add a selfie<br><small>from your camera roll · tap</small></span></button>
-      <div class="fl-card"><div class="fl-card__art" data-card-art>${blobAvatar(candy, { id: 'flc' })}</div><b data-card-name>mia</b><span>aura.my/<i data-card-handle>mia</i></span><i class="fl-card__shine"></i></div>
+      <div class="fl-card"><div class="fl-card__art" data-card-art>${blobAvatar(candy, { id: 'flc' })}</div><b data-card-name>cami</b><span>aura.my/<i data-card-handle>cami</i></span><i class="fl-card__shine"></i></div>
       <button class="fl-btn" data-next-step>next →</button>
     </div>`,
   faves: () => `
@@ -212,10 +212,10 @@ const how = {
       <div class="ch-head"><span class="ch-av"></span><b>the group 🫧</b></div>
       <div class="ch-body" data-chat>
         <p class="bub bub--me">look what i made 👀</p>
-        <button class="bub bub--me bub--card" data-next-step><span class="og">${blobAvatar(['#FFF8EE', '#FFE3F0', '#FFF3C4'], { id: 'ogb' })}<b>mia</b></span><span class="bub__meta"><b>mia's space</b><span>aura.my/mia · tap to open</span></span></button>
-        <div class="bubrow">${avatar('jay', 'bub__av')}<p class="bub"><small>jay</small>WAIT how</p></div>
-        <div class="bubrow">${avatar('lu', 'bub__av')}<p class="bub"><small>lu</small>squishing ur face rn</p></div>
-        <div class="bubrow">${avatar('noah', 'bub__av')}<p class="bub"><small>noah</small>beat ur score btw. 345.</p></div>
+        <button class="bub bub--me bub--card" data-next-step><span class="og">${blobAvatar(['#FFF8EE', '#FFE3F0', '#FFF3C4'], { id: 'ogb' })}<b>cami</b></span><span class="bub__meta"><b>cami's space</b><span>aura.my/cami · tap to open</span></span></button>
+        <div class="bubrow">${avatar('maddie', 'bub__av')}<p class="bub"><small>maddie</small>WAIT how</p></div>
+        <div class="bubrow">${avatar('marcus', 'bub__av')}<p class="bub"><small>marcus</small>signing ur wall rn</p></div>
+        <div class="bubrow">${avatar('jayden', 'bub__av')}<p class="bub"><small>jayden</small>beat ur score btw. 345.</p></div>
       </div>
       <form class="ch-input" data-send><input placeholder="iMessage" maxlength="40" aria-label="Message"><button aria-label="send">↑</button></form>
     </div>`,

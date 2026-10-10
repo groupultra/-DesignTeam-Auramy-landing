@@ -23,15 +23,15 @@ export function initEndingScenes(root = document.querySelector('[data-ending-sli
   let running = false;
   const transitions = ['push', 'wipe', 'cut'];
   const messages = [
-    ['eli', 'is looking around your world 👀'],
-    ['ava', 'saved your song for later'],
-    ['jay', 'found the tiny camera roll'],
-    ['lu', 'left a tiny note on the wall'],
-    ['noah', 'is trying to beat your score'],
-    ['zara', 'opened the reading corner'],
+    ['Noor', 'added a clip to your edit 🎬'],
+    ['Hannah', 'opened your close friends page 🚗'],
+    ['Coach D', 'signed the team page: film at 3:15.'],
+    ['Noah', 'is trying to beat your 88'],
+    ['June', 'drew in your guestbook ☾'],
+    ['Nina', 'sent you her four favs'],
   ];
-  // The first visible card already features Eli, so the first live pop is a
-  // new person rather than a duplicate of the static stack.
+  // The static stack already shows the first three, so the first live pop is a
+  // new person rather than a duplicate.
   let messageIndex = 3;
 
   const draw = (index, style = 'still', previous = -1) => {

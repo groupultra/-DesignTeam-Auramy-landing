@@ -1,18 +1,26 @@
-import { renderSpace } from './spaces.js';
-import { mountSpace } from './interact.js?v=calm-7';
+import { PERSONAS, ORDER } from './personas.js';
+import { homeMarkup, mountHome } from './persona-sites.js?v=personas-1';
 
-const WORLDS = [
-  { id: 'desk', label: 'Desktop', title: 'little desktop', hint: 'Open icons, move windows, and make a little mess.' },
-  { id: 'vinyl', label: 'Vinyl', title: 'vinyl room', hint: 'Scratch a record and swap what is on the shelf.' },
-  { id: 'pixel', label: 'Pixel', title: 'pixel world', hint: 'Walk around, visit places, and leave a sign of life.' },
-  { id: 'scrap', label: 'Scrapbook', title: 'scrapbook', hint: 'Flip photos, move notes, and sign the wall.' },
-  { id: 'story', label: 'Story', title: 'story mode', hint: 'Tap through moments, vote, and send a note.' },
-];
+const HINTS = {
+  camila: 'Tap a clip on the timeline. Her friends drop the rest.',
+  maddie: 'Close friends only. Hit drive → and the windshield clears.',
+  marcus: 'Scoreboard up top, the team chat underneath. Lock in.',
+  jayden: 'No about-me. Just the board. Try to beat his 88.',
+  river: 'A porch at night. Flip the light and see who shows up.',
+  theo: 'Tap the screen for the next subtitle. It’s a slow burn.',
+  aaliyah: 'Try a nail shape, then request a set.',
+};
+const WORLDS = ORDER.map((id) => ({
+  id,
+  label: PERSONAS[id].name,
+  title: PERSONAS[id].template,
+  hint: `<b>${PERSONAS[id].template}</b> · ${PERSONAS[id].url} — ${HINTS[id]}`,
+}));
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 
 /**
- * Mount the five original interactive worlds in one scroll-pinned phone.
+ * Mount the seven persona template worlds in one scroll-pinned phone.
  * The returned function removes listeners and stops the active demo loop.
  */
 export function initWorldsScroll(root) {
@@ -23,8 +31,9 @@ export function initWorldsScroll(root) {
     <div class="worlds-scroll__pin" data-worlds-pin>
       <div class="worlds-scroll__layout">
         <header class="worlds-scroll__head">
-          <h2 id="${prefix}-title">One page. Different worlds.</h2>
-          <p data-worlds-instruction>Scroll to explore. Tap a style to jump.</p>
+          <p class="worlds-scroll__kicker">seven people · seven templates</p>
+          <h2 id="${prefix}-title">Same app.<br>Not the same world.</h2>
+          <p data-worlds-instruction>Scroll to explore. Tap a name to jump.</p>
         </header>
         <div class="worlds-scroll__stage">
           <div class="phone worlds-scroll__phone">
@@ -62,7 +71,7 @@ export function initWorldsScroll(root) {
   const range = () => Math.max(1, root.offsetHeight - window.innerHeight);
 
   function syncInstruction() {
-    instruction.textContent = isManual() ? 'Tap a style to explore.' : 'Scroll to explore. Tap a style to jump.';
+    instruction.textContent = isManual() ? 'Tap a name to explore.' : 'Scroll to explore. Tap a name to jump.';
   }
 
   function unmount() {
@@ -80,10 +89,10 @@ export function initWorldsScroll(root) {
     if (!shouldRun || mounted === active) return;
 
     const world = WORLDS[active];
-    screen.innerHTML = renderSpace(world.id);
+    screen.innerHTML = homeMarkup(world.id);
     screen.dataset.off = '0';
     screen.inert = false;
-    stopWorld = mountSpace(world.id, screen);
+    stopWorld = mountHome(world.id, screen);
     mounted = active;
   }
 
@@ -99,7 +108,7 @@ export function initWorldsScroll(root) {
       tab.tabIndex = selected ? 0 : -1;
     });
     screen.setAttribute('aria-labelledby', tabs[active].id);
-    hint.textContent = world.hint;
+    hint.innerHTML = world.hint;
     count.textContent = `${active + 1} / ${WORLDS.length}`;
     syncWorld();
   }
@@ -154,6 +163,14 @@ export function initWorldsScroll(root) {
       tabs[clamp(next, 0, WORLDS.length - 1)].focus({ preventScroll: true });
     }, { signal });
   });
+
+  // Links elsewhere on the page ("see her world") jump straight to one persona.
+  document.addEventListener('auramy:world', (event) => {
+    const index = WORLDS.findIndex((world) => world.id === event.detail);
+    if (index < 0) return;
+    if (isManual()) root.scrollIntoView({ behavior: shouldAvoidSmoothScroll() ? 'auto' : 'smooth' });
+    goTo(index);
+  }, { signal });
 
   window.addEventListener('scroll', scheduleScroll, { passive: true, signal });
   window.addEventListener('resize', scheduleScroll, { passive: true, signal });
