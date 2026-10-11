@@ -10,6 +10,7 @@ import { injectDoodles } from './doodles.js';
 import { initHeroDesktop, initWeird } from './hero-desktop.js?v=early-web-1';
 import { initSetupWizard } from './setup-wizard.js?v=early-web-2';
 import { initAuraShop } from './aura-shop.js?v=early-web-2';
+import { initPlayWindow } from './play-window.js?v=early-web-1';
 
 document.documentElement.classList.add('js');
 injectSprite();
@@ -166,6 +167,9 @@ initEndingScenes($('#notify'));
   initMadeScroll($('[data-made-scroll]'));
 }
 
+/* ───────── play: one window, four friends' pages ───────── */
+initPlayWindow($('[data-play-window]'));
+
 /* ───────── squish (jelly blob physics) ───────── */
 {
   const root = $('#squish');
@@ -283,7 +287,7 @@ initEndingScenes($('#notify'));
   const scoreEl = $('[data-score]', root);
   const msg = $('[data-msg]', root);
   const board = $('[data-board]', root);
-  const base = [{ n: 'jayden', s: 345 }, { n: 'marcus', s: 320 }, { n: 'river', s: 290 }, { n: 'theo', s: 150 }];
+  const base = [{ n: 'marcus', s: 345 }, { n: 'jayden', s: 320 }, { n: 'river', s: 290 }, { n: 'theo', s: 150 }];
   let you = 0, running = false, score = 0, speed = 1.6, zw = 24, pw = 6, zc = 50, phase = 0, raf = 0, last = 0, pos = 0;
   const cheers = ['clean.', 'ok pro', 'again!', 'locked in', 'too easy?', '🔥🔥'];
 
@@ -323,7 +327,7 @@ initEndingScenes($('#notify'));
       const isPerfect = Math.abs(p - zc) <= pw / 2;
       score += isPerfect ? 25 : 10;
       scoreEl.textContent = score;
-      msg.textContent = isPerfect ? 'perfect ✦ +25' : cheers[Math.floor(Math.random() * cheers.length)];
+      msg.textContent = isPerfect ? 'touchdown ✦ +25' : cheers[Math.floor(Math.random() * cheers.length)];
       speed *= 1.1; zw = Math.max(9, zw - 1.6); pw = Math.max(3, pw - 0.3);
       zc = 25 + Math.random() * 50;
       setZone(); flash('is-hit');
@@ -332,7 +336,7 @@ initEndingScenes($('#notify'));
       flash('is-miss');
       you = Math.max(you, score);
       drawBoard();
-      msg.textContent = score > 345 ? `${score}! new high score. jayden is typing…` : score > 320 ? `${score}. you passed marcus. jayden's next.` : score > 0 ? `${score}. so close. tap to go again` : 'oops. tap to try again';
+      msg.textContent = score > 345 ? `${score}! new high score. marcus is typing…` : score > 320 ? `${score}. you passed jayden. marcus is next.` : score > 0 ? `${score}. so close. tap to go again` : 'fumble. tap to try again';
     }
   }
   root.addEventListener('pointerdown', (e) => { e.preventDefault(); press(); });

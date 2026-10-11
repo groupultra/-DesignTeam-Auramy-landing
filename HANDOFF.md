@@ -47,7 +47,7 @@ Logo 原图副本在 `Assets/Brand/auramy-logo-supplied-original.jpg`，运行�
 - 不要恢复已删除的 `#safe` 或 `#for`。
 - `#how` 保持一部手机内切步骤；不要加回具象手或 SVG 手指。
 - `#spaces` 保持单手机随页面滚动换内容，底部菜单跟随；不要改回横向多手机轮播。
-- `#play` 保持四张正常文档流卡片；不要改回内部上下刷容器。
+- `#play` 是一个放大的 Auramy 窗口（`play-window.js`）：滚进来时小窗口随滚动放大到全屏，之后页面滚动带动窗口里的四个朋友页面（Jayden 梗图风 squish、Marcus 记分屏风计时游戏、Camila 软木板留言墙、Maddie 杂志风 aux），标题栏和地址栏跟着当前页面换。全程由页面滚动驱动，不是内部滚动容器；减少动态效果或矮屏时退回普通文档流。
 - `#made` 保留 Instagram、Snapchat 和链接页的多样性，强调从社交主页链接进入个人世界。
 - `#notify` 保留照片背景、右下拟真锁屏手机和 iOS 风格通知。
 - 保留减少动态效果和暂停控制；不要重建闪烁碎片、满屏弹跳或小字注释墙。
@@ -64,6 +64,7 @@ Logo 原图副本在 `Assets/Brand/auramy-logo-supplied-original.jpg`，运行�
 | `site/assets/js/your-page.js` | 向导的结果页 `aura.my/<name>`：用途决定内容模块，外观套 7 个模板皮肤；上线后朋友弹出点赞、签留言墙、涨 aura；全部可点 |
 | `site/assets/js/doodles.js` | 圆珠笔涂鸦 SVG sprite |
 | `site/assets/js/worlds-scroll.js` | `#spaces` 单手机随滚动切换 7 个模板；整段区块（背景、标题字体、made for 便签、任务栏、两张贴图）跟着切成当前人的网站风格，各有一个签名特效（Camila 胶片走带、Maddie 雨刷与尾灯、Marcus 球场线与灯光、Jayden 骷髅表情上浮、River 星空与飞蛾、Theo 放映光束与颗粒、Aaliyah 辫子与甲片闪光），照片按需加载 |
+| `site/assets/js/play-window.js` | `#play` 窗口放大 + 窗口内四个页面的滚动、标题栏/地址栏同步、全屏时隐藏顶栏 |
 | `site/assets/js/made.js` | 7 个平台截图，界面本身即平台识别；`initMadeScroll` 让区块吸顶，纵向滚动驱动横向平移（mobile first），减少动态效果或矮屏时退回横向滑动 |
 | `site/assets/js/aura-shop.js` | `#aura` 的完整链路：访客互动（弹幕、点赞）→ 实时小票记账 → 笑脸计数 → aura mart 按价格逐个解锁 8 个组件 → 买下后出现在 “your page” 窗口 |
 

@@ -19,10 +19,10 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Instrument+Serif:ital@0;1&family=Pixelify+Sans:wght@400..700&family=Shantell+Sans:wght,INFM@300..800,0..100&family=Space+Mono:wght@400;700&family=Unbounded:wght@700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@500;700&family=Instrument+Serif:ital@0;1&family=Pixelify+Sans:wght@400..700&family=Shantell+Sans:wght,INFM@300..800,0..100&family=Space+Mono:wght@400;700&family=Unbounded:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
-  <link rel="stylesheet" href="/assets/css/early-web.css?v=early-web-4">
+  <link rel="stylesheet" href="/assets/css/early-web.css?v=early-web-5">
   <link rel="stylesheet" href="/assets/css/persona-sites.css?v=early-web-1">
 </head>
 <body class="early-web">
@@ -119,56 +119,76 @@
       </div>
     </section>
 
-    <!-- PLAY: four things friends can do on your page -->
-    <section class="sec play" id="play" aria-labelledby="play-title">
-      <div class="wrap">
-        <h2 class="sec-title" id="play-title">Your people <em>can play too.</em></h2>
-        <div class="play__grid">
-          <article class="xpwin play-win play-win--squish" id="play-squish" aria-labelledby="play-squish-title">
-            <header class="xpwin__bar"><img class="xpwin__icon" src="/assets/img/av/jayden.jpg" alt="" width="16" height="16"><b class="xpwin__title" id="play-squish-title">squish the gc cat</b><span class="xpwin__btns" aria-hidden="true"><button type="button" tabindex="-1">_</button><button type="button" class="is-close" tabindex="-1">×</button></span></header>
-            <div class="play-win__body">
-              <div class="squish" id="squish" aria-label="Squishable cat face. Press and drag, or press Enter or Space to squish." role="button" tabindex="0">
-                <svg viewBox="0 0 300 300" aria-hidden="true">
-                  <ellipse class="squish__shadow" cx="150" cy="268" rx="90" ry="10"/>
-                  <pattern id="sqface" patternUnits="objectBoundingBox" patternContentUnits="objectBoundingBox" width="1" height="1"><image href="/assets/img/personas/jayden/cat-face.jpg" width="1" height="1" preserveAspectRatio="none"/></pattern>
-                  <path class="squish__body" fill="url(#sqface)" stroke="#fff" stroke-width="7" stroke-linejoin="round"/>
-                  <g class="squish__face"></g>
-                </svg>
-              </div>
-              <p class="play-win__foot">squished <b data-squish-count>14</b> times today. jayden gets a ping.</p>
-              <p class="sr-only" role="status" aria-live="polite" data-squish-status></p>
-            </div>
-          </article>
+    <!-- PLAY: one window that grows to fill the screen; inside, four friends' pages, four styles -->
+    <section class="pw" id="play" aria-labelledby="play-title" data-play-window>
+      <div class="pw__stage">
+        <h2 class="sec-title pw__heading" id="play-title">Your people <em>can play too.</em></h2>
+        <div class="pw__win">
+          <div class="pw__frame" aria-hidden="true"></div>
+          <div class="pw__view">
+            <div class="pw__scroll" data-pw-scroll>
 
-          <article class="xpwin play-win play-win--game" id="play-game" aria-labelledby="play-game-title">
-            <header class="xpwin__bar"><img class="xpwin__icon" src="/assets/img/av/jayden.jpg" alt="" width="16" height="16"><b class="xpwin__title" id="play-game-title">beat jayden's high score</b><span class="xpwin__btns" aria-hidden="true"><button type="button" tabindex="-1">_</button><button type="button" class="is-close" tabindex="-1">×</button></span></header>
-            <div class="play-win__body">
-              <div class="tgame" id="tgame" tabindex="0" role="button" aria-label="Timing game. Press to stop the marker in the yellow zone.">
-                <div class="tgame__score"><span>score</span><b data-score>0</b></div>
-                <div class="tgame__track"><div class="tgame__zone"></div><div class="tgame__zone tgame__zone--perfect"></div><div class="tgame__marker"></div></div>
-                <p class="tgame__msg" data-msg>tap when the dot's in the zone</p>
-                <ol class="board" data-board></ol>
-              </div>
-            </div>
-          </article>
+              <article class="site site--jay" data-site="jayden" data-url="aura.my/jayden/squish" data-title="squish the gc cat" aria-labelledby="play-squish-title">
+                <p class="jay__marquee" aria-hidden="true"><span>★ SQUISH THE GC CAT ★ jayden gets a ping every time ★ do not squish him 50 times ★ he will know ★ SQUISH THE GC CAT ★ jayden gets a ping every time ★ do not squish him 50 times ★ he will know </span></p>
+                <div class="jay__inner">
+                  <h3 class="jay__title" id="play-squish-title"><span>squish</span><span>the gc cat</span></h3>
+                  <b class="jay__burst" aria-hidden="true">NEW!</b>
+                  <div class="squish" id="squish" aria-label="Squishable cat face. Press and drag, or press Enter or Space to squish." role="button" tabindex="0">
+                    <svg viewBox="0 0 300 300" aria-hidden="true">
+                      <ellipse class="squish__shadow" cx="150" cy="268" rx="90" ry="10"/>
+                      <pattern id="sqface" patternUnits="objectBoundingBox" patternContentUnits="objectBoundingBox" width="1" height="1"><image href="/assets/img/personas/jayden/cat-face.jpg" width="1" height="1" preserveAspectRatio="none"/></pattern>
+                      <path class="squish__body" fill="url(#sqface)" stroke="#fff" stroke-width="7" stroke-linejoin="round"/>
+                      <g class="squish__face"></g>
+                    </svg>
+                  </div>
+                  <p class="jay__count">squished <b data-squish-count>14</b> times today</p>
+                  <p class="jay__ping" aria-hidden="true">jayden gets a ping 📳</p>
+                  <p class="sr-only" role="status" aria-live="polite" data-squish-status></p>
+                </div>
+                <span class="jay__sticker jay__sticker--a" aria-hidden="true">💀</span>
+                <span class="jay__sticker jay__sticker--b" aria-hidden="true">certified<br>gc classic</span>
+                <span class="jay__sticker jay__sticker--c" aria-hidden="true">🔥</span>
+              </article>
 
-          <article class="xpwin play-win play-win--wall" id="play-wall" aria-labelledby="play-wall-title">
-            <header class="xpwin__bar"><img class="xpwin__icon" src="/assets/img/av/camila.jpg" alt="" width="16" height="16"><b class="xpwin__title" id="play-wall-title">sign camila's guestbook</b><span class="xpwin__btns" aria-hidden="true"><button type="button" tabindex="-1">_</button><button type="button" class="is-close" tabindex="-1">×</button></span></header>
-            <div class="play-win__body">
-              <div class="wall" id="wall" aria-live="polite"></div>
-              <form class="wall__form" data-wall-form>
-                <input name="note" maxlength="48" placeholder="leave cami a note…" aria-label="Your note" autocomplete="off">
-                <button class="xp-btn xp-btn--go" type="submit">stick it</button>
-              </form>
-            </div>
-          </article>
+              <article class="site site--mc" data-site="marcus" data-url="aura.my/marcus/game-day" data-title="beat marcus's high score" aria-labelledby="play-game-title">
+                <p class="mc__top" aria-hidden="true"><span>EAGLES <b>21</b></span><span>Q4 · 0:47</span><span>VISITORS <b>14</b></span></p>
+                <div class="mc__inner">
+                  <h3 class="mc__title" id="play-game-title"><span>beat my</span> high score</h3>
+                  <div class="tgame" id="tgame" tabindex="0" role="button" aria-label="Timing game. Press to stop the ball in the end zone.">
+                    <div class="tgame__score"><span>score</span><b data-score>0</b></div>
+                    <div class="tgame__track"><div class="tgame__zone"></div><div class="tgame__zone tgame__zone--perfect"></div><div class="tgame__marker"></div></div>
+                    <p class="tgame__msg" data-msg>tap when the ball's in the zone</p>
+                    <ol class="board" data-board></ol>
+                  </div>
+                </div>
+              </article>
 
-          <article class="xpwin play-win play-win--aux" id="play-love" aria-labelledby="play-love-title">
-            <header class="xpwin__bar"><img class="xpwin__icon" src="/assets/img/av/maddie.jpg" alt="" width="16" height="16"><b class="xpwin__title" id="play-love-title">maddie's aux.mp3</b><span class="xpwin__btns" aria-hidden="true"><button type="button" tabindex="-1">_</button><button type="button" class="is-close" tabindex="-1">×</button></span></header>
-            <div class="play-win__body">
-              <div class="album-party" id="albumParty" data-album-party></div>
+              <article class="site site--cm" data-site="camila" data-url="aura.my/cami/guestbook" data-title="sign cami's guestbook" aria-labelledby="play-wall-title">
+                <p class="cm__top" aria-hidden="true"><span>cami's corkboard ✿</span><span>sd → boston</span></p>
+                <div class="cm__inner">
+                  <h3 class="cm__title" id="play-wall-title">sign the board<br>before you leave</h3>
+                  <div class="wall" id="wall" aria-live="polite"></div>
+                  <form class="wall__form" data-wall-form>
+                    <input name="note" maxlength="48" placeholder="leave cami a note…" aria-label="Your note" autocomplete="off">
+                    <button type="submit">pin it</button>
+                  </form>
+                </div>
+              </article>
+
+              <article class="site site--md" data-site="maddie" data-url="aura.my/maddie/aux" data-title="maddie's aux" aria-labelledby="play-love-title">
+                <p class="md__top" aria-hidden="true"><span>maddie</span><span>aux · close friends</span></p>
+                <div class="md__inner">
+                  <h3 class="md__title" id="play-love-title"><em>aux</em> is shared.<br>i have veto.</h3>
+                  <div class="album-party" id="albumParty" data-album-party></div>
+                </div>
+              </article>
+
             </div>
-          </article>
+          </div>
+          <header class="pw__chrome">
+            <div class="xpwin__bar"><img class="xpwin__icon" data-pw-icon src="/assets/img/av/jayden.jpg" alt="" width="16" height="16"><b class="xpwin__title" data-pw-title>squish the gc cat</b><span class="xpwin__btns" aria-hidden="true"><button type="button" tabindex="-1">_</button><button type="button" tabindex="-1">□</button><button type="button" class="is-close" tabindex="-1">×</button></span></div>
+            <p class="pw__addr"><span>Address</span><i data-pw-url>aura.my/jayden/squish</i><b class="pw__load" aria-hidden="true"></b></p>
+          </header>
         </div>
       </div>
     </section>
@@ -290,6 +310,6 @@
   <button class="motion-toggle" type="button" data-motion-toggle aria-pressed="false">pause motion</button>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script type="module" src="/assets/js/landing.js?v=early-web-4"></script>
+  <script type="module" src="/assets/js/landing.js?v=early-web-5"></script>
 </body>
 </html>
