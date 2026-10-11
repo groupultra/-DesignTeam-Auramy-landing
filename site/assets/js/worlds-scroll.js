@@ -1,7 +1,33 @@
 import { PERSONAS, ORDER, personaAvatar } from './personas.js';
 import { homeMarkup, mountHome } from './persona-sites.js?v=early-web-1';
 
-const WORLDS = ORDER.map((id) => ({ id, label: PERSONAS[id].name, ...PERSONAS[id] }));
+// After the seven people comes an eighth, empty world: yours. It ends the scroll on a claim form.
+const SMILEY = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path fill="#f6ec22" d="M32 4c17-1 29 12 28 29-1 17-13 28-29 27C15 59 4 47 5 31 6 15 17 5 32 4Z"/><path fill="none" stroke="#161a2e" stroke-width="4" stroke-linecap="round" d="M23 22l-1 8M40 20l1 8M17 37c8 10 24 10 31-2"/></svg>')}`;
+const YOU = { id: 'you', label: 'You', name: 'You', meta: 'aura.my/yourname', template: 'blank page', url: 'aura.my/you', madeFor: 'you. yes, you.', line: 'Seven people, seven worlds. Yours is next.' };
+const WORLDS = [...ORDER.map((id) => ({ id, label: PERSONAS[id].name, ...PERSONAS[id] })), YOU];
+const avatarFor = (id) => (id === 'you' ? SMILEY : personaAvatar(id));
+
+const youMarkup = () => `<div class="ps ps--you">
+  <p class="ps-you__bar"><span>aura.my/</span><b>???</b></p>
+  <div class="ps-you__avatar" aria-hidden="true">+</div>
+  <p class="ps-you__name">your name here</p>
+  <ul class="ps-you__blocks" aria-label="Empty spots on your page"><li>your photos</li><li>your songs</li><li>your people</li></ul>
+  <p class="ps-you__empty">this one’s still empty.<br><b>it’s waiting for you.</b></p>
+  <form class="ps-you__claim" data-claim>
+    <label><span>aura.my/</span><input name="handle" autocomplete="off" spellcheck="false" maxlength="20" placeholder="yourname" aria-label="Your name"></label>
+    <button type="submit">claim it →</button>
+  </form>
+  <a class="ps-you__build" href="#how">or build it first ↓</a>
+</div>`;
+const yourHome = (id) => (id === 'you' ? youMarkup() : homeMarkup(id));
+// The blank page's claim box starts with whatever name was typed anywhere else on the page.
+const mountYours = (id, host) => {
+  if (id !== 'you') return mountHome(id, host);
+  const typed = [...document.querySelectorAll('[data-claim] input[name="handle"]')].find((el) => el.value.trim());
+  const input = host.querySelector('input[name="handle"]');
+  if (typed && input) input.value = typed.value;
+  return () => {};
+};
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 
@@ -16,6 +42,7 @@ const BACKDROPS = {
   river: { bg: 'zine', pics: ['sheet', 'charm'], caps: ['kite, ref v3', ''] },
   theo: { bg: 'matinee', pics: ['ticket', 'street'], caps: ['ADMIT ONE', 'REEL 2'] },
   aaliyah: { bg: 'floral', pics: ['cobalt', 'braids'], caps: ['$25', 'knotless'] },
+  you: { bg: null, pics: [], empty: ['+ your pic', '+ your song'] },
 };
 const spread = (n, fn) => Array.from({ length: n }, (_, i) => fn(i)).join('');
 const DECOR = {
@@ -25,12 +52,15 @@ const DECOR = {
   jayden: `<i class="wbg__grid"></i>${spread(8, (i) => `<b class="wbg__skull" style="--x:${(i * 13 + 5) % 96}%;--d:${(i * 0.83).toFixed(2)}s;--s:${0.7 + (i % 3) * 0.25}">💀</b>`)}`,
   river: `<i class="wbg__stars"></i><i class="wbg__moon"></i><i class="wbg__lamp"></i>${spread(3, (i) => `<b class="wbg__moth" style="--d:${-i * 1.1}s;--r:${34 + i * 14}px"></b>`)}`,
   theo: '<i class="wbg__beam"></i><i class="wbg__grain"></i><i class="wbg__bars"></i>',
+  you: `<i class="wbg__dots"></i>${spread(7, (i) => `<b class="wbg__twinkle" style="--x:${[8, 86, 22, 72, 50, 14, 92][i]}%;--y:${[12, 20, 70, 64, 8, 40, 46][i]}%;--d:${(i * 0.41).toFixed(2)}s">✦</b>`)}`,
   aaliyah: `<i class="wbg__braid"></i><i class="wbg__braid wbg__braid--r"></i>${spread(6, (i) => `<b class="wbg__glint" style="--x:${[12, 82, 30, 70, 8, 90][i]}%;--y:${[18, 30, 62, 74, 44, 56][i]}%;--d:${(i * 0.47).toFixed(2)}s">✦</b>`)}`,
 };
 
-const backdropMarkup = () => `<div class="wbg" aria-hidden="true">${ORDER.map((id) => {
-  const { pics, caps = [] } = BACKDROPS[id];
-  return `<div class="wbg__layer" data-bg="${id}"><i class="wbg__photo"></i>${DECOR[id]}${pics.map((key, i) => `<figure class="wbg__pic wbg__pic--${i ? 'b' : 'a'}"><img alt="" data-src="${PERSONAS[id].photos[key]}" decoding="async">${caps[i] ? `<figcaption>${caps[i]}</figcaption>` : ''}</figure>`).join('')}</div>`;
+const backdropMarkup = () => `<div class="wbg" aria-hidden="true">${WORLDS.map(({ id }) => {
+  const { pics, caps = [], empty = [] } = BACKDROPS[id];
+  const photos = pics.map((key, i) => `<figure class="wbg__pic wbg__pic--${i ? 'b' : 'a'}"><img alt="" data-src="${PERSONAS[id].photos[key]}" decoding="async">${caps[i] ? `<figcaption>${caps[i]}</figcaption>` : ''}</figure>`).join('');
+  const blanks = empty.map((label, i) => `<figure class="wbg__pic wbg__pic--${i ? 'b' : 'a'} wbg__pic--empty"><span>${label}</span></figure>`).join('');
+  return `<div class="wbg__layer" data-bg="${id}"><i class="wbg__photo"></i>${DECOR[id]}${photos}${blanks}</div>`;
 }).join('')}</div>`;
 
 /**
@@ -61,7 +91,7 @@ export function initWorldsScroll(root) {
         </div>
       </div>
       <div class="worlds-scroll__tabs" role="tablist" aria-label="Choose a world">
-        ${WORLDS.map((world, index) => `<button type="button" role="tab" id="${prefix}-tab-${world.id}" aria-controls="${prefix}-panel" aria-selected="${index === 0 ? 'true' : 'false'}" tabindex="${index === 0 ? '0' : '-1'}" data-world-index="${index}"><img src="${personaAvatar(world.id)}" alt="" width="20" height="20"><span>${world.label}</span></button>`).join('')}
+        ${WORLDS.map((world, index) => `<button type="button" role="tab" id="${prefix}-tab-${world.id}" aria-controls="${prefix}-panel" aria-selected="${index === 0 ? 'true' : 'false'}" tabindex="${index === 0 ? '0' : '-1'}" data-world-index="${index}"><img src="${avatarFor(world.id)}" alt="" width="20" height="20"><span>${world.label}</span></button>`).join('')}
       </div>
     </div>`;
 
@@ -109,10 +139,10 @@ export function initWorldsScroll(root) {
     if (!shouldRun || mounted === active) return;
 
     const world = WORLDS[active];
-    screen.innerHTML = homeMarkup(world.id);
+    screen.innerHTML = yourHome(world.id);
     screen.dataset.off = '0';
     screen.inert = false;
-    stopWorld = mountHome(world.id, screen);
+    stopWorld = mountYours(world.id, screen);
     mounted = active;
   }
 
@@ -149,7 +179,7 @@ export function initWorldsScroll(root) {
       tab.tabIndex = selected ? 0 : -1;
     });
     screen.setAttribute('aria-labelledby', tabs[active].id);
-    who.avatar.src = personaAvatar(world.id);
+    who.avatar.src = avatarFor(world.id);
     who.name.textContent = world.name;
     who.meta.textContent = world.meta;
     who.madeFor.textContent = world.madeFor;

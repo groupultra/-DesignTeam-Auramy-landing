@@ -178,9 +178,13 @@ export function initMadeScroll(section) {
       section.style.removeProperty('--made-travel');
       return;
     }
-    travel = Math.max(0, row.scrollWidth - viewport.clientWidth);
+    // Measure from the last app itself: Safari can size a max-content flex row from its
+    // children's text width rather than their set width, which made the row far too long.
+    const last = row.lastElementChild;
+    const end = last ? last.offsetLeft + last.offsetWidth + (parseFloat(getComputedStyle(row).paddingRight) || 0) : 0;
+    travel = Math.max(0, end - viewport.clientWidth);
     section.style.setProperty('--made-travel', `${travel}px`);
-    track?.style.setProperty('--thumb', `${clamp((viewport.clientWidth / row.scrollWidth) * 100, 12, 100).toFixed(1)}%`);
+    track?.style.setProperty('--thumb', `${clamp((viewport.clientWidth / Math.max(1, end)) * 100, 12, 100).toFixed(1)}%`);
     update();
   }
 

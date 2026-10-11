@@ -1,12 +1,12 @@
 import { auraFor, prefersReducedMotion } from './aura.js';
 import { injectSprite, blobAvatar } from './sprite.js';
 import { PEOPLE, avatar } from './people.js';
-import { renderMade, initMadeScroll } from './made.js?v=early-web-2';
-import { initWorldsScroll } from './worlds-scroll.js?v=early-web-2';
+import { renderMade, initMadeScroll } from './made.js?v=early-web-3';
+import { initWorldsScroll } from './worlds-scroll.js?v=early-web-4';
 import { initScrollReveal } from './scroll-reveal.js?v=early-web-1';
 import { initAlbumParty } from './album-party.js?v=early-web-1';
 import { initEndingScenes } from './ending-scenes.js?v=early-web-1';
-import { injectDoodles } from './doodles.js';
+import { injectDoodles, doodle } from './doodles.js';
 import { initHeroDesktop, initWeird } from './hero-desktop.js?v=early-web-1';
 import { initSetupWizard } from './setup-wizard.js?v=early-web-2';
 import { initAuraShop } from './aura-shop.js?v=early-web-5';
@@ -293,7 +293,7 @@ initPlayWindow($('[data-play-window]'));
 
   const drawBoard = () => {
     const rows = [...base, ...(you ? [{ n: 'you', s: you, me: true }] : [])].sort((a, b) => b.s - a.s).slice(0, 5);
-    const face = (n) => PEOPLE[n] ? avatar(n, 'board__av') : `<span class="board__av board__av--blob">${blobAvatar(n === 'you' ? ['#E8FF5A', '#5CE1E6', '#8B6CFF'] : candy, { id: 'bd' + n })}</span>`;
+    const face = (n) => n === 'you' ? `<span class="board__av board__av--you">${doodle('smile')}</span>` : PEOPLE[n] ? avatar(n, 'board__av') : `<span class="board__av board__av--blob">${blobAvatar(candy, { id: 'bd' + n })}</span>`;
     board.innerHTML = rows.map((r) => `<li class="${r.me ? 'is-you' : ''}"><span class="board__who">${face(r.n)}<b>${r.n}</b></span><span>${r.s}</span></li>`).join('');
   };
   const setZone = () => {
