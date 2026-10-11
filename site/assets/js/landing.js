@@ -1,14 +1,14 @@
 import { auraFor, prefersReducedMotion } from './aura.js';
 import { injectSprite, blobAvatar } from './sprite.js';
 import { PEOPLE, avatar } from './people.js';
-import { renderMade } from './made.js?v=early-web-1';
+import { renderMade, initMadeScroll } from './made.js?v=early-web-2';
 import { initWorldsScroll } from './worlds-scroll.js?v=early-web-1';
 import { initScrollReveal } from './scroll-reveal.js?v=early-web-1';
 import { initAlbumParty } from './album-party.js?v=early-web-1';
 import { initEndingScenes } from './ending-scenes.js?v=early-web-1';
 import { injectDoodles } from './doodles.js';
 import { initHeroDesktop, initWeird } from './hero-desktop.js?v=early-web-1';
-import { initSetupWizard } from './setup-wizard.js?v=early-web-1';
+import { initSetupWizard } from './setup-wizard.js?v=early-web-2';
 import { initAuraShop } from './aura-shop.js?v=early-web-2';
 
 document.documentElement.classList.add('js');
@@ -117,7 +117,7 @@ initHeroDesktop($('[data-desktop]'));
 initWeird($('[data-weird-toggle]'), $('#top'));
 
 /* ───────── setup wizard ───────── */
-const wizard = initSetupWizard($('[data-wizard]'), {
+const wizard = initSetupWizard($('[data-build]'), {
   toast,
   onName: (value) => { claimInputs().forEach((input) => { input.value = value; }); updatePreview(value); },
 });
@@ -162,8 +162,8 @@ initEndingScenes($('#notify'));
 
 /* ───────── made by actual humans ───────── */
 {
-  const row = $('[data-made]');
-  renderMade(row);
+  renderMade($('[data-made]'));
+  initMadeScroll($('[data-made-scroll]'));
 }
 
 /* ───────── squish (jelly blob physics) ───────── */

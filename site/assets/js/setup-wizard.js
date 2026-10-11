@@ -1,17 +1,22 @@
-// "Make yours": a four-step setup wizard in an XP-style window. Back / Next only; no
-// accounts or real domains. Step 2 echoes the seven personas: whatever it's for, there's a look.
+// "Make yours": a four-step setup wizard in an XP-style window, next to a phone that builds
+// your page as you click (name → what it's for → look → live). Back / Next only; no
+// accounts or real domains. The finished page is fully tappable.
 import { PERSONAS, ORDER } from './personas.js';
-import { homeMarkup } from './persona-sites.js?v=early-web-1';
 import { doodle } from './doodles.js';
+import { mountYourPage } from './your-page.js?v=early-web-2';
 
 const FOR = { camila: 'the group chat', maddie: 'close friends', marcus: 'the team', jayden: 'memes', river: 'my OC', theo: 'movies', aaliyah: 'my shop' };
-const STEPS = ['Name it', 'What’s it for?', 'Pick a look', 'Send it'];
-const REPLIES = [['maddie', 'WAIT how'], ['marcus', 'signing ur wall rn'], ['jayden', 'beat ur score btw. 88.']];
+const STEPS = ['Name it', 'What’s it for?', 'Pick a look', 'It’s live'];
+const SHARE = [['tiktok-logo', 'TikTok'], ['instagram-logo', 'Instagram'], ['snapchat-logo', 'Snapchat'], ['discord-logo', 'Discord']];
+const PUBLISH_MS = 1100;
 
 const slug = (raw) => (raw || '').trim().toLowerCase().replace(/[^a-z0-9._-]+/g, '').slice(0, 20) || 'you';
+const motionOff = () => matchMedia('(prefers-reduced-motion: reduce)').matches || document.body.classList.contains('is-motion-paused');
 
-export function initSetupWizard(host, { onName, toast } = {}) {
-  if (!host) return () => {};
+export function initSetupWizard(build, { onName, toast } = {}) {
+  const host = build?.querySelector('[data-wizard]');
+  const screen = build?.querySelector('[data-your-page]');
+  if (!host || !screen) return {};
   host.innerHTML = `
     <header class="xpwin__bar"><img class="xpwin__icon" src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt="" width="16" height="16"><b class="xpwin__title">Auramy Setup</b><span class="xpwin__btns" aria-hidden="true"><button type="button" tabindex="-1">_</button><button type="button" class="is-close" tabindex="-1">×</button></span></header>
     <div class="wizard__body">
@@ -20,30 +25,26 @@ export function initSetupWizard(host, { onName, toast } = {}) {
         <section class="wizard__step" data-step="0" aria-labelledby="wiz-0">
           <h3 id="wiz-0">What should we call you?</h3>
           <label class="addr addr--small"><span class="addr__prefix">aura.my/</span><input data-wiz-name data-handle-sync maxlength="20" autocomplete="off" spellcheck="false" placeholder="yourname" aria-label="Your name"></label>
-          <p class="wizard__card"><span>${doodle('smile')}</span><b data-wiz-show-name>you</b><i>aura.my/<span data-wiz-show-slug>you</span></i></p>
+          <p class="wizard__hint">${doodle('arrow')}<span>watch it build itself</span></p>
         </section>
         <section class="wizard__step" data-step="1" aria-labelledby="wiz-1" hidden>
           <h3 id="wiz-1">What’s it for?</h3>
           <div class="wizard__chips" role="group" aria-labelledby="wiz-1">${ORDER.map((id) => `<button type="button" data-wiz-for="${id}" aria-pressed="${id === 'camila'}">${FOR[id]}</button>`).join('')}</div>
-          <div class="wizard__peek" data-wiz-peek inert></div>
         </section>
         <section class="wizard__step" data-step="2" aria-labelledby="wiz-2" hidden>
           <h3 id="wiz-2">Pick a look.</h3>
           <div class="wizard__looks" role="radiogroup" aria-labelledby="wiz-2">${ORDER.map((id) => `<button type="button" role="radio" data-wiz-look="${id}" aria-checked="false" style="--look:${PERSONAS[id].color}"><i></i><b>${PERSONAS[id].template}</b></button>`).join('')}</div>
         </section>
         <section class="wizard__step" data-step="3" aria-labelledby="wiz-3" hidden>
-          <h3 id="wiz-3">Send it to your people.</h3>
+          <h3 id="wiz-3">It’s live. Go tap it.</h3>
           <div class="wizard__done"><p>aura.my/<b data-wiz-final>you</b></p><button type="button" class="xp-btn" data-wiz-copy>copy link</button></div>
-          <ol class="wizard__chat" aria-label="Group chat preview">
-            <li class="is-me">look what i made 👀</li>
-            ${REPLIES.map(([who, text]) => `<li><img src="/assets/img/av/${who}.jpg" alt="" width="24" height="24"><span><b>${who}</b>${text}</span></li>`).join('')}
-          </ol>
+          <p class="wizard__share"><span>put it in your bio:</span>${SHARE.map(([icon, label]) => `<button type="button" data-wiz-share="${label}" aria-label="Add to ${label} bio"><i class="ph-fill ph-${icon}" aria-hidden="true"></i></button>`).join('')}</p>
         </section>
       </div>
     </div>
     <footer class="wizard__foot">
       <div class="wizard__progress" role="progressbar" aria-label="Setup progress" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1">${STEPS.map(() => '<i></i>').join('')}</div>
-      <p class="wizard__count" data-wiz-count>Step 1 of 4</p>
+      <p class="wizard__count" data-wiz-count aria-live="polite">Step 1 of 4</p>
       <button type="button" class="xp-btn" data-wiz-back disabled>&lt; Back</button>
       <button type="button" class="xp-btn xp-btn--go" data-wiz-next>Next &gt;</button>
     </footer>`;
@@ -51,30 +52,50 @@ export function initSetupWizard(host, { onName, toast } = {}) {
   const $ = (s) => host.querySelector(s);
   const steps = [...host.querySelectorAll('[data-step]')];
   const nameInput = $('[data-wiz-name]');
-  const peek = $('[data-wiz-peek]');
+  const nextBtn = $('[data-wiz-next]');
+  const page = mountYourPage(screen);
   let step = 0;
   let forId = 'camila';
   let look = 'camila';
+  let lookTouched = false;
+  let publishing = 0;
 
-  const syncName = () => {
-    const value = nameInput.value.trim();
-    $('[data-wiz-show-name]').textContent = value.toLowerCase() || 'you';
-    $('[data-wiz-show-slug]').textContent = slug(value);
-    $('[data-wiz-final]').textContent = slug(value);
-  };
-  const syncPeek = () => { peek.innerHTML = homeMarkup(forId); };
+  const pageName = () => nameInput.value.trim().toLowerCase() || 'you';
+  const syncPage = () => page.update({ name: pageName(), slug: slug(nameInput.value), forId, look, stage: Math.min(step, 2) });
+  const syncName = () => { $('[data-wiz-final]').textContent = slug(nameInput.value); syncPage(); };
   const syncLook = () => host.querySelectorAll('[data-wiz-look]').forEach((b) => b.setAttribute('aria-checked', String(b.dataset.wizLook === look)));
 
   function go(next) {
+    clearTimeout(publishing);
+    publishing = 0;
     step = Math.max(0, Math.min(STEPS.length - 1, next));
     steps.forEach((s, i) => { s.hidden = i !== step; });
     host.querySelectorAll('.wizard__progress i').forEach((bar, i) => bar.classList.toggle('is-on', i <= step));
+    host.classList.remove('is-publishing');
+    build.classList.remove('is-publishing');
     $('.wizard__progress').setAttribute('aria-valuenow', String(step + 1));
     $('[data-wiz-count]').textContent = `Step ${step + 1} of ${STEPS.length}`;
     $('[data-wiz-back]').disabled = step === 0;
-    $('[data-wiz-next]').innerHTML = step === STEPS.length - 1 ? 'Finish' : 'Next &gt;';
-    if (step === 1 && !peek.innerHTML) syncPeek();
-    if (step === 2) { look = forId; syncLook(); }
+    nextBtn.disabled = false;
+    nextBtn.innerHTML = step === 2 ? 'Publish ▸' : step === 3 ? 'Start over' : 'Next &gt;';
+    if (step === 2) { if (!lookTouched) look = forId; syncLook(); }
+    syncPage();
+    const live = step === 3;
+    build.toggleAttribute('data-live', live);
+    if (live) page.goLive(); else page.offline();
+  }
+
+  function publish() {
+    host.classList.add('is-publishing');
+    build.classList.add('is-publishing');
+    nextBtn.disabled = true;
+    $('[data-wiz-count]').textContent = 'Publishing…';
+    publishing = setTimeout(() => {
+      go(3);
+      // On a phone the result sits above the window: bring all of it into view, below the nav.
+      const box = build.querySelector('.build__device').getBoundingClientRect();
+      if (box.top < 60 || box.bottom > window.innerHeight) window.scrollBy({ top: box.top - 72, behavior: motionOff() ? 'auto' : 'smooth' });
+    }, motionOff() ? 0 : PUBLISH_MS);
   }
 
   nameInput.addEventListener('input', () => { syncName(); onName?.(nameInput.value); });
@@ -83,24 +104,22 @@ export function initSetupWizard(host, { onName, toast } = {}) {
     if (pick) {
       forId = pick.dataset.wizFor;
       host.querySelectorAll('[data-wiz-for]').forEach((b) => b.setAttribute('aria-pressed', String(b === pick)));
-      syncPeek();
+      syncPage();
       return;
     }
     const lk = event.target.closest('[data-wiz-look]');
-    if (lk) { look = lk.dataset.wizLook; syncLook(); return; }
+    if (lk) { look = lk.dataset.wizLook; lookTouched = true; syncLook(); syncPage(); return; }
     if (event.target.closest('[data-wiz-back]')) { go(step - 1); return; }
-    if (event.target.closest('[data-wiz-copy]')) {
+    const share = event.target.closest('[data-wiz-share]');
+    if (share || event.target.closest('[data-wiz-copy]')) {
       const link = `aura.my/${slug(nameInput.value)}`;
       navigator.clipboard?.writeText(link).catch(() => {});
-      toast?.(`copied <b>${link}</b>. paste it in the group chat.`);
+      toast?.(share ? `copied <b>${link}</b>. paste it in your ${share.dataset.wizShare} bio.` : `copied <b>${link}</b>. paste it in the group chat.`);
       return;
     }
     if (event.target.closest('[data-wiz-next]')) {
-      if (step === STEPS.length - 1) {
-        toast?.(`<b>aura.my/${slug(nameInput.value)}</b> is a preview for now. claiming opens soon.`, 4200);
-        go(0);
-        return;
-      }
+      if (step === 2) { publish(); return; }
+      if (step === 3) { page.reset(); lookTouched = false; go(0); return; }
       go(step + 1);
     }
   });

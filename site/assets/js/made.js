@@ -135,3 +135,96 @@ export function renderMade(row) {
     (opening ? app.querySelector('[data-close-site]') : app.querySelector('[data-open-site]')).focus();
   });
 }
+
+const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
+// A short hold at each end so the first and last apps sit still for a beat.
+const HOLD = 0.06;
+
+/**
+ * Pin the section and let vertical scroll slide the row sideways (mobile first).
+ * Falls back to a plain swipe row for reduced motion and very short screens.
+ */
+export function initMadeScroll(section) {
+  const viewport = section?.querySelector('[data-made-viewport]');
+  const row = section?.querySelector('[data-made]');
+  if (!viewport || !row) return () => {};
+  const thumb = section.querySelector('[data-made-thumb]');
+  const track = thumb?.parentElement;
+  const fallback = matchMedia('(prefers-reduced-motion: reduce), (max-height: 520px)');
+  const abort = new AbortController();
+  const { signal } = abort;
+  let travel = 0;
+  let frame = 0;
+
+  const pinned = () => section.dataset.madeMode === 'pin';
+  const range = () => Math.max(1, section.offsetHeight - window.innerHeight);
+  const xFor = (progress) => clamp((progress - HOLD) / (1 - 2 * HOLD), 0, 1) * travel;
+  const progressFor = (x) => HOLD + (travel ? x / travel : 0) * (1 - 2 * HOLD);
+  const apps = () => [...row.children];
+
+  function update() {
+    frame = 0;
+    if (!pinned()) return;
+    const progress = clamp(-section.getBoundingClientRect().top / range(), 0, 1);
+    const x = xFor(progress);
+    row.style.setProperty('--made-x', x.toFixed(1));
+    track?.style.setProperty('--p', travel ? (x / travel).toFixed(4) : '0');
+  }
+
+  function measure() {
+    section.dataset.madeMode = fallback.matches ? 'swipe' : 'pin';
+    if (!pinned()) {
+      row.style.removeProperty('--made-x');
+      section.style.removeProperty('--made-travel');
+      return;
+    }
+    travel = Math.max(0, row.scrollWidth - viewport.clientWidth);
+    section.style.setProperty('--made-travel', `${travel}px`);
+    track?.style.setProperty('--thumb', `${clamp((viewport.clientWidth / row.scrollWidth) * 100, 12, 100).toFixed(1)}%`);
+    update();
+  }
+
+  const schedule = () => { if (!frame) frame = requestAnimationFrame(update); };
+
+  // Scroll the page to the spot where a given app sits at the left edge.
+  function showApp(app, smooth = true) {
+    if (!pinned() || !app) return;
+    const lead = parseFloat(getComputedStyle(row).paddingLeft) || 0;
+    const x = clamp(app.offsetLeft - lead, 0, travel);
+    const top = window.scrollY + section.getBoundingClientRect().top + progressFor(x) * range();
+    const instant = !smooth || matchMedia('(prefers-reduced-motion: reduce)').matches;
+    window.scrollTo({ top, behavior: instant ? 'auto' : 'smooth' });
+  }
+
+  function currentIndex() {
+    const x = parseFloat(row.style.getPropertyValue('--made-x')) || 0;
+    const lead = parseFloat(getComputedStyle(row).paddingLeft) || 0;
+    const list = apps();
+    let best = 0;
+    list.forEach((app, i) => { if (Math.abs(app.offsetLeft - lead - x) < Math.abs(list[best].offsetLeft - lead - x)) best = i; });
+    return best;
+  }
+
+  section.querySelectorAll('[data-made-step]').forEach((button) => button.addEventListener('click', () => {
+    const list = apps();
+    showApp(list[clamp(currentIndex() + Number(button.dataset.madeStep), 0, list.length - 1)]);
+  }, { signal }));
+
+  // Keyboard users: bring the focused app on screen instead of leaving it off to the side.
+  row.addEventListener('focusin', (event) => {
+    if (!pinned()) return;
+    const app = event.target.closest('.app');
+    const box = app?.getBoundingClientRect();
+    if (box && (box.left < 0 || box.right > window.innerWidth)) showApp(app, false);
+  }, { signal });
+
+  window.addEventListener('scroll', schedule, { passive: true, signal });
+  window.addEventListener('resize', measure, { passive: true, signal });
+  fallback.addEventListener('change', measure, { signal });
+  measure();
+
+  return () => {
+    abort.abort();
+    cancelAnimationFrame(frame);
+  };
+}

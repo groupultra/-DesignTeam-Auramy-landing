@@ -60,9 +60,10 @@ Logo 原图副本在 `Assets/Brand/auramy-logo-supplied-original.jpg`，运行�
 | --- | --- |
 | `site/assets/css/early-web.css` | 整页视觉系统：XP 窗口、按钮、地址栏、涂鸦、各区块与响应式；首页只加载它和 `persona-sites.css` |
 | `site/assets/js/hero-desktop.js` | Hero 桌面：窗口拖动、聚焦、最小化到任务栏、桌面图标与开始菜单；`initWeird` 是 “make it weird” 开关 |
-| `site/assets/js/setup-wizard.js` | `#how` 的 XP 安装向导（取名、用途、外观、发送） |
+| `site/assets/js/setup-wizard.js` | `#how` 的 XP 安装向导（取名 → 用途 → 外观 → Publish 上线），旁边手机实时搭出结果页 |
+| `site/assets/js/your-page.js` | 向导的结果页 `aura.my/<name>`：用途决定内容模块，外观套 7 个模板皮肤；上线后朋友弹出点赞、签留言墙、涨 aura；全部可点 |
 | `site/assets/js/doodles.js` | 圆珠笔涂鸦 SVG sprite |
-| `site/assets/js/made.js` | 7 个平台截图，界面本身即平台识别 |
+| `site/assets/js/made.js` | 7 个平台截图，界面本身即平台识别；`initMadeScroll` 让区块吸顶，纵向滚动驱动横向平移（mobile first），减少动态效果或矮屏时退回横向滑动 |
 | `site/assets/js/aura-shop.js` | `#aura` 的完整链路：访客互动（弹幕、点赞）→ 实时小票记账 → 笑脸计数 → aura mart 按价格逐个解锁 8 个组件 → 买下后出现在 “your page” 窗口 |
 
 - 人设各自的“目的”在他们的网站里体现：Maddie 的页面可切换 close friends / anyone；Marcus 有 ME / TEAM / SCOUTS；Jayden 的页面以梗图为主。

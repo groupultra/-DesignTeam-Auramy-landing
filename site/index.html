@@ -22,7 +22,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Instrument+Serif:ital@0;1&family=Pixelify+Sans:wght@400..700&family=Shantell+Sans:wght,INFM@300..800,0..100&family=Space+Mono:wght@400;700&family=Unbounded:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
-  <link rel="stylesheet" href="/assets/css/early-web.css?v=early-web-1">
+  <link rel="stylesheet" href="/assets/css/early-web.css?v=early-web-3">
   <link rel="stylesheet" href="/assets/css/persona-sites.css?v=early-web-1">
 </head>
 <body class="early-web">
@@ -90,18 +90,32 @@
     <section class="worlds-scroll" id="spaces" aria-labelledby="spaces-title"></section>
 
     <!-- LINKS: the same link, on the apps they already use -->
-    <section class="sec made" id="made" aria-labelledby="made-title">
-      <div class="wrap">
-        <h2 class="sec-title" id="made-title">Same link. <em>Wherever they already are.</em></h2>
+    <section class="made" id="made" aria-labelledby="made-title" data-made-scroll>
+      <div class="made__pin">
+        <div class="wrap">
+          <h2 class="sec-title" id="made-title">Same link. <em>Wherever they already are.</em></h2>
+        </div>
+        <div class="made__viewport" data-made-viewport>
+          <div class="made__row" data-made></div>
+        </div>
+        <div class="made__bar wrap" data-made-bar>
+          <button type="button" data-made-step="-1" aria-label="Previous app">&#9664;</button>
+          <span class="made__track" aria-hidden="true"><i data-made-thumb></i></span>
+          <button type="button" data-made-step="1" aria-label="Next app">&#9654;</button>
+        </div>
       </div>
-      <div class="made__row" data-made></div>
     </section>
 
     <!-- MAKE ONE: four-step setup -->
     <section class="sec how" id="how" aria-labelledby="how-title">
       <div class="wrap how__wrap">
         <h2 class="sec-title" id="how-title">Yours takes <em>four clicks.</em></h2>
-        <div class="xpwin wizard" data-wizard role="group" aria-label="Auramy setup"></div>
+        <div class="build" data-build>
+          <div class="build__device">
+            <div class="phone build__phone"><div class="screen build__screen" data-your-page aria-label="Your page preview"></div></div>
+          </div>
+          <div class="xpwin wizard" data-wizard role="group" aria-label="Auramy setup"></div>
+        </div>
       </div>
     </section>
 
@@ -276,6 +290,6 @@
   <button class="motion-toggle" type="button" data-motion-toggle aria-pressed="false">pause motion</button>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script type="module" src="/assets/js/landing.js?v=early-web-1"></script>
+  <script type="module" src="/assets/js/landing.js?v=early-web-3"></script>
 </body>
 </html>
