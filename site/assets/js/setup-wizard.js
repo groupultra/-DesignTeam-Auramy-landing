@@ -60,6 +60,30 @@ export function initSetupWizard(build, { onName, toast } = {}) {
   let lookTouched = false;
   let publishing = 0;
 
+  const onPhone = matchMedia('(max-width: 899px)');
+  const section = build.closest('section');
+  let snapTimer = 0;
+
+  // Phones: the builder is one screen, its bottom on the bottom of the screen. Typing opens the
+  // keyboard and pushes it up; once the keyboard goes away (or a step changes) put it back so
+  // the page preview is in view again.
+  function snapBack(delay = 0) {
+    if (!onPhone.matches || !section || build.hasAttribute('data-live')) return;
+    clearTimeout(snapTimer);
+    snapTimer = setTimeout(() => {
+      const box = section.getBoundingClientRect();
+      if (box.top > window.innerHeight * 0.6 || box.bottom < window.innerHeight * 0.4) return; // they scrolled away
+      const dy = box.bottom - window.innerHeight;
+      if (Math.abs(dy) > 2) window.scrollBy({ top: dy, behavior: motionOff() ? 'auto' : 'smooth' });
+    }, delay);
+  }
+  // Leaving the name field closes the keyboard; snap once it has slid away.
+  const leaveField = () => {
+    if (document.activeElement !== nameInput) { snapBack(); return; }
+    nameInput.blur();
+    snapBack(380);
+  };
+
   const pageName = () => nameInput.value.trim().toLowerCase() || 'you';
   const syncPage = () => page.update({ name: pageName(), slug: slug(nameInput.value), forId, look, stage: Math.min(step, 2) });
   const syncName = () => { $('[data-wiz-final]').textContent = slug(nameInput.value); syncPage(); };
@@ -99,6 +123,13 @@ export function initSetupWizard(build, { onName, toast } = {}) {
   }
 
   nameInput.addEventListener('input', () => { syncName(); onName?.(nameInput.value); });
+  nameInput.addEventListener('blur', () => snapBack(380));
+  nameInput.addEventListener('keydown', (event) => {
+    if (event.key !== 'Enter') return;
+    event.preventDefault();
+    go(1);
+    leaveField();
+  });
   host.addEventListener('click', (event) => {
     const pick = event.target.closest('[data-wiz-for]');
     if (pick) {
@@ -109,7 +140,7 @@ export function initSetupWizard(build, { onName, toast } = {}) {
     }
     const lk = event.target.closest('[data-wiz-look]');
     if (lk) { look = lk.dataset.wizLook; lookTouched = true; syncLook(); syncPage(); return; }
-    if (event.target.closest('[data-wiz-back]')) { go(step - 1); return; }
+    if (event.target.closest('[data-wiz-back]')) { go(step - 1); leaveField(); return; }
     const share = event.target.closest('[data-wiz-share]');
     if (share || event.target.closest('[data-wiz-copy]')) {
       const link = `aura.my/${slug(nameInput.value)}`;
@@ -118,9 +149,10 @@ export function initSetupWizard(build, { onName, toast } = {}) {
       return;
     }
     if (event.target.closest('[data-wiz-next]')) {
-      if (step === 2) { publish(); return; }
-      if (step === 3) { page.reset(); lookTouched = false; go(0); return; }
+      if (step === 2) { if (document.activeElement === nameInput) nameInput.blur(); publish(); return; }
+      if (step === 3) { page.reset(); lookTouched = false; go(0); leaveField(); return; }
       go(step + 1);
+      leaveField();
     }
   });
 

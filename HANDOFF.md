@@ -60,7 +60,7 @@ Logo 原图副本在 `Assets/Brand/auramy-logo-supplied-original.jpg`，运行�
 | --- | --- |
 | `site/assets/css/early-web.css` | 整页视觉系统：XP 窗口、按钮、地址栏、涂鸦、各区块与响应式；首页只加载它和 `persona-sites.css` |
 | `site/assets/js/hero-desktop.js` | Hero 桌面：窗口拖动、聚焦、最小化到任务栏、桌面图标与开始菜单；`initWeird` 是 “make it weird” 开关 |
-| `site/assets/js/setup-wizard.js` | `#how` 的 XP 安装向导（取名 → 用途 → 外观 → Publish 上线），旁边手机实时搭出结果页 |
+| `site/assets/js/setup-wizard.js` | `#how` 的 XP 安装向导（取名 → 用途 → 外观 → Publish 上线），旁边手机实时搭出结果页；手机上整个区块正好一屏，`scroll-snap-align: end` 吸附到屏幕底部，键盘收起或切换步骤后自动吸附回去，保证预览手机可见 |
 | `site/assets/js/your-page.js` | 向导的结果页 `aura.my/<name>`：用途决定内容模块，外观套 7 个模板皮肤；上线后朋友弹出点赞、签留言墙、涨 aura；全部可点 |
 | `site/assets/js/doodles.js` | 圆珠笔涂鸦 SVG sprite |
 | `site/assets/js/worlds-scroll.js` | `#spaces` 单手机随滚动切换 7 个模板；整段区块（背景、标题字体、made for 便签、任务栏、两张贴图）跟着切成当前人的网站风格，各有一个签名特效（Camila 胶片走带、Maddie 雨刷与尾灯、Marcus 球场线与灯光、Jayden 骷髅表情上浮、River 星空与飞蛾、Theo 放映光束与颗粒、Aaliyah 辫子与甲片闪光），照片按需加载；7 个人之后是第 8 个空白的 “You” 页面，里面是 claim 名字的表单（复用全站 `[data-claim]` 逻辑） |
