@@ -11,6 +11,7 @@ shot() { "$CH" --headless=new --disable-gpu --hide-scrollbars --force-device-sca
 
 shot 1200,630 assets/img/og.png og.html
 shot 1200,630 assets/img/og-brand.png og-brand.html
+shot 1200,630 assets/img/og-sims.png og-sims.html
 shot 1024,1024 assets/img/app-icon-1024.png icon.html
 sips -Z 512 assets/img/app-icon-1024.png --out assets/img/app-icon-512.png >/dev/null
 sips -Z 180 assets/img/app-icon-1024.png --out assets/img/app-icon-180.png >/dev/null

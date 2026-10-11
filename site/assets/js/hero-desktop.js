@@ -1,13 +1,14 @@
-// The hero: a little early-2000s desktop with three Auramy worlds open (the lead personas)
-// and the other four waiting as desktop icons. Windows can be focused, dragged by their
-// title bar, minimised to the taskbar and reopened. Local demo only.
+// The hero: a sunny lot in live mode, with three Auramy worlds open as panels (the lead
+// personas) and the other four waiting on the side. A needs panel, household portraits and
+// the time controls frame it; panels can be focused, dragged, tucked away and reopened.
 import { PERSONAS, ORDER, LEADS, personaAvatar } from './personas.js';
 import { homeMarkup } from './persona-sites.js?v=early-web-1';
 import { doodle } from './doodles.js';
 
-const TITLES = { camila: "cami's cut", maddie: 'drive home', marcus: 'friday night drive', jayden: 'lobby.exe', river: 'porchlight', theo: 'late show', aaliyah: 'knotless' };
+const TITLES = { camila: "cami's cut", maddie: 'drive home', marcus: 'friday night drive', jayden: 'lobby', river: 'porchlight', theo: 'late show', aaliyah: 'knotless' };
 const ICONS = ORDER.filter((id) => !LEADS.includes(id));
 const SLOTS = { maddie: 'left', camila: 'main', marcus: 'right' };
+const NEEDS = [['Social', 92], ['Fun', 78], ['Aura', 96], ['Vibes', 64]];
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 
 const windowMarkup = (id, slot) => {
@@ -34,6 +35,10 @@ export function initHeroDesktop(host) {
     </div>
     <ul class="desktop__icons" aria-label="More worlds">${ICONS.map((id) => `<li><button type="button" class="desk-icon" data-open="${id}"><img src="${personaAvatar(id)}" alt="" width="44" height="44"><span>${TITLES[id]}</span></button></li>`).join('')}</ul>
     <div class="desktop__windows" data-windows>${LEADS.map((id) => windowMarkup(id, SLOTS[id])).join('')}</div>
+    <div class="sims-needs" aria-hidden="true">
+      <p class="sims-needs__mood"><img src="${personaAvatar('camila')}" alt="" width="34" height="34"><span><b>Inspired</b>cami · lot 3</span></p>
+      <ul>${NEEDS.map(([label, v]) => `<li><span>${label}</span><i style="--v:${v}%"></i></li>`).join('')}</ul>
+    </div>
     <div class="desktop__taskbar">
       <button type="button" class="desk-start" data-start aria-expanded="false" aria-controls="desk-menu">${doodle('smile')}<b>start</b></button>
       <div class="desk-menu" id="desk-menu" hidden>
@@ -42,7 +47,7 @@ export function initHeroDesktop(host) {
       </div>
       <div class="desk-tasks" data-tasks>${LEADS.map(taskMarkup).join('')}</div>
       <p class="desk-marquee" aria-hidden="true"><span>★ under construction ★ best viewed at 800×600 ★ sign my guestbook ★ under construction ★ best viewed at 800×600 ★ sign my guestbook ★</span></p>
-      <p class="desk-tray">${doodle('smile', 'desk-tray__smile')}<time data-clock>4:12 PM</time></p>
+      <p class="desk-tray"><span class="sims-speed" aria-hidden="true"><i>❚❚</i><i class="is-on">▶</i><i>▶▶</i><i>▶▶▶</i></span><time data-clock>4:12 PM</time><b class="sims-cash">✦ 2,680</b></p>
     </div>`;
 
   const abort = new AbortController();

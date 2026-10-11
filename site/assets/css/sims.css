@@ -1,0 +1,212 @@
+/* Life-sim edition. Same page, same structure, a life-sim UI skin on top of early-web.css:
+   airy glassy panels with blue header strips, round buttons, a sunny lot in live mode with a
+   needs panel and time controls, "Create a Page" for setup and a buy-mode catalog for the
+   aura mart. Branding stays: the yellow smiley, Auramy blue, and an Auramy gem (yellow, not
+   any game's mark) floating over whoever is in focus. */
+
+:root {
+  --f-hand: "Nunito", system-ui, sans-serif;
+  --f-ui: "Nunito", system-ui, sans-serif;
+  --f-pixel: "Nunito", system-ui, sans-serif;
+  --f-head: "Baloo 2", "Nunito", system-ui, sans-serif;
+  --paper: #eef6ff;
+  --face: #ffffff;
+  --ink: #1b2a44;
+  --ink-soft: #4f607d;
+  --line: #cfe0f4;
+  --sky: #2b8ae6;
+  --sky-deep: #1666c9;
+  --leaf: #4fc25a;
+  --title: linear-gradient(180deg, #46a2ff 0%, #2b8ae6 55%, #1f74d6 100%);
+  --title-off: linear-gradient(180deg, #a9cdf2, #8fb9e6);
+  --glass: rgba(255, 255, 255, .86);
+  --shadow: 0 2px 0 rgba(22, 102, 201, .08), 0 14px 32px rgba(22, 70, 140, .16);
+  --shadow-lg: 0 3px 0 rgba(22, 102, 201, .1), 0 26px 56px rgba(22, 70, 140, .24);
+  /* the gem: an Auramy diamond, yellow over blue */
+  --gem: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 64'%3E%3Cpath d='M20 0 40 28 20 64 0 28Z' fill='%23f6ec22'/%3E%3Cpath d='M20 0 40 28H0Z' fill='%23fff8a8'/%3E%3Cpath d='M20 0 28 28H12Z' fill='%23fffbd0'/%3E%3Cpath d='M0 28h40L20 64Z' fill='%23e6d40f'/%3E%3Cpath d='M12 28h16L20 64Z' fill='%23f6ec22'/%3E%3Cpath d='M20 0 40 28 20 64 0 28Z' fill='none' stroke='%232f5ef6' stroke-width='2.4' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+body { background-color: var(--paper); background-image: linear-gradient(135deg, rgba(43, 138, 230, .05) 25%, transparent 25% 75%, rgba(43, 138, 230, .05) 75%), linear-gradient(45deg, rgba(43, 138, 230, .05) 25%, transparent 25% 75%, rgba(43, 138, 230, .05) 75%); background-size: 44px 44px; color: var(--ink); }
+:focus-visible { outline: 3px solid rgba(43, 138, 230, .55); outline-offset: 2px; }
+.sec-title, .hero__title, .claim-win__title { font-family: var(--f-head); font-weight: 800; letter-spacing: -.02em; line-height: 1; }
+.sec-title em, .claim-win__title em { color: var(--sky-deep); }
+.sec-sub { font-weight: 600; }
+
+/* ── buttons: glossy and round ── */
+.xp-btn { min-height: 42px; padding: 0 20px; border: 1.5px solid #cfe0f4; border-radius: 999px; background: linear-gradient(180deg, #ffffff, #eef6ff); color: var(--sky-deep); font: 800 15px/1 var(--f-ui); box-shadow: 0 3px 8px rgba(22, 70, 140, .12); }
+.xp-btn:hover { border-color: #9cc6f2; box-shadow: 0 4px 12px rgba(22, 70, 140, .18); }
+.xp-btn:active { transform: translateY(1px); }
+.xp-btn--go { border-color: #1666c9; background: linear-gradient(180deg, #5cb0ff 0%, #2b8ae6 52%, #1f74d6 100%); color: #fff; text-shadow: 0 1px 1px rgba(10, 50, 110, .35); box-shadow: inset 0 1px 0 rgba(255, 255, 255, .45), 0 4px 12px rgba(22, 102, 201, .35); }
+.xp-btn--go:hover { background: linear-gradient(180deg, #6bb8ff 0%, #3394ef 52%, #227ade 100%); }
+
+/* ── windows: airy panels with a blue header strip and round buttons ── */
+.xpwin { border: 2px solid #ffffff; border-radius: 18px; background: #fff; box-shadow: var(--shadow), 0 0 0 1px rgba(43, 138, 230, .18); }
+.xpwin__bar { gap: 8px; height: 38px; padding: 0 7px 0 12px; background: var(--title); color: #fff; font: 800 14px/1 var(--f-ui); text-shadow: 0 1px 1px rgba(10, 50, 110, .35); }
+.xpwin__icon { width: 22px; height: 22px; border: 2px solid #fff; border-radius: 50%; }
+.xpwin__btns { gap: 5px; }
+.xpwin__btns button { width: 24px; height: 24px; border: 2px solid #fff; border-radius: 50%; background: rgba(255, 255, 255, .22); color: #fff; font: 900 12px/1 var(--f-ui); }
+.xpwin__btns button.is-close { background: #fff; color: var(--sky-deep); }
+.xpwin__addr { height: 30px; padding: 0 10px; border-bottom: 1px solid #e3eefa; background: #f4f9ff; color: var(--ink-soft); font-family: var(--f-ui); }
+.xpwin__addr i { border: 1px solid #d6e6f7; border-radius: 999px; padding: 3px 10px; }
+
+/* ── claim field ── */
+.addr { border: 2px solid #fff; border-radius: 999px; background: #fff; box-shadow: 0 0 0 1px rgba(43, 138, 230, .2), 0 10px 24px rgba(22, 70, 140, .12); }
+.addr:focus-within { box-shadow: 0 0 0 3px rgba(43, 138, 230, .45), 0 10px 24px rgba(22, 70, 140, .12); }
+.addr__field { padding-left: 10px; }
+.addr__prefix, .addr input { font-family: var(--f-ui); font-weight: 800; }
+
+/* ── site nav: a glassy strip ── */
+.topbar { border: 2px solid #fff; border-radius: 999px; background: var(--glass); box-shadow: 0 0 0 1px rgba(43, 138, 230, .16), 0 10px 26px rgba(22, 70, 140, .14); }
+.topbar__brand { font: 800 22px/1 var(--f-head); }
+.topbar__links a { border-radius: 999px; color: var(--ink-soft); font: 800 15px/1 var(--f-ui); }
+.topbar__links a:hover { background: rgba(43, 138, 230, .1); color: var(--sky-deep); }
+
+/* ── hero: a sunny lot in live mode ── */
+.desktop { border: 3px solid #fff; border-radius: 22px; background: radial-gradient(40% 26% at 82% 10%, rgba(255, 245, 190, .95), transparent 70%), linear-gradient(180deg, #7cc8ff 0%, #b9e2ff 52%, #dff2ff 64%); box-shadow: 0 0 0 1px rgba(43, 138, 230, .2), var(--shadow-lg); }
+.desktop::before { display: none; }
+.desk-cloud { color: #fff; stroke: none; fill: #fff; opacity: .9; }
+.desk-hill { left: -10%; right: -10%; bottom: -14%; height: 46%; border-radius: 50% 50% 0 0 / 30% 30% 0 0; background: radial-gradient(circle at 20% 30%, #6bd46f 0 30px, transparent 31px), radial-gradient(circle at 78% 24%, #5ccb62 0 40px, transparent 41px), linear-gradient(180deg, #7fd86f, #4fc25a 60%, #3fae4b); box-shadow: inset 0 8px 0 rgba(255, 255, 255, .3); }
+.desk-win.is-active::before { content: ""; position: absolute; left: 50%; top: -64px; width: 32px; height: 52px; margin-left: -16px; background: var(--gem) center / contain no-repeat; filter: drop-shadow(0 4px 6px rgba(22, 70, 140, .35)); animation: gem-bob 2.4s ease-in-out infinite; pointer-events: none; }
+.desk-win { overflow: visible; }
+.desk-win__screen { border-radius: 0 0 14px 14px; }
+@keyframes gem-bob { 50% { transform: translateY(-6px) rotateY(180deg); } }
+.desktop__windows { inset: 64px 0 74px; }
+.desk-win:not(.is-active) .xpwin__bar { background: var(--title-off); }
+.desk-win--right { top: 24%; }
+.sims-needs { position: absolute; right: 12px; top: 12px; z-index: 7; width: 172px; padding: 9px 11px 10px; border: 2px solid #fff; border-radius: 16px; background: var(--glass); box-shadow: 0 8px 20px rgba(22, 70, 140, .2); font: 800 11.5px/1 var(--f-ui); }
+.sims-needs__mood { display: flex; align-items: center; gap: 8px; margin: 0 0 8px; }
+.sims-needs__mood img { width: 34px; height: 34px; border: 2px solid var(--leaf); border-radius: 50%; object-fit: cover; }
+.sims-needs__mood span { display: grid; gap: 2px; color: var(--ink-soft); font-weight: 700; }
+.sims-needs__mood b { color: #2f9a3a; font-size: 13px; }
+.sims-needs ul { display: grid; gap: 5px; margin: 0; padding: 0; list-style: none; }
+.sims-needs li { display: grid; grid-template-columns: 44px 1fr; align-items: center; gap: 6px; color: var(--ink); }
+.sims-needs li i { height: 8px; border-radius: 999px; background: linear-gradient(90deg, #6fd66a, #49b64f) 0 0 / var(--v) 100% no-repeat, #dbe8f5; box-shadow: inset 0 1px 1px rgba(0, 0, 0, .1); }
+.desktop__icons { top: 74px; left: 12px; gap: 8px; }
+.desk-icon { width: 76px; color: var(--ink); font: 800 11.5px/1.2 var(--f-ui); text-shadow: 0 1px 0 rgba(255, 255, 255, .8); }
+.desk-icon img { width: 50px; height: 50px; border: 3px solid #fff; border-radius: 50%; box-shadow: 0 4px 10px rgba(22, 70, 140, .25); }
+.desk-icon:hover span, .desk-icon:focus-visible span { background: var(--sky); color: #fff; text-shadow: none; }
+/* the live-mode control bar */
+.desktop__taskbar { left: 12px; right: 12px; bottom: 10px; gap: 8px; height: 56px; padding: 0 10px 0 6px; border: 2px solid #fff; border-radius: 999px; background: var(--glass); box-shadow: 0 8px 22px rgba(22, 70, 140, .22); }
+.desk-start { width: 44px; height: 44px; padding: 0; justify-content: center; border: 2px solid #fff; border-radius: 50%; background: var(--title); box-shadow: 0 3px 8px rgba(22, 102, 201, .35); }
+.desk-start .doodle { width: 30px; height: 30px; }
+.desk-start b, .desk-task span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.desk-tasks { gap: 6px; overflow: visible; }
+.desk-task { width: 44px; height: 44px; max-width: none; padding: 0; justify-content: center; border: 0; border-radius: 50%; background: none; box-shadow: none; }
+.desk-task img { width: 44px; height: 44px; border: 3px solid #fff; border-radius: 50%; box-shadow: 0 3px 8px rgba(22, 70, 140, .25); }
+.desk-task[aria-pressed="true"] { background: none; box-shadow: none; }
+.desk-task[aria-pressed="true"] img { border-color: var(--leaf); }
+.desk-task[aria-pressed="false"] img { opacity: .55; }
+.desk-tray { gap: 10px; height: auto; padding: 0; border: 0; background: none; color: var(--ink); font: 800 13px/1 var(--f-ui); }
+.sims-speed { display: flex; gap: 3px; }
+.sims-speed i { display: grid; place-items: center; min-width: 26px; height: 26px; padding: 0 4px; border-radius: 999px; background: #e3eefa; color: var(--sky-deep); font: 900 9px/1 var(--f-ui); font-style: normal; letter-spacing: -.12em; }
+.sims-speed i.is-on { background: var(--sky); color: #fff; }
+.sims-cash { padding: 5px 10px; border-radius: 999px; background: #fffbd0; color: #8a6d00; }
+.desk-marquee, html[data-weird="on"] .desk-marquee { display: none; }
+.desk-menu { left: 0; bottom: calc(100% + 10px); width: 250px; border: 2px solid #fff; border-radius: 18px; background: var(--glass); box-shadow: var(--shadow-lg); }
+.desk-menu__head { background: var(--title); font: 800 13px/1 var(--f-ui); }
+.desk-menu button { border-radius: 999px; font: 700 13px/1.2 var(--f-ui); }
+.desk-menu button img { border-radius: 50%; }
+.desk-menu button:hover, .desk-menu button:focus-visible { background: var(--sky); }
+html[data-weird="on"] .desktop { background: linear-gradient(180deg, #ff4fc3 0%, #8e63ff 45%, #3ce6ff 70%); }
+
+/* ── "personality not found": a dialog ── */
+#vs .xp-error { overflow: hidden; border: .6cqw solid #fff; border-radius: 5cqw; background: #fff; box-shadow: 0 0 0 .3cqw rgba(43, 138, 230, .25), 0 5cqw 10cqw rgba(22, 70, 140, .3); text-align: center; }
+#vs .xp-error__bar { justify-content: center; background: var(--title); font: 800 4.2cqw/1 var(--f-ui); }
+#vs .xp-error__bar span { display: none; }
+#vs .xp-error__body { justify-content: center; padding: 5cqw 4cqw 3cqw; color: var(--ink); font: 700 3.8cqw/1.3 var(--f-ui); }
+#vs .xp-error__body i { background: var(--gem) center / 60% no-repeat, #eef6ff; color: transparent; }
+#vs .xp-error__ok span { padding: 2.4cqw 12cqw; border: 0; border-radius: 99cqw; background: linear-gradient(180deg, #5cb0ff, #1f74d6); color: #fff; font: 800 3.8cqw/1 var(--f-ui); }
+#vs .scroll-reveal__note { border: 2px solid #fff; border-radius: 999px; background: var(--glass); color: var(--ink); font: 800 12.5px/1.2 var(--f-ui); box-shadow: 0 0 0 1px rgba(43, 138, 230, .2); }
+#vs .scroll-reveal__note::before { border-radius: 999px; background: linear-gradient(90deg, #6fd66a, #49b64f); opacity: .5; }
+
+/* ── worlds tab strip: household portraits ── */
+.worlds-scroll__tabs { padding: 6px; border: 2px solid rgba(255, 255, 255, .7); border-radius: 999px; }
+.worlds-scroll__tabs button { border: 0; border-radius: 999px; font: 800 13px/1 var(--f-ui); }
+.worlds-scroll__tabs img { border: 2px solid #fff; }
+
+/* ── sideways app row ── */
+.made__bar { height: 18px; border: 2px solid #fff; border-radius: 999px; background: #e3eefa; box-shadow: 0 0 0 1px rgba(43, 138, 230, .2); }
+.made__bar button { border-radius: 50%; background: #fff; color: var(--sky-deep); }
+.made__track i { top: 3px; bottom: 3px; border: 0; border-radius: 999px; background: var(--title); }
+
+/* ── setup: Create a Page, steps as round tabs ── */
+.wizard__side { align-content: start; justify-items: center; gap: 16px; padding: 18px 12px; background: linear-gradient(180deg, #eaf4ff, #d9ebff); background-image: none; color: var(--ink); }
+.wizard__appicon { display: grid; place-items: center; width: 64px; height: 64px; border: 3px solid #fff; border-radius: 50%; background: var(--title); box-shadow: 0 4px 12px rgba(22, 102, 201, .35); }
+.wizard__side .wizard__appicon .doodle { width: 44px; height: 44px; }
+.wizard__steps { display: grid; gap: 10px; width: 100%; margin: 0; padding: 0; list-style: none; counter-reset: step; font: 800 12.5px/1.15 var(--f-ui); color: var(--ink-soft); }
+.wizard__steps li { display: flex; align-items: center; gap: 8px; counter-increment: step; }
+.wizard__steps li::before { content: counter(step); display: grid; place-items: center; flex: none; width: 28px; height: 28px; border: 2px solid #fff; border-radius: 50%; background: #c6dcf3; color: #fff; font-weight: 900; }
+.wizard__steps li.is-done::before { content: "✓"; background: var(--leaf); }
+.wizard__steps li.is-on { color: var(--sky-deep); }
+.wizard__steps li.is-on::before { background: var(--sky); box-shadow: 0 0 0 3px rgba(43, 138, 230, .25); }
+.wizard__step h3 { font-family: var(--f-head); font-weight: 800; }
+.wizard__chips button { border: 2px solid #d6e6f7; border-radius: 999px; font: 800 14px/1 var(--f-ui); color: var(--ink); }
+.wizard__chips button[aria-pressed="true"] { border-color: var(--sky); background: var(--sky); color: #fff; }
+.wizard__looks button { border: 2px solid #d6e6f7; border-radius: 14px; font-family: var(--f-ui); font-weight: 800; }
+.wizard__looks button[aria-checked="true"] { border-color: var(--sky); background: #eaf4ff; box-shadow: none; }
+.wizard__looks i { border-radius: 50%; }
+.wizard__done p { border: 2px solid #d6e6f7; border-radius: 999px; font-family: var(--f-ui); }
+.wizard__share button { border: 2px solid #d6e6f7; border-radius: 50%; color: var(--sky-deep); }
+.wizard__foot { border-top: 1px solid #e3eefa; background: #f4f9ff; }
+.wizard__progress { height: 10px; padding: 0; gap: 3px; border: 0; border-radius: 999px; background: #dbe8f5; }
+.wizard__progress i { border-radius: 999px; }
+.wizard__progress i.is-on { background: linear-gradient(90deg, #6fd66a, #49b64f); }
+
+/* ── play window ── */
+.pw__chrome { border-top: 0; background: #f4f9ff; }
+.pw__addr { border-bottom: 1px solid #e3eefa; background: #f4f9ff; }
+.pw__addr i { border: 1px solid #d6e6f7; border-radius: 999px; font-family: var(--f-ui); font-weight: 700; }
+.pw[data-pw-mode="pin"] .pw__frame { border: 2px solid #fff; }
+
+/* ── aura mart: buy mode ── */
+.mart__banner { border-bottom: 0; background: var(--title); }
+.mart__marquee { color: #fff; font: 800 13px/1.4 var(--f-ui); }
+.mart__wallet { border-radius: 999px; background: #fffbd0; color: #8a6d00; font: 800 12px/1 var(--f-ui); }
+.mart__wallet b { color: #8a6d00; }
+.mart__shelf { background: #f4f9ff; background-image: none; }
+.mart__item { border: 2px solid #fff; border-radius: 18px; box-shadow: 0 0 0 1px rgba(43, 138, 230, .16), 0 8px 18px rgba(22, 70, 140, .1); }
+.mart__preview { border-radius: 12px; }
+.mart__name { font: 800 16px/1.1 var(--f-ui); }
+.mart__does { font-family: var(--f-ui); font-weight: 600; }
+.mart__price { color: #2f9a3a; font: 900 15px/1 var(--f-ui); }
+.mart__tag { border-radius: 999px; font: 900 10px/1 var(--f-ui); }
+.mart__tag--new { background: var(--leaf); }
+.aura-meter__bubble { border: 2px solid #fff; border-radius: 16px; background: var(--glass); font: 800 14px/1.25 var(--f-ui); box-shadow: 0 0 0 1px rgba(43, 138, 230, .2), var(--shadow); }
+.aura-meter__bubble::after { border: 0; background: #fff; }
+.orb__num { border-radius: 999px; background: #fff; color: #2f9a3a; font-family: var(--f-ui); box-shadow: 0 0 0 2px #d6e6f7; }
+.orb__num small { color: var(--ink-soft); }
+.orb__tap { border-radius: 999px; font: 800 14px/1 var(--f-ui); }
+.aura { background-color: #eaf4ff; }
+
+/* ── claim: on the lot ── */
+.claimsec { background: radial-gradient(40% 30% at 82% 12%, rgba(255, 245, 190, .95), transparent 70%), linear-gradient(180deg, #7cc8ff 0%, #b9e2ff 60%, #dff2ff 76%); }
+.claimsec__wall .doodle--cloud { color: #fff; stroke: none; fill: #fff; }
+.claimsec__wall .desk-hill { bottom: -26%; }
+.claim-win { overflow: visible; }
+.claim-win::before { content: ""; position: absolute; left: 50%; top: -72px; z-index: 3; width: 32px; height: 52px; margin-left: -16px; background: var(--gem) center / contain no-repeat; filter: drop-shadow(0 4px 6px rgba(22, 70, 140, .35)); animation: gem-bob 2.4s ease-in-out infinite; }
+.claim-win__body { background: #fff; border-radius: 0 0 16px 16px; }
+
+/* ── toast: a notification panel, top right ── */
+.toast { left: auto; right: 16px; top: 78px; bottom: auto; max-width: min(92vw, 360px); padding: 40px 16px 14px 62px; border: 2px solid #fff; border-radius: 18px; background: var(--glass); color: var(--ink); font: 700 13.5px/1.35 var(--f-ui); box-shadow: 0 0 0 1px rgba(43, 138, 230, .2), var(--shadow-lg); transform: translateX(calc(100% + 40px)); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); }
+.toast::before { content: ""; left: 14px; top: 40px; width: 38px; height: 38px; border: 2px solid #fff; border-radius: 50%; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23f6ec22' d='M32 4c17-1 29 12 28 29-1 17-13 28-29 27C15 59 4 47 5 31 6 15 17 5 32 4Z'/%3E%3Cpath fill='none' stroke='%23161a2e' stroke-width='4' stroke-linecap='round' d='M23 22l-1 8M40 20l1 8M17 37c8 10 24 10 31-2'/%3E%3C/svg%3E") center / 28px no-repeat, var(--title); }
+.toast::after { content: "Auramy"; position: absolute; left: 0; right: 0; top: 0; height: 30px; padding: 0 16px; border-radius: 16px 16px 0 0; background: var(--title); color: #fff; font: 800 13px/30px var(--f-ui); }
+.toast.is-on { transform: none; }
+.motion-toggle { border: 2px solid #fff; border-radius: 999px; background: var(--glass); color: var(--sky-deep); font: 800 12px/1 var(--f-ui); box-shadow: 0 0 0 1px rgba(43, 138, 230, .2), 0 6px 14px rgba(22, 70, 140, .14); }
+.foot nav a, .foot__small { font-family: var(--f-ui); font-weight: 700; }
+
+@media (max-width: 640px) {
+  .sims-needs { width: 132px; padding: 7px 8px; font-size: 10.5px; }
+  .sims-needs li { grid-template-columns: 36px 1fr; }
+  .sims-needs li:nth-child(n + 3) { display: none; }
+  .desktop__windows { inset: 92px 0 70px; }
+  .desk-tray .sims-speed i:nth-child(n + 3), .desk-tray time { display: none; }
+  .desk-start, .desk-task, .desk-task img { width: 38px; height: 38px; }
+  .desk-start .doodle { width: 26px; height: 26px; }
+  .desktop__taskbar { height: 50px; }
+  .motion-toggle { color: transparent; }
+  .motion-toggle::before { color: var(--sky-deep); }
+  .toast { top: 12px; right: 12px; }
+}
+@media (min-width: 900px) {
+  .wizard__body { grid-template-columns: 158px minmax(0, 1fr); }
+}

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Auramy share card (life sim)</title>
+<!-- Life-sim edition of og.html: a glassy panel on a sunny lot, the Auramy gem above it.
+     Rendered by tools/render-png.sh → /assets/img/og-sims.png -->
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@800&family=Caveat:wght@700&family=Nunito:wght@800&family=Instrument+Serif:ital@1&family=Shantell+Sans:wght,INFM@800,45&family=Unbounded:wght@800&display=block" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body { position: relative; background: radial-gradient(30% 40% at 90% 6%, rgba(255, 245, 190, .95), transparent 70%), linear-gradient(180deg, #7cc8ff 0%, #b9e2ff 58%, #6fd06a 58%, #4fc25a 100%); color: #1b2a44; font-family: "Nunito", sans-serif; }
+
+  .win { position: absolute; inset: 60px 26px 20px; overflow: hidden; border: 4px solid #fff; border-radius: 26px; background: linear-gradient(135deg, rgba(43, 138, 230, .06) 25%, transparent 25% 75%, rgba(43, 138, 230, .06) 75%) 0 0 / 52px 52px, linear-gradient(45deg, rgba(43, 138, 230, .06) 25%, transparent 25% 75%, rgba(43, 138, 230, .06) 75%) 0 0 / 52px 52px, #f4f9ff; box-shadow: 0 0 0 2px rgba(43, 138, 230, .25), 0 26px 56px rgba(22, 70, 140, .35); }
+  .bar { display: flex; align-items: center; gap: 14px; height: 60px; padding: 0 12px 0 16px; background: linear-gradient(180deg, #46a2ff 0%, #2b8ae6 55%, #1f74d6 100%); color: #fff; font: 800 28px/1 "Nunito", sans-serif; text-shadow: 0 1px 1px rgba(10, 50, 110, .35); }
+  .bar img { width: 40px; height: 40px; border: 3px solid #fff; border-radius: 50%; }
+  .bar b { flex: 1; }
+  .bar span { display: grid; place-items: center; width: 40px; height: 40px; border: 3px solid #fff; border-radius: 50%; background: rgba(255, 255, 255, .22); font: 900 20px/1 "Nunito", sans-serif; }
+  .bar span.x { background: #fff; color: #1666c9; }
+  .gem { position: absolute; left: 50%; top: 6px; z-index: 3; width: 30px; height: 48px; margin-left: -15px; filter: drop-shadow(0 4px 6px rgba(22, 70, 140, .35)); }
+
+  h1 { position: absolute; left: 52px; top: 116px; font: 800 88px/.98 "Baloo 2", sans-serif; letter-spacing: -.02em; }
+  h1 em { position: relative; display: inline-block; font-style: normal; background: linear-gradient(180deg, transparent 56%, #f6ec22 56% 90%, transparent 90%); }
+  h1 svg { position: absolute; left: -7%; top: -16%; width: 114%; height: 136%; overflow: visible; fill: none; stroke: #2541d8; stroke-width: 3.4; stroke-linecap: round; }
+
+  /* four friends, four completely different pages: fanned so every name shows */
+  .card { position: absolute; top: 112px; width: 196px; height: 312px; overflow: hidden; border-radius: 18px; box-shadow: 0 22px 44px rgba(18, 48, 143, .3), 0 3px 8px rgba(18, 48, 143, .16); }
+  .card img { display: block; width: 100%; height: 64%; object-fit: cover; }
+  .card b { position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; height: 36%; padding-left: 16px; }
+  .cami { left: 596px; transform: rotate(-9deg) translateY(16px); background: linear-gradient(170deg, #f7c27a, #ef7d58); }
+  .cami img { width: 84%; height: 58%; margin: 8% 0 0 8%; border: 6px solid #fff4e2; border-radius: 4px; }
+  .cami b { padding-left: 14px; color: #1d0f08; font: italic 400 54px/1 "Instrument Serif", serif; }
+  .j4y { left: 730px; top: 136px; transform: rotate(-3deg); background: #0b0d0c; box-shadow: 0 0 0 4px #c8ff3d, 0 22px 44px rgba(18, 48, 143, .3); }
+  .j4y img { object-fit: contain; padding-top: 14px; background: radial-gradient(circle at 50% 60%, #2a3a12, #0b0d0c 70%); }
+  .j4y b { color: #c8ff3d; font: 800 60px/1 -apple-system, "Helvetica Neue", Arial, sans-serif; letter-spacing: -.07em; }
+  .mads { left: 864px; transform: rotate(3deg) translateY(8px); background: #2a2c2e; }
+  .mads b { padding-left: 10px; background: #f7f4ec; color: #23252a; font: 700 46px/1 "Caveat", cursive; }
+  .eagles { left: 974px; transform: rotate(9deg) translateY(26px); background: #0d2b1d; }
+  .eagles img { object-position: 52% 30%; }
+  .eagles b { justify-content: center; padding: 0; color: #f2c230; font: italic 800 54px/1 "Unbounded", sans-serif; letter-spacing: -.06em; }
+
+  .smile { position: absolute; left: 1036px; top: 74px; width: 110px; height: 110px; transform: rotate(12deg); filter: drop-shadow(0 10px 14px rgba(18, 48, 143, .3)); }
+</style>
+</head>
+<body>
+  <svg class="gem" viewBox="0 0 40 64"><path d="M20 0 40 28 20 64 0 28Z" fill="#f6ec22"/><path d="M20 0 40 28H0Z" fill="#fff8a8"/><path d="M0 28h40L20 64Z" fill="#e6d40f"/><path d="M20 0 40 28 20 64 0 28Z" fill="none" stroke="#2f5ef6" stroke-width="2.4" stroke-linejoin="round"/></svg>
+  <div class="win">
+    <header class="bar"><img src="/assets/img/brand/auramy-monitor.jpg" alt=""><b>aura.my/you</b><span>_</span><span class="x">×</span></header>
+    <h1>A little<br>internet for<br><em>your people.<svg viewBox="0 0 240 100" preserveAspectRatio="none"><path d="M40 22C82 6 162 4 210 24c30 13 30 46-6 60-48 17-128 16-170 2C6 76 0 52 22 36c26-18 86-26 150-22"/></svg></em></h1>
+
+    <div class="card cami"><img src="/assets/img/personas/camila/c01-graduation-selfie.jpg" alt=""><b>cami</b></div>
+    <div class="card j4y"><img src="/assets/img/personas/jayden/j16-j4y-avatar.jpg" alt=""><b>j4y</b></div>
+    <div class="card mads"><img src="/assets/img/personas/maddie/p04-shared-earbuds.jpg" alt=""><b>mads</b></div>
+    <div class="card eagles"><img src="/assets/img/personas/marcus/mc02-day-game-run-after-catch.jpg" alt=""><b>#11</b></div>
+
+    <svg class="smile" viewBox="0 0 64 64"><path fill="#f6ec22" d="M32 4c17-1 29 12 28 29-1 17-13 28-29 27C15 59 4 47 5 31 6 15 17 5 32 4Z"/><path fill="none" stroke="#161a2e" stroke-width="4" stroke-linecap="round" d="M23 22l-1 8M40 20l1 8M17 37c8 10 24 10 31-2"/></svg>
+  </div>
+</body>
+</html>
