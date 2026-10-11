@@ -5,6 +5,34 @@ const WORLDS = ORDER.map((id) => ({ id, label: PERSONAS[id].name, ...PERSONAS[id
 
 const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
 
+// Each world re-skins the whole section: a backdrop photo, two pinned-up pictures in that
+// template's style and one signature effect (film running, rain + wiper, field lines,
+// rising skulls, stars + moths, projector flicker, nail glints). Photos load lazily.
+const BACKDROPS = {
+  camila: { bg: 'car', pics: ['fries', 'pool'] },
+  maddie: { bg: 'bus', pics: ['earbuds', 'doodle'], caps: ['cf only', ''] },
+  marcus: { bg: 'stands', pics: ['mom', 'lift'], caps: ['SENIOR NIGHT', '6AM LIFT'] },
+  jayden: { bg: null, pics: ['catmeme', 'drift'] },
+  river: { bg: 'zine', pics: ['sheet', 'charm'], caps: ['kite, ref v3', ''] },
+  theo: { bg: 'matinee', pics: ['ticket', 'street'], caps: ['ADMIT ONE', 'REEL 2'] },
+  aaliyah: { bg: 'floral', pics: ['cobalt', 'braids'], caps: ['$25', 'knotless'] },
+};
+const spread = (n, fn) => Array.from({ length: n }, (_, i) => fn(i)).join('');
+const DECOR = {
+  camila: '<i class="wbg__strip"></i><i class="wbg__strip wbg__strip--r"></i><i class="wbg__clips"></i>',
+  maddie: '<i class="wbg__bokeh"></i><i class="wbg__rain"></i><i class="wbg__wiper"></i>',
+  marcus: '<i class="wbg__yards"></i><i class="wbg__light"></i><i class="wbg__light wbg__light--r"></i>',
+  jayden: `<i class="wbg__grid"></i>${spread(8, (i) => `<b class="wbg__skull" style="--x:${(i * 13 + 5) % 96}%;--d:${(i * 0.83).toFixed(2)}s;--s:${0.7 + (i % 3) * 0.25}">💀</b>`)}`,
+  river: `<i class="wbg__stars"></i><i class="wbg__moon"></i><i class="wbg__lamp"></i>${spread(3, (i) => `<b class="wbg__moth" style="--d:${-i * 1.1}s;--r:${34 + i * 14}px"></b>`)}`,
+  theo: '<i class="wbg__beam"></i><i class="wbg__grain"></i><i class="wbg__bars"></i>',
+  aaliyah: `<i class="wbg__braid"></i><i class="wbg__braid wbg__braid--r"></i>${spread(6, (i) => `<b class="wbg__glint" style="--x:${[12, 82, 30, 70, 8, 90][i]}%;--y:${[18, 30, 62, 74, 44, 56][i]}%;--d:${(i * 0.47).toFixed(2)}s">✦</b>`)}`,
+};
+
+const backdropMarkup = () => `<div class="wbg" aria-hidden="true">${ORDER.map((id) => {
+  const { pics, caps = [] } = BACKDROPS[id];
+  return `<div class="wbg__layer" data-bg="${id}"><i class="wbg__photo"></i>${DECOR[id]}${pics.map((key, i) => `<figure class="wbg__pic wbg__pic--${i ? 'b' : 'a'}"><img alt="" data-src="${PERSONAS[id].photos[key]}" decoding="async">${caps[i] ? `<figcaption>${caps[i]}</figcaption>` : ''}</figure>`).join('')}</div>`;
+}).join('')}</div>`;
+
 /**
  * Mount the seven persona template worlds in one scroll-pinned phone.
  * The returned function removes listeners and stops the active demo loop.
@@ -15,6 +43,7 @@ export function initWorldsScroll(root) {
   const prefix = root.id || 'spaces';
   root.innerHTML = `
     <div class="worlds-scroll__pin" data-worlds-pin>
+      ${backdropMarkup()}
       <div class="worlds-scroll__layout">
         <header class="worlds-scroll__head">
           <h2 class="sec-title" id="${prefix}-title">Whoever you are,<br><em>there’s a world for it.</em></h2>
@@ -48,6 +77,8 @@ export function initWorldsScroll(root) {
     line: root.querySelector('[data-who-line]'),
     url: root.querySelector('[data-who-url]'),
   };
+  const layers = [...root.querySelectorAll('.wbg__layer')];
+  let switchTimer = 0;
   const motionFallback = matchMedia('(prefers-reduced-motion: reduce), (max-height: 640px)');
   const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
   let active = -1;
@@ -85,12 +116,33 @@ export function initWorldsScroll(root) {
     mounted = active;
   }
 
+  // Show the active backdrop; load its photos (and its neighbours') only when needed.
+  function paintBackdrop() {
+    layers.forEach((layer, index) => {
+      layer.classList.toggle('is-on', index === active);
+      if (Math.abs(index - active) > 1 || layer.dataset.loaded) return;
+      layer.dataset.loaded = 'true';
+      const bg = BACKDROPS[layer.dataset.bg].bg;
+      if (bg) layer.querySelector('.wbg__photo').style.backgroundImage = `url("${PERSONAS[layer.dataset.bg].photos[bg]}")`;
+      layer.querySelectorAll('img[data-src]').forEach((img) => { img.src = img.dataset.src; });
+    });
+  }
+
   function select(index) {
     const next = clamp(index, 0, WORLDS.length - 1);
     if (next === active) return;
     active = next;
     const world = WORLDS[active];
+    const first = !root.dataset.world;
     root.dataset.world = world.id;
+    paintBackdrop();
+    if (!first) {
+      root.classList.remove('is-switching');
+      void root.offsetWidth;
+      root.classList.add('is-switching');
+      clearTimeout(switchTimer);
+      switchTimer = setTimeout(() => root.classList.remove('is-switching'), 450);
+    }
     tabs.forEach((tab, tabIndex) => {
       const selected = tabIndex === active;
       tab.setAttribute('aria-selected', String(selected));
@@ -177,6 +229,7 @@ export function initWorldsScroll(root) {
   // content has already left the viewport at either end.
   const observer = new IntersectionObserver(([entry]) => {
     rootVisible = entry.isIntersecting;
+    root.classList.toggle('is-visible', rootVisible);
     syncWorld();
   }, { threshold: 0.1 });
   observer.observe(screen);
@@ -190,6 +243,7 @@ export function initWorldsScroll(root) {
     observer.disconnect();
     cancelAnimationFrame(frame);
     clearTimeout(lockTimer);
+    clearTimeout(switchTimer);
     unmount();
     screen.innerHTML = '';
   };

@@ -2,7 +2,7 @@ import { auraFor, prefersReducedMotion } from './aura.js';
 import { injectSprite, blobAvatar } from './sprite.js';
 import { PEOPLE, avatar } from './people.js';
 import { renderMade, initMadeScroll } from './made.js?v=early-web-2';
-import { initWorldsScroll } from './worlds-scroll.js?v=early-web-1';
+import { initWorldsScroll } from './worlds-scroll.js?v=early-web-2';
 import { initScrollReveal } from './scroll-reveal.js?v=early-web-1';
 import { initAlbumParty } from './album-party.js?v=early-web-1';
 import { initEndingScenes } from './ending-scenes.js?v=early-web-1';
