@@ -1,33 +1,102 @@
-<!doctype html><html><head><meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Caveat:wght@700&family=Instrument+Serif:ital@1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/tokens.css">
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Auramy share card</title>
+<!-- 1200×630 share card in the early-web style. Rendered by tools/render-png.sh → /assets/img/og.png -->
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Instrument+Serif:ital@1&family=Pixelify+Sans:wght@600&family=Shantell+Sans:wght,INFM@800,45&family=Space+Mono:wght@700&family=Unbounded:wght@800&display=block" rel="stylesheet">
 <style>
-html,body{margin:0;width:1200px;height:630px;overflow:hidden}
-body{position:relative;background:#FFF8EE;font-family:var(--f-display);color:#141013}
-.a1{position:absolute;width:900px;height:900px;left:-300px;top:-420px;border-radius:50%;background:radial-gradient(circle,rgba(255,95,162,.45),transparent 62%)}
-.a2{position:absolute;width:900px;height:900px;right:-340px;top:-80px;border-radius:50%;background:radial-gradient(circle,rgba(232,255,90,.65),transparent 62%)}
-.a3{position:absolute;width:700px;height:700px;left:260px;bottom:-480px;border-radius:50%;background:radial-gradient(circle,rgba(255,138,60,.35),transparent 62%)}
-.logo{position:absolute;left:64px;top:56px;height:40px}
-h1{position:absolute;left:62px;top:150px;margin:0;font-weight:800;font-size:112px;line-height:.86;letter-spacing:-.055em;font-variation-settings:"opsz" 96}
-h1 em{font-family:var(--f-serif);font-style:italic;font-weight:400;letter-spacing:-.02em;font-size:1.1em;background:linear-gradient(100deg,#ff3d8b,#ff6a3d 55%,#ff9f1a);-webkit-background-clip:text;background-clip:text;color:transparent;padding-right:.05em}
-.claim{position:absolute;left:64px;bottom:62px;display:flex;align-items:center;gap:14px;padding:10px 10px 10px 24px;border:3px solid #141013;border-radius:99px;background:#fff;box-shadow:0 6px 0 #141013;font:700 26px/1 var(--f-mono)}
-.claim span{color:#9b9189}.claim b{padding:14px 22px;border-radius:99px;background:var(--aura-candy);border:2px solid #141013;font-family:var(--f-display);font-size:24px}
-.card{position:absolute;right:92px;top:78px;width:330px;height:470px;border-radius:30px;background:#141013;box-shadow:0 0 0 8px #fff,0 40px 60px -30px rgba(20,16,19,.6);transform:rotate(5deg);padding:14px;box-sizing:border-box}
-.art{height:250px;border-radius:20px;background:var(--aura-candy);display:grid;place-items:center}
-.art img{width:170px;filter:drop-shadow(0 18px 18px rgba(20,16,19,.3))}
-.nm{margin:18px 8px 4px;color:#FFF8EE;font-weight:800;font-size:58px;letter-spacing:-.05em;line-height:1}
-.url{margin:0 8px;color:#b9ada0;font:400 17px/1 var(--f-mono)}.url b{color:#fff8ee}
-.chips{display:flex;gap:6px;margin:16px 8px 0}.chips i{font-style:normal;padding:7px 11px;border-radius:99px;background:rgba(255,248,238,.12);color:#fff8ee;font-weight:600;font-size:16px}
-.note{position:absolute;right:452px;top:300px;width:150px;height:140px;background:#FFE45C;transform:rotate(-8deg);display:grid;place-items:center;text-align:center;font:700 34px/.95 var(--f-hand);box-shadow:0 14px 24px -12px rgba(20,16,19,.5)}
-.likes{position:absolute;right:300px;top:40px;padding:12px 18px;border-radius:99px;background:#fff;box-shadow:0 0 0 5px #fff,0 12px 24px -12px rgba(20,16,19,.4);font:700 24px/1 var(--f-mono);transform:rotate(-6deg)}.likes i{font-style:normal;color:#FF3D5A}
-.star{position:absolute;right:58px;bottom:40px;width:86px;fill:#E8FF5A;stroke:#fff;stroke-width:8;paint-order:stroke;filter:drop-shadow(0 8px 10px rgba(20,16,19,.25));transform:rotate(12deg)}
-</style></head><body>
-<i class="a1"></i><i class="a2"></i><i class="a3"></i>
-<img class="logo" src="/assets/logo/auramy-lockup.svg">
-<h1>a website<br>with your<br><em>aura.</em></h1>
-<div class="claim"><span>aura.my/</span>you<b>claim it →</b></div>
-<div class="card"><div class="art"><img src="/assets/logo/auramy-mark.svg"></div><p class="nm">you</p><p class="url">aura.my/<b>you</b></p><div class="chips"><i>loud</i><i>sweet</i><i>main character</i></div></div>
-<div class="note">u have<br>aura fr</div>
-<div class="likes"><i>♥</i> 1,204</div>
-<svg class="star" viewBox="0 0 100 100"><path d="M50 4l12.9 29.2 31.8 3.2-23.8 21.3 6.8 31.2L50 73 22.3 88.9l6.8-31.2L5.3 36.4l31.8-3.2Z"/></svg>
-</body></html>
+  :root { --led: #2f5ef6; --ink: #161a2e; --soft: #4b5068; --crayon: #f6ec22; --pen: #2541d8;
+    --title: linear-gradient(180deg, #6b95ff 0%, #3466f7 10%, #2d5cf0 50%, #2450dc 88%, #1d40b8 100%); }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body { position: relative; background: radial-gradient(rgba(47, 94, 246, .16) 1.3px, transparent 1.8px) 0 0 / 22px 22px, #f8f7f2; color: var(--ink); font-family: "Shantell Sans", system-ui, sans-serif; }
+  svg.d { position: absolute; overflow: visible; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+
+  .brand { position: absolute; left: 60px; top: 50px; display: flex; align-items: center; gap: 14px; font: 800 36px/1 "Shantell Sans"; font-variation-settings: "INFM" 45; }
+  .brand img { width: 56px; height: 56px; border-radius: 12px; box-shadow: 0 6px 14px rgba(18, 48, 143, .18); }
+
+  h1 { position: absolute; left: 58px; top: 150px; width: 660px; font: 800 72px/1.04 "Shantell Sans"; font-variation-settings: "INFM" 45; letter-spacing: -.02em; }
+  h1 .people { position: relative; display: inline-block; padding: 0 .06em; background: linear-gradient(180deg, transparent 56%, rgba(246, 236, 34, .95) 56% 90%, transparent 90%); }
+  h1 .people svg { left: -6%; top: -14%; width: 112%; height: 132%; color: var(--pen); stroke-width: 3.2; }
+  .sub { position: absolute; left: 62px; top: 326px; color: var(--soft); font: 800 34px/1 "Shantell Sans"; font-variation-settings: "INFM" 45; }
+  .sub svg { left: 340px; top: -18px; width: 120px; height: 82px; color: var(--pen); stroke-width: 3.5; }
+
+  .addr { position: absolute; left: 60px; top: 430px; display: flex; align-items: center; gap: 10px; width: 590px; padding: 9px 9px 9px 20px; border: 2px solid #7f9db9; border-radius: 12px; background: #fff; box-shadow: 0 12px 26px rgba(18, 48, 143, .14); font: 700 26px/1 Tahoma, Verdana, sans-serif; }
+  .addr span { color: #5e6480; }
+  .addr b { flex: 1; color: var(--ink); }
+  .addr i { padding: 16px 22px; border: 2px solid #b9a40a; border-radius: 8px; background: linear-gradient(180deg, #fff8a2 0%, #f9ef3c 45%, #eedd16 100%); color: #12308f; font-style: normal; white-space: nowrap; }
+  .foot { position: absolute; left: 62px; top: 548px; display: flex; align-items: center; gap: 10px; color: var(--soft); font: 700 19px/1 "Space Mono", monospace; }
+  .foot img { width: 36px; height: 36px; margin-right: -18px; border: 3px solid #f8f7f2; border-radius: 50%; object-fit: cover; }
+  .foot span { margin-left: 26px; }
+
+  /* the windows: three friends, three worlds */
+  .win { position: absolute; overflow: hidden; border: 2px solid #1d3fb5; border-radius: 12px 12px 7px 7px; background: #fff; box-shadow: 0 26px 50px rgba(18, 48, 143, .26), 0 4px 10px rgba(18, 48, 143, .14); }
+  .bar { display: flex; align-items: center; gap: 8px; height: 36px; padding: 0 6px 0 9px; background: var(--title); color: #fff; font: 700 17px/1 Tahoma, Verdana, sans-serif; text-shadow: 1px 1px 0 rgba(10, 30, 110, .55); }
+  .bar img { width: 22px; height: 22px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(255, 255, 255, .8); }
+  .bar b { flex: 1; }
+  .bar span { display: grid; place-items: center; width: 24px; height: 24px; border: 1px solid rgba(255, 255, 255, .9); border-radius: 4px; background: linear-gradient(180deg, #6f98ff, #2c5be9); font-size: 14px; }
+  .bar span.x { background: linear-gradient(180deg, #f39a7a, #d8431f); }
+  .shot { display: block; width: 100%; object-fit: cover; }
+
+  .maddie { z-index: 1; left: 688px; top: 34px; width: 290px; transform: rotate(-5deg); background: #2a2c2e; }
+  .maddie .shot { height: 250px; filter: saturate(.9); }
+  .maddie .note { position: absolute; left: 16px; right: 40px; top: 16px; padding: 10px 14px 12px; border-radius: 4px; background: #f7f4ec; color: #23252a; transform: rotate(-1.5deg); box-shadow: 0 6px 14px rgba(0, 0, 0, .35); }
+  .maddie .note b { display: block; font: 700 40px/.9 "Caveat", cursive; }
+  .maddie .note small { font: 700 14px/1 "Space Mono", monospace; }
+  .maddie .body { position: relative; height: 250px; }
+
+  .marcus { z-index: 3; left: 958px; top: 150px; width: 218px; transform: rotate(4deg); background: #0d2b1d; }
+  .marcus .body { position: relative; height: 290px; }
+  .marcus .shot { height: 290px; object-position: 46% 30%; }
+  .marcus .body::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 35%, rgba(13, 43, 29, .92) 82%); }
+  .marcus h3 { position: absolute; z-index: 1; left: 14px; bottom: 32px; font: italic 800 33px/.86 "Unbounded", sans-serif; letter-spacing: -.06em; }
+  .marcus h3 span { display: block; color: #f2c230; }
+  .marcus h3 span + span { color: #fff; }
+  .marcus p { position: absolute; z-index: 1; left: 14px; bottom: 12px; color: #f4f1e6; font: 700 13px/1 "Space Mono", monospace; letter-spacing: .04em; }
+
+  .camila { z-index: 2; left: 702px; top: 292px; width: 296px; transform: rotate(-2deg); }
+  .camila .body { position: relative; height: 262px; padding: 14px 16px 0; background: linear-gradient(170deg, #f7c27a, #f39a5c 55%, #ef7d58); }
+  .camila .shot { height: 142px; border: 6px solid #fff4e2; border-radius: 4px; box-shadow: 0 6px 14px rgba(120, 40, 10, .3); }
+  .camila .clips { display: flex; gap: 4px; height: 14px; margin-top: 10px; }
+  .camila .clips i { flex: 1; border-radius: 3px; }
+  .camila h3 { margin-top: 6px; color: #1d0f08; font: italic 400 62px/.8 "Instrument Serif", serif; letter-spacing: -.03em; }
+
+  .smile { right: 30px; top: 26px; width: 104px; height: 104px; transform: rotate(10deg); filter: drop-shadow(0 10px 14px rgba(18, 48, 143, .25)); stroke: none; }
+  .spark { color: var(--pop, #ff4fc3); stroke: none; fill: currentColor; }
+  .heart { right: 26px; top: 560px; width: 46px; height: 46px; color: #ff4fc3; transform: rotate(12deg); stroke: none; }
+  .like { position: absolute; z-index: 4; left: 1012px; top: 498px; display: flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 999px; background: #fff; box-shadow: 0 10px 22px rgba(18, 48, 143, .2); color: #d4148f; font: 700 20px/1 "Pixelify Sans", monospace; transform: rotate(-4deg); }
+</style>
+</head>
+<body>
+  <p class="brand"><img src="/assets/img/brand/auramy-monitor.jpg" alt="">Auramy</p>
+
+  <h1>A little internet<br>for <span class="people">your people.<svg class="d" viewBox="0 0 240 100" preserveAspectRatio="none"><path d="M40 22C82 6 162 4 210 24c30 13 30 46-6 60-48 17-128 16-170 2C6 76 0 52 22 36c26-18 86-26 150-22"/></svg></span></h1>
+  <p class="sub">Not your followers.<svg class="d" viewBox="0 0 130 90"><path d="M8 80C26 52 52 26 112 20"/><path d="M92 6l22 14-18 18"/></svg></p>
+
+  <p class="addr"><span>aura.my/</span><b>yourname</b><i>claim your name</i></p>
+  <p class="foot"><img src="/assets/img/av/camila.jpg" alt=""><img src="/assets/img/av/maddie.jpg" alt=""><img src="/assets/img/av/marcus.jpg" alt=""><img src="/assets/img/av/jayden.jpg" alt=""><img src="/assets/img/av/river.jpg" alt=""><span>your people are already here</span></p>
+
+  <article class="win maddie">
+    <header class="bar"><img src="/assets/img/av/maddie.jpg" alt=""><b>aura.my/maddie</b><span>_</span><span class="x">×</span></header>
+    <div class="body"><img class="shot" src="/assets/img/personas/maddie/p04-shared-earbuds.jpg" alt=""><p class="note"><b>maddie</b><small>★ close friends only</small></p></div>
+  </article>
+
+  <article class="win marcus">
+    <header class="bar"><img src="/assets/img/av/marcus.jpg" alt=""><b>aura.my/eagles</b><span class="x">×</span></header>
+    <div class="body"><img class="shot" src="/assets/img/personas/marcus/mc02-day-game-run-after-catch.jpg" alt=""><h3><span>MARCUS</span><span>REED</span></h3><p>#11 · WR · CAPTAIN</p></div>
+  </article>
+
+  <article class="win camila">
+    <header class="bar"><img src="/assets/img/av/camila.jpg" alt=""><b>aura.my/cami</b><span>_</span><span class="x">×</span></header>
+    <div class="body"><img class="shot" src="/assets/img/personas/camila/c01-graduation-selfie.jpg" alt=""><p class="clips"><i style="background:#ffd84d"></i><i style="background:#ff7aa8"></i><i style="background:#62d2ff"></i><i style="background:#b48cff"></i><i style="background:#7ee08a"></i></p><h3>cami</h3></div>
+  </article>
+
+  <p class="like">♥ 1,204</p>
+  <svg class="d smile" viewBox="0 0 64 64"><path fill="#f6ec22" d="M32 4c17-1 29 12 28 29-1 17-13 28-29 27C15 59 4 47 5 31 6 15 17 5 32 4Z"/><path fill="none" stroke="#161a2e" stroke-width="4" d="M23 22l-1 8M40 20l1 8M17 37c8 10 24 10 31-2"/></svg>
+  <svg class="d spark" viewBox="0 0 40 40" style="left:640px;top:40px;width:34px;height:34px;--pop:#2f5ef6"><path d="M20 3c1.4 10.6 5.6 15.4 16.6 17-11 1.6-15.2 6.2-16.6 17-1.4-10.8-5.6-15.4-16.6-17C14.4 18.4 18.6 13.6 20 3Z"/></svg>
+  <svg class="d spark" viewBox="0 0 40 40" style="left:1150px;top:460px;width:34px;height:34px"><path d="M20 3c1.4 10.6 5.6 15.4 16.6 17-11 1.6-15.2 6.2-16.6 17-1.4-10.8-5.6-15.4-16.6-17C14.4 18.4 18.6 13.6 20 3Z"/></svg>
+  <svg class="d spark" viewBox="0 0 40 40" style="left:668px;top:260px;width:28px;height:28px;--pop:#e8c400"><path d="M20 3c1.4 10.6 5.6 15.4 16.6 17-11 1.6-15.2 6.2-16.6 17-1.4-10.8-5.6-15.4-16.6-17C14.4 18.4 18.6 13.6 20 3Z"/></svg>
+  <svg class="d heart" viewBox="0 0 40 40"><path fill="currentColor" d="M20 35C5 25 2 13 10 8c5-3 9 0 10 5 2-6 7-8 11-5 8 5 4 17-11 27Z"/></svg>
+</body>
+</html>
