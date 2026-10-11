@@ -65,6 +65,7 @@ Logo 原图副本在 `Assets/Brand/auramy-logo-supplied-original.jpg`，运行�
 | `site/assets/js/doodles.js` | 圆珠笔涂鸦 SVG sprite |
 | `site/assets/js/worlds-scroll.js` | `#spaces` 单手机随滚动切换 7 个模板；整段区块（背景、标题字体、made for 便签、任务栏、两张贴图）跟着切成当前人的网站风格，各有一个签名特效（Camila 胶片走带、Maddie 雨刷与尾灯、Marcus 球场线与灯光、Jayden 骷髅表情上浮、River 星空与飞蛾、Theo 放映光束与颗粒、Aaliyah 辫子与甲片闪光），照片按需加载；7 个人之后是第 8 个空白的 “You” 页面，里面是 claim 名字的表单（复用全站 `[data-claim]` 逻辑） |
 | `site/assets/js/play-window.js` | `#play` 窗口放大 + 窗口内四个页面的滚动、标题栏/地址栏同步、全屏时隐藏顶栏 |
+| `site/brand/index.html` + `assets/css/brand-kit.css` + `assets/js/brand-kit.js` | Brand kit v2：你的互联网小角落。五个不变量（蜡笔笑脸、蓝屏幕、蓝天绿草、UI 模仿、你的角落），logo 解剖、颜色、天空草地、四种皮肤实时切换演示、字体、涂鸦、语气、应用和下载。令牌在 `assets/css/brand-tokens.css`，新图标在 `assets/img/brand/`，笑脸 SVG 在 `assets/logo/auramy-smiley*.svg` |
 | `site/assets/js/made.js` | 7 个平台截图，界面本身即平台识别；卡片用固定 width（Safari 会按文字算 max-content 宽度，导致右侧大片空白），滑动距离按最后一张卡片计算；`initMadeScroll` 让区块吸顶，纵向滚动驱动横向平移（mobile first），减少动态效果或矮屏时退回横向滑动 |
 | `site/assets/js/aura-shop.js` | `#aura` 的完整链路：访客互动（弹幕、点赞）→ 实时小票记账 → 笑脸计数 → aura mart 按价格逐个解锁 6 个组件 → 买下后在 “your page” 迷你网页里真的生效（访客计数器、跟随指针的光标拖尾、可拖动的镭射贴纸、闪粉名字、播放中的音乐条、会走会吃的像素宠物） |
 
