@@ -3,117 +3,55 @@
 <head>
 <meta charset="utf-8">
 <title>Auramy share card</title>
-<!-- 1200×630 share card in the early-web style. Rendered by tools/render-png.sh → /assets/img/og.png -->
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Instrument+Serif:ital@1&family=Pixelify+Sans:wght@600&family=Shantell+Sans:wght,INFM@800,45&family=Space+Mono:wght@700&family=Unbounded:wght@800&display=block" rel="stylesheet">
+<!-- 1200×630 share card, built to read as a thumbnail: one window, one line, four very
+     different pages. Rendered by tools/render-png.sh → /assets/img/og.png -->
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Instrument+Serif:ital@1&family=Shantell+Sans:wght,INFM@800,45&family=Unbounded:wght@800&display=block" rel="stylesheet">
 <style>
-  :root { --led: #2f5ef6; --ink: #161a2e; --soft: #4b5068; --crayon: #f6ec22; --pen: #2541d8;
-    --title: linear-gradient(180deg, #6b95ff 0%, #3466f7 10%, #2d5cf0 50%, #2450dc 88%, #1d40b8 100%); }
   * { box-sizing: border-box; margin: 0; }
   html, body { width: 1200px; height: 630px; overflow: hidden; }
-  body { position: relative; background: radial-gradient(120% 90% at 50% 120%, #7ea0ff, transparent 60%), linear-gradient(180deg, #2b5ef0, #1d43d6); color: var(--ink); font-family: "Shantell Sans", system-ui, sans-serif; }
-  /* the whole card is one Auramy window */
-  .main { position: absolute; inset: 16px; overflow: hidden; border: 2px solid #1d3fb5; border-radius: 14px 14px 8px 8px; background: #efece2; box-shadow: 0 18px 40px rgba(6, 22, 90, .45); }
-  .main__bar { display: flex; align-items: center; gap: 12px; height: 50px; padding: 0 8px 0 14px; background: var(--title); color: #fff; font: 700 23px/1 Tahoma, Verdana, sans-serif; text-shadow: 1px 1px 0 rgba(10, 30, 110, .55); }
-  .main__bar img { width: 30px; height: 30px; border-radius: 6px; }
-  .main__bar b { flex: 1; }
-  .main__bar span { display: grid; place-items: center; width: 34px; height: 34px; border: 1.5px solid rgba(255, 255, 255, .9); border-radius: 5px; background: linear-gradient(180deg, #6f98ff, #2c5be9); font: 700 18px/1 Tahoma, sans-serif; }
-  .main__bar span.x { background: linear-gradient(180deg, #f39a7a, #d8431f); }
-  .main__addr { display: flex; align-items: center; gap: 10px; height: 42px; padding: 0 10px; border-bottom: 1px solid #c8c3b5; background: #f3f1ea; color: #5e6480; font: 17px/1 Tahoma, Verdana, sans-serif; }
-  .main__addr i { flex: 1; padding: 6px 10px; border: 1px solid #7f9db9; background: #fff; color: var(--ink); font-style: normal; }
-  .main__addr b { padding: 6px 12px; border: 1px solid #7f9db9; border-radius: 3px; background: linear-gradient(180deg, #fff, #ebe8df); color: var(--ink); font-weight: 400; }
-  .main__page { position: absolute; left: 0; right: 0; top: 92px; bottom: 30px; overflow: hidden; background: radial-gradient(rgba(47, 94, 246, .16) 1.3px, transparent 1.8px) 0 0 / 22px 22px, #f8f7f2; }
-  .main__status { position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 10px; height: 30px; padding: 0 12px; border-top: 1px solid #c8c3b5; background: #efece2; color: #4b5068; font: 15px/1 Tahoma, Verdana, sans-serif; }
-  .main__status span { margin-left: auto; padding-left: 12px; border-left: 1px solid #c8c3b5; }
-  svg.d { position: absolute; overflow: visible; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+  body { position: relative; background: radial-gradient(120% 90% at 50% 120%, #7ea0ff, transparent 60%), linear-gradient(180deg, #2b5ef0, #1d43d6); color: #161a2e; font-family: "Shantell Sans", system-ui, sans-serif; }
 
-
-  h1 { position: absolute; left: 40px; top: 40px; width: 640px; font: 800 66px/1.04 "Shantell Sans"; font-variation-settings: "INFM" 45; letter-spacing: -.02em; }
-  h1 .people { position: relative; display: inline-block; padding: 0 .06em; background: linear-gradient(180deg, transparent 56%, rgba(246, 236, 34, .95) 56% 90%, transparent 90%); }
-  h1 .people svg { left: -6%; top: -14%; width: 112%; height: 132%; color: var(--pen); stroke-width: 3.2; }
-  .sub { position: absolute; left: 44px; top: 210px; color: var(--soft); font: 800 34px/1 "Shantell Sans"; font-variation-settings: "INFM" 45; }
-  .sub svg { left: 340px; top: -18px; width: 120px; height: 82px; color: var(--pen); stroke-width: 3.5; }
-
-  .addr { position: absolute; left: 42px; top: 298px; display: flex; align-items: center; gap: 10px; width: 590px; padding: 9px 9px 9px 20px; border: 2px solid #7f9db9; border-radius: 12px; background: #fff; box-shadow: 0 12px 26px rgba(18, 48, 143, .14); font: 700 26px/1 Tahoma, Verdana, sans-serif; }
-  .addr span { color: #5e6480; }
-  .addr b { flex: 1; color: var(--ink); }
-  .addr i { padding: 16px 22px; border: 2px solid #b9a40a; border-radius: 8px; background: linear-gradient(180deg, #fff8a2 0%, #f9ef3c 45%, #eedd16 100%); color: #12308f; font-style: normal; white-space: nowrap; }
-  .foot { position: absolute; left: 44px; top: 404px; display: flex; align-items: center; gap: 10px; color: var(--soft); font: 700 19px/1 "Space Mono", monospace; }
-  .foot img { width: 36px; height: 36px; margin-right: -18px; border: 3px solid #f8f7f2; border-radius: 50%; object-fit: cover; }
-  .foot span { margin-left: 26px; }
-
-  /* the windows: three friends, three worlds */
-  .win { position: absolute; overflow: hidden; border: 2px solid #1d3fb5; border-radius: 12px 12px 7px 7px; background: #fff; box-shadow: 0 26px 50px rgba(18, 48, 143, .26), 0 4px 10px rgba(18, 48, 143, .14); }
-  .bar { display: flex; align-items: center; gap: 8px; height: 36px; padding: 0 6px 0 9px; background: var(--title); color: #fff; font: 700 17px/1 Tahoma, Verdana, sans-serif; text-shadow: 1px 1px 0 rgba(10, 30, 110, .55); }
-  .bar img { width: 22px; height: 22px; border-radius: 50%; object-fit: cover; border: 1px solid rgba(255, 255, 255, .8); }
+  .win { position: absolute; inset: 18px; overflow: hidden; border: 3px solid #1d3fb5; border-radius: 16px 16px 9px 9px; background: radial-gradient(rgba(47, 94, 246, .16) 1.5px, transparent 2px) 0 0 / 26px 26px, #f8f7f2; box-shadow: 0 18px 40px rgba(6, 22, 90, .45); }
+  .bar { display: flex; align-items: center; gap: 14px; height: 60px; padding: 0 10px 0 16px; background: linear-gradient(180deg, #6b95ff 0%, #3466f7 10%, #2d5cf0 50%, #2450dc 88%, #1d40b8 100%); color: #fff; font: 700 28px/1 Tahoma, Verdana, sans-serif; text-shadow: 1px 1px 0 rgba(10, 30, 110, .55); }
+  .bar img { width: 38px; height: 38px; border-radius: 8px; }
   .bar b { flex: 1; }
-  .bar span { display: grid; place-items: center; width: 24px; height: 24px; border: 1px solid rgba(255, 255, 255, .9); border-radius: 4px; background: linear-gradient(180deg, #6f98ff, #2c5be9); font-size: 14px; }
+  .bar span { display: grid; place-items: center; width: 40px; height: 40px; border: 2px solid rgba(255, 255, 255, .9); border-radius: 6px; background: linear-gradient(180deg, #6f98ff, #2c5be9); font: 700 22px/1 Tahoma, sans-serif; }
   .bar span.x { background: linear-gradient(180deg, #f39a7a, #d8431f); }
-  .shot { display: block; width: 100%; object-fit: cover; }
 
-  .maddie { z-index: 1; left: 676px; top: 18px; width: 262px; transform: rotate(-5deg); background: #2a2c2e; }
-  .maddie .shot { height: 214px; filter: saturate(.9); }
-  .maddie .note { position: absolute; left: 16px; right: 40px; top: 16px; padding: 10px 14px 12px; border-radius: 4px; background: #f7f4ec; color: #23252a; transform: rotate(-1.5deg); box-shadow: 0 6px 14px rgba(0, 0, 0, .35); }
-  .maddie .note b { display: block; font: 700 40px/.9 "Caveat", cursive; }
-  .maddie .note small { font: 700 14px/1 "Space Mono", monospace; }
-  .maddie .body { position: relative; height: 214px; }
+  h1 { position: absolute; left: 56px; top: 146px; font: 800 86px/1.02 "Shantell Sans"; font-variation-settings: "INFM" 45; letter-spacing: -.025em; }
+  h1 em { position: relative; display: inline-block; font-style: normal; background: linear-gradient(180deg, transparent 56%, #f6ec22 56% 90%, transparent 90%); }
+  h1 svg { position: absolute; left: -7%; top: -16%; width: 114%; height: 136%; overflow: visible; fill: none; stroke: #2541d8; stroke-width: 3.4; stroke-linecap: round; }
 
-  .marcus { z-index: 3; left: 930px; top: 92px; width: 200px; transform: rotate(4deg); background: #0d2b1d; }
-  .marcus .body { position: relative; height: 262px; }
-  .marcus .shot { height: 262px; object-position: 46% 30%; }
-  .marcus .body::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 35%, rgba(13, 43, 29, .92) 82%); }
-  .marcus h3 { position: absolute; z-index: 1; left: 14px; bottom: 32px; font: italic 800 30px/.86 "Unbounded", sans-serif; letter-spacing: -.06em; }
-  .marcus h3 span { display: block; color: #f2c230; }
-  .marcus h3 span + span { color: #fff; }
-  .marcus p { position: absolute; z-index: 1; left: 14px; bottom: 12px; color: #f4f1e6; font: 700 13px/1 "Space Mono", monospace; letter-spacing: .04em; }
+  /* four friends, four completely different pages: fanned so every name shows */
+  .card { position: absolute; top: 150px; width: 196px; height: 312px; overflow: hidden; border-radius: 18px; box-shadow: 0 22px 44px rgba(18, 48, 143, .3), 0 3px 8px rgba(18, 48, 143, .16); }
+  .card img { display: block; width: 100%; height: 64%; object-fit: cover; }
+  .card b { position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; height: 36%; padding-left: 16px; }
+  .cami { left: 596px; transform: rotate(-9deg) translateY(16px); background: linear-gradient(170deg, #f7c27a, #ef7d58); }
+  .cami img { width: 84%; height: 58%; margin: 8% 0 0 8%; border: 6px solid #fff4e2; border-radius: 4px; }
+  .cami b { padding-left: 14px; color: #1d0f08; font: italic 400 54px/1 "Instrument Serif", serif; }
+  .j4y { left: 730px; top: 136px; transform: rotate(-3deg); background: #0b0d0c; box-shadow: 0 0 0 4px #c8ff3d, 0 22px 44px rgba(18, 48, 143, .3); }
+  .j4y img { object-fit: contain; padding-top: 14px; background: radial-gradient(circle at 50% 60%, #2a3a12, #0b0d0c 70%); }
+  .j4y b { color: #c8ff3d; font: 800 60px/1 -apple-system, "Helvetica Neue", Arial, sans-serif; letter-spacing: -.07em; }
+  .mads { left: 864px; transform: rotate(3deg) translateY(8px); background: #2a2c2e; }
+  .mads b { padding-left: 10px; background: #f7f4ec; color: #23252a; font: 700 46px/1 "Caveat", cursive; }
+  .eagles { left: 974px; transform: rotate(9deg) translateY(26px); background: #0d2b1d; }
+  .eagles img { object-position: 52% 30%; }
+  .eagles b { justify-content: center; padding: 0; color: #f2c230; font: italic 800 54px/1 "Unbounded", sans-serif; letter-spacing: -.06em; }
 
-  .camila { z-index: 2; left: 690px; top: 226px; width: 268px; transform: rotate(-2deg); }
-  .camila .body { position: relative; height: 204px; padding: 14px 16px 0; background: linear-gradient(170deg, #f7c27a, #f39a5c 55%, #ef7d58); }
-  .camila .shot { height: 106px; border: 6px solid #fff4e2; border-radius: 4px; box-shadow: 0 6px 14px rgba(120, 40, 10, .3); }
-  .camila .clips { display: flex; gap: 4px; height: 14px; margin-top: 10px; }
-  .camila .clips i { flex: 1; border-radius: 3px; }
-  .camila h3 { margin-top: 6px; color: #1d0f08; font: italic 400 50px/.8 "Instrument Serif", serif; letter-spacing: -.03em; }
-
-  .smile { right: 22px; top: 6px; width: 82px; height: 82px; transform: rotate(10deg); filter: drop-shadow(0 10px 14px rgba(18, 48, 143, .25)); stroke: none; }
-  .spark { color: var(--pop, #ff4fc3); stroke: none; fill: currentColor; }
-  .heart { right: 30px; top: 440px; width: 46px; height: 46px; color: #ff4fc3; transform: rotate(12deg); stroke: none; }
-  .like { position: absolute; z-index: 4; left: 972px; top: 400px; display: flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 999px; background: #fff; box-shadow: 0 10px 22px rgba(18, 48, 143, .2); color: #d4148f; font: 700 20px/1 "Pixelify Sans", monospace; transform: rotate(-4deg); }
+  .smile { position: absolute; left: 1036px; top: 74px; width: 110px; height: 110px; transform: rotate(12deg); filter: drop-shadow(0 10px 14px rgba(18, 48, 143, .3)); }
 </style>
 </head>
 <body>
-  <div class="main">
-    <header class="main__bar"><img src="/assets/img/brand/auramy-monitor.jpg" alt=""><b>Auramy · a little internet for your people</b><span>_</span><span>□</span><span class="x">×</span></header>
-    <p class="main__addr">Address<i>https://aura.my/yourname</i><b>Go</b></p>
-    <div class="main__page">
+  <div class="win">
+    <header class="bar"><img src="/assets/img/brand/auramy-monitor.jpg" alt=""><b>aura.my/you</b><span>_</span><span class="x">×</span></header>
+    <h1>A little<br>internet for<br><em>your people.<svg viewBox="0 0 240 100" preserveAspectRatio="none"><path d="M40 22C82 6 162 4 210 24c30 13 30 46-6 60-48 17-128 16-170 2C6 76 0 52 22 36c26-18 86-26 150-22"/></svg></em></h1>
 
-  <h1>A little internet<br>for <span class="people">your people.<svg class="d" viewBox="0 0 240 100" preserveAspectRatio="none"><path d="M40 22C82 6 162 4 210 24c30 13 30 46-6 60-48 17-128 16-170 2C6 76 0 52 22 36c26-18 86-26 150-22"/></svg></span></h1>
-  <p class="sub">Not your followers.<svg class="d" viewBox="0 0 130 90"><path d="M8 80C26 52 52 26 112 20"/><path d="M92 6l22 14-18 18"/></svg></p>
+    <div class="card cami"><img src="/assets/img/personas/camila/c01-graduation-selfie.jpg" alt=""><b>cami</b></div>
+    <div class="card j4y"><img src="/assets/img/personas/jayden/j16-j4y-avatar.jpg" alt=""><b>j4y</b></div>
+    <div class="card mads"><img src="/assets/img/personas/maddie/p04-shared-earbuds.jpg" alt=""><b>mads</b></div>
+    <div class="card eagles"><img src="/assets/img/personas/marcus/mc02-day-game-run-after-catch.jpg" alt=""><b>#11</b></div>
 
-  <p class="addr"><span>aura.my/</span><b>yourname</b><i>claim your name</i></p>
-  <p class="foot"><img src="/assets/img/av/camila.jpg" alt=""><img src="/assets/img/av/maddie.jpg" alt=""><img src="/assets/img/av/marcus.jpg" alt=""><img src="/assets/img/av/jayden.jpg" alt=""><img src="/assets/img/av/river.jpg" alt=""><span>your people are already here</span></p>
-
-  <article class="win maddie">
-    <header class="bar"><img src="/assets/img/av/maddie.jpg" alt=""><b>aura.my/maddie</b><span>_</span><span class="x">×</span></header>
-    <div class="body"><img class="shot" src="/assets/img/personas/maddie/p04-shared-earbuds.jpg" alt=""><p class="note"><b>maddie</b><small>★ close friends only</small></p></div>
-  </article>
-
-  <article class="win marcus">
-    <header class="bar"><img src="/assets/img/av/marcus.jpg" alt=""><b>aura.my/eagles</b><span class="x">×</span></header>
-    <div class="body"><img class="shot" src="/assets/img/personas/marcus/mc02-day-game-run-after-catch.jpg" alt=""><h3><span>MARCUS</span><span>REED</span></h3><p>#11 · WR · CAPTAIN</p></div>
-  </article>
-
-  <article class="win camila">
-    <header class="bar"><img src="/assets/img/av/camila.jpg" alt=""><b>aura.my/cami</b><span>_</span><span class="x">×</span></header>
-    <div class="body"><img class="shot" src="/assets/img/personas/camila/c01-graduation-selfie.jpg" alt=""><p class="clips"><i style="background:#ffd84d"></i><i style="background:#ff7aa8"></i><i style="background:#62d2ff"></i><i style="background:#b48cff"></i><i style="background:#7ee08a"></i></p><h3>cami</h3></div>
-  </article>
-
-  <p class="like">♥ 1,204</p>
-  <svg class="d smile" viewBox="0 0 64 64"><path fill="#f6ec22" d="M32 4c17-1 29 12 28 29-1 17-13 28-29 27C15 59 4 47 5 31 6 15 17 5 32 4Z"/><path fill="none" stroke="#161a2e" stroke-width="4" d="M23 22l-1 8M40 20l1 8M17 37c8 10 24 10 31-2"/></svg>
-  <svg class="d spark" viewBox="0 0 40 40" style="left:636px;top:20px;width:30px;height:30px;--pop:#2f5ef6"><path d="M20 3c1.4 10.6 5.6 15.4 16.6 17-11 1.6-15.2 6.2-16.6 17-1.4-10.8-5.6-15.4-16.6-17C14.4 18.4 18.6 13.6 20 3Z"/></svg>
-  <svg class="d spark" viewBox="0 0 40 40" style="left:1120px;top:370px;width:30px;height:30px"><path d="M20 3c1.4 10.6 5.6 15.4 16.6 17-11 1.6-15.2 6.2-16.6 17-1.4-10.8-5.6-15.4-16.6-17C14.4 18.4 18.6 13.6 20 3Z"/></svg>
-  <svg class="d spark" viewBox="0 0 40 40" style="left:648px;top:214px;width:26px;height:26px;--pop:#e8c400"><path d="M20 3c1.4 10.6 5.6 15.4 16.6 17-11 1.6-15.2 6.2-16.6 17-1.4-10.8-5.6-15.4-16.6-17C14.4 18.4 18.6 13.6 20 3Z"/></svg>
-  <svg class="d heart" viewBox="0 0 40 40"><path fill="currentColor" d="M20 35C5 25 2 13 10 8c5-3 9 0 10 5 2-6 7-8 11-5 8 5 4 17-11 27Z"/></svg>
-    </div>
-    <p class="main__status">✓ Done · 7 friends online<span>aura.my</span></p>
+    <svg class="smile" viewBox="0 0 64 64"><path fill="#f6ec22" d="M32 4c17-1 29 12 28 29-1 17-13 28-29 27C15 59 4 47 5 31 6 15 17 5 32 4Z"/><path fill="none" stroke="#161a2e" stroke-width="4" stroke-linecap="round" d="M23 22l-1 8M40 20l1 8M17 37c8 10 24 10 31-2"/></svg>
   </div>
 </body>
 </html>
