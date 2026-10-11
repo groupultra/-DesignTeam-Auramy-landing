@@ -9,6 +9,7 @@ import { initEndingScenes } from './ending-scenes.js?v=early-web-1';
 import { injectDoodles } from './doodles.js';
 import { initHeroDesktop, initWeird } from './hero-desktop.js?v=early-web-1';
 import { initSetupWizard } from './setup-wizard.js?v=early-web-1';
+import { initAuraShop } from './aura-shop.js?v=early-web-2';
 
 document.documentElement.classList.add('js');
 injectSprite();
@@ -100,24 +101,6 @@ $$('.reveal').forEach((el) => io.observe(el));
 }
 
 const retrigger = (el, cls) => { el.classList.remove(cls); void el.offsetWidth; el.classList.add(cls); };
-
-// little glyphs that float up from an element (page-level, fixed position)
-function pop(el, glyphs, color) {
-  if (motionPaused() || document.hidden) return;
-  const r = el.getBoundingClientRect();
-  glyphs.forEach((g, i) => {
-    const s = document.createElement('span');
-    s.className = 'plus';
-    s.textContent = g;
-    if (color) s.style.color = color;
-    s.style.left = `${r.left + r.width / 2 - 10 + (Math.random() - 0.5) * r.width * 0.4}px`;
-    s.style.top = `${r.top + r.height * 0.3}px`;
-    s.style.setProperty('--dx', `${(Math.random() - 0.5) * 90}px`);
-    s.style.animationDelay = `${i * 60}ms`;
-    document.body.append(s);
-    setTimeout(() => s.remove(), 1200);
-  });
-}
 
 /* ───────── toast ───────── */
 const toastEl = $('#toast');
@@ -480,65 +463,8 @@ initEndingScenes($('#notify'));
   });
 }
 
-/* ───────── aura orb ───────── */
-{
-  const orb = $('#orb');
-  const num = $('[data-aura-count]');
-  let val = 0, target = 12480, counted = false;
-  const fmt = (v) => Math.round(v).toLocaleString('en-US');
-  whileVisible(orb, () => {
-    if (counted) return;
-    counted = true;
-    if (reduced || motionPaused()) { val = target; num.textContent = fmt(val); return; }
-    const t0 = performance.now();
-    const step = (t) => {
-      if (motionPaused() || document.hidden) { val = target; num.textContent = fmt(val); return; }
-      const k = Math.min(1, (t - t0) / 1600);
-      val = target * (1 - (1 - k) ** 3);
-      num.textContent = fmt(val);
-      if (k < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-  });
-  orb.addEventListener('click', (e) => {
-    const add = [5, 10, 20, 25, 50][Math.floor(Math.random() * 5)];
-    target += add; val = target; num.textContent = fmt(val);
-    if (motionPaused() || document.hidden) return;
-    const s = document.createElement('span');
-    s.className = 'plus';
-    s.textContent = `+${add} ✦`;
-    const rect = orb.getBoundingClientRect();
-    const x = e.detail ? e.clientX : rect.left + rect.width / 2;
-    const y = e.detail ? e.clientY : rect.top + rect.height / 2;
-    s.style.left = `${x - 20}px`; s.style.top = `${y - 20}px`;
-    s.style.setProperty('--dx', `${(Math.random() - 0.5) * 80}px`);
-    document.body.append(s);
-    setTimeout(() => s.remove(), 1000);
-  });
+/* ───────── aura: visits → aura → new pieces ───────── */
+initAuraShop($('#aura'), { toast });
 
-  // the shop actually spends aura
-  $$('[data-buy]').forEach((b) => b.addEventListener('click', () => {
-    const price = +b.dataset.buy;
-    if (b.classList.contains('is-owned')) { toast(`already yours ✦ <b>${b.dataset.name}</b>`); return; }
-    if (target < price) { retrigger(b, 'is-shake'); toast('need more aura. tap the smiley ✦'); return; }
-    const from = target;
-    target -= price; val = target;
-    const t0 = performance.now();
-    const step = (t) => {
-      if (motionPaused() || document.hidden) { num.textContent = fmt(target); return; }
-      const k = Math.min(1, (t - t0) / 600);
-      num.textContent = fmt(from - price * (1 - (1 - k) ** 3));
-      if (k < 1) requestAnimationFrame(step);
-    };
-    requestAnimationFrame(step);
-    b.classList.add('is-owned');
-    $('b', b).textContent = 'yours';
-    pop(b, ['✦', '✧', '★', '✦']);
-    toast(`✦ unlocked <b>${b.dataset.name}</b>`);
-  }));
-}
-
-/* ───────── stickers & badges ───────── */
-$$('.sticker-card, .badge').forEach((el) => el.addEventListener('click', () => { retrigger(el, 'is-wiggle'); pop(el, ['✦', '♡']); }));
 
 console.info('%c☺ auramy', 'font: 800 20px sans-serif; color: #2f5ef6', 'a little internet for your people. hi, curious one.');

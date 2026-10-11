@@ -192,34 +192,55 @@
       </div>
     </section>
 
-    <!-- AURA: visits turn into points you can spend on weird stuff -->
+    <!-- AURA: people interact with your page → aura → new pieces for your page -->
     <section class="sec aura" id="aura" aria-labelledby="aura-title">
-      <div class="wrap aura__grid">
-        <div class="aura__copy">
+      <div class="wrap">
+        <div class="aura__head">
           <h2 class="sec-title" id="aura-title">Farm aura. <em>(legally.)</em></h2>
-          <p class="sec-sub">Get visited. Earn aura. Spend it on weird stuff.</p>
-          <ul class="buttons88" aria-label="Visitor badges">
-            <li><button type="button" class="badge badge88 badge88--blue"><b>10</b>visitors</button></li>
-            <li><button type="button" class="badge badge88 badge88--yellow"><b>100</b>visitors</button></li>
-            <li><button type="button" class="badge badge88 badge88--holo"><b>1K</b>club</button></li>
-          </ul>
+          <p class="sec-sub">Every like, note and beaten score on your page turns into aura. Spend it on new pieces.</p>
         </div>
-        <div class="aura__stage">
-          <button class="orb" id="orb" type="button" aria-label="Tap for aura">
-            <svg class="doodle doodle--smile orb__smile" aria-hidden="true" focusable="false"><use href="#d-smile"/></svg>
-            <span class="orb__num"><b data-aura-count>12,480</b><small>aura</small></span>
-            <span class="orb__tap" aria-hidden="true">tap me</span>
-          </button>
-          <div class="xpwin ledger">
-            <header class="xpwin__bar"><img class="xpwin__icon" src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt="" width="16" height="16"><b class="xpwin__title">aura shop</b><span class="xpwin__btns" aria-hidden="true"><button type="button" tabindex="-1">_</button><button type="button" class="is-close" tabindex="-1">×</button></span></header>
-            <p class="ledger__earn"><span>+5 a visit</span><span>+20 a note</span><span>+50 when someone beats your score</span></p>
-            <ul class="ledger__shop">
-              <li><button class="buy" type="button" data-buy="800" data-name="iPod-style player"><i class="ph ph-music-notes" aria-hidden="true"></i><span>iPod-style player</span><b>800</b></button></li>
-              <li><button class="buy" type="button" data-buy="1200" data-name="cassette walkman"><i class="ph ph-cassette-tape" aria-hidden="true"></i><span>cassette walkman</span><b>1,200</b></button></li>
-              <li><button class="buy" type="button" data-buy="300" data-name="holo sticker pack"><i class="ph ph-sparkle" aria-hidden="true"></i><span>holo sticker pack</span><b>300</b></button></li>
-              <li><button class="buy" type="button" data-buy="2000" data-name="3D room world"><i class="ph ph-cube" aria-hidden="true"></i><span>3D room world</span><b>2,000</b></button></li>
-            </ul>
+        <div class="aura-flow">
+          <article class="xpwin aura-page" aria-label="Your page while people visit">
+            <header class="xpwin__bar"><img class="xpwin__icon" src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt="" width="16" height="16"><b class="xpwin__title">aura.my/<span data-preview-handle>you</span></b><span class="xpwin__btns" aria-hidden="true"><button type="button" tabindex="-1">_</button><button type="button" class="is-close" tabindex="-1">×</button></span></header>
+            <div class="aura-page__body">
+              <div class="aura-page__top">
+                <svg class="doodle doodle--smile aura-page__avatar" aria-hidden="true" focusable="false"><use href="#d-smile"/></svg>
+                <p><b>your page</b><span><i class="aura-page__dot" aria-hidden="true"></i><b data-here>3</b> people here now</span></p>
+                <button type="button" class="xp-btn aura-page__like" data-aura-like aria-label="Like this page">♥ like</button>
+              </div>
+              <div class="aura-page__slots">
+                <div class="aura-slot" data-slot><span>+ empty slot</span></div>
+                <div class="aura-slot" data-slot><span>+ empty slot</span></div>
+                <div class="aura-slot" data-slot><span>+ empty slot</span></div>
+                <div class="aura-slot" data-slot><span>+ empty slot</span></div>
+              </div>
+              <div class="aura-danmaku" data-danmaku aria-hidden="true"></div>
+              <div class="aura-pops" data-pops aria-hidden="true"></div>
+            </div>
+          </article>
+
+          <p class="aura-arrow aura-arrow--a" aria-hidden="true"><span>every like,<br>note, visit</span><svg class="doodle doodle--arrow" focusable="false"><use href="#d-arrow"/></svg></p>
+
+          <div class="aura-meter">
+            <button class="orb" id="orb" type="button" aria-label="Like your page from here: plus 10 aura">
+              <svg class="doodle doodle--smile orb__smile" aria-hidden="true" focusable="false"><use href="#d-smile"/></svg>
+              <span class="orb__num"><b data-aura-count>0</b><small>aura</small></span>
+              <span class="orb__tap" aria-hidden="true">tap me</span>
+            </button>
+            <p class="aura-meter__bubble" data-bubble role="status" aria-live="polite"></p>
+            <div class="receipt">
+              <p class="receipt__head">aura.exe · today</p>
+              <ul class="receipt__lines" data-receipt></ul>
+            </div>
           </div>
+
+          <p class="aura-arrow aura-arrow--b" aria-hidden="true"><svg class="doodle doodle--arrowDown" focusable="false"><use href="#d-arrowDown"/></svg><span>spend it</span></p>
+
+          <article class="xpwin mart" aria-labelledby="mart-title">
+            <header class="xpwin__bar"><img class="xpwin__icon" src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt="" width="16" height="16"><b class="xpwin__title" id="mart-title">aura mart</b><span class="xpwin__btns" aria-hidden="true"><button type="button" tabindex="-1">_</button><button type="button" class="is-close" tabindex="-1">×</button></span></header>
+            <div class="mart__banner"><p class="mart__marquee" aria-hidden="true"><span>★ welcome to the aura mart ★ new pieces for your page ★ cursor trails are back ★ 3D rooms restocked ★ prices in aura only ★ welcome to the aura mart ★ new pieces for your page ★ cursor trails are back ★ 3D rooms restocked ★ prices in aura only ★</span></p><p class="mart__wallet">your aura <b>✦ <span data-mart-balance>0</span></b></p></div>
+            <ul class="mart__shelf" data-mart aria-label="Pieces you can add to your page"></ul>
+          </article>
         </div>
       </div>
     </section>

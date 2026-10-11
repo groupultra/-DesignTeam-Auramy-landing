@@ -63,6 +63,7 @@ Logo 原图副本在 `Assets/Brand/auramy-logo-supplied-original.jpg`，运行�
 | `site/assets/js/setup-wizard.js` | `#how` 的 XP 安装向导（取名、用途、外观、发送） |
 | `site/assets/js/doodles.js` | 圆珠笔涂鸦 SVG sprite |
 | `site/assets/js/made.js` | 7 个平台截图，界面本身即平台识别 |
+| `site/assets/js/aura-shop.js` | `#aura` 的完整链路：访客互动（弹幕、点赞）→ 实时小票记账 → 笑脸计数 → aura mart 按价格逐个解锁 8 个组件 → 买下后出现在 “your page” 窗口 |
 
 - 人设各自的“目的”在他们的网站里体现：Maddie 的页面可切换 close friends / anyone；Marcus 有 ME / TEAM / SCOUTS；Jayden 的页面以梗图为主。
 - 平台截图只模仿界面布局与配色，不使用任何平台 Logo；图标来自 Phosphor（jsDelivr，版本固定 2.1.1）。
