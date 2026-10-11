@@ -1,6 +1,7 @@
 // "Your people can play too" is one Auramy window. Scrolling into the section grows it from
 // a small window to the whole screen; scrolling on moves through four friends' pages inside it
 // (each in its own style), and the title bar + address bar follow whichever page you're on.
+// At the end the window shrinks back to the small one before the next section.
 // Reduced motion and very short screens get the same window as a plain, scrolling block.
 
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
@@ -65,7 +66,11 @@ export function initPlayWindow(section) {
     const W = stage.clientWidth;
     const H = stage.clientHeight;
     const scrolled = -section.getBoundingClientRect().top;
-    const e = growCurve(clamp(scrolled / runway, 0, 1));
+    // Grow over the first runway, stay full while the pages scroll, then shrink back over
+    // the last runway (the same curve played backwards) before the section scrolls away.
+    const outroStart = runway + travel;
+    const g = scrolled < outroStart ? scrolled / runway : 1 - (scrolled - outroStart) / runway;
+    const e = growCurve(clamp(g, 0, 1));
     // The small window: centred, sitting under the heading.
     const w0 = Math.min(560, W * 0.74);
     const h0 = Math.min(360, H * 0.4);
@@ -84,7 +89,7 @@ export function initPlayWindow(section) {
     section.style.setProperty('--h-y', `${(-e * 60).toFixed(1)}px`);
     section.classList.toggle('is-full', e >= 0.999);
     // Inside the maximised window the page nav steps aside so the title bar is the top of the screen.
-    document.documentElement.classList.toggle('is-in-window', e >= 0.999 && scrolled < runway + travel - 4);
+    document.documentElement.classList.toggle('is-in-window', e >= 0.999 && scrolled > 0 && scrolled < outroStart + runway);
     setSite(siteAt(y));
   }
 
@@ -108,7 +113,7 @@ export function initPlayWindow(section) {
     section.style.setProperty('--pw-view-h', `${viewH}px`);
     travel = Math.max(0, scroller.offsetHeight - viewH);
     runway = H * 0.9;
-    section.style.height = `${Math.round(H + runway + travel)}px`;
+    section.style.height = `${Math.round(H + runway * 2 + travel)}px`;
     update();
   }
 

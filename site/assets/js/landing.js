@@ -10,7 +10,7 @@ import { injectDoodles } from './doodles.js';
 import { initHeroDesktop, initWeird } from './hero-desktop.js?v=early-web-1';
 import { initSetupWizard } from './setup-wizard.js?v=early-web-2';
 import { initAuraShop } from './aura-shop.js?v=early-web-2';
-import { initPlayWindow } from './play-window.js?v=early-web-1';
+import { initPlayWindow } from './play-window.js?v=early-web-2';
 
 document.documentElement.classList.add('js');
 injectSprite();
