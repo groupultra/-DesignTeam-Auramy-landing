@@ -10,23 +10,34 @@
     --title: linear-gradient(180deg, #6b95ff 0%, #3466f7 10%, #2d5cf0 50%, #2450dc 88%, #1d40b8 100%); }
   * { box-sizing: border-box; margin: 0; }
   html, body { width: 1200px; height: 630px; overflow: hidden; }
-  body { position: relative; background: radial-gradient(rgba(47, 94, 246, .16) 1.3px, transparent 1.8px) 0 0 / 22px 22px, #f8f7f2; color: var(--ink); font-family: "Shantell Sans", system-ui, sans-serif; }
+  body { position: relative; background: radial-gradient(120% 90% at 50% 120%, #7ea0ff, transparent 60%), linear-gradient(180deg, #2b5ef0, #1d43d6); color: var(--ink); font-family: "Shantell Sans", system-ui, sans-serif; }
+  /* the whole card is one Auramy window */
+  .main { position: absolute; inset: 16px; overflow: hidden; border: 2px solid #1d3fb5; border-radius: 14px 14px 8px 8px; background: #efece2; box-shadow: 0 18px 40px rgba(6, 22, 90, .45); }
+  .main__bar { display: flex; align-items: center; gap: 12px; height: 50px; padding: 0 8px 0 14px; background: var(--title); color: #fff; font: 700 23px/1 Tahoma, Verdana, sans-serif; text-shadow: 1px 1px 0 rgba(10, 30, 110, .55); }
+  .main__bar img { width: 30px; height: 30px; border-radius: 6px; }
+  .main__bar b { flex: 1; }
+  .main__bar span { display: grid; place-items: center; width: 34px; height: 34px; border: 1.5px solid rgba(255, 255, 255, .9); border-radius: 5px; background: linear-gradient(180deg, #6f98ff, #2c5be9); font: 700 18px/1 Tahoma, sans-serif; }
+  .main__bar span.x { background: linear-gradient(180deg, #f39a7a, #d8431f); }
+  .main__addr { display: flex; align-items: center; gap: 10px; height: 42px; padding: 0 10px; border-bottom: 1px solid #c8c3b5; background: #f3f1ea; color: #5e6480; font: 17px/1 Tahoma, Verdana, sans-serif; }
+  .main__addr i { flex: 1; padding: 6px 10px; border: 1px solid #7f9db9; background: #fff; color: var(--ink); font-style: normal; }
+  .main__addr b { padding: 6px 12px; border: 1px solid #7f9db9; border-radius: 3px; background: linear-gradient(180deg, #fff, #ebe8df); color: var(--ink); font-weight: 400; }
+  .main__page { position: absolute; left: 0; right: 0; top: 92px; bottom: 30px; overflow: hidden; background: radial-gradient(rgba(47, 94, 246, .16) 1.3px, transparent 1.8px) 0 0 / 22px 22px, #f8f7f2; }
+  .main__status { position: absolute; left: 0; right: 0; bottom: 0; display: flex; align-items: center; gap: 10px; height: 30px; padding: 0 12px; border-top: 1px solid #c8c3b5; background: #efece2; color: #4b5068; font: 15px/1 Tahoma, Verdana, sans-serif; }
+  .main__status span { margin-left: auto; padding-left: 12px; border-left: 1px solid #c8c3b5; }
   svg.d { position: absolute; overflow: visible; fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
 
-  .brand { position: absolute; left: 60px; top: 50px; display: flex; align-items: center; gap: 14px; font: 800 36px/1 "Shantell Sans"; font-variation-settings: "INFM" 45; }
-  .brand img { width: 56px; height: 56px; border-radius: 12px; box-shadow: 0 6px 14px rgba(18, 48, 143, .18); }
 
-  h1 { position: absolute; left: 58px; top: 150px; width: 660px; font: 800 72px/1.04 "Shantell Sans"; font-variation-settings: "INFM" 45; letter-spacing: -.02em; }
+  h1 { position: absolute; left: 40px; top: 40px; width: 640px; font: 800 66px/1.04 "Shantell Sans"; font-variation-settings: "INFM" 45; letter-spacing: -.02em; }
   h1 .people { position: relative; display: inline-block; padding: 0 .06em; background: linear-gradient(180deg, transparent 56%, rgba(246, 236, 34, .95) 56% 90%, transparent 90%); }
   h1 .people svg { left: -6%; top: -14%; width: 112%; height: 132%; color: var(--pen); stroke-width: 3.2; }
-  .sub { position: absolute; left: 62px; top: 326px; color: var(--soft); font: 800 34px/1 "Shantell Sans"; font-variation-settings: "INFM" 45; }
+  .sub { position: absolute; left: 44px; top: 210px; color: var(--soft); font: 800 34px/1 "Shantell Sans"; font-variation-settings: "INFM" 45; }
   .sub svg { left: 340px; top: -18px; width: 120px; height: 82px; color: var(--pen); stroke-width: 3.5; }
 
-  .addr { position: absolute; left: 60px; top: 430px; display: flex; align-items: center; gap: 10px; width: 590px; padding: 9px 9px 9px 20px; border: 2px solid #7f9db9; border-radius: 12px; background: #fff; box-shadow: 0 12px 26px rgba(18, 48, 143, .14); font: 700 26px/1 Tahoma, Verdana, sans-serif; }
+  .addr { position: absolute; left: 42px; top: 298px; display: flex; align-items: center; gap: 10px; width: 590px; padding: 9px 9px 9px 20px; border: 2px solid #7f9db9; border-radius: 12px; background: #fff; box-shadow: 0 12px 26px rgba(18, 48, 143, .14); font: 700 26px/1 Tahoma, Verdana, sans-serif; }
   .addr span { color: #5e6480; }
   .addr b { flex: 1; color: var(--ink); }
   .addr i { padding: 16px 22px; border: 2px solid #b9a40a; border-radius: 8px; background: linear-gradient(180deg, #fff8a2 0%, #f9ef3c 45%, #eedd16 100%); color: #12308f; font-style: normal; white-space: nowrap; }
-  .foot { position: absolute; left: 62px; top: 548px; display: flex; align-items: center; gap: 10px; color: var(--soft); font: 700 19px/1 "Space Mono", monospace; }
+  .foot { position: absolute; left: 44px; top: 404px; display: flex; align-items: center; gap: 10px; color: var(--soft); font: 700 19px/1 "Space Mono", monospace; }
   .foot img { width: 36px; height: 36px; margin-right: -18px; border: 3px solid #f8f7f2; border-radius: 50%; object-fit: cover; }
   .foot span { margin-left: 26px; }
 
@@ -39,37 +50,40 @@
   .bar span.x { background: linear-gradient(180deg, #f39a7a, #d8431f); }
   .shot { display: block; width: 100%; object-fit: cover; }
 
-  .maddie { z-index: 1; left: 688px; top: 34px; width: 290px; transform: rotate(-5deg); background: #2a2c2e; }
-  .maddie .shot { height: 250px; filter: saturate(.9); }
+  .maddie { z-index: 1; left: 676px; top: 18px; width: 262px; transform: rotate(-5deg); background: #2a2c2e; }
+  .maddie .shot { height: 214px; filter: saturate(.9); }
   .maddie .note { position: absolute; left: 16px; right: 40px; top: 16px; padding: 10px 14px 12px; border-radius: 4px; background: #f7f4ec; color: #23252a; transform: rotate(-1.5deg); box-shadow: 0 6px 14px rgba(0, 0, 0, .35); }
   .maddie .note b { display: block; font: 700 40px/.9 "Caveat", cursive; }
   .maddie .note small { font: 700 14px/1 "Space Mono", monospace; }
-  .maddie .body { position: relative; height: 250px; }
+  .maddie .body { position: relative; height: 214px; }
 
-  .marcus { z-index: 3; left: 958px; top: 150px; width: 218px; transform: rotate(4deg); background: #0d2b1d; }
-  .marcus .body { position: relative; height: 290px; }
-  .marcus .shot { height: 290px; object-position: 46% 30%; }
+  .marcus { z-index: 3; left: 930px; top: 92px; width: 200px; transform: rotate(4deg); background: #0d2b1d; }
+  .marcus .body { position: relative; height: 262px; }
+  .marcus .shot { height: 262px; object-position: 46% 30%; }
   .marcus .body::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 35%, rgba(13, 43, 29, .92) 82%); }
-  .marcus h3 { position: absolute; z-index: 1; left: 14px; bottom: 32px; font: italic 800 33px/.86 "Unbounded", sans-serif; letter-spacing: -.06em; }
+  .marcus h3 { position: absolute; z-index: 1; left: 14px; bottom: 32px; font: italic 800 30px/.86 "Unbounded", sans-serif; letter-spacing: -.06em; }
   .marcus h3 span { display: block; color: #f2c230; }
   .marcus h3 span + span { color: #fff; }
   .marcus p { position: absolute; z-index: 1; left: 14px; bottom: 12px; color: #f4f1e6; font: 700 13px/1 "Space Mono", monospace; letter-spacing: .04em; }
 
-  .camila { z-index: 2; left: 702px; top: 292px; width: 296px; transform: rotate(-2deg); }
-  .camila .body { position: relative; height: 262px; padding: 14px 16px 0; background: linear-gradient(170deg, #f7c27a, #f39a5c 55%, #ef7d58); }
-  .camila .shot { height: 142px; border: 6px solid #fff4e2; border-radius: 4px; box-shadow: 0 6px 14px rgba(120, 40, 10, .3); }
+  .camila { z-index: 2; left: 690px; top: 226px; width: 268px; transform: rotate(-2deg); }
+  .camila .body { position: relative; height: 204px; padding: 14px 16px 0; background: linear-gradient(170deg, #f7c27a, #f39a5c 55%, #ef7d58); }
+  .camila .shot { height: 106px; border: 6px solid #fff4e2; border-radius: 4px; box-shadow: 0 6px 14px rgba(120, 40, 10, .3); }
   .camila .clips { display: flex; gap: 4px; height: 14px; margin-top: 10px; }
   .camila .clips i { flex: 1; border-radius: 3px; }
-  .camila h3 { margin-top: 6px; color: #1d0f08; font: italic 400 62px/.8 "Instrument Serif", serif; letter-spacing: -.03em; }
+  .camila h3 { margin-top: 6px; color: #1d0f08; font: italic 400 50px/.8 "Instrument Serif", serif; letter-spacing: -.03em; }
 
-  .smile { right: 30px; top: 26px; width: 104px; height: 104px; transform: rotate(10deg); filter: drop-shadow(0 10px 14px rgba(18, 48, 143, .25)); stroke: none; }
+  .smile { right: 22px; top: 6px; width: 82px; height: 82px; transform: rotate(10deg); filter: drop-shadow(0 10px 14px rgba(18, 48, 143, .25)); stroke: none; }
   .spark { color: var(--pop, #ff4fc3); stroke: none; fill: currentColor; }
-  .heart { right: 26px; top: 560px; width: 46px; height: 46px; color: #ff4fc3; transform: rotate(12deg); stroke: none; }
-  .like { position: absolute; z-index: 4; left: 1012px; top: 498px; display: flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 999px; background: #fff; box-shadow: 0 10px 22px rgba(18, 48, 143, .2); color: #d4148f; font: 700 20px/1 "Pixelify Sans", monospace; transform: rotate(-4deg); }
+  .heart { right: 30px; top: 440px; width: 46px; height: 46px; color: #ff4fc3; transform: rotate(12deg); stroke: none; }
+  .like { position: absolute; z-index: 4; left: 972px; top: 400px; display: flex; align-items: center; gap: 8px; padding: 9px 14px; border-radius: 999px; background: #fff; box-shadow: 0 10px 22px rgba(18, 48, 143, .2); color: #d4148f; font: 700 20px/1 "Pixelify Sans", monospace; transform: rotate(-4deg); }
 </style>
 </head>
 <body>
-  <p class="brand"><img src="/assets/img/brand/auramy-monitor.jpg" alt="">Auramy</p>
+  <div class="main">
+    <header class="main__bar"><img src="/assets/img/brand/auramy-monitor.jpg" alt=""><b>Auramy · a little internet for your people</b><span>_</span><span>□</span><span class="x">×</span></header>
+    <p class="main__addr">Address<i>https://aura.my/yourname</i><b>Go</b></p>
+    <div class="main__page">
 
   <h1>A little internet<br>for <span class="people">your people.<svg class="d" viewBox="0 0 240 100" preserveAspectRatio="none"><path d="M40 22C82 6 162 4 210 24c30 13 30 46-6 60-48 17-128 16-170 2C6 76 0 52 22 36c26-18 86-26 150-22"/></svg></span></h1>
   <p class="sub">Not your followers.<svg class="d" viewBox="0 0 130 90"><path d="M8 80C26 52 52 26 112 20"/><path d="M92 6l22 14-18 18"/></svg></p>
@@ -94,9 +108,12 @@
 
   <p class="like">♥ 1,204</p>
   <svg class="d smile" viewBox="0 0 64 64"><path fill="#f6ec22" d="M32 4c17-1 29 12 28 29-1 17-13 28-29 27C15 59 4 47 5 31 6 15 17 5 32 4Z"/><path fill="none" stroke="#161a2e" stroke-width="4" d="M23 22l-1 8M40 20l1 8M17 37c8 10 24 10 31-2"/></svg>
-  <svg class="d spark" viewBox="0 0 40 40" style="left:640px;top:40px;width:34px;height:34px;--pop:#2f5ef6"><path d="M20 3c1.4 10.6 5.6 15.4 16.6 17-11 1.6-15.2 6.2-16.6 17-1.4-10.8-5.6-15.4-16.6-17C14.4 18.4 18.6 13.6 20 3Z"/></svg>
-  <svg class="d spark" viewBox="0 0 40 40" style="left:1150px;top:460px;width:34px;height:34px"><path d="M20 3c1.4 10.6 5.6 15.4 16.6 17-11 1.6-15.2 6.2-16.6 17-1.4-10.8-5.6-15.4-16.6-17C14.4 18.4 18.6 13.6 20 3Z"/></svg>
-  <svg class="d spark" viewBox="0 0 40 40" style="left:668px;top:260px;width:28px;height:28px;--pop:#e8c400"><path d="M20 3c1.4 10.6 5.6 15.4 16.6 17-11 1.6-15.2 6.2-16.6 17-1.4-10.8-5.6-15.4-16.6-17C14.4 18.4 18.6 13.6 20 3Z"/></svg>
+  <svg class="d spark" viewBox="0 0 40 40" style="left:636px;top:20px;width:30px;height:30px;--pop:#2f5ef6"><path d="M20 3c1.4 10.6 5.6 15.4 16.6 17-11 1.6-15.2 6.2-16.6 17-1.4-10.8-5.6-15.4-16.6-17C14.4 18.4 18.6 13.6 20 3Z"/></svg>
+  <svg class="d spark" viewBox="0 0 40 40" style="left:1120px;top:370px;width:30px;height:30px"><path d="M20 3c1.4 10.6 5.6 15.4 16.6 17-11 1.6-15.2 6.2-16.6 17-1.4-10.8-5.6-15.4-16.6-17C14.4 18.4 18.6 13.6 20 3Z"/></svg>
+  <svg class="d spark" viewBox="0 0 40 40" style="left:648px;top:214px;width:26px;height:26px;--pop:#e8c400"><path d="M20 3c1.4 10.6 5.6 15.4 16.6 17-11 1.6-15.2 6.2-16.6 17-1.4-10.8-5.6-15.4-16.6-17C14.4 18.4 18.6 13.6 20 3Z"/></svg>
   <svg class="d heart" viewBox="0 0 40 40"><path fill="currentColor" d="M20 35C5 25 2 13 10 8c5-3 9 0 10 5 2-6 7-8 11-5 8 5 4 17-11 27Z"/></svg>
+    </div>
+    <p class="main__status">✓ Done · 7 friends online<span>aura.my</span></p>
+  </div>
 </body>
 </html>
