@@ -22,7 +22,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Anton&family=Caveat:wght@500;700&family=Instrument+Serif:ital@0;1&family=Pixelify+Sans:wght@400..700&family=Shantell+Sans:wght,INFM@300..800,0..100&family=Space+Mono:wght@400;700&family=Unbounded:wght@700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/regular/style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
-  <link rel="stylesheet" href="/assets/css/early-web.css?v=early-web-5">
+  <link rel="stylesheet" href="/assets/css/early-web.css?v=early-web-7">
   <link rel="stylesheet" href="/assets/css/persona-sites.css?v=early-web-1">
 </head>
 <body class="early-web">
@@ -237,16 +237,35 @@
           <article class="xpwin aura-page" aria-label="Your page while people visit">
             <header class="xpwin__bar"><img class="xpwin__icon" src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt="" width="16" height="16"><b class="xpwin__title">aura.my/<span data-preview-handle>you</span></b><span class="xpwin__btns" aria-hidden="true"><button type="button" tabindex="-1">_</button><button type="button" class="is-close" tabindex="-1">×</button></span></header>
             <div class="aura-page__body">
-              <div class="aura-page__top">
-                <svg class="doodle doodle--smile aura-page__avatar" aria-hidden="true" focusable="false"><use href="#d-smile"/></svg>
-                <p><b>your page</b><span><i class="aura-page__dot" aria-hidden="true"></i><b data-here>3</b> people here now</span></p>
-                <button type="button" class="xp-btn aura-page__like" data-aura-like aria-label="Like this page">♥ like</button>
-              </div>
-              <div class="aura-page__slots">
-                <div class="aura-slot" data-slot><span>+ empty slot</span></div>
-                <div class="aura-slot" data-slot><span>+ empty slot</span></div>
-                <div class="aura-slot" data-slot><span>+ empty slot</span></div>
-                <div class="aura-slot" data-slot><span>+ empty slot</span></div>
+              <div class="mini" data-mini>
+                <div class="mini__top">
+                  <svg class="doodle doodle--smile mini__avatar" aria-hidden="true" focusable="false"><use href="#d-smile"/></svg>
+                  <div class="mini__id">
+                    <h3 class="mini__name" data-text="you"><span data-preview-handle>you</span></h3>
+                    <p class="mini__here"><i class="aura-page__dot" aria-hidden="true"></i><b data-here>3</b> here now</p>
+                  </div>
+                  <button type="button" class="mini__like" data-aura-like aria-label="Like this page">♥ like</button>
+                </div>
+                <p class="mini__bio">making my little corner of the internet ✿</p>
+                <ul class="mini__tiles" aria-label="On my page">
+                  <li style="--c:#ffd84d"><span aria-hidden="true">🎧</span>on repeat</li>
+                  <li style="--c:#ff9ec7"><span aria-hidden="true">📸</span>camera roll</li>
+                  <li style="--c:#8fd3ff"><span aria-hidden="true">✎</span>guestbook</li>
+                </ul>
+                <p class="mini__note"><b data-note-who>noor</b> <span data-note-text>ok this page is SO you</span></p>
+                <div class="mini__player" data-mini-player hidden>
+                  <span class="mini__cover" aria-hidden="true"></span>
+                  <span class="mini__track"><b>the drive home mix</b><small>12 songs · visuals only</small><i class="mini__bar"><i></i></i></span>
+                  <i class="mini__eq" aria-hidden="true"><i></i><i></i><i></i><i></i></i>
+                  <button type="button" class="mini__play" data-mini-play aria-pressed="true" aria-label="Pause the mix">❚❚</button>
+                </div>
+                <footer class="mini__foot">
+                  <span class="mini__counter" data-mini-counter hidden aria-label="Visitor counter"><small>visitors</small><span data-counter-digits></span></span>
+                  <small>made with auramy ☺</small>
+                </footer>
+                <div class="mini__stickers" data-mini-stickers hidden></div>
+                <button type="button" class="mini__pet" data-mini-pet hidden aria-label="Pet your pixel pet"></button>
+                <div class="mini__fx" data-mini-fx aria-hidden="true"></div>
               </div>
               <div class="aura-danmaku" data-danmaku aria-hidden="true"></div>
               <div class="aura-pops" data-pops aria-hidden="true"></div>
@@ -272,7 +291,7 @@
 
           <article class="xpwin mart" aria-labelledby="mart-title">
             <header class="xpwin__bar"><img class="xpwin__icon" src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt="" width="16" height="16"><b class="xpwin__title" id="mart-title">aura mart</b><span class="xpwin__btns" aria-hidden="true"><button type="button" tabindex="-1">_</button><button type="button" class="is-close" tabindex="-1">×</button></span></header>
-            <div class="mart__banner"><p class="mart__marquee" aria-hidden="true"><span>★ welcome to the aura mart ★ new pieces for your page ★ cursor trails are back ★ 3D rooms restocked ★ prices in aura only ★ welcome to the aura mart ★ new pieces for your page ★ cursor trails are back ★ 3D rooms restocked ★ prices in aura only ★</span></p><p class="mart__wallet">your aura <b>✦ <span data-mart-balance>0</span></b></p></div>
+            <div class="mart__banner"><p class="mart__marquee" aria-hidden="true"><span>★ welcome to the aura mart ★ everything works on your page ★ cursor trails are back ★ pixel pets restocked ★ prices in aura only ★ welcome to the aura mart ★ everything works on your page ★ cursor trails are back ★ pixel pets restocked ★ prices in aura only ★</span></p><p class="mart__wallet">your aura <b>✦ <span data-mart-balance>0</span></b></p></div>
             <ul class="mart__shelf" data-mart aria-label="Pieces you can add to your page"></ul>
           </article>
         </div>
@@ -310,6 +329,6 @@
   <button class="motion-toggle" type="button" data-motion-toggle aria-pressed="false">pause motion</button>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script type="module" src="/assets/js/landing.js?v=early-web-6"></script>
+  <script type="module" src="/assets/js/landing.js?v=early-web-9"></script>
 </body>
 </html>
