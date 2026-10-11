@@ -1,11 +1,11 @@
-// The hero: a little early-2000s desktop with three Auramy worlds open (the lead personas)
-// and the other four waiting as desktop icons. Windows can be focused, dragged by their
-// title bar, minimised to the taskbar and reopened. Local demo only.
+// The hero: a little Mac desktop with three Auramy worlds open (the lead personas) and the
+// other four waiting as desktop icons. A menu bar on top, a Dock below; windows can be
+// focused, dragged by their title bar, minimised to the Dock and reopened. Local demo only.
 import { PERSONAS, ORDER, LEADS, personaAvatar } from './personas.js';
 import { homeMarkup } from './persona-sites.js?v=early-web-1';
 import { doodle } from './doodles.js';
 
-const TITLES = { camila: "cami's cut", maddie: 'drive home', marcus: 'friday night drive', jayden: 'lobby.exe', river: 'porchlight', theo: 'late show', aaliyah: 'knotless' };
+const TITLES = { camila: "cami's cut", maddie: 'drive home', marcus: 'friday night drive', jayden: 'lobby', river: 'porchlight', theo: 'late show', aaliyah: 'knotless' };
 const ICONS = ORDER.filter((id) => !LEADS.includes(id));
 const SLOTS = { maddie: 'left', camila: 'main', marcus: 'right' };
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
@@ -34,15 +34,18 @@ export function initHeroDesktop(host) {
     </div>
     <ul class="desktop__icons" aria-label="More worlds">${ICONS.map((id) => `<li><button type="button" class="desk-icon" data-open="${id}"><img src="${personaAvatar(id)}" alt="" width="44" height="44"><span>${TITLES[id]}</span></button></li>`).join('')}</ul>
     <div class="desktop__windows" data-windows>${LEADS.map((id) => windowMarkup(id, SLOTS[id])).join('')}</div>
+    <div class="mac-menubar" aria-hidden="true">
+      <span class="mac-menubar__logo">${doodle('smile')}</span><b>Auramy</b><span>File</span><span>Edit</span><span>View</span><span class="mac-menubar__more">Window</span><span class="mac-menubar__more">Help</span>
+      <span class="mac-menubar__right"><i class="ph-fill ph-wifi-high"></i><i class="ph-fill ph-battery-high"></i><time data-clock>4:12 PM</time></span>
+    </div>
     <div class="desktop__taskbar">
-      <button type="button" class="desk-start" data-start aria-expanded="false" aria-controls="desk-menu">${doodle('smile')}<b>start</b></button>
+      <button type="button" class="desk-start" data-start aria-expanded="false" aria-controls="desk-menu">${doodle('smile')}<b>all worlds</b></button>
       <div class="desk-menu" id="desk-menu" hidden>
         <p class="desk-menu__head">${doodle('smile')}<b>all worlds</b></p>
         <ul>${ORDER.map((id) => `<li><button type="button" data-open="${id}"><img src="${personaAvatar(id)}" alt="" width="24" height="24"><span><b>${TITLES[id]}</b>${PERSONAS[id].name}</span></button></li>`).join('')}</ul>
       </div>
       <div class="desk-tasks" data-tasks>${LEADS.map(taskMarkup).join('')}</div>
       <p class="desk-marquee" aria-hidden="true"><span>★ under construction ★ best viewed at 800×600 ★ sign my guestbook ★ under construction ★ best viewed at 800×600 ★ sign my guestbook ★</span></p>
-      <p class="desk-tray">${doodle('smile', 'desk-tray__smile')}<time data-clock>4:12 PM</time></p>
     </div>`;
 
   const abort = new AbortController();

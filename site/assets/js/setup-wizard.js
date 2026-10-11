@@ -1,4 +1,4 @@
-// "Make yours": a four-step setup wizard in an XP-style window, next to a phone that builds
+// "Make yours": a four-step setup wizard in a Mac installer window, next to a phone that builds
 // your page as you click (name → what it's for → look → live). Back / Next only; no
 // accounts or real domains. The finished page is fully tappable.
 import { PERSONAS, ORDER } from './personas.js';
@@ -20,7 +20,7 @@ export function initSetupWizard(build, { onName, toast } = {}) {
   host.innerHTML = `
     <header class="xpwin__bar"><img class="xpwin__icon" src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt="" width="16" height="16"><b class="xpwin__title">Auramy Setup</b><span class="xpwin__btns" aria-hidden="true"><button type="button" tabindex="-1">_</button><button type="button" class="is-close" tabindex="-1">×</button></span></header>
     <div class="wizard__body">
-      <aside class="wizard__side" aria-hidden="true">${doodle('smile')}<span>auramy</span></aside>
+      <aside class="wizard__side" aria-hidden="true"><span class="wizard__appicon">${doodle('smile')}</span><ol class="wizard__steps">${STEPS.map((label) => `<li>${label}</li>`).join('')}</ol></aside>
       <div class="wizard__main">
         <section class="wizard__step" data-step="0" aria-labelledby="wiz-0">
           <h3 id="wiz-0">What should we call you?</h3>
@@ -45,8 +45,8 @@ export function initSetupWizard(build, { onName, toast } = {}) {
     <footer class="wizard__foot">
       <div class="wizard__progress" role="progressbar" aria-label="Setup progress" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1">${STEPS.map(() => '<i></i>').join('')}</div>
       <p class="wizard__count" data-wiz-count aria-live="polite">Step 1 of 4</p>
-      <button type="button" class="xp-btn" data-wiz-back disabled>&lt; Back</button>
-      <button type="button" class="xp-btn xp-btn--go" data-wiz-next>Next &gt;</button>
+      <button type="button" class="xp-btn" data-wiz-back disabled>Go Back</button>
+      <button type="button" class="xp-btn xp-btn--go" data-wiz-next>Continue</button>
     </footer>`;
 
   const $ = (s) => host.querySelector(s);
@@ -101,7 +101,8 @@ export function initSetupWizard(build, { onName, toast } = {}) {
     $('[data-wiz-count]').textContent = `Step ${step + 1} of ${STEPS.length}`;
     $('[data-wiz-back]').disabled = step === 0;
     nextBtn.disabled = false;
-    nextBtn.innerHTML = step === 2 ? 'Publish ▸' : step === 3 ? 'Start over' : 'Next &gt;';
+    nextBtn.textContent = step === 2 ? 'Publish' : step === 3 ? 'Start Over' : 'Continue';
+    host.querySelectorAll('.wizard__steps li').forEach((li, i) => { li.classList.toggle('is-on', i === step); li.classList.toggle('is-done', i < step); });
     if (step === 2) { if (!lookTouched) look = forId; syncLook(); }
     syncPage();
     const live = step === 3;
