@@ -45,8 +45,8 @@ export function initSetupWizard(build, { onName, toast } = {}) {
     <footer class="wizard__foot">
       <div class="wizard__progress" role="progressbar" aria-label="Setup progress" aria-valuemin="1" aria-valuemax="4" aria-valuenow="1">${STEPS.map(() => '<i></i>').join('')}</div>
       <p class="wizard__count" data-wiz-count aria-live="polite">Step 1 of 4</p>
-      <button type="button" class="xp-btn" data-wiz-back disabled>&lt; Back</button>
-      <button type="button" class="xp-btn xp-btn--go" data-wiz-next>Next &gt;</button>
+      <button type="button" class="xp-btn" data-wiz-back disabled>Back</button>
+      <button type="button" class="xp-btn xp-btn--go" data-wiz-next>Next</button>
     </footer>`;
 
   const $ = (s) => host.querySelector(s);
@@ -101,7 +101,7 @@ export function initSetupWizard(build, { onName, toast } = {}) {
     $('[data-wiz-count]').textContent = `Step ${step + 1} of ${STEPS.length}`;
     $('[data-wiz-back]').disabled = step === 0;
     nextBtn.disabled = false;
-    nextBtn.innerHTML = step === 2 ? 'Publish ▸' : step === 3 ? 'Start over' : 'Next &gt;';
+    nextBtn.textContent = step === 2 ? 'Publish ▶' : step === 3 ? 'Start Over' : 'Next';
     if (step === 2) { if (!lookTouched) look = forId; syncLook(); }
     syncPage();
     const live = step === 3;

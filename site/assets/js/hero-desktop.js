@@ -1,13 +1,15 @@
-// The hero: a little early-2000s desktop with three Auramy worlds open (the lead personas)
-// and the other four waiting as desktop icons. Windows can be focused, dragged by their
-// title bar, minimised to the taskbar and reopened. Local demo only.
+// The hero: a blocky game world with three Auramy worlds open as in-game panels (the lead
+// personas) and the other four waiting on the side. A player list, chat and a hotbar frame it;
+// panels can be focused, dragged by their title bar, put away to the hotbar and reopened.
 import { PERSONAS, ORDER, LEADS, personaAvatar } from './personas.js';
 import { homeMarkup } from './persona-sites.js?v=early-web-1';
 import { doodle } from './doodles.js';
 
-const TITLES = { camila: "cami's cut", maddie: 'drive home', marcus: 'friday night drive', jayden: 'lobby.exe', river: 'porchlight', theo: 'late show', aaliyah: 'knotless' };
+const TITLES = { camila: "cami's cut", maddie: 'drive home', marcus: 'friday night drive', jayden: 'lobby', river: 'porchlight', theo: 'late show', aaliyah: 'knotless' };
 const ICONS = ORDER.filter((id) => !LEADS.includes(id));
 const SLOTS = { maddie: 'left', camila: 'main', marcus: 'right' };
+const PLAYERS = [['camila', 'cami', 2680], ['marcus', 'marcus11', 2410], ['jayden', 'j4y', 1980], ['aaliyah', 'aaliyah.nails', 1560], ['maddie', 'mads.cf', 1204], ['river', 'riverdraws', 990], ['theo', 'theo', 760]];
+const CHAT = [['noor', '#ff7aa8', 'this place is so you'], ['j4y', '#c8ff3d', 'beat my 88 lol'], ['mads', '#7ff0d1', 'the playlist slaps ngl']];
 const clamp = (v, a, b) => Math.min(b, Math.max(a, v));
 
 const windowMarkup = (id, slot) => {
@@ -34,6 +36,9 @@ export function initHeroDesktop(host) {
     </div>
     <ul class="desktop__icons" aria-label="More worlds">${ICONS.map((id) => `<li><button type="button" class="desk-icon" data-open="${id}"><img src="${personaAvatar(id)}" alt="" width="44" height="44"><span>${TITLES[id]}</span></button></li>`).join('')}</ul>
     <div class="desktop__windows" data-windows>${LEADS.map((id) => windowMarkup(id, SLOTS[id])).join('')}</div>
+    <div class="rbx-hud" aria-hidden="true"><span class="rbx-hud__btn rbx-hud__btn--menu">${doodle('smile')}</span><span class="rbx-hud__btn"><i class="ph-fill ph-chat-circle-dots"></i></span><span class="rbx-hud__btn"><i class="ph-fill ph-backpack"></i></span></div>
+    <div class="rbx-chat" aria-hidden="true">${CHAT.map(([who, color, line]) => `<p><b style="color:${color}">[${who}]:</b> ${line}</p>`).join('')}</div>
+    <div class="rbx-players" aria-hidden="true"><p><span>People</span><b>✦ Aura</b></p><ol>${PLAYERS.map(([id, handle, aura]) => `<li><img src="${personaAvatar(id)}" alt="" width="18" height="18"><span>${handle}</span><b>${aura.toLocaleString('en-US')}</b></li>`).join('')}</ol></div>
     <div class="desktop__taskbar">
       <button type="button" class="desk-start" data-start aria-expanded="false" aria-controls="desk-menu">${doodle('smile')}<b>start</b></button>
       <div class="desk-menu" id="desk-menu" hidden>

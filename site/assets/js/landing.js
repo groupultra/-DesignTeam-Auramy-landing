@@ -7,8 +7,8 @@ import { initScrollReveal } from './scroll-reveal.js?v=early-web-1';
 import { initAlbumParty } from './album-party.js?v=early-web-1';
 import { initEndingScenes } from './ending-scenes.js?v=early-web-1';
 import { injectDoodles, doodle } from './doodles.js';
-import { initHeroDesktop, initWeird } from './hero-desktop.js?v=early-web-1';
-import { initSetupWizard } from './setup-wizard.js?v=early-web-4';
+import { initHeroDesktop, initWeird } from './hero-desktop.js?v=roblox-1';
+import { initSetupWizard } from './setup-wizard.js?v=roblox-1';
 import { initAuraShop } from './aura-shop.js?v=early-web-5';
 import { initPlayWindow } from './play-window.js?v=early-web-2';
 
