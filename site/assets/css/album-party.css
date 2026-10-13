@@ -1,0 +1,35 @@
+.album-party { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); align-content: center; justify-items: center; flex: 1; min-height: 0; overflow: hidden; padding: 22px; background: radial-gradient(circle at 50% 46%, #ffffff75 0 18%, transparent 52%), #c8b7ff; text-align: center; isolation: isolate; }
+.album-party > * { min-width: 0; }
+.album-party__eyebrow { margin: 0 0 14px; color: #382571; font: 700 9px/1.2 var(--f-mono, monospace); letter-spacing: .1em; text-transform: uppercase; }
+.album-party__covers { position: relative; width: min(100%, 390px); height: min(270px, 37vw); min-height: 205px; }
+.album-party__cover { position: absolute; top: 50%; width: 43%; aspect-ratio: 1; padding: 0; overflow: hidden; border: 2px solid #171717; border-radius: 5px; background: #fff; box-shadow: 5px 7px 0 #171717; cursor: pointer; transition: transform .25s ease, filter .25s ease, z-index 0s linear .25s; }
+.album-party__cover img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.album-party__cover:nth-child(1) { left: 1%; z-index: 1; transform: translateY(-50%) rotate(-10deg); }
+.album-party__cover:nth-child(2) { left: 50%; z-index: 2; transform: translate(-50%, -50%) rotate(3deg); }
+.album-party__cover:nth-child(3) { right: 1%; z-index: 1; transform: translateY(-50%) rotate(10deg); }
+.album-party[data-awake="true"] .album-party__cover { animation: album-cover-float 3.8s ease-in-out infinite; }
+.album-party[data-awake="true"] .album-party__cover:nth-child(2) { animation-delay: -.9s; animation-duration: 4.5s; }
+.album-party[data-awake="true"] .album-party__cover:nth-child(3) { animation-delay: -1.7s; animation-duration: 4.1s; }
+.album-party__cover.is-selected { z-index: 4; filter: saturate(1.08); }
+.album-party__cover:nth-child(1).is-selected { transform: translate(18%, -58%) rotate(-4deg) scale(1.13); }
+.album-party__cover:nth-child(2).is-selected { transform: translate(-50%, -58%) rotate(0) scale(1.13); }
+.album-party__cover:nth-child(3).is-selected { transform: translate(-18%, -58%) rotate(4deg) scale(1.13); }
+.album-party__cover:focus-visible { outline: 4px solid #e9ff76; outline-offset: 5px; }
+.album-party__now { position: relative; z-index: 5; display: grid; gap: 4px; margin-top: 4px; }
+.album-party__now p { margin: 0; color: #5b3ca9; font: 700 9px/1 var(--f-mono, monospace); letter-spacing: .08em; text-transform: uppercase; }
+.album-party__now h4 { max-width: 23ch; margin: 0; color: #171717; font: 700 clamp(25px, 3.2vw, 39px)/.92 var(--f-display); letter-spacing: -.06em; }
+.album-party__now span { color: #382571; font: 400 12px/1.25 var(--f-mono, monospace); }
+.album-party__likes { position: relative; z-index: 5; margin: 14px 0 0; color: #382571; font: 400 11px/1.2 var(--f-mono, monospace); }
+.album-party__likes b { color: #171717; font-weight: 700; }
+.album-party__likes span { color: #df3d7b; font-size: 15px; }
+.album-party__hint { position: relative; z-index: 5; margin: 12px 0 0; color: #5a4a83; font: 400 9px/1.25 var(--f-mono, monospace); }
+.album-party__heart { position: absolute; z-index: 6; color: #df3d7b; pointer-events: none; text-shadow: 0 1px #ffffff90; }
+.album-party__heart--ambient { left: var(--x); bottom: 20%; opacity: 0; font-size: 17px; animation: album-ambient 3.2s ease-out var(--delay) forwards; }
+.album-party__heart--burst { left: var(--x); top: var(--y); font-size: 21px; animation: album-burst .9s cubic-bezier(.2,.8,.25,1) forwards; }
+.album-party:not(.is-awake) .album-party__heart--ambient { animation-play-state: paused; }
+.album-party__live { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@keyframes album-ambient { 0% { opacity: 0; transform: translate(0, 0) scale(.5); } 15% { opacity: .7; } 100% { opacity: 0; transform: translate(var(--drift), -170px) scale(1.1) rotate(12deg); } }
+@keyframes album-burst { from { opacity: 1; transform: translate(-50%, -50%) scale(.35) rotate(0); } to { opacity: 0; transform: translate(calc(-50% + var(--dx)), calc(-50% + var(--dy))) scale(1.15) rotate(var(--spin)); } }
+@keyframes album-cover-float { 0%, 100% { translate: 0 0; } 50% { translate: 0 -7px; } }
+@media (max-width: 700px) { .album-party { align-content:center; padding:12px; } .album-party__eyebrow { margin-bottom:8px; font-size:8px; } .album-party__covers { width:min(100%,300px); height:min(178px,47vw); min-height:135px; } .album-party__cover { width:43%; } .album-party__now { gap:3px; margin-top:0; } .album-party__now p { font-size:8px; } .album-party__now h4 { max-width:20ch; font-size:clamp(21px,6vw,28px); line-height:.92; } .album-party__now span { font-size:10px; } .album-party__likes { margin-top:9px; font-size:9px; } .album-party__hint { margin-top:8px; font-size:8px; } }
+@media (prefers-reduced-motion: reduce) { .album-party__heart { display: none; } .album-party__cover { transition: none; animation: none !important; } }

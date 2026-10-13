@@ -1,0 +1,33 @@
+{
+  "retrieved": "2026-10-02",
+  "selectionEvidence": "https://ca.billboard.com/charts/billboard-200",
+  "chartDate": "2026-09-12",
+  "note": "Cover images reproduced as contextual music examples. Album art remains copyright of the respective rights holders; no affiliation implied. Not generated. No audio bundled.",
+  "albums": [
+    {
+      "id": "the-art-of-loving",
+      "title": "The Art of Loving",
+      "artist": "Olivia Dean",
+      "source": "https://music.apple.com/us/album/the-art-of-loving/1817609404",
+      "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/08/e2/21/08e22164-7c0b-1522-818f-e0e74f62dc49/25UMGIM69703.rgb.jpg/600x600bb.jpg",
+      "local": "/assets/img/albums/the-art-of-loving.jpg"
+    },
+    {
+      "id": "the-great-divide",
+      "title": "The Great Divide",
+      "artist": "Noah Kahan",
+      "source": "https://music.apple.com/us/album/the-great-divide/1872241079",
+      "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/e0/53/5b/e0535bb5-a269-8cc4-e12f-589e26809569/26UMGIM02802.rgb.jpg/600x600bb.jpg",
+      "local": "/assets/img/albums/the-great-divide.jpg"
+    },
+    {
+      "id": "pretty-sad",
+      "title": "you seem pretty sad for a girl so in love",
+      "edition": "with a bonus track",
+      "artist": "Olivia Rodrigo",
+      "source": "https://music.apple.com/us/album/you-seem-pretty-sad-for-a-girl-so-in-love-with-a-bonus-track/6779846974",
+      "art": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/dc/a1/65/dca1650a-a5a4-2bb3-952a-03fb9d770bfd/26UMGIM39303.rgb.jpg/600x600bb.jpg",
+      "local": "/assets/img/albums/pretty-sad.jpg"
+    }
+  ]
+}

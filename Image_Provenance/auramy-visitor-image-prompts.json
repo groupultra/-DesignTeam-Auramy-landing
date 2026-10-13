@@ -1,0 +1,22 @@
+{
+  "mode": "built-in image_gen",
+  "created": "2026-10-02",
+  "purpose": "Three distinct visitors browsing personal websites in the slideshow section",
+  "assets": [
+    {
+      "key": "train-reader",
+      "prompt": "Use case: photorealistic-natural. Asset type: responsive full-bleed landing page background showing a friend browsing another person's personal website. Primary request: an unretouched candid 0.5x smartphone photo of a young adult East Asian woman with short dark bob hair, in a worn blue hoodie on a moving city train, absorbed and quietly smiling while looking at a smartphone in her hands; the camera is very close, slightly above and behind her shoulder so we clearly see both her face in profile and her phone screen. Phone screen shows a colorful lime and pink scrapbook personal website with a photo, music tile and tiny cat photo, no readable words. Her posture is natural, no looking at camera, believable fingers. Daylight from train window, imperfect flash highlights, visible skin texture, slightly tilted horizon, grain, strong wide-angle perspective. Landscape 4:3 composition, subject and phone occupy center-right; interesting train interior and window on the left for headline overlay. No stock photography polish, no branding, no watermarks, no captions.",
+      "savedPath": "site/assets/img/visitors/train-reader.jpg"
+    },
+    {
+      "key": "bedroom-reader",
+      "prompt": "Use case: photorealistic-natural. Asset type: landing page slide background showing a DIFFERENT friend visiting a personal website. Primary request: a spontaneous high-angle ultra-wide camera-roll photo of a young adult Black man with short natural curls and a faded orange T-shirt sprawled sideways on a purple bedroom rug beside a bed, grinning at the smartphone he is scrolling; shot from just behind his shoulder so his natural face in three-quarter view and phone are both visible. Screen shows a cobalt-and-yellow playful personal homepage with a skateboard photo, track list and photos grid, no readable words. Poster scraps, wired headphones and sneakers are scattered nearby, authentic lived-in room. Warm bedside-lamp light with direct amateur phone flash, genuine pores, untidy edges, no beautification. Landscape 4:3 composition, person and phone center-right with room texture on left for headline overlay. Real anatomy and hands, no looking at camera, no watermark, no branding, no graphics outside the phone, not a polished lifestyle advertisement.",
+      "savedPath": "site/assets/img/visitors/bedroom-reader.jpg"
+    },
+    {
+      "key": "cafe-reader",
+      "prompt": "Use case: photorealistic-natural. Asset type: landing page slide background of another person browsing a friend's personal internet page. Primary request: a casual tilted over-the-shoulder wide-angle photo of a young adult Latina woman with curly dark hair and tiny silver earrings sitting by the window in a small diner, wearing a lime cardigan, laughing softly at her smartphone. Both her face in profile and phone screen are visible. The phone shows a lavender personal web page with original anime drawings, an article card, and small friend portraits, no readable words. A half-eaten pastry and iced drink on the table, rain on glass, a friend blurred across the table. Natural casual moment, real skin texture, slight motion blur, direct phone flash mixed with blue evening light, strong perspective, no retouching. Landscape 4:3 photo, person+phone center-right, diner/window detail left behind headline. No stock-photo staging, no branding, no watermark, no captions, anatomically correct hands.",
+      "savedPath": "site/assets/img/visitors/cafe-reader.jpg"
+    }
+  ]
+}

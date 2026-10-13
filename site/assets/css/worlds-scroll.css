@@ -1,0 +1,132 @@
+/* One phone, five original worlds. This file deliberately owns every visual rule below #spaces. */
+#spaces.worlds-scroll {
+  --world-ink: #171417;
+  --world-paper: #fffaf0;
+  --world-accent: #ff5fa2;
+  position: relative;
+  height: calc(100svh + 4 * 52svh);
+  min-height: 980px;
+  background: var(--world-paper);
+  color: var(--world-ink);
+  scroll-margin-top: 56px;
+}
+
+#spaces.worlds-scroll .worlds-scroll__pin {
+  position: sticky;
+  top: 0;
+  display: grid;
+  align-items: center;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: max(72px, 8svh) clamp(22px, 5vw, 72px) 38px;
+  overflow: clip;
+}
+
+#spaces.worlds-scroll .worlds-scroll__layout {
+  display: grid;
+  grid-template-columns: minmax(250px, 1fr) auto;
+  align-items: center;
+  gap: clamp(36px, 9vw, 150px);
+  width: min(1120px, 100%);
+  margin: 0 auto;
+}
+
+#spaces.worlds-scroll .worlds-scroll__head { max-width: 510px; }
+#spaces.worlds-scroll .worlds-scroll__head h2 {
+  margin: 0;
+  font: 750 clamp(42px, 5.8vw, 76px)/.94 "Bricolage Grotesque", var(--f-display, sans-serif);
+  letter-spacing: -.07em;
+}
+#spaces.worlds-scroll .worlds-scroll__head > p:last-child {
+  margin: 20px 0 0;
+  max-width: 30ch;
+  font: 500 16px/1.45 "Bricolage Grotesque", var(--f-display, sans-serif);
+}
+
+#spaces.worlds-scroll .worlds-scroll__stage {
+  display: grid;
+  justify-items: center;
+  gap: 13px;
+  min-width: 0;
+}
+#spaces.worlds-scroll .worlds-scroll__phone {
+  --pw: clamp(210px, min(25vw, 46svh), 300px);
+  box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.12), inset 0 0 0 5px #070607, 12px 20px 45px -22px rgba(23,20,23,.62);
+}
+#spaces.worlds-scroll .worlds-scroll__screen { transition: opacity .18s ease; }
+#spaces.worlds-scroll .worlds-scroll__screen[data-off="1"] { opacity: 0; }
+
+#spaces.worlds-scroll .worlds-scroll__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  width: min(370px, 100%);
+}
+#spaces.worlds-scroll .worlds-scroll__tabs button {
+  min-height: 44px;
+  border: 1.5px solid rgba(23,20,23,.22);
+  border-radius: 999px;
+  padding: 9px 12px;
+  background: rgba(255,255,255,.66);
+  color: var(--world-ink);
+  font: 650 12px/1 "Bricolage Grotesque", var(--f-display, sans-serif);
+  cursor: pointer;
+  transition: background .18s ease, color .18s ease, border-color .18s ease, transform .18s ease;
+}
+#spaces.worlds-scroll .worlds-scroll__tabs button:hover { transform: translateY(-1px); }
+#spaces.worlds-scroll .worlds-scroll__tabs button[aria-selected="true"] { border-color: var(--world-ink); background: var(--world-ink); color: var(--world-paper); }
+#spaces.worlds-scroll .worlds-scroll__tabs button:focus-visible { outline: 3px solid var(--world-accent); outline-offset: 3px; }
+#spaces.worlds-scroll .worlds-scroll__hint { min-height: 2.8em; max-width: 33ch; margin: 0; color: #625b61; font: 500 12px/1.35 "Bricolage Grotesque", var(--f-display, sans-serif); text-align: center; }
+#spaces.worlds-scroll .worlds-scroll__progress { position: absolute; bottom: 19px; left: 50%; display: flex; gap: 9px; margin: 0; transform: translateX(-50%); font: 500 10px/1 var(--f-mono, monospace); white-space: nowrap; }
+#spaces.worlds-scroll .worlds-scroll__progress b { padding: 5px 8px; border-radius: 999px; background: var(--world-ink); color: #e9ff76; }
+
+#spaces.worlds-scroll[data-world="desk"] { --world-accent: #8b6cff; }
+#spaces.worlds-scroll[data-world="vinyl"] { --world-accent: #a65740; }
+#spaces.worlds-scroll[data-world="pixel"] { --world-accent: #4d899f; }
+#spaces.worlds-scroll[data-world="scrap"] { --world-accent: #d65777; }
+#spaces.worlds-scroll[data-world="story"] { --world-accent: #d07231; }
+#spaces.worlds-scroll [data-worlds-hint]:empty { display: none; }
+#spaces.worlds-scroll [data-off="1"] *,
+#spaces.worlds-scroll [data-off="1"] *::before,
+#spaces.worlds-scroll [data-off="1"] *::after { animation-play-state: paused !important; }
+
+@media (max-width: 700px) {
+  #spaces.worlds-scroll { height: calc(100svh + 4 * 54svh); min-height: 900px; }
+  #spaces.worlds-scroll .worlds-scroll__pin { align-items: start; padding: max(54px, 7svh) 16px 16px; }
+  #spaces.worlds-scroll .worlds-scroll__layout { grid-template-columns: 1fr; gap: 11px; }
+  #spaces.worlds-scroll .worlds-scroll__head { text-align: center; justify-self: center; }
+  #spaces.worlds-scroll .worlds-scroll__head h2 { font-size: clamp(32px, 9.2vw, 46px); }
+  #spaces.worlds-scroll .worlds-scroll__head > p:last-child { margin-top: 8px; font-size: 13px; }
+  #spaces.worlds-scroll .worlds-scroll__stage { gap: 8px; }
+  #spaces.worlds-scroll .worlds-scroll__phone { --pw: min(232px, calc((100svh - 211px) * .46)); }
+  #spaces.worlds-scroll .worlds-scroll__tabs { gap: 5px; width: min(360px, 100%); }
+  #spaces.worlds-scroll .worlds-scroll__tabs button { min-height: 44px; padding: 9px 10px; font-size: 12px; }
+  #spaces.worlds-scroll .worlds-scroll__hint { display: none; }
+  #spaces.worlds-scroll .worlds-scroll__progress { display: none; }
+}
+
+@media (max-width: 390px) {
+  #spaces.worlds-scroll .worlds-scroll__tabs { width: 100%; }
+  #spaces.worlds-scroll .worlds-scroll__tabs button { padding-inline: 9px; font-size: 12px; }
+}
+
+@media (max-height: 640px), (prefers-reduced-motion: reduce) {
+  #spaces.worlds-scroll { height: auto; min-height: 0; padding: 28px 0 34px; }
+  #spaces.worlds-scroll .worlds-scroll__pin { position: static; min-height: 0; padding: 28px 16px 0; overflow: visible; }
+  #spaces.worlds-scroll .worlds-scroll__layout { grid-template-columns: 1fr; gap: 12px; }
+  #spaces.worlds-scroll .worlds-scroll__head { text-align: center; justify-self: center; }
+  #spaces.worlds-scroll .worlds-scroll__head h2 { font-size: clamp(30px, 6vw, 48px); }
+  #spaces.worlds-scroll .worlds-scroll__head > p:last-child { margin-top: 8px; font-size: 13px; }
+  #spaces.worlds-scroll .worlds-scroll__phone { --pw: min(210px, calc((100svh - 166px) * .43)); }
+  #spaces.worlds-scroll .worlds-scroll__hint, #spaces.worlds-scroll .worlds-scroll__progress { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #spaces.worlds-scroll *, #spaces.worlds-scroll *::before, #spaces.worlds-scroll *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}

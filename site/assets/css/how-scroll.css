@@ -1,0 +1,64 @@
+/* One phone, held by an abstract hand; no horizontal or pinned tutorial. */
+.how[data-how-scroll] { position:relative; overflow:clip; padding:clamp(74px,9vw,126px) 0 clamp(64px,8vw,104px); background:#f7f5e8; border-block:2px solid #141414; }
+.how-handheld { position:relative; }
+.how-handheld__head { position:relative; z-index:3; max-width:39rem; }
+.how-handheld__head .h2 { max-width:10ch; margin:0; }
+.how-handheld__scene { position:relative; display:grid; grid-template-columns:minmax(190px,.85fr) minmax(350px,1fr); min-height:min(660px,calc(100svh - 170px)); margin-top:clamp(20px,4vw,62px); isolation:isolate; }
+.how-handheld__copy { z-index:3; align-self:center; max-width:23rem; padding:32px 20px 32px 0; }
+.how-scroll__number { display:block; margin-bottom:9px; color:#5532c9; font:700 clamp(66px,8vw,122px)/.78 var(--f-hand,cursive); letter-spacing:-.09em; }
+.how-handheld__copy h3 { margin:0; color:#171717; font:700 clamp(36px,4.8vw,70px)/.86 var(--f-display); letter-spacing:-.065em; }
+.how-handheld__copy p { max-width:23ch; margin:18px 0 0; color:#393939; font-size:clamp(15px,1.5vw,20px); line-height:1.32; }
+
+.how-handheld__device { position:relative; z-index:2; align-self:center; justify-self:center; width:min(500px,43vw); min-height:min(635px,calc(100svh - 190px)); }
+.how-handheld__phone { position:absolute; z-index:2; bottom:0; left:0; width:min(340px,74%); padding:9px; border:3px solid #171717; border-radius:36px; background:#171717; box-shadow:10px 13px 0 #171717; transform:rotate(-4deg); }
+.how-handheld__phone::before { content:''; position:absolute; z-index:5; top:8px; left:50%; width:35%; height:17px; border-radius:0 0 12px 12px; background:#171717; transform:translateX(-50%); pointer-events:none; }
+.how-handheld__screen { position:relative; aspect-ratio:360 / 780; overflow:hidden; border-radius:28px; background:#fffdf1; }
+.how-handheld__panel { position:absolute; inset:0; width:100%; max-width:none; margin:0; opacity:0; transform:translateX(10%) scale(.98); pointer-events:none; transition:opacity .22s ease,transform .3s cubic-bezier(.2,.9,.3,1); }
+.how-handheld__panel.is-active { z-index:1; opacity:1; transform:translateX(0) scale(1); pointer-events:auto; }
+/* Existing editorial mini cards are relatively positioned; phone panels must overlap. */
+.editorial-page.raw-page #how .how-handheld__panel { position:absolute; inset:0; width:100%; height:auto; max-width:none; min-height:0; aspect-ratio:auto; margin:0; }
+/* The old mini-screen CTAs would duplicate the phone's single Next control. */
+.how-handheld__panel [data-next-step]:not(.bub--card) { display:none; }
+/* The share composer sits above the single phone navigation, not beneath it. */
+.how-handheld__panel[data-screen="share"] .ch-input { bottom:24cqw; z-index:7; }
+.how-handheld__panel[data-screen="share"] .ch-body { bottom:42cqw; }
+.how-handheld__nav { position:absolute; z-index:6; right:10px; bottom:10px; left:10px; display:flex; justify-content:space-between; gap:9px; padding:8px; border:1.5px solid #171717; border-radius:15px; background:#fffdf1e8; box-shadow:2px 2px 0 #171717; }
+.how-handheld__nav button { min-height:30px; border:1.5px solid #171717; border-radius:99px; padding:6px 9px; background:#fffdf1; color:#171717; font:700 9px/1 var(--f-mono,monospace); letter-spacing:.04em; text-transform:uppercase; cursor:pointer; }
+.how-handheld__nav button:last-child { background:#ceff00; box-shadow:2px 2px 0 #171717; }
+.how-handheld__nav button:disabled { opacity:.42; cursor:default; }
+.how-handheld__nav button:focus-visible { outline:3px solid #ff52b4; outline-offset:3px; }
+
+/* One connected hand comes in front of the phone, but never takes the controls. */
+.how-handheld__hand { position:absolute; z-index:5; right:-4%; bottom:-13%; width:38%; height:auto; overflow:visible; pointer-events:none; user-select:none; rotate:-27deg; transform-origin:58% 76%; }
+.how.is-how-press .how-handheld__hand { animation:how-hand-tap .22s cubic-bezier(.2,1.15,.35,1) both; }
+
+.how-handheld__bursts { position:absolute; z-index:0; inset:0; pointer-events:none; font-family:var(--f-hand,cursive); color:#171717; }
+.how-handheld__bursts i { position:absolute; display:grid; place-items:center; width:92px; aspect-ratio:1; font-style:normal; font-weight:700; font-size:28px; line-height:.7; text-align:center; background:#ff52b4; clip-path:polygon(50% 0,61% 27%,84% 7%,77% 34%,100% 40%,77% 51%,94% 73%,68% 67%,61% 100%,49% 73%,26% 92%,31% 65%,0 62%,25% 47%,5% 24%,34% 30%); transform:rotate(-13deg); }
+.how-handheld__bursts i:nth-child(1) { left:34%; top:6%; color:#fffdf1; font:800 50px/1 var(--f-display); background:#5532c9; }
+.how-handheld__bursts i:nth-child(2) { bottom:17%; left:7%; width:118px; background:#ceff00; transform:rotate(12deg); }
+.how-handheld__bursts i:nth-child(3) { top:15%; right:7%; background:#ff9c3d; font-size:41px; }
+.how-handheld__bursts i:nth-child(4) { bottom:2%; left:45%; width:72px; background:#9ddcfa; font-size:43px; }
+.how.is-how-pop .how-handheld__bursts i { animation:how-burst .28s cubic-bezier(.2,1.4,.4,1) both; }
+.how.is-how-pop .how-handheld__bursts i:nth-child(2) { animation-delay:.03s; }.how.is-how-pop .how-handheld__bursts i:nth-child(3) { animation-delay:.06s; }.how.is-how-pop .how-handheld__bursts i:nth-child(4) { animation-delay:.09s; }
+
+.how-scroll__progress { position:relative; z-index:4; display:flex; align-items:center; gap:11px; margin:3px 0 0; color:#393939; font:700 10px/1.2 var(--f-mono,monospace); letter-spacing:.08em; text-transform:uppercase; }
+.how-scroll__progress::before { content:''; width:min(23vw,200px); height:2px; background:linear-gradient(90deg,#171717 calc((var(--how-step,1) / 4) * 100%),#17171733 0); }
+.how-scroll__sr { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+.how[data-how-step="1"] { --how-step:1; }.how[data-how-step="2"] { --how-step:2; }.how[data-how-step="3"] { --how-step:3; }.how[data-how-step="4"] { --how-step:4; }
+@keyframes how-hand-tap { 0%,100% { transform:translate(0,0) rotate(0); } 42% { transform:translate(-5px,5px) rotate(-2.5deg); } 68% { transform:translate(2px,-2px) rotate(1deg); } }
+@keyframes how-burst { 0% { opacity:0; transform:scale(.35) rotate(-34deg); } 100% { opacity:1; } }
+
+@media (max-width:700px) {
+  .how[data-how-scroll] { padding:66px 0 58px; }
+  .how-handheld__scene { grid-template-columns:1fr; min-height:0; margin-top:18px; padding-bottom:92px; }
+  .how-handheld__copy { padding:0; max-width:19rem; }.how-scroll__number { margin-bottom:4px; font-size:59px; }.how-handheld__copy h3 { font-size:42px; }.how-handheld__copy p { margin-top:7px; font-size:14px; }
+  .how-handheld__device { width:min(390px,100%); min-height:590px; margin:8px auto 0; }
+  .how-handheld__phone { left:4%; width:min(294px,77%); padding:7px; border-radius:29px; box-shadow:7px 9px 0 #171717; transform:rotate(-3deg); }
+  .how-handheld__phone::before { top:6px; height:13px; }.how-handheld__screen { border-radius:22px; }
+  .how-handheld__nav { right:7px; bottom:7px; left:7px; padding:6px; border-radius:13px; }.how-handheld__nav button { min-height:28px; padding:5px 8px; font-size:8px; }
+  .how-handheld__hand { right:-3%; bottom:-16%; width:34%; }
+  .how-handheld__bursts i:nth-child(1) { top:21%; left:1%; }.how-handheld__bursts i:nth-child(2) { bottom:10%; left:-6%; width:88px; font-size:21px; }.how-handheld__bursts i:nth-child(3) { top:43%; right:-2%; width:65px; font-size:29px; }.how-handheld__bursts i:nth-child(4) { display:none; }
+  .how-scroll__progress { margin-top:5px; }.how-scroll__progress::before { width:86px; }
+}
+@media (max-height:640px) { .how-handheld__scene { min-height:0; }.how-handheld__device { min-height:480px; width:min(420px,48vw); }.how-handheld__phone { width:min(255px,75%); }.how-handheld__bursts { display:none; } }
+@media (prefers-reduced-motion:reduce) { .how-handheld__panel { transition:none; } }.raw-page.is-motion-paused .how-handheld__panel { transition:none; }

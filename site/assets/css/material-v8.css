@@ -1,0 +1,142 @@
+/* Material v8: one friendly machine made from cream plastic, blue glass, paper and metal. */
+.material-v8 {
+  --m-cream:#f3ebdd;
+  --m-paper:#fff9ec;
+  --m-blue:#064bff;
+  --m-yellow:#ffd400;
+  --m-ink:#17140f;
+  --m-red:#e7443e;
+  --m-green:#5d8a4b;
+  --m-shadow:rgba(23,20,15,.24);
+  background:var(--m-cream);
+  color:var(--m-ink);
+  font-family:var(--f-display);
+}
+.material-v8 *, .material-v8 *::before, .material-v8 *::after { box-sizing:border-box; }
+.material-v8 :focus-visible { outline:3px solid var(--m-blue); outline-offset:4px; box-shadow:0 0 0 6px var(--m-yellow); }
+.material-v8 .nav {
+  min-height:70px; border-bottom:2px solid #cfc4b1; background:rgba(243,235,221,.93);
+  box-shadow:0 8px 20px rgba(79,59,30,.1); backdrop-filter:blur(12px);
+}
+.material-v8 .nav__logo { display:inline-flex; align-items:center; gap:9px; color:var(--m-ink); font:800 16px/1 var(--f-brand); letter-spacing:-.08em; text-decoration:none; }
+.material-v8 .nav__logo img { width:36px!important; height:36px!important; object-fit:cover; border:2px solid var(--m-ink); border-radius:10px; box-shadow:2px 3px 0 var(--m-ink); }
+.material-v8 .nav__logo:hover img { transform:rotate(-2deg) scale(1.04); }
+.material-v8 .nav__links a { color:#373027; font-weight:700; }
+.material-v8 .nav .btn { min-height:44px; border:2px solid var(--m-ink); border-radius:12px; background:var(--m-blue); box-shadow:3px 4px 0 var(--m-ink); color:#fff; }
+
+/* The landing object is a cream desktop with a separate, real monitor portrait. */
+.material-v8 .hero--editorial {
+  position:relative; min-height:1050px; overflow:hidden; padding:clamp(130px,15vw,180px) max(5vw,32px) 58px!important;
+  background:linear-gradient(112deg,#e9ddc9 0 49%,#f7f0e5 49% 100%)!important;
+  border-bottom:3px solid var(--m-ink);
+}
+.material-v8 .hero--editorial::before { content:""; position:absolute; z-index:0; inset:108px 4vw 70px 48%; width:auto; height:auto; border:12px solid #cabda7; border-radius:54px; opacity:1; background:
+  radial-gradient(circle at 20% 20%,rgba(255,255,255,.22),transparent 24%),
+  repeating-radial-gradient(circle at 20% 15%,rgba(255,255,255,.07) 0 1px,transparent 1px 4px),
+  linear-gradient(135deg,#095aff,#043ecb); box-shadow:inset 0 0 0 6px #002ca4,inset 0 0 28px #001a63,0 17px 0 #b9ab93,0 31px 36px rgba(63,44,20,.27); filter:none; animation:none; }
+.material-v8.calm-page.raw-page main > .hero--editorial::before { content:""!important; position:absolute!important; display:block!important; z-index:0!important; inset:108px 4vw 70px 48%!important; width:auto!important; height:auto!important; border:12px solid #cabda7!important; border-radius:54px!important; opacity:1!important; background-image:radial-gradient(circle at 20% 20%,rgba(255,255,255,.22),transparent 24%),repeating-radial-gradient(circle at 20% 15%,rgba(255,255,255,.07) 0 1px,transparent 1px 4px),linear-gradient(135deg,#095aff,#043ecb)!important; box-shadow:inset 0 0 0 6px #002ca4,inset 0 0 28px #001a63,0 17px 0 #b9ab93,0 31px 36px rgba(63,44,20,.27)!important; filter:none!important; animation:none!important; transform:none!important; pointer-events:none!important; }
+.material-v8.calm-page.raw-page .hero--editorial .hero-heading { position:relative; z-index:3; width:min(50%,590px); margin:0!important; text-align:left!important; }
+.material-v8 .editorial-kicker { display:inline-block!important; margin:0 0 16px!important; padding:7px 10px!important; border:2px solid var(--m-ink)!important; background:var(--m-yellow)!important; box-shadow:3px 3px 0 var(--m-ink)!important; color:var(--m-ink)!important; font:700 10px/1 var(--f-mono)!important; letter-spacing:.09em!important; }
+.material-v8 .hero--editorial h1, .material-v8.raw-page .hero-heading h1 { color:var(--m-ink)!important; font:800 clamp(3.6rem,6.7vw,6.4rem)/.89 var(--f-display)!important; letter-spacing:-.075em!important; }
+.material-v8 .hero--editorial h1 em, .material-v8.raw-page .hero-heading h1 em { color:var(--m-blue)!important; font:inherit!important; font-style:normal!important; }
+.material-v8 .hero-deck, .material-v8.raw-page .hero-deck { max-width:34ch!important; color:#40382e!important; font:600 17px/1.48 var(--f-display)!important; }
+.material-v8 .hero-heading .claim { border:2px solid var(--m-ink)!important; border-radius:16px!important; background:var(--m-paper)!important; box-shadow:5px 6px 0 var(--m-ink)!important; }
+.material-v8 .hero-heading .claim .btn { min-height:48px; background:var(--m-blue); color:#fff; }
+.material-v8 .hero-monitor { position:absolute; z-index:2; top:clamp(135px,14vw,190px); right:clamp(4vw,7vw,120px); width:min(34vw,480px); margin:0; padding:clamp(10px,1.3vw,17px); border:3px solid var(--m-ink); border-radius:32px; background:#fffdf7; box-shadow:inset 0 0 0 5px #eee4d4,10px 13px 0 rgba(0,34,133,.55),0 25px 35px rgba(0,24,84,.24); transform:rotate(2.5deg); }
+.material-v8 .hero-monitor::before { content:""; position:absolute; right:20px; bottom:-22px; width:86px; height:18px; border:3px solid var(--m-ink); border-radius:50%; background:#e4d8c6; box-shadow:0 7px 0 #a79782; }
+.material-v8 .hero-monitor img { position:relative; z-index:1; display:block; width:100%!important; height:auto!important; aspect-ratio:1/1; object-fit:contain; border-radius:20px; mix-blend-mode:multiply; }
+.material-v8 .hero-monitor figcaption { position:relative; z-index:2; margin:8px 2px 0; color:#0735a9; font:700 10px/1.2 var(--f-mono); letter-spacing:.07em; }
+.material-v8 .hero-monitor figcaption span { color:#7ecb5c; text-shadow:0 0 6px #7ecb5c; }
+.material-v8 .hero-collage { position:relative!important; z-index:4!important; width:min(1080px,94vw)!important; height:440px!important; margin:clamp(64px,10vw,130px) auto 0!important; }
+.material-v8 .site-preview-collage { height:440px!important; }
+.material-v8 .site-preview-collage__main { top:25px!important; border:4px solid var(--m-ink); border-radius:18px; box-shadow:8px 10px 0 rgba(0,42,150,.4); }
+.material-v8 .site-preview-collage__pet, .material-v8 .site-preview-collage__oc, .material-v8 .site-preview-collage__sheet { filter:drop-shadow(5px 6px 0 rgba(23,20,15,.28)); }
+.material-v8 .raw-hero__controls { z-index:5; }.material-v8 .chaos-button { border:2px solid var(--m-ink)!important; border-radius:10px!important; background:var(--m-paper)!important; color:var(--m-ink)!important; box-shadow:3px 3px 0 var(--m-ink)!important; }
+.material-v8 .hero-scroll { color:var(--m-ink)!important; font-weight:800!important; }
+.material-v8.calm-page.raw-page .hero-deck { margin:24px 0 20px!important; }
+
+/* Paper gets a blue LED interruption before the solid cream console. */
+.material-v8 .scroll-reveal { padding-block:clamp(80px,11vw,135px); background:var(--m-blue)!important; color:var(--m-paper); border-bottom:3px solid var(--m-ink); }
+.material-v8 #vs .scroll-reveal__heading { color:var(--m-paper)!important; font-weight:800!important; }.material-v8 #vs .scroll-reveal__heading span { color:var(--m-yellow)!important; }
+.material-v8 .scroll-reveal__device { border:8px solid #d8c9b1; border-radius:32px; box-shadow:inset 0 0 0 3px #fff8e8,0 13px 0 #b7a88e,0 28px 38px rgba(0,20,84,.45); }
+.material-v8 .scroll-reveal__chrome { background:#e9dfcf!important; color:var(--m-ink)!important; font-family:var(--f-mono)!important; }
+.material-v8 .scroll-reveal__reduced-copy { color:var(--m-paper); }
+
+.material-v8 .how[data-how-scroll] { background:var(--m-cream)!important; border-block:3px solid var(--m-ink)!important; }
+.material-v8 .how[data-how-scroll]::before { content:""; position:absolute; inset:24px 3vw 28px; border:3px solid #d1c1a9; border-radius:44px; box-shadow:inset 0 0 0 5px #f8f1e6; pointer-events:none; }
+.material-v8 .how-handheld__head, .material-v8 .how-handheld__scene, .material-v8 .how-scroll__progress { position:relative; z-index:1; }
+.material-v8 .how-handheld__head .h2, .material-v8 .how-handheld__copy h3 { color:var(--m-ink)!important; font-weight:800!important; }
+.material-v8 .how-handheld__head .h2 em { color:var(--m-blue)!important; font-family:var(--f-display)!important; }
+.material-v8 .how-scroll__number { color:var(--m-red)!important; font-family:var(--f-mono)!important; font-size:clamp(48px,6vw,84px)!important; letter-spacing:-.1em; text-shadow:2px 2px 0 #fff9ec; }
+.material-v8 .how-handheld__phone { border:10px solid #d7c7ad!important; border-radius:38px!important; background:#d7c7ad!important; box-shadow:inset 0 0 0 3px #fff7e9,11px 14px 0 #b8a88f,0 25px 34px rgba(75,56,28,.2)!important; transform:rotate(2deg)!important; }
+.material-v8 .how-handheld__phone::before { background:#342d26!important; }.material-v8 .how-handheld__screen { border-radius:26px!important; background:#064bff!important; }
+.material-v8 .how-handheld__nav { border:0!important; border-radius:0 0 22px 22px!important; padding:12px!important; background:#d7c7ad!important; box-shadow:none!important; }
+.material-v8 .how-handheld__nav button { min-width:44px; min-height:44px!important; border:2px solid var(--m-ink)!important; border-radius:9px!important; background:#f8efe0!important; box-shadow:0 3px 0 #9e8c70!important; color:var(--m-ink)!important; font:700 11px/1 var(--f-mono)!important; }
+.material-v8 .how-handheld__nav button:last-child { background:var(--m-yellow)!important; }
+.material-v8 .how-scroll__progress { display:inline-flex; padding:8px 11px; border:2px solid var(--m-ink); border-radius:8px; background:#17140f; color:#a1ff78; box-shadow:3px 3px 0 #a4947c; }
+.material-v8 .how-scroll__progress::before { background:linear-gradient(90deg,#a1ff78 calc((var(--how-step,1) / 4) * 100%),#48634a 0)!important; }
+
+/* One scrolling phone remains the worlds object; the soft body changes around it. */
+.material-v8 #spaces.worlds-scroll { background:linear-gradient(90deg,#f8f0e2 50%,#e7dac7 50%)!important; border-bottom:3px solid var(--m-ink); }
+.material-v8 #spaces.worlds-scroll .worlds-scroll__head h2 { color:var(--m-ink); font-weight:800; }.material-v8 #spaces.worlds-scroll .worlds-scroll__head > p:last-child { color:#554a3d; font-weight:600; }
+.material-v8 #spaces.worlds-scroll .worlds-scroll__phone { padding:8px; border:5px solid #d5c4aa; border-radius:35px; background:#d5c4aa; box-shadow:inset 0 0 0 3px #fff8eb,9px 13px 0 #a89578,0 26px 40px rgba(62,43,18,.3)!important; }
+.material-v8 #spaces.worlds-scroll .worlds-scroll__tabs button { min-height:44px; border:2px solid var(--m-ink); border-radius:8px; background:#fff9ec; box-shadow:0 3px 0 #c7b69d; color:var(--m-ink); font-weight:800; }
+.material-v8 #spaces.worlds-scroll .worlds-scroll__tabs button[aria-selected="true"] { background:var(--m-blue); border-color:var(--m-ink); color:#fff; box-shadow:0 3px 0 #032e9c; }
+.material-v8 #spaces.worlds-scroll .worlds-scroll__progress b { background:var(--m-blue); color:var(--m-yellow); }
+
+/* A paper contact sheet with clean white social-profile interiors. */
+.material-v8 .made { position:relative; background:repeating-linear-gradient(90deg,transparent 0 31px,rgba(101,82,54,.08) 31px 32px),var(--m-paper)!important; border-bottom:3px solid var(--m-ink); }
+.material-v8 .made::after { content:""; position:absolute; inset:28px 3vw; border:2px dashed #c8b89c; pointer-events:none; }.material-v8 .made > * { position:relative; z-index:1; }
+.material-v8 .made .h2, .material-v8 .play .h2, .material-v8 .aura .h2 { color:var(--m-ink)!important; font-weight:800!important; }.material-v8 .made .h2 em, .material-v8 .play .h2 em, .material-v8 .aura .h2 em { color:var(--m-red)!important; font-family:var(--f-display)!important; }
+.material-v8 .made__disclaimer, .material-v8 .play .lede { color:#514536!important; font-size:16px!important; }
+.material-v8 .made-card { border:3px solid var(--m-ink)!important; background:#fff!important; box-shadow:7px 8px 0 #d3bda1!important; }
+.material-v8 .made-card:nth-child(2n) { transform:rotate(1.2deg)!important; }.material-v8 .made-card:nth-child(3n) { transform:rotate(-1deg)!important; }
+.material-v8.calm-page.raw-page .made-card.social-profile--links { background:linear-gradient(145deg,#37204d,#141733)!important; color:#fff!important; box-shadow:7px 8px #e09bca!important; }
+
+/* Four ordinary cards, each with an obviously different physical material. */
+.material-v8 .play { background:#e5d7c1!important; border-bottom:3px solid var(--m-ink); }.material-v8 .play-feed { gap:24px!important; }
+.material-v8 .play-feed .tile { min-height:510px; border:3px solid var(--m-ink)!important; border-radius:18px!important; box-shadow:8px 9px 0 rgba(23,20,15,.28)!important; color:var(--m-ink)!important; }.material-v8 .play-feed .tile header { border-bottom:2px solid currentColor; }.material-v8 .play-feed .tile header h3 { font-weight:800!important; }.material-v8 .play-feed .tile header p, .material-v8 .play-feed .tile footer { color:inherit!important; font-family:var(--f-display)!important; }
+.material-v8 .tile--squish { background:radial-gradient(circle at 60% 35%,#fff4c7 0 3%,transparent 3% 100%),#e5cfac!important; }.material-v8 .tile--squish .squish__shadow { fill:#927d5e; }.material-v8 .tile--squish .squish__body { stroke:#fff6e5; stroke-width:10px; }
+.material-v8.calm-page.raw-page .play-feed .tile--game, .material-v8.calm-page.raw-page .play-feed .tile--game header h3, .material-v8.calm-page.raw-page .play-feed .tile--game .tgame__score, .material-v8.calm-page.raw-page .play-feed .tile--game .tgame__score b, .material-v8.calm-page.raw-page .play-feed .tile--game .tgame__msg, .material-v8.calm-page.raw-page .play-feed .tile--game header p, .material-v8.calm-page.raw-page .play-feed .tile--game footer { background-color:#064bff!important; color:#fff9ec!important; }.material-v8.calm-page.raw-page .play-feed .tile--game .tgame { border:3px solid #9ecbff; border-radius:8px; background:repeating-linear-gradient(0deg,#0040d8 0 3px,#064bff 3px 6px); box-shadow:inset 0 0 24px #001e75; }.material-v8.calm-page.raw-page .play-feed .tile--game .board li { background:#f3ebdd!important; color:var(--m-ink)!important; border-color:var(--m-ink)!important; }.material-v8.calm-page.raw-page .play-feed .tile--game .board li::before, .material-v8.calm-page.raw-page .play-feed .tile--game .board li b { color:var(--m-ink)!important; }.material-v8.calm-page.raw-page .play-feed .tile--game .tgame__marker { background:var(--m-yellow)!important; box-shadow:0 0 12px var(--m-yellow); }
+.material-v8 .tile--wall { background:repeating-linear-gradient(0deg,transparent 0 29px,#c8b69b 30px),#fff9ec!important; }.material-v8 .tile--wall .wall__form input { border:2px solid var(--m-ink)!important; border-radius:8px!important; background:#fffdf8!important; }.material-v8 .tile--wall .wall__form .btn { min-height:44px; background:#d5302b!important; color:#fff9ec!important; font-weight:800!important; }
+.material-v8 .tile--love { background:linear-gradient(135deg,#d3d1ca,#f4f0e5 24%,#b3b2ae 49%,#eee9dd 73%,#aaa9a4)!important; }.material-v8 .tile--love .album-party { border-top:2px solid #6e6a64; background:radial-gradient(circle,#f8f5ee 0 5%,#52504f 5.5% 8%,#d9d5ca 8.5% 10%,transparent 10.5%),linear-gradient(135deg,#bbb8b0,#eee9df 48%,#aaa7a0); }.material-v8 .tile--love .album-party__cover { border-color:#151515; box-shadow:4px 5px 0 #555; }
+
+/* Keep the full bleed visitor photography and restore a physical iOS phone at the lower right. */
+.material-v8 .notify--slideshow { background:#17140f!important; border-color:var(--m-ink)!important; }.material-v8 .notify__deck::before { background:var(--m-yellow)!important; }.material-v8 .notify__copy .h2 { color:var(--m-paper)!important; text-shadow:3px 3px 0 var(--m-blue)!important; }.material-v8 .notify__copy .h2 em { color:var(--m-yellow)!important; }.material-v8 .lock-phone { border-color:#e8e1d5!important; box-shadow:7px 10px 0 #061b58,0 18px 36px rgba(0,0,0,.42)!important; }.material-v8 .ntf__ico img { object-fit:cover; border-radius:5px; }
+
+.material-v8 .aura { background:linear-gradient(135deg,#e9dcc5,#f7f0e2)!important; border-bottom:3px solid var(--m-ink); }.material-v8 .orb { border:12px solid #cfbea2!important; background:#17140f!important; box-shadow:inset 0 0 0 3px #fff3dc,0 13px 0 #a18d71,0 27px 34px rgba(65,47,23,.25)!important; }.material-v8 .orb__core { background:radial-gradient(circle at 35% 30%,#fff,#a1ff78 15%,#23bb58 40%,#063d27 72%)!important; }.material-v8 .orb__num { color:#b7ff8f!important; font-family:var(--f-mono)!important; }.material-v8 .ledger { border:3px solid var(--m-ink); background:#fff9ec; box-shadow:7px 8px 0 #baa68a; }.material-v8 .ledger__h { background:var(--m-blue)!important; color:#fff!important; font-family:var(--f-mono)!important; }.material-v8 .buy { min-height:44px; border:2px solid var(--m-ink)!important; border-radius:8px!important; background:#f5e9d4!important; box-shadow:0 3px 0 #baa68a; color:var(--m-ink)!important; }.material-v8 .buy b, .material-v8 .ledger__col--shop li b { color:var(--m-ink)!important; }.material-v8 .buy.is-owned { background:#a1ff78!important; }
+
+.material-v8.calm-page.raw-page main > .claimsec { background:#064bff!important; background-image:repeating-linear-gradient(0deg,transparent 0 3px,rgba(255,255,255,.04) 3px 4px)!important; color:#fff9ec!important; border-block:3px solid var(--m-ink); }.material-v8.calm-page.raw-page main > .claimsec::before { display:none!important; }.material-v8 .claimsec__title, .material-v8.raw-page main > .claimsec .claimsec__title { color:#fff9ec!important; font-family:var(--f-display)!important; font-weight:800!important; }.material-v8 .claimsec__title em, .material-v8.raw-page main > .claimsec .claimsec__title em { color:var(--m-yellow)!important; font-family:var(--f-display)!important; }.material-v8 .claimsec .claim { border:3px solid var(--m-ink)!important; border-radius:14px!important; background:var(--m-paper)!important; box-shadow:6px 7px 0 #001a61!important; }.material-v8 .claimsec .btn { min-height:48px; background:var(--m-yellow)!important; color:var(--m-ink)!important; }
+.material-v8 .foot { background:#17140f!important; border:0!important; }.material-v8 .foot__logo { display:inline-flex; align-items:center; gap:10px; color:#fff9ec; font:800 17px/1 var(--f-brand); letter-spacing:-.08em; text-decoration:none; }.material-v8 .foot__logo img { width:40px!important; height:40px!important; object-fit:cover; border:2px solid #fff9ec; border-radius:10px; }.material-v8 .foot nav a { color:#fff9ec; }
+
+/* This layer follows the calm reset, which intentionally clears older decorative images. */
+.material-v8.calm-page.raw-page .hero--editorial { background-image:linear-gradient(112deg,#e9ddc9 0 49%,#f7f0e5 49% 100%)!important; }
+.material-v8.calm-page .made { background-image:repeating-linear-gradient(90deg,transparent 0 31px,rgba(101,82,54,.08) 31px 32px)!important; }
+.material-v8.calm-page .play { background-image:none!important; }
+.material-v8.calm-page .tile--squish { background-image:radial-gradient(circle at 60% 35%,#fff4c7 0 3%,transparent 3% 100%)!important; }
+.material-v8.calm-page .tile--game { background-image:none!important; }
+.material-v8.calm-page .tile--wall { background-image:repeating-linear-gradient(0deg,transparent 0 29px,#c8b69b 30px)!important; }
+.material-v8.calm-page .tile--love { background-image:linear-gradient(135deg,#d3d1ca,#f4f0e5 24%,#b3b2ae 49%,#eee9dd 73%,#aaa9a4)!important; }
+.material-v8.calm-page .aura { background-image:linear-gradient(135deg,#e9dcc5,#f7f0e2)!important; }
+
+@media (max-width:800px) {
+  .material-v8 .nav__links { display:none; }.material-v8 .hero--editorial { min-height:0; padding-top:116px!important; }.material-v8.calm-page.raw-page .hero--editorial .hero-heading { width:min(100%,560px)!important; }.material-v8 .hero-monitor { position:relative; top:auto; right:auto; width:min(68vw,390px); margin:44px auto 0; }.material-v8.calm-page.raw-page main > .hero--editorial::before { inset:410px 4vw 42px!important; border-width:8px!important; border-radius:36px!important; }.material-v8 .hero-collage { height:420px!important; margin:52px auto 0!important; }.material-v8 .site-preview-collage { height:420px!important; margin:0!important; }.material-v8 .site-preview-collage__main { width:274px!important; }.material-v8 .site-preview-collage__pet { left:-2%!important; }.material-v8 .site-preview-collage__oc { right:-2%!important; }.material-v8 .how-handheld__phone { transform:rotate(1deg)!important; }.material-v8 .made::after { inset:18px 12px; }.material-v8 .play-feed .tile { min-height:460px; }
+}
+@media (min-width:701px) and (max-height:780px) {
+  .material-v8 #spaces.worlds-scroll .worlds-scroll__pin { padding:56px clamp(22px,5vw,72px) 18px; }
+  .material-v8 #spaces.worlds-scroll .worlds-scroll__layout { gap:clamp(22px,5vw,64px); }
+  .material-v8 #spaces.worlds-scroll .worlds-scroll__phone { --pw:min(250px,calc((100svh - 162px) * .42)); }
+  .material-v8 #spaces.worlds-scroll .worlds-scroll__stage { gap:7px; }
+  .material-v8 #spaces.worlds-scroll .worlds-scroll__hint { min-height:1.4em; }
+}
+@media (max-width:700px) and (min-height:641px) and (max-height:740px) {
+  .material-v8 #spaces.worlds-scroll .worlds-scroll__pin { padding-top:90px; padding-bottom:66px; }
+  .material-v8 #spaces.worlds-scroll .worlds-scroll__phone { --pw:min(190px,calc((100svh - 230px) * .4)); }
+  .material-v8 #spaces.worlds-scroll .worlds-scroll__layout { gap:7px; }
+  .material-v8 #spaces.worlds-scroll .worlds-scroll__head > p:last-child { display:none; }
+}
+@media (max-width:520px) {
+  .material-v8 .nav { padding-inline:14px; }.material-v8 .nav .btn { padding-inline:10px; font-size:11px; }.material-v8 .hero--editorial { padding-inline:18px!important; }.material-v8 .hero--editorial h1, .material-v8.raw-page .hero-heading h1 { font-size:clamp(3.1rem,14vw,4.1rem)!important; }.material-v8 .hero-monitor { width:70vw; margin-top:34px; }.material-v8 .hero-collage { height:370px!important; margin-top:42px!important; }.material-v8 .site-preview-collage { height:370px!important; margin:0!important; }.material-v8 .site-preview-collage__main { top:48px!important; width:230px!important; }.material-v8 .site-preview-collage__pet { width:160px!important; }.material-v8 .site-preview-collage__oc { width:164px!important; top:238px!important; }.material-v8 .site-preview-collage__sheet { width:180px!important; }.material-v8 .scroll-reveal__device { border-width:5px; }.material-v8 .foot__grid { align-items:flex-start; }
+}
+@media (prefers-reduced-motion:reduce) { .material-v8 *, .material-v8 *::before, .material-v8 *::after { animation-duration:.01ms!important; animation-iteration-count:1!important; transition-duration:.01ms!important; } }
+.material-v8.is-motion-paused .hero-monitor { transform:rotate(2.5deg); }

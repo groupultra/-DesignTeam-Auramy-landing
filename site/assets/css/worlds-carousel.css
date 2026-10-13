@@ -1,0 +1,166 @@
+/* Worlds is a native horizontal gallery, with no vertical scroll pinning. */
+.worlds-section {
+  --world-card-width: 390px;
+  position: relative;
+  height: auto;
+  padding: 104px 0 74px;
+  overflow: clip;
+  background: #101310;
+  color: #faf9f2;
+  scroll-margin-top: 60px;
+}
+.worlds-section__head { position: relative; padding: 0 28px; text-align: center; }
+.worlds-section__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 24px;
+  color: #e9ff76;
+  font: 400 11px/1.3 var(--f-mono);
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.worlds-section__eyebrow::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+.worlds-section__title {
+  margin: 0;
+  color: #faf9f2;
+  font-size: clamp(54px, 6.8vw, 98px);
+  font-weight: 700;
+  line-height: .94;
+  letter-spacing: -.065em;
+}
+.worlds-section__title em { color: #e9ff76; font-family: var(--f-serif); font-weight: 400; letter-spacing: -.035em; }
+.worlds-section__intro { margin: 25px auto 0; max-width: 38ch; color: #a7aca1; font-size: 16px; line-height: 1.55; }
+.worlds-section__rail { position: relative; margin-top: 38px; }
+.worlds-track {
+  display: flex;
+  align-items: flex-start;
+  gap: 26px;
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 36px max(24px, calc(50% - var(--world-card-width) / 2)) 25px;
+  scroll-snap-type: x mandatory;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.worlds-track::-webkit-scrollbar { display: none; }
+.worlds-track:focus-visible { outline: 2px solid #e9ff76; outline-offset: -6px; }
+.world-slide { position: relative; flex: 0 0 var(--world-card-width); min-width: 0; scroll-snap-align: center; scroll-snap-stop: always; }
+.world-slide__plinth {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-height: 642px;
+  padding: 25px 24px 22px;
+  border-radius: 18px;
+  background: var(--world-color);
+  color: #101310;
+  transform: translateY(18px) scale(.94);
+  transform-origin: center center;
+  transition: transform .55s cubic-bezier(.2,.75,.2,1);
+}
+.world-slide.is-active .world-slide__plinth { transform: translateY(0) scale(1); }
+.world-slide__top { display: flex; align-items: center; justify-content: space-between; gap: 12px; align-self: stretch; font: 400 9px/1.4 var(--f-mono); letter-spacing: -.035em; text-transform: uppercase; }
+.world-slide__top > span:first-child { max-width: 24ch; }
+.world-slide__top > span:last-child { white-space: nowrap; opacity: .55; }
+.world-slide__phone-wrap { position: relative; display: grid; place-items: center; flex: 1; width: 100%; padding-block: 27px 25px; }
+.worlds-section .world-slide__phone {
+  --pw: 245px;
+  transform: rotate(var(--world-tilt));
+  box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.12), inset 0 0 0 5px #070607, 8px 21px 32px -15px rgba(16,19,16,.55);
+  transition: transform .55s cubic-bezier(.2,.75,.2,1);
+}
+.world-slide.is-active .world-slide__phone { transform: rotate(0); }
+.world-slide__try { display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 10px; font: 400 10px/1.2 var(--f-mono); opacity: .75; }
+.world-slide__try > span { font: 400 21px/1 var(--f-display); }
+.world-slide__preview { position: absolute; z-index: 30; inset: 0; padding: 0; border: 0; border-radius: inherit; background: transparent; cursor: pointer; }
+.world-slide__preview[hidden] { display: none; }
+.world-slide__preview:focus-visible { outline: 3px solid #faf9f2; outline-offset: 5px; }
+.world-slide__title { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin: 21px 12px 0; color: #a7aca1; font-size: 22px; font-weight: 500; letter-spacing: -.03em; transition: color .2s; }
+.world-slide__title > span { font-size: 21px; opacity: .5; }
+.world-slide.is-active .world-slide__title { color: #e9ff76; }
+.world-slide--claim .world-slide__plinth { align-items: stretch; background: #a9dffc; }
+.world-slide__blank-site { display:flex; flex:1; flex-direction:column; min-height:0; margin:18px 2px 14px; overflow:hidden; border:2px solid #171717; border-radius:7px; background:#fffdf1; box-shadow:5px 6px 0 #171717; }
+.world-slide__blank-bar { display:flex; align-items:center; justify-content:space-between; min-height:30px; padding:0 9px; border-bottom:1.5px solid #171717; background:#f2efe3; color:#595850; font:400 8px/1 var(--f-mono); }
+.world-slide__blank-bar b { color:#171717; font-weight:700; }.world-slide__blank-bar i { color:#171717; font-style:normal; letter-spacing:2px; }
+.world-slide__blank-page { display:flex; flex:1; flex-direction:column; align-items:center; min-height:0; padding:17px 14px 13px; background:linear-gradient(180deg,#fffef8,#f5f4ec); }
+.world-slide__blank-avatar { width:55px; height:55px; border:2px solid #c9c8c0; border-radius:50%; background:linear-gradient(135deg,#efeee8 25%,#fff 25% 50%,#efeee8 50% 75%,#fff 75%) 0 0/12px 12px; }
+.world-slide__blank-line { display:block; height:9px; margin-top:13px; border-radius:99px; background:#d8d7cf; }.world-slide__blank-line--title { width:54%; }.world-slide__blank-line--short { width:31%; height:6px; margin-top:8px; }
+.world-slide__blank-blocks { display:grid; grid-template-columns:repeat(3,1fr); gap:6px; width:100%; margin:18px 0 auto; }.world-slide__blank-blocks i { display:block; height:62px; border:1.5px solid #d2d1c9; border-radius:3px; background:repeating-linear-gradient(135deg,#f2f1eb 0 5px,#fbfaf4 5px 10px); }
+.world-slide__blank-claim { width:100%; padding-top:12px; border-top:1.5px dashed #bbb9ae; }.world-slide__blank-claim > p { margin:0 0 8px; color:#56554e; font:700 10px/1 var(--f-mono); text-align:center; }
+.worlds-claim { display: grid; width: 100%; gap: 8px; }
+.worlds-claim__field { display: flex; align-items: center; min-width: 0; height: 48px; border: 1.5px solid #101310; border-radius: 4px; padding: 0 11px; background: #f7f5e8; color: #101310; font: 400 11px/1 var(--f-mono); }
+.worlds-claim__field input { width: 100%; min-width: 0; border: 0; outline: 0; padding: 0 0 0 2px; background: transparent; color: inherit; font: inherit; }
+.worlds-claim__field input::placeholder { color: #596052; opacity: 1; }
+.worlds-claim button { min-height: 48px; border: 1.5px solid #101310; border-radius: 4px; padding: 10px 13px; background: #101310; color: #f7f5e8; font: 700 11px/1 var(--f-mono); cursor: pointer; text-align: left; transition: transform .16s ease, background .16s ease, color .16s ease; }
+.worlds-claim button span { float: right; font: 400 18px/.6 var(--f-display); }
+.worlds-claim button:hover { transform: translateY(-2px); background: #5532c9; }
+.worlds-claim :is(input, button):focus-visible { outline: 3px solid #5532c9; outline-offset: 3px; }
+.worlds-section [data-world-screen][data-off="1"] *, .worlds-section [data-world-screen][data-off="1"] *::before, .worlds-section [data-world-screen][data-off="1"] *::after { animation-play-state: paused !important; }
+.worlds-section__controls { display: flex; align-items: center; justify-content: center; gap: 27px; margin-top: 15px; padding-inline: 24px; }
+.worlds-arrow {
+  display: grid;
+  place-items: center;
+  flex: 0 0 46px;
+  width: 46px;
+  height: 46px;
+  border: 1px solid #50544b;
+  border-radius: 50%;
+  padding: 0 0 2px;
+  background: transparent;
+  color: #faf9f2;
+  font: 400 22px/1 var(--f-display);
+  cursor: pointer;
+  transition: background .2s, color .2s, border-color .2s;
+}
+.worlds-arrow:hover:not(:disabled) { background: #e9ff76; border-color: #e9ff76; color: #101310; }
+.worlds-arrow:disabled { opacity: .25; cursor: default; }
+.worlds-dots { display: flex; gap: 5px; align-items: center; }
+.worlds-dot { display: grid; place-items: center; width: 27px; height: 38px; padding: 0; border: 0; background: transparent; cursor: pointer; }
+.worlds-dot span { display: block; width: 6px; height: 6px; border-radius: 99px; background: #5b6155; transition: width .2s, background .2s; }
+.worlds-dot[aria-current="true"] span { width: 24px; background: #e9ff76; }
+.worlds-section .worlds-arrow:focus-visible, .worlds-section .worlds-dot:focus-visible { outline: 2px solid #e9ff76; outline-offset: 5px; }
+.worlds-section__caption { min-height: 3em; margin: 20px auto 0; padding-inline: 24px; max-width: 58ch; text-align: center; color: #a7aca1; font: 400 11px/1.6 var(--f-mono); }
+.worlds-section__footer { display: flex; align-items: center; justify-content: space-between; gap: 18px; max-width: 1320px; margin: 33px auto 0; padding: 26px 40px 0; border-top: 1px solid #30372b; color: #899080; font: 400 10px/1.4 var(--f-mono); text-transform: uppercase; letter-spacing: .04em; }
+.worlds-section__footer p { margin: 0; }
+.worlds-section__footer b { color: #e9ff76; font-weight: 400; }
+.worlds-sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+
+@media (min-width: 1600px) {
+  .worlds-section { --world-card-width: 420px; }
+  .world-slide__plinth { min-height: 684px; }
+  .worlds-section .world-slide__phone { --pw: 264px; }
+}
+@media (max-width: 700px) {
+  .worlds-section { --world-card-width: min(310px, calc(100vw - 64px)); padding: 75px 0 42px; }
+  .worlds-section__head { padding-inline: 22px; }
+  .worlds-section__eyebrow { margin-bottom: 21px; font-size: 9px; }
+  .worlds-section__title { font-size: clamp(43px, 12.5vw, 75px); }
+  .worlds-section__intro { max-width: 29ch; font-size: 14px; margin-top: 23px; }
+  .worlds-section__rail { margin-top: 15px; }
+  .worlds-track { gap: 12px; padding-top: 26px; padding-bottom: 18px; }
+  .world-slide__plinth { min-height: 540px; padding: 19px 18px 18px; border-radius: 14px; }
+  .worlds-section .world-slide__phone { --pw: min(210px, calc(100vw - 139px)); }
+  .world-slide__phone-wrap { padding-block: 25px 20px; }
+  .world-slide__top { font-size: 8px; }
+  .world-slide__try { font-size: 8px; }
+  .world-slide__title { margin-top: 18px; margin-inline: 6px; font-size: 20px; }
+  .world-slide__blank-site { margin-block:12px 10px; }
+  .world-slide__blank-page { padding:13px 10px 10px; }
+  .world-slide__blank-avatar { width:47px; height:47px; }
+  .world-slide__blank-blocks { margin-top:13px; }
+  .world-slide__blank-blocks i { height:48px; }
+  .world-slide__blank-claim { padding-top:9px; }
+  .worlds-claim__field, .worlds-claim button { min-height: 43px; height: 43px; font-size: 9px; }
+  .worlds-section__controls { margin-top: 8px; gap: 20px; }
+  .worlds-section__caption { max-width: 34ch; font-size: 10px; margin-top: 19px; }
+  .worlds-section__footer { padding: 21px 24px 0; margin-top: 25px; align-items: flex-end; font-size: 8px; }
+  .worlds-section__footer p:first-child { max-width: 24ch; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .worlds-section *, .worlds-section *::before, .worlds-section *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+}

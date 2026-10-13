@@ -1,0 +1,37 @@
+/* Auramy brand tokens · v2 (October 2026)
+   Five constants: the crayon smiley, the blue screen, sky over grass, UI mimicry, your corner.
+   Host-UI tokens (window chrome, buttons, UI type) change with the skin; these do not. */
+:root {
+  /* the blue screen */
+  --auramy-blue: #2f5ef6;
+  --auramy-blue-deep: #1d43d6;
+  --auramy-blue-night: #12308f;
+  /* the smiley */
+  --auramy-yellow: #f6ec22;
+  --auramy-yellow-crayon: #d9c710;
+  --auramy-ink: #161a2e;
+  /* sky over grass */
+  --auramy-sky-top: #4a82ff;
+  --auramy-sky: #86b4ff;
+  --auramy-sky-horizon: #cfe3ff;
+  --auramy-grass-light: #d2f063;
+  --auramy-grass: #a9d845;
+  --auramy-grass-deep: #93c83a;
+  --auramy-cloud: #ffffff;
+  /* paper and pen */
+  --auramy-paper: #f8f7f2;
+  --auramy-pen: #2541d8;
+  --auramy-ink-soft: #4b5068;
+  /* pops: only when it's weird */
+  --auramy-pop-pink: #ff4fc3;
+  --auramy-pop-lime: #9dfa3c;
+  --auramy-pop-cyan: #3ce6ff;
+
+  --auramy-sky-gradient: linear-gradient(180deg, var(--auramy-sky-top) 0%, var(--auramy-sky) 46%, var(--auramy-sky-horizon) 70%);
+  --auramy-grass-gradient: linear-gradient(180deg, var(--auramy-grass-light) 0%, var(--auramy-grass) 60%, var(--auramy-grass-deep) 100%);
+  --auramy-marker: linear-gradient(180deg, transparent 56%, var(--auramy-yellow) 56% 90%, transparent 90%);
+
+  --auramy-font-hand: "Shantell Sans", "Comic Sans MS", "Chalkboard SE", system-ui, sans-serif;
+  --auramy-font-count: "Pixelify Sans", "Courier New", monospace;
+  --auramy-font-label: "Space Mono", ui-monospace, monospace;
+}

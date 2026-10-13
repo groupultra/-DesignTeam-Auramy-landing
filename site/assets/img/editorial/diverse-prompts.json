@@ -1,0 +1,16 @@
+{
+  "mode": "built-in image_gen",
+  "created": "2026-10-02",
+  "assets": [
+    {
+      "key": "pet",
+      "prompt": "Use case: photorealistic-natural. Asset type: photo inside a playful personal website dedicated to someone's pet. Primary request: a very candid unretouched 0.5x phone photo of a slightly scruffy small terrier dog called Miso, cream shaggy fur, extremely close wet nose wide-angle perspective, ears flopping, looking up into the camera. Real everyday apartment, blue rug and sneakers in background. Amateur snap, funny and affectionate, natural fur texture, flash a little uneven, off-center framing. Square image. No lettering, no graphic shapes, no border, no watermarks; looks like an actual user's spontaneous camera roll upload, not an advertisement.",
+      "assetPath": "/assets/img/editorial/miso.jpg"
+    },
+    {
+      "key": "oc",
+      "prompt": "Use case: illustration-story. Asset type: original artwork inside a young artist's personal OC portfolio website. Primary request: original anime-style character illustration by a passionate independent digital artist, an androgynous young adult courier with choppy white hair, huge cobalt blue jacket, headphones, black shorts over leggings and chunky shoes, carrying a pink messenger bag; exaggerated playful foreshortening, hand extended toward viewer. Hand-drawn expressive ink lines, sketch marks, flat bold pink cobalt and cream color accents, sticker / sketchbook energy, character on pale blush background with pencil studies around the edges. Portrait 3:4 composition. No UI, no text, no existing franchise characters, no lettering, no watermark. Should look like an OC an artist proudly posted, not corporate illustration.",
+      "assetPath": "/assets/img/editorial/oc-courier.jpg"
+    }
+  ]
+}

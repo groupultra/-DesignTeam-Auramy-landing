@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Auramy brand kit card</title>
+<!-- 1200×630 share card for /brand. Rendered by tools/render-png.sh → /assets/img/og-brand.png -->
+<link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght,INFM@800,45&family=Space+Mono:wght@700&display=block" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body { position: relative; background: radial-gradient(rgba(47, 94, 246, .14) 1.4px, transparent 1.9px) 0 0 / 24px 24px, #f8f7f2; color: #161a2e; font-family: "Shantell Sans", sans-serif; }
+  .copy { position: absolute; left: 64px; top: 120px; width: 560px; }
+  .kicker { color: #2f5ef6; font: 700 20px/1 "Space Mono", monospace; letter-spacing: .06em; text-transform: uppercase; }
+  h1 { margin-top: 22px; font: 800 80px/1.02 "Shantell Sans"; font-variation-settings: "INFM" 45; letter-spacing: -.025em; }
+  h1 span { position: relative; display: inline-block; background: linear-gradient(180deg, transparent 56%, #f6ec22 56% 90%, transparent 90%); }
+  h1 svg { position: absolute; left: -6%; top: -16%; width: 112%; height: 136%; overflow: visible; fill: none; stroke: #2541d8; stroke-width: 3.4; stroke-linecap: round; }
+  .world { position: absolute; right: 48px; top: 48px; width: 500px; height: 534px; overflow: hidden; border: 2px solid rgba(29, 63, 181, .3); border-radius: 28px; background: linear-gradient(180deg, #4a82ff 0%, #86b4ff 46%, #cfe3ff 70%); box-shadow: 0 24px 50px rgba(18, 48, 143, .25); }
+  .hill { position: absolute; left: -16%; right: -16%; bottom: -30%; height: 60%; border-radius: 50% 50% 0 0 / 100% 100% 0 0; background: linear-gradient(180deg, #d2f063, #a9d845 60%, #93c83a); box-shadow: inset 0 12px 0 rgba(255, 255, 255, .35); }
+  .icon { position: absolute; left: 50%; top: 52%; width: 290px; border-radius: 20%; box-shadow: 0 26px 46px rgba(18, 48, 143, .35); transform: translate(-50%, -50%) rotate(-4deg); }
+  .cloud { position: absolute; fill: #fff; stroke: rgba(37, 65, 216, .55); stroke-width: 2.4; }
+</style>
+</head>
+<body>
+  <div class="copy">
+    <p class="kicker">auramy brand kit · v2</p>
+    <h1>your little corner of the <span>internet.<svg viewBox="0 0 240 100" preserveAspectRatio="none"><path d="M40 22C82 6 162 4 210 24c30 13 30 46-6 60-48 17-128 16-170 2C6 76 0 52 22 36c26-18 86-26 150-22"/></svg></span></h1>
+  </div>
+  <div class="world">
+    <svg class="cloud" viewBox="0 0 90 50" style="left:30px;top:40px;width:140px"><path d="M16 44C4 44 3 29 15 28c0-13 18-18 26-7 5-11 25-10 25 4 13-1 16 18 2 19Z"/></svg>
+    <svg class="cloud" viewBox="0 0 90 50" style="right:30px;top:96px;width:104px"><path d="M16 44C4 44 3 29 15 28c0-13 18-18 26-7 5-11 25-10 25 4 13-1 16 18 2 19Z"/></svg>
+    <i class="hill"></i>
+    <img class="icon" src="/assets/img/brand/auramy-icon-640.jpg" alt="">
+  </div>
+</body>
+</html>
