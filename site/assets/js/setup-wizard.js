@@ -6,6 +6,9 @@ import { doodle } from './doodles.js';
 import { mountYourPage } from './your-page.js?v=early-web-2';
 
 const FOR = { camila: 'the group chat', maddie: 'close friends', marcus: 'the team', jayden: 'memes', river: 'my OC', theo: 'movies', aaliyah: 'my shop' };
+// What it's for stays personal (no shop on the main page); every look stays on offer.
+const PURPOSES = ORDER.filter((id) => id !== 'aaliyah');
+const VIBE = { camila: 'film edit', maddie: 'rainy drive', marcus: 'game night', jayden: 'game lobby', river: 'night sky', theo: 'old cinema', aaliyah: 'glossy red' };
 const STEPS = ['Name it', 'What’s it for?', 'Pick a look', 'It’s live'];
 const SHARE = [['tiktok-logo', 'TikTok'], ['instagram-logo', 'Instagram'], ['snapchat-logo', 'Snapchat'], ['discord-logo', 'Discord']];
 const PUBLISH_MS = 1100;
@@ -29,11 +32,11 @@ export function initSetupWizard(build, { onName, toast } = {}) {
         </section>
         <section class="wizard__step" data-step="1" aria-labelledby="wiz-1" hidden>
           <h3 id="wiz-1">What’s it for?</h3>
-          <div class="wizard__chips" role="group" aria-labelledby="wiz-1">${ORDER.map((id) => `<button type="button" data-wiz-for="${id}" aria-pressed="${id === 'camila'}">${FOR[id]}</button>`).join('')}</div>
+          <div class="wizard__chips" role="group" aria-labelledby="wiz-1">${PURPOSES.map((id) => `<button type="button" data-wiz-for="${id}" aria-pressed="${id === 'camila'}">${FOR[id]}</button>`).join('')}</div>
         </section>
         <section class="wizard__step" data-step="2" aria-labelledby="wiz-2" hidden>
           <h3 id="wiz-2">Pick a look.</h3>
-          <div class="wizard__looks" role="radiogroup" aria-labelledby="wiz-2">${ORDER.map((id) => `<button type="button" role="radio" data-wiz-look="${id}" aria-checked="false" style="--look:${PERSONAS[id].color}"><i></i><b>${PERSONAS[id].template}</b></button>`).join('')}</div>
+          <div class="wizard__looks" role="radiogroup" aria-labelledby="wiz-2">${ORDER.map((id) => `<button type="button" role="radio" data-wiz-look="${id}" aria-checked="false" style="--look:${PERSONAS[id].color}"><i></i><span><b>${PERSONAS[id].template}</b><small>${VIBE[id]}</small></span></button>`).join('')}<button type="button" class="wizard__dice" data-wiz-dice><span aria-hidden="true">🎲</span><b>surprise me</b></button></div>
         </section>
         <section class="wizard__step" data-step="3" aria-labelledby="wiz-3" hidden>
           <h3 id="wiz-3">It’s live. Go tap it.</h3>
@@ -140,6 +143,19 @@ export function initSetupWizard(build, { onName, toast } = {}) {
     }
     const lk = event.target.closest('[data-wiz-look]');
     if (lk) { look = lk.dataset.wizLook; lookTouched = true; syncLook(); syncPage(); return; }
+    const dice = event.target.closest('[data-wiz-dice]');
+    if (dice) {
+      let next = look;
+      while (next === look) next = ORDER[Math.floor(Math.random() * ORDER.length)];
+      look = next;
+      lookTouched = true;
+      dice.classList.remove('is-rolling');
+      void dice.offsetWidth;
+      dice.classList.add('is-rolling');
+      syncLook();
+      syncPage();
+      return;
+    }
     if (event.target.closest('[data-wiz-back]')) { go(step - 1); leaveField(); return; }
     const share = event.target.closest('[data-wiz-share]');
     if (share || event.target.closest('[data-wiz-copy]')) {

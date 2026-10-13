@@ -75,8 +75,12 @@ export function initScrollReveal(root) {
     const progress = staticView ? 1 : ease(clamp((raw - 0.07) / 0.69));
     inView = stageBounds.bottom > Math.max(0, top) && stageBounds.top < innerHeight;
 
+    // First the feed scrolls past (your post gets swiped away), then the whole feed peels off.
+    const feed = ease(clamp(progress / 0.5));
+    const lift = ease(clamp((progress - 0.42) / 0.58));
     root.style.setProperty('--reveal-progress', progress.toFixed(4));
-    curtain.style.transform = `translateY(${-progress * 112}%) rotate(${-progress * 5}deg) skewY(${-Math.sin(progress * Math.PI) * 2.5}deg)`;
+    root.style.setProperty('--feed', feed.toFixed(4));
+    curtain.style.transform = `translateY(${-lift * 112}%) rotate(${-lift * 5}deg) skewY(${-Math.sin(lift * Math.PI) * 2.5}deg)`;
     curtain.style.visibility = progress >= 1 ? 'hidden' : 'visible';
     root.classList.toggle('is-peeling', progress > 0.01 && progress < 1);
     root.classList.toggle('is-revealed', progress >= 0.995);
@@ -85,13 +89,13 @@ export function initScrollReveal(root) {
       (previousProgress < point && progress >= point) || (previousProgress > point && progress <= point))) glitch();
     previousProgress = progress;
 
-    const nextNote = staticView ? '' : progress >= 0.995 ? 'loaded. hi maddie ☺' : `loading the real stuff… ${Math.round(progress * 100)}%`;
+    const nextNote = staticView ? '' : progress >= 0.995 ? 'out of the feed. hi maddie ☺' : `leaving the feed… ${Math.round(progress * 100)}%`;
     if (note && nextNote !== currentNote) { note.textContent = nextNote; currentNote = nextNote; }
 
     const nextComplete = progress >= 0.995;
     if (nextComplete !== complete) {
       complete = nextComplete;
-      if (status) status.textContent = complete ? 'The link list is gone. Maddie’s close-friends page is ready to explore.' : 'Keep scrolling to reveal Maddie’s close-friends page.';
+      if (status) status.textContent = complete ? 'Out of the feed. Maddie’s close-friends page is ready to explore.' : 'Keep scrolling to leave the feed and open Maddie’s page.';
     }
     syncWorld();
   }

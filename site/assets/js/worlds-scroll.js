@@ -1,10 +1,18 @@
-import { PERSONAS, ORDER, personaAvatar } from './personas.js';
+import { PERSONAS, personaAvatar } from './personas.js';
 import { homeMarkup, mountHome } from './persona-sites.js?v=early-web-1';
 
 // After the seven people comes an eighth, empty world: yours. It ends the scroll on a claim form.
 const SMILEY = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><path fill="#f6ec22" d="M32 4c17-1 29 12 28 29-1 17-13 28-29 27C15 59 4 47 5 31 6 15 17 5 32 4Z"/><path fill="none" stroke="#161a2e" stroke-width="4" stroke-linecap="round" d="M23 22l-1 8M40 20l1 8M17 37c8 10 24 10 31-2"/></svg>')}`;
-const YOU = { id: 'you', label: 'You', name: 'You', meta: 'aura.my/yourname', template: 'blank page', url: 'aura.my/you', madeFor: 'you. yes, you.', line: 'Seven people, seven worlds. Yours is next.' };
-const WORLDS = [...ORDER.map((id) => ({ id, label: PERSONAS[id].name, ...PERSONAS[id] })), YOU];
+const YOU = { id: 'you', label: 'You', name: 'You', meta: 'aura.my/yourname', template: 'blank page', url: 'aura.my/you', madeFor: 'you. yes, you.', line: 'Four people, four pages. Yours is next.' };
+// Four examples, not seven. Each line says how friends take part.
+const SHOWN = ['camila', 'maddie', 'marcus', 'river'];
+const LINES = {
+  camila: 'Six friends in five states. Each one drops clips into her edit.',
+  maddie: 'Not on Google, no like counts. Only friends with the link get in.',
+  marcus: 'Teammates lock in, Coach posts film times, scouts watch the reel.',
+  river: 'Pen name only. Friends trade art and add to the lore.',
+};
+const WORLDS = [...SHOWN.map((id) => ({ id, label: PERSONAS[id].name, ...PERSONAS[id], line: LINES[id] })), YOU];
 const avatarFor = (id) => (id === 'you' ? SMILEY : personaAvatar(id));
 
 const youMarkup = () => `<div class="ps ps--you">
@@ -64,7 +72,7 @@ const backdropMarkup = () => `<div class="wbg" aria-hidden="true">${WORLDS.map((
 }).join('')}</div>`;
 
 /**
- * Mount the seven persona template worlds in one scroll-pinned phone.
+ * Mount the persona template worlds in one scroll-pinned phone.
  * The returned function removes listeners and stops the active demo loop.
  */
 export function initWorldsScroll(root) {
@@ -82,6 +90,7 @@ export function initWorldsScroll(root) {
             <p class="worlds-scroll__for">made for <em data-who-for></em></p>
             <p class="worlds-scroll__line" data-who-line></p>
           </div>
+          <a class="worlds-scroll__skip" href="#how">skip the examples ↓</a>
         </header>
         <div class="worlds-scroll__stage">
           <div class="phone worlds-scroll__phone">

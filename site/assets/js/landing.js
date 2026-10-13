@@ -1,14 +1,14 @@
 import { auraFor, prefersReducedMotion } from './aura.js';
 import { injectSprite, blobAvatar } from './sprite.js';
 import { PEOPLE, avatar } from './people.js';
-import { renderMade, initMadeScroll } from './made.js?v=early-web-3';
-import { initWorldsScroll } from './worlds-scroll.js?v=early-web-4';
-import { initScrollReveal } from './scroll-reveal.js?v=early-web-1';
+import { renderMade, initMadeScroll } from './made.js?v=v3-tune-1';
+import { initWorldsScroll } from './worlds-scroll.js?v=v3-tune-1';
+import { initScrollReveal } from './scroll-reveal.js?v=v3-tune-1';
 import { initAlbumParty } from './album-party.js?v=early-web-1';
-import { initEndingScenes } from './ending-scenes.js?v=early-web-1';
+import { initEndingScenes } from './ending-scenes.js?v=v3-tune-1';
 import { injectDoodles, doodle } from './doodles.js';
-import { initHeroDesktop, initWeird } from './hero-desktop.js?v=early-web-1';
-import { initSetupWizard } from './setup-wizard.js?v=early-web-4';
+import { initHeroPhone } from './hero-phone.js?v=v3-tune-1';
+import { initSetupWizard } from './setup-wizard.js?v=v3-tune-1';
 import { initAuraShop } from './aura-shop.js?v=early-web-5';
 import { initPlayWindow } from './play-window.js?v=early-web-2';
 
@@ -113,9 +113,8 @@ function toast(html, ms = 3200) {
   toastT = setTimeout(() => toastEl.classList.remove('is-on'), ms);
 }
 
-/* ───────── hero desktop + make it weird ───────── */
-initHeroDesktop($('[data-desktop]'));
-initWeird($('[data-weird-toggle]'), $('#top'));
+/* ───────── hero: one phone, many looks ───────── */
+initHeroPhone($('[data-hero-phone]'));
 
 /* ───────── setup wizard ───────── */
 const wizard = initSetupWizard($('[data-build]'), {
@@ -163,7 +162,7 @@ initEndingScenes($('#notify'));
 
 /* ───────── made by actual humans ───────── */
 {
-  renderMade($('[data-made]'));
+  renderMade($('[data-made]'), ['camila', 'maddie', 'marcus', 'river']);
   initMadeScroll($('[data-made-scroll]'));
 }
 

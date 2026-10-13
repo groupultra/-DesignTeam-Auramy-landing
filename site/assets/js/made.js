@@ -109,9 +109,9 @@ const card = (id, i) => `<article class="app app--${id}" data-profile="${id}" st
   </section>
 </article>`;
 
-export function renderMade(row) {
+export function renderMade(row, ids = ORDER) {
   if (!row) return;
-  row.innerHTML = ORDER.map(card).join('');
+  row.innerHTML = ids.map(card).join('');
   bindSignatures(row);
   if (row.dataset.socialProfileBound) return;
   row.dataset.socialProfileBound = 'true';

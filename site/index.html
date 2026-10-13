@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="color-scheme" content="light">
-  <title>Auramy · a little internet for your people</title>
-  <meta name="description" content="A little internet for your people, not your followers. Make a world for the group chat, the team, the memes, the OC or the shop. Friends open it, poke it and sign it, right in the browser.">
+  <title>Auramy · your own little website, for your friends</title>
+  <meta name="description" content="Your own little website. Make it in four taps, put the link in your bio, and your friends can sign it, play on it and add to it. Opens in any phone browser, no app.">
   <meta name="theme-color" content="#2f5ef6">
   <link rel="icon" href="/assets/img/brand/auramy-monitor.jpg?v=materials-8" type="image/jpeg">
   <link rel="apple-touch-icon" href="/assets/img/brand/auramy-monitor.jpg?v=materials-8">
@@ -31,6 +31,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
   <link rel="stylesheet" href="/assets/css/early-web.css?v=early-web-11">
   <link rel="stylesheet" href="/assets/css/persona-sites.css?v=early-web-1">
+  <link rel="stylesheet" href="/assets/css/v3-tune.css?v=1">
 </head>
 <body class="early-web">
   <a class="skip" href="#main">Skip to content</a>
@@ -38,8 +39,8 @@
   <header class="topbar" id="nav">
     <a class="topbar__brand" href="/" aria-label="Auramy home"><img src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt="" width="32" height="32"><span>Auramy</span></a>
     <nav class="topbar__links" aria-label="Primary">
-      <a href="#spaces">worlds</a>
-      <a href="#made">links</a>
+      <a href="#loop">how it works</a>
+      <a href="#spaces">examples</a>
       <a href="#how">make one</a>
       <a href="#play">play</a>
     </nav>
@@ -47,60 +48,136 @@
   </header>
 
   <main id="main">
-    <!-- HERO: a little desktop with three worlds open -->
-    <section class="hero" id="top" aria-labelledby="hero-title">
+    <!-- HERO: one phone in a mobile browser, flipping through looks -->
+    <section class="hero hero--phone" id="top" aria-labelledby="hero-title">
       <div class="hero__copy">
-        <h1 class="hero__title" id="hero-title">A little internet <span class="hero__for">for <span class="hero__circle">your people.<svg class="doodle doodle--circle" aria-hidden="true" focusable="false"><use href="#d-circle"/></svg></span></span></h1>
-        <p class="hero__sub">Not your followers.<svg class="doodle doodle--arrow" aria-hidden="true" focusable="false"><use href="#d-arrow"/></svg></p>
+        <p class="hero__kicker"><svg class="doodle doodle--smile" aria-hidden="true" focusable="false"><use href="#d-smile"/></svg>a little internet for your people</p>
+        <h1 class="hero__title" id="hero-title">Your own little <span class="hero__circle">website.<svg class="doodle doodle--circle" aria-hidden="true" focusable="false"><use href="#d-circle"/></svg></span></h1>
+        <p class="hero__sub">Make it in 4 taps. Put the link in your bio. Your friends can sign it, play on it and add to it.</p>
+      </div>
+      <div class="hero__stage" data-hero-phone role="group" aria-label="A phone browser showing friends' Auramy pages, each in a different look"></div>
+      <div class="hero__cta">
         <form class="addr" data-claim>
           <label class="addr__field"><i class="ph ph-globe-simple addr__icon" aria-hidden="true"></i><span class="addr__prefix">aura.my/</span><input name="handle" autocomplete="off" spellcheck="false" maxlength="20" placeholder="yourname" aria-label="Your name"></label>
           <button class="xp-btn xp-btn--go" type="submit">claim your name</button>
         </form>
-        <div class="hero__weird">
-          <button type="button" class="xp-btn hero__weird-btn" data-weird-toggle aria-pressed="false"><i class="ph-fill ph-lightning" aria-hidden="true"></i><span>make it weird</span></button>
-          <p class="hero__mood" data-mood aria-live="polite">posting this anyway.</p>
-        </div>
+        <p class="hero__fine"><span>free</span><span>no app</span><span>opens in any phone browser</span></p>
       </div>
-      <div class="desktop" data-desktop role="group" aria-label="A little desktop with Auramy worlds open"></div>
-      <div class="hero__stickers" data-stickers aria-hidden="true"></div>
     </section>
 
-    <!-- LINKS → WORLD: Maddie's main account versus her close friends page -->
+    <!-- OUT OF THE FEED: Maddie is one post between ads, then her own page -->
     <section class="scroll-reveal" id="vs" aria-labelledby="vs-title">
       <div class="scroll-reveal__stage" data-reveal-stage>
-        <h2 class="sec-title scroll-reveal__heading" id="vs-title">You’re not <em>a list of links.</em></h2>
+        <h2 class="sec-title scroll-reveal__heading" id="vs-title">Get out of <em>the feed.</em></h2>
         <div class="scroll-reveal__canvas">
-          <p class="scroll-reveal__annotation scroll-reveal__annotation--before" aria-hidden="true">is this all of you?<svg class="doodle doodle--arrow" aria-hidden="true" focusable="false"><use href="#d-arrow"/></svg></p>
+          <p class="scroll-reveal__annotation scroll-reveal__annotation--before" aria-hidden="true">in a feed, you’re one post. between ads.<svg class="doodle doodle--arrow" aria-hidden="true" focusable="false"><use href="#d-arrow"/></svg></p>
           <div class="phone scroll-reveal__device" data-reveal-device>
             <div class="screen">
               <div class="compare__after scroll-reveal__after" data-off="1" inert aria-label="Maddie's close-friends page"></div>
-              <div class="scroll-reveal__curtain" data-reveal-curtain aria-hidden="true">
-                <div class="linkpage">
-                  <span class="linkpage__avatar">?</span>
-                  <p class="linkpage__handle">@maddie</p>
-                  <p class="linkpage__bio">3 posts. it's for my grandma.</p>
-                  <ul class="linkpage__links"><li>instagram (main)</li><li>snapchat</li><li>pinterest</li><li>apple music</li></ul>
+              <div class="scroll-reveal__curtain feedcur" data-reveal-curtain aria-hidden="true">
+                <div class="feedcur__status"><b>9:41</b><span><i class="ph-fill ph-cell-signal-full"></i><i class="ph-fill ph-wifi-high"></i><i class="ph-fill ph-battery-full"></i></span></div>
+                <div class="feedcur__top"><b>feed</b><span><i class="ph ph-heart"></i><i class="ph ph-paper-plane-tilt"></i></span></div>
+                <div class="feedcur__scroll">
+                  <ul class="feedcur__stories"><li><i style="background-image:url(/assets/img/av/maddie.jpg)"></i></li><li><i style="background-image:url(/assets/img/av/camila.jpg)"></i></li><li><i style="background-image:url(/assets/img/av/river.jpg)"></i></li><li><i style="--c:#ffb36b"></i></li><li><i style="--c:#9ec3ff"></i></li></ul>
+                  <article class="fpost fpost--mine">
+                    <header><img class="fpost__av" src="/assets/img/av/maddie.jpg" alt=""><b>mads.main</b><small>2h</small></header>
+                    <div class="fpost__img"><img src="/assets/img/personas/maddie/p02-saved-you-a-seat.jpg" alt="" loading="lazy" decoding="async"></div>
+                    <p class="fpost__acts"><i class="ph ph-heart"></i><i class="ph ph-chat-circle"></i><i class="ph ph-paper-plane-tilt"></i></p>
+                    <p class="fpost__meta"><b>3 likes</b></p>
+                    <p class="fpost__cap"><b>mads.main</b> hi grandma 🌷</p>
+                    <p class="fpost__com">grandma_joan: beautiful!! ❤️</p>
+                  </article>
+                  <article class="fpost fpost--ad">
+                    <header><i class="fpost__av" style="--c:#ffb3d1"></i><b>glowbae</b><small>Sponsored</small></header>
+                    <div class="fpost__img fpost__img--ad"><span>48% OFF<br>everything ✦</span></div>
+                    <p class="fpost__cta">Shop now <i class="ph ph-caret-right"></i></p>
+                  </article>
+                  <article class="fpost fpost--ad">
+                    <header><i class="fpost__av" style="--c:#9ec3ff"></i><b>suggested reel</b><small>for you</small></header>
+                    <div class="fpost__img fpost__img--reel"><span><i class="ph-fill ph-play"></i> 2.1M</span></div>
+                  </article>
+                  <article class="fpost fpost--ad">
+                    <header><i class="fpost__av" style="--c:#c8f59a"></i><b>snackbox</b><small>Sponsored</small></header>
+                    <div class="fpost__img fpost__img--ad2"><span>you deserve<br>a treat</span></div>
+                  </article>
                 </div>
-                <div class="xp-error"><p class="xp-error__bar"><b>Error</b><span>×</span></p><p class="xp-error__body"><i>!</i>personality not found.</p><p class="xp-error__ok"><span>OK</span></p></div>
               </div>
             </div>
           </div>
-          <p class="scroll-reveal__annotation scroll-reveal__annotation--after" aria-hidden="true">the real stuff. close friends only.</p>
+          <p class="scroll-reveal__annotation scroll-reveal__annotation--after" aria-hidden="true">her own page. close friends only, or anyone with the link. she picks.</p>
         </div>
         <p class="scroll-reveal__note" data-reveal-note aria-hidden="true"></p>
-        <p class="scroll-reveal__reduced-copy">Her main has three posts for her grandma. Her close friends get this.</p>
+        <p class="scroll-reveal__reduced-copy">In a feed, Maddie is one post between ads. On her own page, she’s all of her. Close friends only, or anyone with the link. She picks.</p>
         <p class="scroll-reveal__sr" role="status" aria-live="polite" data-reveal-status></p>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS: the whole loop, in four steps -->
+    <section class="sec loop" id="loop" aria-labelledby="loop-title">
+      <div class="wrap">
+        <h2 class="sec-title" id="loop-title">How it <em>works.</em></h2>
+        <ol class="loop__steps">
+          <li class="xpwin loop__step">
+            <header class="xpwin__bar"><b class="xpwin__title">1 · make it</b></header>
+            <div class="loop__body">
+              <div class="loop__pic loop__pic--make" aria-hidden="true"><p><i>✓</i>aura.my/<b>you</b></p><p><i>✓</i>for: the group chat</p><p><i>✓</i>look: The Edit</p></div>
+              <h3>Tap through 4 steps.</h3>
+              <p>Name it, say what it’s for, pick a look. Your page builds itself.</p>
+              <a href="#how">try it ↓</a>
+            </div>
+          </li>
+          <li class="xpwin loop__step">
+            <header class="xpwin__bar"><b class="xpwin__title">2 · share it</b></header>
+            <div class="loop__body">
+              <div class="loop__pic loop__pic--bio" aria-hidden="true"><span class="loop__av"></span><p><b>@you</b>bio stuff ✿<em><i class="ph ph-link-simple"></i>aura.my/you</em></p></div>
+              <h3>Put the link in your bio.</h3>
+              <p>TikTok, Instagram, Snapchat, Discord. Same link everywhere.</p>
+              <a href="#made">see it ↓</a>
+            </div>
+          </li>
+          <li class="xpwin loop__step">
+            <header class="xpwin__bar"><b class="xpwin__title">3 · friends drop by</b></header>
+            <div class="loop__body">
+              <div class="loop__pic loop__pic--wall" aria-hidden="true"><p class="loop__note">the canoe clip. you know the one.<small>noor</small></p><p class="loop__same">same 🤝</p></div>
+              <h3>They sign it, play it, add to it.</h3>
+              <p>No feed and no follower count. Just your people, on your page.</p>
+              <a href="#play">play ↓</a>
+            </div>
+          </li>
+          <li class="xpwin loop__step">
+            <header class="xpwin__bar"><b class="xpwin__title">4 · you hear about it</b></header>
+            <div class="loop__body">
+              <div class="loop__pic loop__pic--ping" aria-hidden="true"><p><span></span><b>Noor left a note</b><small>now</small></p><p><span></span><b>Jules: same song 🤝</b><small>2m</small></p></div>
+              <h3>A calm ping, not a feed.</h3>
+              <p>Who came by, what they liked, what they said. It all adds up to aura.</p>
+              <a href="#notify">see it ↓</a>
+            </div>
+          </li>
+        </ol>
       </div>
     </section>
 
     <!-- WORLDS: whoever you are, there's a world for it -->
     <section class="worlds-scroll" id="spaces" aria-labelledby="spaces-title"></section>
 
+    <!-- MAKE ONE: four-step setup -->
+    <section class="sec how" id="how" aria-labelledby="how-title">
+      <div class="wrap how__wrap">
+        <h2 class="sec-title" id="how-title">Yours takes <em>four taps.</em></h2>
+        <div class="build" data-build>
+          <div class="build__device">
+            <div class="phone build__phone"><div class="screen build__screen" data-your-page aria-label="Your page preview"></div></div>
+          </div>
+          <div class="xpwin wizard" data-wizard role="group" aria-label="Auramy setup"></div>
+        </div>
+      </div>
+    </section>
+
     <!-- LINKS: the same link, on the apps they already use -->
     <section class="made" id="made" aria-labelledby="made-title" data-made-scroll>
       <div class="made__pin">
         <div class="wrap">
-          <h2 class="sec-title" id="made-title">Same link. <em>Wherever they already are.</em></h2>
+          <h2 class="sec-title" id="made-title">Put the link <em>in your bio.</em></h2>
         </div>
         <div class="made__viewport" data-made-viewport>
           <div class="made__row" data-made></div>
@@ -109,19 +186,6 @@
           <button type="button" data-made-step="-1" aria-label="Previous app">&#9664;</button>
           <span class="made__track" aria-hidden="true"><i data-made-thumb></i></span>
           <button type="button" data-made-step="1" aria-label="Next app">&#9654;</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- MAKE ONE: four-step setup -->
-    <section class="sec how" id="how" aria-labelledby="how-title">
-      <div class="wrap how__wrap">
-        <h2 class="sec-title" id="how-title">Yours takes <em>four clicks.</em></h2>
-        <div class="build" data-build>
-          <div class="build__device">
-            <div class="phone build__phone"><div class="screen build__screen" data-your-page aria-label="Your page preview"></div></div>
-          </div>
-          <div class="xpwin wizard" data-wizard role="group" aria-label="Auramy setup"></div>
         </div>
       </div>
     </section>
@@ -200,7 +264,7 @@
       </div>
     </section>
 
-    <!-- FOUND YOU AGAIN: the little moments when people open your link -->
+    <!-- YOU HEAR ABOUT IT: calm, specific pings when friends visit -->
     <section class="sec notify notify--slideshow" id="notify" aria-labelledby="notify-title" data-ending-slideshow>
       <div class="notify__deck" aria-label="People opening a personal website on their phones">
         <figure class="notify-slide is-active" data-notify-slide>
@@ -218,15 +282,18 @@
         <p class="notify__slide-count" aria-hidden="true"><b data-notify-count>01</b> / 03</p>
       </div>
       <div class="wrap notify__layout">
-        <h2 class="sec-title notify__title" id="notify-title">Found you <em>again.</em></h2>
+        <div class="notify__copy">
+          <h2 class="sec-title notify__title" id="notify-title">You hear about it. <em>Gently.</em></h2>
+          <p class="notify__sub">Who came by, what they liked, what they said. No feed to keep up with, no follower count.</p>
+        </div>
         <div class="lock-phone" aria-label="A phone lock screen with Auramy notifications">
           <div class="lock-phone__screen">
             <p class="lock-phone__date">Friday, October 9</p>
             <p class="lock-phone__time">9:41</p>
             <div class="lock__stack" id="lockStack" data-notify-stack aria-live="off">
-              <div class="ntf"><span class="ntf__ico"><img src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt=""></span><b>Auramy</b><small>now</small><p>Coach D signed the team page: film at 3:15.</p></div>
-              <div class="ntf is-old"><span class="ntf__ico"><img src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt=""></span><b>Auramy</b><small>3m ago</small><p>Hannah opened your close friends page 🚗</p></div>
-              <div class="ntf is-old"><span class="ntf__ico"><img src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt=""></span><b>Auramy</b><small>7m ago</small><p>Noor added a clip to your edit 🎬</p></div>
+              <div class="ntf"><span class="ntf__ico"><img src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt=""></span><b>Auramy</b><small>now</small><p>Hannah left a note: “the canoe clip. you know the one.”</p></div>
+              <div class="ntf is-old"><span class="ntf__ico"><img src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt=""></span><b>Auramy</b><small>3m ago</small><p>Jules has your song on repeat too 🤝</p></div>
+              <div class="ntf is-old"><span class="ntf__ico"><img src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt=""></span><b>Auramy</b><small>7m ago</small><p>Noor stopped by your page</p></div>
             </div>
           </div>
         </div>
@@ -238,11 +305,11 @@
       <div class="wrap">
         <div class="aura__head">
           <h2 class="sec-title" id="aura-title">Farm aura. <em>(legally.)</em></h2>
-          <p class="sec-sub">Every like, note and beaten score on your page turns into aura. Spend it on new pieces.</p>
+          <p class="sec-sub">Aura is how often your people show up. Every visit, note and beaten score on your page adds some. Spend it on new pieces for your page.</p>
         </div>
         <div class="aura-flow">
           <article class="xpwin aura-page" aria-label="Your page while people visit">
-            <header class="xpwin__bar"><img class="xpwin__icon" src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt="" width="16" height="16"><b class="xpwin__title">aura.my/<span data-preview-handle>you</span></b><span class="xpwin__btns" aria-hidden="true"><button type="button" tabindex="-1">_</button><button type="button" class="is-close" tabindex="-1">×</button></span></header>
+            <header class="xpwin__bar"><img class="xpwin__icon" src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt="" width="16" height="16"><b class="xpwin__title">aura.my/<span data-preview-handle>you</span></b><em class="demo-tag">demo</em><span class="xpwin__btns" aria-hidden="true"><button type="button" tabindex="-1">_</button><button type="button" class="is-close" tabindex="-1">×</button></span></header>
             <div class="aura-page__body">
               <div class="mini" data-mini>
                 <div class="mini__top">
@@ -312,6 +379,7 @@
         <header class="xpwin__bar"><img class="xpwin__icon" src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt="" width="16" height="16"><b class="xpwin__title">new world</b><span class="xpwin__btns" aria-hidden="true"><button type="button" tabindex="-1">_</button><button type="button" class="is-close" tabindex="-1">×</button></span></header>
         <div class="claim-win__body">
           <h2 class="claim-win__title" id="claim-title">Be a little <em>too much.</em></h2>
+          <p class="claim-win__sub">Free. Four taps. Your friends open it in any browser.</p>
           <form class="addr addr--big" data-claim>
             <label class="addr__field"><i class="ph ph-globe-simple addr__icon" aria-hidden="true"></i><span class="addr__prefix">aura.my/</span><input name="handle" autocomplete="off" spellcheck="false" maxlength="20" placeholder="yourname" aria-label="Your name"></label>
             <button class="xp-btn xp-btn--go" type="submit">claim your name</button>
@@ -336,6 +404,6 @@
   <button class="motion-toggle" type="button" data-motion-toggle aria-pressed="false">pause motion</button>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script type="module" src="/assets/js/landing.js?v=early-web-13"></script>
+  <script type="module" src="/assets/js/landing.js?v=v3-tune-1"></script>
 </body>
 </html>

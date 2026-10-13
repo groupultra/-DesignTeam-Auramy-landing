@@ -22,13 +22,14 @@ export function initEndingScenes(root = document.querySelector('[data-ending-sli
   let cleanupTimer = 0;
   let running = false;
   const transitions = ['push', 'wipe', 'cut'];
+  // Calm and specific: who came by, what they liked, what they said.
   const messages = [
-    ['Noor', 'added a clip to your edit 🎬'],
-    ['Hannah', 'opened your close friends page 🚗'],
+    ['Hannah', 'left a note: “the canoe clip. you know the one.”'],
+    ['Jules', 'has your song on repeat too 🤝'],
+    ['Noor', 'stopped by your page'],
+    ['Priya', 'added a clip to your edit 🎬'],
     ['Coach D', 'signed the team page: film at 3:15.'],
-    ['Noah', 'is trying to beat your 88'],
-    ['June', 'drew in your guestbook ☾'],
-    ['Nina', 'sent you her four favs'],
+    ['June', 'drew a moth in your guestbook ☾'],
   ];
   // The static stack already shows the first three, so the first live pop is a
   // new person rather than a duplicate.
@@ -62,7 +63,7 @@ export function initEndingScenes(root = document.querySelector('[data-ending-sli
     node.innerHTML = `<span class="ntf__ico"><img src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt=""></span><b>Auramy</b><small>now</small><p>${name[0].toUpperCase()}${name.slice(1)} ${copy}</p>`;
     stack.prepend(node);
     [...stack.children].slice(3).forEach((item) => item.remove());
-    messageTimer = setTimeout(popMessage, 1300 + Math.round(Math.random() * 500));
+    messageTimer = setTimeout(popMessage, 3600 + Math.round(Math.random() * 900));
   };
 
   const next = () => {
