@@ -16,7 +16,13 @@ export function initHeroPhone(host) {
   if (!host) return () => {};
   host.innerHTML = `
     <div class="hp__sky" aria-hidden="true">${doodle('cloud', 'hp__cloud hp__cloud--a')}${doodle('cloud', 'hp__cloud hp__cloud--b')}<i class="desk-hill"></i></div>
-    <p class="hp__note" aria-hidden="true">a real website.<br>no app.${doodle('arrow', 'hp__note-arrow')}</p>
+    <p class="hp__note" aria-hidden="true">a real website.<br>phone or laptop.${doodle('arrow', 'hp__note-arrow')}</p>
+    <div class="hp__laptop" aria-hidden="true">
+      <div class="hp__lid"><div class="hp__desk">${doodle('cloud', 'hp__cloud hp__cloud--l')}<i class="desk-hill"></i>
+        <div class="hp__win"><p class="hp__winbar"><i></i><i></i><i></i><span>${ph('lock-simple', true)}aura.my/<b data-hp-lap-handle>${handleOf(LOOKS[0])}</b></span></p><div class="hp__winview"><div class="hp__col" data-hp-lap></div></div></div>
+      </div></div>
+      <i class="hp__base"></i>
+    </div>
     <div class="phone hp__phone">
       <div class="screen hp__screen">
         <div class="hp__status" aria-hidden="true"><b>9:41</b><span>${ph('cell-signal-full', true)}${ph('wifi-high', true)}${ph('battery-full', true)}</span></div>
@@ -40,6 +46,9 @@ export function initHeroPhone(host) {
     <p class="sr-only" role="status" data-hp-status></p>`;
 
   const view = host.querySelector('[data-hp-view]');
+  const lap = host.querySelector('[data-hp-lap]');
+  const lapHandle = host.querySelector('[data-hp-lap-handle]');
+  const wide = matchMedia('(min-width: 961px)');
   const handle = host.querySelector('[data-hp-handle]');
   const bar = host.querySelector('.hp__bar');
   const status = host.querySelector('[data-hp-status]');
@@ -82,6 +91,9 @@ export function initHeroPhone(host) {
     view.append(page);
     stopPage = visible ? mountHome(id, page) : () => {};
     page.dataset.mounted = visible ? '1' : '0';
+    // The laptop shows the same page as a desktop browser would: one column, centred.
+    if (lap && wide.matches) lap.innerHTML = homeMarkup(id);
+    if (lapHandle) lapHandle.textContent = handleOf(id);
   }
 
   function show(index, { announce = false } = {}) {
@@ -159,6 +171,7 @@ export function initHeroPhone(host) {
   document.addEventListener('visibilitychange', syncCycle, { signal });
   document.addEventListener('auramy:motion-change', syncCycle, { signal });
   reduced.addEventListener('change', syncCycle, { signal });
+  wide.addEventListener('change', () => { if (wide.matches && lap && !lap.firstChild) lap.innerHTML = homeMarkup(LOOKS[current]); }, { signal });
 
   show(0);
 

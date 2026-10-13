@@ -31,7 +31,8 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@phosphor-icons/web@2.1.1/src/fill/style.css">
   <link rel="stylesheet" href="/assets/css/early-web.css?v=early-web-11">
   <link rel="stylesheet" href="/assets/css/persona-sites.css?v=early-web-1">
-  <link rel="stylesheet" href="/assets/css/v3-tune.css?v=1">
+  <link rel="stylesheet" href="/assets/css/v3-tune.css?v=2">
+  <link rel="stylesheet" href="/assets/css/v4-progressive.css?v=1">
 </head>
 <body class="early-web">
   <a class="skip" href="#main">Skip to content</a>
@@ -39,16 +40,16 @@
   <header class="topbar" id="nav">
     <a class="topbar__brand" href="/" aria-label="Auramy home"><img src="/assets/img/brand/auramy-monitor.jpg?v=materials-8" alt="" width="32" height="32"><span>Auramy</span></a>
     <nav class="topbar__links" aria-label="Primary">
-      <a href="#loop">how it works</a>
-      <a href="#spaces">examples</a>
-      <a href="#how">make one</a>
+      <a href="#vs">what you get</a>
+      <a href="#looks">examples</a>
       <a href="#play">play</a>
+      <a href="#how">make one</a>
     </nav>
     <a class="xp-btn xp-btn--go topbar__cta" href="#claim">claim your name</a>
   </header>
 
   <main id="main">
-    <!-- HERO: one phone in a mobile browser, flipping through looks -->
+    <!-- IT'S A WEBSITE: a phone (and, on wide screens, a laptop) open at aura.my/<name> -->
     <section class="hero hero--phone" id="top" aria-labelledby="hero-title">
       <div class="hero__copy">
         <p class="hero__kicker"><svg class="doodle doodle--smile" aria-hidden="true" focusable="false"><use href="#d-smile"/></svg>a little internet for your people</p>
@@ -61,31 +62,35 @@
           <label class="addr__field"><i class="ph ph-globe-simple addr__icon" aria-hidden="true"></i><span class="addr__prefix">aura.my/</span><input name="handle" autocomplete="off" spellcheck="false" maxlength="20" placeholder="yourname" aria-label="Your name"></label>
           <button class="xp-btn xp-btn--go" type="submit">claim your name</button>
         </form>
-        <p class="hero__fine"><span>free</span><span>no app</span><span>opens in any phone browser</span></p>
+        <p class="hero__fine"><span>free</span><span>no app</span><span>opens on any phone or laptop</span></p>
       </div>
     </section>
 
-    <!-- OUT OF THE FEED: Maddie is one post between ads, then her own page -->
-    <section class="scroll-reveal" id="vs" aria-labelledby="vs-title">
+    <!-- IT'S FANCY: a post shows one side; her page shows the rest, block by block -->
+    <section class="scroll-reveal fancy" id="vs" aria-labelledby="vs-title">
       <div class="scroll-reveal__stage" data-reveal-stage>
-        <h2 class="sec-title scroll-reveal__heading" id="vs-title">Get out of <em>the feed.</em></h2>
+        <h2 class="sec-title scroll-reveal__heading" id="vs-title">Your feed shows one side. <em>Your page shows the rest.</em></h2>
         <div class="scroll-reveal__canvas">
           <p class="scroll-reveal__annotation scroll-reveal__annotation--before" aria-hidden="true">in a feed, you’re one post. between ads.<svg class="doodle doodle--arrow" aria-hidden="true" focusable="false"><use href="#d-arrow"/></svg></p>
           <div class="phone scroll-reveal__device" data-reveal-device>
             <div class="screen">
-              <div class="compare__after scroll-reveal__after" data-off="1" inert aria-label="Maddie's close-friends page"></div>
+              <div class="fancy__page" aria-label="Cami's page at aura.my/cami">
+                <div class="hp__status" aria-hidden="true"><b>9:41</b><span><i class="ph-fill ph-cell-signal-full"></i><i class="ph-fill ph-wifi-high"></i><i class="ph-fill ph-battery-full"></i></span></div>
+                <div class="hp__bar"><span class="hp__aa" aria-hidden="true">aA</span><p class="hp__url"><i class="ph-fill ph-lock-simple" aria-hidden="true"></i><span>aura.my/<b>cami</b></span></p><span class="hp__reload" aria-hidden="true"><i class="ph ph-arrow-clockwise"></i></span></div>
+                <div class="hp__view"><div class="fancy__scroll" data-fancy-scroll></div></div>
+              </div>
               <div class="scroll-reveal__curtain feedcur" data-reveal-curtain aria-hidden="true">
                 <div class="feedcur__status"><b>9:41</b><span><i class="ph-fill ph-cell-signal-full"></i><i class="ph-fill ph-wifi-high"></i><i class="ph-fill ph-battery-full"></i></span></div>
                 <div class="feedcur__top"><b>feed</b><span><i class="ph ph-heart"></i><i class="ph ph-paper-plane-tilt"></i></span></div>
                 <div class="feedcur__scroll">
-                  <ul class="feedcur__stories"><li><i style="background-image:url(/assets/img/av/maddie.jpg)"></i></li><li><i style="background-image:url(/assets/img/av/camila.jpg)"></i></li><li><i style="background-image:url(/assets/img/av/river.jpg)"></i></li><li><i style="--c:#ffb36b"></i></li><li><i style="--c:#9ec3ff"></i></li></ul>
-                  <article class="fpost fpost--mine">
-                    <header><img class="fpost__av" src="/assets/img/av/maddie.jpg" alt=""><b>mads.main</b><small>2h</small></header>
-                    <div class="fpost__img"><img src="/assets/img/personas/maddie/p02-saved-you-a-seat.jpg" alt="" loading="lazy" decoding="async"></div>
+                  <ul class="feedcur__stories"><li><i style="background-image:url(/assets/img/av/camila.jpg)"></i></li><li><i style="background-image:url(/assets/img/av/ava.jpg)"></i></li><li><i style="background-image:url(/assets/img/av/lu.jpg)"></i></li><li><i style="--c:#ffb36b"></i></li><li><i style="--c:#9ec3ff"></i></li></ul>
+                  <article class="fpost">
+                    <header><img class="fpost__av" src="/assets/img/av/camila.jpg" alt=""><b>camicuts</b><small>3h</small></header>
+                    <div class="fpost__img"><img src="/assets/img/personas/camila/c04-windy-big-sur-stop.jpg" alt="" loading="lazy" decoding="async"></div>
                     <p class="fpost__acts"><i class="ph ph-heart"></i><i class="ph ph-chat-circle"></i><i class="ph ph-paper-plane-tilt"></i></p>
-                    <p class="fpost__meta"><b>3 likes</b></p>
-                    <p class="fpost__cap"><b>mads.main</b> hi grandma 🌷</p>
-                    <p class="fpost__com">grandma_joan: beautiful!! ❤️</p>
+                    <p class="fpost__meta"><b>14 likes</b></p>
+                    <p class="fpost__cap"><b>camicuts</b> big sur w the girls ☀︎</p>
+                    <p class="fpost__com">view all 2 comments</p>
                   </article>
                   <article class="fpost fpost--ad">
                     <header><i class="fpost__av" style="--c:#ffb3d1"></i><b>glowbae</b><small>Sponsored</small></header>
@@ -96,97 +101,33 @@
                     <header><i class="fpost__av" style="--c:#9ec3ff"></i><b>suggested reel</b><small>for you</small></header>
                     <div class="fpost__img fpost__img--reel"><span><i class="ph-fill ph-play"></i> 2.1M</span></div>
                   </article>
-                  <article class="fpost fpost--ad">
-                    <header><i class="fpost__av" style="--c:#c8f59a"></i><b>snackbox</b><small>Sponsored</small></header>
-                    <div class="fpost__img fpost__img--ad2"><span>you deserve<br>a treat</span></div>
-                  </article>
                 </div>
               </div>
             </div>
           </div>
-          <p class="scroll-reveal__annotation scroll-reveal__annotation--after" aria-hidden="true">her own page. close friends only, or anyone with the link. she picks.</p>
+          <ol class="fancy__spots" aria-label="What's on Cami's page">
+            <li data-spot="reel">clips from the group chat</li>
+            <li data-spot="song">the song on repeat</li>
+            <li data-spot="dump">the whole camera roll</li>
+            <li data-spot="people">her people</li>
+            <li data-spot="wall">a wall friends sign</li>
+            <li data-spot="game">a game they’ll lose at</li>
+          </ol>
         </div>
         <p class="scroll-reveal__note" data-reveal-note aria-hidden="true"></p>
-        <p class="scroll-reveal__reduced-copy">In a feed, Maddie is one post between ads. On her own page, she’s all of her. Close friends only, or anyone with the link. She picks.</p>
+        <p class="scroll-reveal__reduced-copy">In a feed, Cami is one post between ads. On her page: clips from the group chat, the song on repeat, her camera roll, her people, a wall friends sign and a game.</p>
         <p class="scroll-reveal__sr" role="status" aria-live="polite" data-reveal-status></p>
       </div>
     </section>
 
-    <!-- HOW IT WORKS: the whole loop, in four steps -->
-    <section class="sec loop" id="loop" aria-labelledby="loop-title">
+    <!-- EVERYONE'S IS DIFFERENT: a quick glance at other people's pages -->
+    <section class="sec looks" id="looks" aria-labelledby="looks-title">
       <div class="wrap">
-        <h2 class="sec-title" id="loop-title">How it <em>works.</em></h2>
-        <ol class="loop__steps">
-          <li class="xpwin loop__step">
-            <header class="xpwin__bar"><b class="xpwin__title">1 · make it</b></header>
-            <div class="loop__body">
-              <div class="loop__pic loop__pic--make" aria-hidden="true"><p><i>✓</i>aura.my/<b>you</b></p><p><i>✓</i>for: the group chat</p><p><i>✓</i>look: The Edit</p></div>
-              <h3>Tap through 4 steps.</h3>
-              <p>Name it, say what it’s for, pick a look. Your page builds itself.</p>
-              <a href="#how">try it ↓</a>
-            </div>
-          </li>
-          <li class="xpwin loop__step">
-            <header class="xpwin__bar"><b class="xpwin__title">2 · share it</b></header>
-            <div class="loop__body">
-              <div class="loop__pic loop__pic--bio" aria-hidden="true"><span class="loop__av"></span><p><b>@you</b>bio stuff ✿<em><i class="ph ph-link-simple"></i>aura.my/you</em></p></div>
-              <h3>Put the link in your bio.</h3>
-              <p>TikTok, Instagram, Snapchat, Discord. Same link everywhere.</p>
-              <a href="#made">see it ↓</a>
-            </div>
-          </li>
-          <li class="xpwin loop__step">
-            <header class="xpwin__bar"><b class="xpwin__title">3 · friends drop by</b></header>
-            <div class="loop__body">
-              <div class="loop__pic loop__pic--wall" aria-hidden="true"><p class="loop__note">the canoe clip. you know the one.<small>noor</small></p><p class="loop__same">same 🤝</p></div>
-              <h3>They sign it, play it, add to it.</h3>
-              <p>No feed and no follower count. Just your people, on your page.</p>
-              <a href="#play">play ↓</a>
-            </div>
-          </li>
-          <li class="xpwin loop__step">
-            <header class="xpwin__bar"><b class="xpwin__title">4 · you hear about it</b></header>
-            <div class="loop__body">
-              <div class="loop__pic loop__pic--ping" aria-hidden="true"><p><span></span><b>Noor left a note</b><small>now</small></p><p><span></span><b>Jules: same song 🤝</b><small>2m</small></p></div>
-              <h3>A calm ping, not a feed.</h3>
-              <p>Who came by, what they liked, what they said. It all adds up to aura.</p>
-              <a href="#notify">see it ↓</a>
-            </div>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <!-- WORLDS: whoever you are, there's a world for it -->
-    <section class="worlds-scroll" id="spaces" aria-labelledby="spaces-title"></section>
-
-    <!-- MAKE ONE: four-step setup -->
-    <section class="sec how" id="how" aria-labelledby="how-title">
-      <div class="wrap how__wrap">
-        <h2 class="sec-title" id="how-title">Yours takes <em>four taps.</em></h2>
-        <div class="build" data-build>
-          <div class="build__device">
-            <div class="phone build__phone"><div class="screen build__screen" data-your-page aria-label="Your page preview"></div></div>
-          </div>
-          <div class="xpwin wizard" data-wizard role="group" aria-label="Auramy setup"></div>
+        <div class="looks__head">
+          <h2 class="sec-title" id="looks-title">Everyone’s <em>looks different.</em></h2>
+          <p class="sec-sub">Art kid, athlete, film nerd, gamer, coder. Same Auramy underneath, completely different pages.</p>
         </div>
-      </div>
-    </section>
-
-    <!-- LINKS: the same link, on the apps they already use -->
-    <section class="made" id="made" aria-labelledby="made-title" data-made-scroll>
-      <div class="made__pin">
-        <div class="wrap">
-          <h2 class="sec-title" id="made-title">Put the link <em>in your bio.</em></h2>
-        </div>
-        <div class="made__viewport" data-made-viewport>
-          <div class="made__row" data-made></div>
-        </div>
-        <div class="made__bar wrap" data-made-bar>
-          <button type="button" data-made-step="-1" aria-label="Previous app">&#9664;</button>
-          <span class="made__track" aria-hidden="true"><i data-made-thumb></i></span>
-          <button type="button" data-made-step="1" aria-label="Next app">&#9654;</button>
-        </div>
+        <ul class="lw" data-looks-wall></ul>
       </div>
     </section>
 
@@ -372,6 +313,25 @@
       </div>
     </section>
 
+    <!-- MAKE YOURS: three plain steps, then the four-tap builder -->
+    <section class="sec how" id="how" aria-labelledby="how-title">
+      <div class="wrap how__wrap">
+        <h2 class="sec-title" id="how-title">Yours takes <em>four taps.</em></h2>
+        <ol class="how__steps">
+          <li><b>1</b><span>Name it, pick a look</span></li>
+          <li><b>2</b><span>Get aura.my/<span data-preview-handle>you</span></span></li>
+          <li><b>3</b><span>Put it in your bio</span></li>
+        </ol>
+        <div class="build" data-build>
+          <div class="build__device">
+            <div class="phone build__phone"><div class="screen build__screen" data-your-page aria-label="Your page preview"></div></div>
+          </div>
+          <div class="xpwin wizard" data-wizard role="group" aria-label="Auramy setup"></div>
+        </div>
+      </div>
+    </section>
+
+
     <!-- CLAIM -->
     <section class="sec claimsec" id="claim" aria-labelledby="claim-title">
       <div class="claimsec__wall" aria-hidden="true"><svg class="doodle doodle--cloud" focusable="false"><use href="#d-cloud"/></svg><svg class="doodle doodle--cloud" focusable="false"><use href="#d-cloud"/></svg><i class="desk-hill"></i></div>
@@ -404,6 +364,6 @@
   <button class="motion-toggle" type="button" data-motion-toggle aria-pressed="false">pause motion</button>
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script type="module" src="/assets/js/landing.js?v=v3-tune-1"></script>
+  <script type="module" src="/assets/js/landing.js?v=v4-1"></script>
 </body>
 </html>

@@ -1,13 +1,12 @@
 import { auraFor, prefersReducedMotion } from './aura.js';
 import { injectSprite, blobAvatar } from './sprite.js';
 import { PEOPLE, avatar } from './people.js';
-import { renderMade, initMadeScroll } from './made.js?v=v3-tune-1';
-import { initWorldsScroll } from './worlds-scroll.js?v=v3-tune-1';
-import { initScrollReveal } from './scroll-reveal.js?v=v3-tune-1';
+import { initFancyReveal } from './fancy-reveal.js?v=1';
+import { renderLooksWall } from './looks-wall.js?v=1';
 import { initAlbumParty } from './album-party.js?v=early-web-1';
 import { initEndingScenes } from './ending-scenes.js?v=v3-tune-1';
 import { injectDoodles, doodle } from './doodles.js';
-import { initHeroPhone } from './hero-phone.js?v=v3-tune-1';
+import { initHeroPhone } from './hero-phone.js?v=v4-1';
 import { initSetupWizard } from './setup-wizard.js?v=v3-tune-1';
 import { initAuraShop } from './aura-shop.js?v=early-web-5';
 import { initPlayWindow } from './play-window.js?v=early-web-2';
@@ -152,19 +151,13 @@ document.addEventListener('submit', (e) => {
   toast(`<b>${handle}</b> is saved as a preview. Claiming names opens soon.`, 4800);
 });
 
-/* ───────── links → Maddie's world ───────── */
-initScrollReveal($('#vs'));
+/* ───────── it's fancy, and everyone's is different ───────── */
+initFancyReveal($('#vs'));
+renderLooksWall($('[data-looks-wall]'));
 
-/* ───────── worlds: a normal, vertically scrolling collection ───────── */
-initWorldsScroll($('#spaces'));
+/* ───────── play pieces + calm pings ───────── */
 initAlbumParty($('#albumParty'));
 initEndingScenes($('#notify'));
-
-/* ───────── made by actual humans ───────── */
-{
-  renderMade($('[data-made]'), ['camila', 'maddie', 'marcus', 'river']);
-  initMadeScroll($('[data-made-scroll]'));
-}
 
 /* ───────── play: one window, four friends' pages ───────── */
 initPlayWindow($('[data-play-window]'));
